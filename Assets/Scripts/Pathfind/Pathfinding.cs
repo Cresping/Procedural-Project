@@ -9,10 +9,8 @@ namespace Pathfind
 
         public static List<Point> FindPath(GridPathfind grid, Point startPos, Point targetPos)
         {
-            // find path
             List<Node> nodes_path = _ImpFindPath(grid, startPos, targetPos);
 
-            // convert to a list of points and return
             List<Point> ret = new List<Point>();
             if (nodes_path != null)
             {
@@ -96,7 +94,9 @@ namespace Pathfind
             int dstY = Mathf.Abs(nodeA.GridY - nodeB.GridY);
 
             if (dstX > dstY)
+            {
                 return 14 * dstY + 10 * (dstX - dstY);
+            }
             return 14 * dstX + 10 * (dstY - dstX);
         }
     }

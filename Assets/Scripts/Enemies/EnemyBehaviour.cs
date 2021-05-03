@@ -19,7 +19,6 @@ public abstract class EnemyBehaviour : MovingObject
         this._currentEnemyHP = enemyVariableSO.MaxEnemyHP;
         this._myTurn = Mathf.FloorToInt((playerVariableSO.PlayerSpeed - enemyVariableSO.EnemySpeed) / TURNS_VALUE);
         this._currentTurn = _myTurn;
-        Debug.Log(_myTurn);
     }
 
     protected virtual void OnEnable()
@@ -50,12 +49,9 @@ public abstract class EnemyBehaviour : MovingObject
         int previousTurn = _myTurn;
         this._myTurn = Mathf.FloorToInt((playerVariableSO.PlayerSpeed - enemyVariableSO.EnemySpeed) / TURNS_VALUE);
         _currentTurn += _myTurn- previousTurn;
-        Debug.Log(previousTurn + " " + _myTurn + " " + _currentTurn);
     }
     protected void CheckTurn()
     {
-
-        Debug.Log("Current Turn " + _currentTurn);
         if (_currentTurn <= 0)
         {
             DoSomething();

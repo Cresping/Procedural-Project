@@ -6,17 +6,20 @@ using static UnityEngine.InputSystem.InputAction;
 
 public class PlayerController : MovingObject
 {
+    private const float TIME_BETWEEE_KEYSTROKES = 0.1f;
     [SerializeField] PlayerVariableSO playerVariableSO;
     [SerializeField] private SpriteRenderer _mySprite;
     private InputActions _inputActions;
     private Vector2 _moveDirection;
     private Vector2 _previousPosition;
+    private bool _canPressButton;
 
     protected override void Awake()
     {
         base.Awake();
-        _inputActions = new InputActions();
-        _previousPosition = transform.position;
+        this._canPressButton = true;
+        this._inputActions = new InputActions();
+        this._previousPosition = transform.position;
     }
     protected override void Start()
     {
@@ -35,8 +38,15 @@ public class PlayerController : MovingObject
     }
     public void TryMoveButton(Vector2 direction)
     {
-        _moveDirection = direction;
-        AttemptTeleportMovement<Collider2D>((int)_moveDirection.x, (int)_moveDirection.y);
+        if (_canPressButton)
+        {
+            CancelInvoke(nameof(EnableKeystroke));
+            _canPressButton = false;
+            _moveDirection = direction;
+            AttemptTeleportMovement<Collider2D>((int)_moveDirection.x + Mathf.FloorToInt(transform.position.x), (int)_moveDirection.y + Mathf.FloorToInt(transform.position.y));
+            Invoke(nameof(EnableKeystroke), TIME_BETWEEE_KEYSTROKES);
+        }
+
     }
     private void TryMove(CallbackContext ctx)
     {
@@ -63,29 +73,10 @@ public class PlayerController : MovingObject
         _previousPosition = transform.position;
     }
 
-    protected override void OnCantMove()
+    protected override void OnCantMove() { }
+
+    private void EnableKeystroke()
     {
-
+        _canPressButton = true;
     }
-
-    //private void TryMoveTo(CallbackContext ctx)
-    //{
-    //Vector2 cameraRayPosition = Camera.main.ScreenToWorldPoint(ctx.ReadValue<Vector2>());
-    //Vector3 aux = new Vector3(cameraRayPosition.x, cameraRayPosition.y, -10);
-    //RaycastHit2D hit = Physics2D.Raycast(aux, Vector2.zero, Mathf.Infinity, moveLayer);
-    //if (hit.collider != null)
-    //{
-    //Vector2 worldPoint = aux;
-    //Vector3Int position = grid.WorldToCell(worldPoint);
-    // Debug.Log(gridPathfind.GetNode(position.x,position.y).Walkable);
-    // Debug.Log(Pathfind.Pathfinding.FindPath(gridPathfind,new Pathfind.Point((int) (transform.position.x-0.5f),(int) (transform.position.y-0.5f)),new Pathfind.Point((int) (position.x),(int) (position.y))).Count);
-    //MoveToSmoothMovementPathfinding(position.x, position.y);
-    //}
-    // }
-
-    protected override void AttemptSmoothMovement<T>(int xDir, int yDir)
-    {
-        base.AttemptSmoothMovement<T>(xDir, yDir);
-    }
-
 }

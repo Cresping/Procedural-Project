@@ -7,7 +7,7 @@ public class UIDungeonController : MonoBehaviour
     [SerializeField] PlayerController playerController;
     [SerializeField] GameObject pauseMenu;
 
-    public void changePauseMenu()
+    public void ChangePauseMenu()
     {
         pauseMenu.SetActive(!pauseMenu.activeSelf);
     }
