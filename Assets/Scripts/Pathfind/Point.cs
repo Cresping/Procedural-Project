@@ -7,8 +7,8 @@ namespace HeroesGames.ProjectProcedural.Pathfind
     /// </summary>
     public class Point
     {
-        public int posX;
-        public int posY;
+        private int posX;
+        private int posY;
 
         /// <summary>
         /// Constructor por defecto
@@ -40,7 +40,9 @@ namespace HeroesGames.ProjectProcedural.Pathfind
                 posX = value.x;
                 posY = value.y;
             }
-
         }
+
+        public int PosX { get => posX; set => posX = value; }
+        public int PosY { get => posY; set => posY = value; }
     }
 }

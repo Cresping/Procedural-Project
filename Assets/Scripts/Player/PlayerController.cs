@@ -15,7 +15,7 @@ namespace HeroesGames.ProjectProcedural.Player
     {
         private const float TIME_BETWEEE_BUTTONSTROKES = 0.1f;
 
-        [SerializeField] PlayerVariableSO playerVariableSO;
+        [SerializeField] private PlayerVariableSO playerVariableSO;
         [SerializeField] private SpriteRenderer _mySprite;
 
         private InputActions _inputActions;

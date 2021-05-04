@@ -39,8 +39,8 @@ namespace HeroesGames.ProjectProcedural.Pathfind
         /// <returns></returns>
         private static List<Node> ImpFindPath(GridPathfind grid, Point startPos, Point targetPos)
         {
-            Node startNode = grid.GetNode(startPos.posX,startPos.posY);
-            Node targetNode = grid.GetNode(targetPos.posX,targetPos.posY);
+            Node startNode = grid.GetNode(startPos.PosX,startPos.PosY);
+            Node targetNode = grid.GetNode(targetPos.PosX, targetPos.PosY);
 
             List<Node> openSet = new List<Node>();
             HashSet<Node> closedSet = new HashSet<Node>();

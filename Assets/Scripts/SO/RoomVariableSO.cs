@@ -19,7 +19,7 @@ namespace HeroesGames.ProjectProcedural.SO
         public EnumTypes.RoomType RoomType { get => roomType; private set => roomType = value; }
 
         /// <summary>
-        /// Módulo encargadod e instanciar todos los enemigos de la habitación en un padre concreto
+        /// Mï¿½dulo encargadod e instanciar todos los enemigos de la habitaciï¿½n en un padre concreto
         /// </summary>
         /// <param name="parent"> Donde se van a instanciar los enemigos en la escena</param>
         public void InstantiateAllEnemies(Transform parent)
@@ -34,9 +34,9 @@ namespace HeroesGames.ProjectProcedural.SO
             }
         }
         /// <summary>
-        /// Activa todos los enemigos de la habitación en las posiciones dadas
+        /// Activa todos los enemigos de la habitaciï¿½n en las posiciones dadas
         /// </summary>
-        /// <param name="positions">Posiciones donde se activarán los enemigos</param>
+        /// <param name="positions">Posiciones donde se activarï¿½n los enemigos</param>
         public void EnableAllEnemies(List<Vector2Int> positions)
         {
             int index = 0;
@@ -52,7 +52,7 @@ namespace HeroesGames.ProjectProcedural.SO
             catch (Exception) { }
         }
         /// <summary>
-        /// Desactiva todos los enemigos de la habitación
+        /// Desactiva todos los enemigos de la habitaciï¿½n
         /// </summary>
         public void DisableAllEnemies()
         {
@@ -62,9 +62,9 @@ namespace HeroesGames.ProjectProcedural.SO
             }
         }
         /// <summary>
-        /// Devuelve la cantidad total de enemigos que hay en la habitación
+        /// Devuelve la cantidad total de enemigos que hay en la habitaciï¿½n
         /// </summary>
-        /// <returns> Cantidad de total de enemigos en la habitaci´on</returns>
+        /// <returns> Cantidad de total de enemigos en la habitaciï¿½on</returns>
         public int NumberOfEnemies()
         {
             return enemyTypeList.Count;
