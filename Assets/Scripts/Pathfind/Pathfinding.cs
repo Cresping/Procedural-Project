@@ -1,15 +1,23 @@
 using UnityEngine;
 using System.Collections.Generic;
 
-namespace Pathfind
+namespace HeroesGames.ProjectProcedural.Pathfind
 {
-
+    /// <summary>
+    /// Clase encargada de encontrar un camino, si es posible, entre dos posiciones
+    /// </summary>
     public class Pathfinding
     {
-
+        /// <summary>
+        /// Devuelve la lista de puntos que se deben de recorrer para llegar a la posición deseada
+        /// </summary>
+        /// <param name="grid"> El conjunto de nodos</param>
+        /// <param name="startPos">Posición inicial</param>
+        /// <param name="targetPos">Posición final</param>
+        /// <returns></returns>
         public static List<Point> FindPath(GridPathfind grid, Point startPos, Point targetPos)
         {
-            List<Node> nodes_path = _ImpFindPath(grid, startPos, targetPos);
+            List<Node> nodes_path = ImpFindPath(grid, startPos, targetPos);
 
             List<Point> ret = new List<Point>();
             if (nodes_path != null)
@@ -22,11 +30,17 @@ namespace Pathfind
             return ret;
         }
 
-
-        private static List<Node> _ImpFindPath(GridPathfind grid, Point startPos, Point targetPos)
+        /// <summary>
+        /// Devuelve la lista de nodos que se deben de recorrer para llegar a la posición deseada
+        /// </summary>
+        /// <param name="grid">El conjunto de nodos</param>
+        /// <param name="startPos">Posición inicial</param>
+        /// <param name="targetPos">Posición final</param>
+        /// <returns></returns>
+        private static List<Node> ImpFindPath(GridPathfind grid, Point startPos, Point targetPos)
         {
-            Node startNode = grid.GetNode(startPos.x,startPos.y);
-            Node targetNode = grid.GetNode(targetPos.x,targetPos.y);
+            Node startNode = grid.GetNode(startPos.posX,startPos.posY);
+            Node targetNode = grid.GetNode(targetPos.posX,targetPos.posY);
 
             List<Node> openSet = new List<Node>();
             HashSet<Node> closedSet = new HashSet<Node>();
@@ -74,6 +88,13 @@ namespace Pathfind
             return null;
         }
 
+        /// <summary>
+        /// Módulo encargado de volver atras en la lista de nodos
+        /// </summary>
+        /// <param name="grid">El conjunto de nodos</param>
+        /// <param name="startNode">Nodo de inicio</param>
+        /// <param name="endNode">Nodo final</param>
+        /// <returns></returns>
         private static List<Node> RetracePath(GridPathfind grid, Node startNode, Node endNode)
         {
             List<Node> path = new List<Node>();
@@ -87,7 +108,12 @@ namespace Pathfind
             path.Reverse();
             return path;
         }
-
+        /// <summary>
+        /// Devuelve la distancia entre dos nodos
+        /// </summary>
+        /// <param name="nodeA">Nodo A</param>
+        /// <param name="nodeB">Nodo B</param>
+        /// <returns>Distancia entera entre los dos nodos</returns>
         private static int GetDistance(Node nodeA, Node nodeB)
         {
             int dstX = Mathf.Abs(nodeA.GridX - nodeB.GridX);

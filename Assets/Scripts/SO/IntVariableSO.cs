@@ -5,6 +5,9 @@ using UnityEngine;
 
 namespace HeroesGames.ProjectProcedural.SO
 {
+    /// <summary>
+    ///  Clase encargada de crear un 'ScriptableObject' generico de tipo 'Int'
+    /// </summary>
     [CreateAssetMenu(fileName = "NewIntVariable", menuName = "Scriptables/Variables/IntVariable")]
     public class IntVariableSO : ScriptableObject, ISerializationCallbackReceiver
     {
@@ -22,10 +25,6 @@ namespace HeroesGames.ProjectProcedural.SO
                 _runtimeValue = value;
                 OnValueChangeCallback?.Invoke();
             }
-        }
-        public void UpdateValueWithoutCallBack(int value)
-        {
-            _runtimeValue = value;
         }
 
         public void OnAfterDeserialize()

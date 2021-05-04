@@ -5,6 +5,9 @@ using UnityEngine;
 
 namespace HeroesGames.ProjectProcedural.SO
 {
+    /// <summary>
+    ///  Clase encargada de crear un 'ScriptableObject' generico de tipo 'Float'
+    /// </summary>
     [CreateAssetMenu(fileName = "NewFloatVariable", menuName = "Scriptables/Variables/FloatVariable")]
     public class FloatVariableSO : ScriptableObject, ISerializationCallbackReceiver
     {
@@ -23,12 +26,6 @@ namespace HeroesGames.ProjectProcedural.SO
                 OnValueChangeCallback?.Invoke();
             }
         }
-        public void UpdateValueWithoutCallBack(float value)
-        {
-            _runtimeValue = value;
-        }
-
-
         public void OnAfterDeserialize()
         {
             _runtimeValue = initialValue;

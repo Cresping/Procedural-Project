@@ -2,13 +2,21 @@ using UnityEngine;
 using System.Collections.Generic;
 using System;
 
-namespace Pathfind
+namespace HeroesGames.ProjectProcedural.Pathfind
 {
+    /// <summary>
+    /// Clase encargada de almacenar los datos de todos los nodos del Grid
+    /// </summary>
     public class GridPathfind : MonoBehaviour
     {
         private Node[,] _nodes;
         private int _gridSizeX, _gridSizeY;
 
+        /// <summary>
+        /// Crea un grid de determinada altura y anchura
+        /// </summary>
+        /// <param name="width">Altura</param>
+        /// <param name="height">Anchura</param>
         public void CreateGrid(int width, int height)
         {
             _gridSizeX = width;
@@ -23,19 +31,13 @@ namespace Pathfind
                 }
             }
         }
-
-
-        public bool AddNode(int posx, int posy, bool walkeable)
-        {
-            if (posx < _gridSizeX && posy < _gridSizeY && posx >= 0 && posy >= 0)
-            {
-                _nodes[posx, posy].Walkable = walkeable;
-
-                return true;
-            }
-
-            return false;
-        }
+        /// <summary>
+        /// Cambia si un nodo se puede caminar o no
+        /// </summary>
+        /// <param name="posx">Posición del nodo en X</param>
+        /// <param name="posy">Posición del nodo en Y</param>
+        /// <param name="walkeable">Si es caminable o no</param>
+        /// <returns>True si existe, false si no</returns>
         public bool ChangeNode(int posx, int posy, bool walkeable)
         {
             try
@@ -43,23 +45,33 @@ namespace Pathfind
                 _nodes[posx, posy].Walkable = walkeable;
                 return true;
             }
-            catch (Exception)
+            catch (ArgumentOutOfRangeException)
             {
-                Debug.Log("El nodo "+posx+" "+posy+" no existe");
+                Debug.LogError("El nodo "+posx+" "+posy+" no existe");
                 return false;
             }
         }
 
+        /// <summary>
+        /// Devuelve el nodo de la posición dada
+        /// </summary>
+        /// <param name="posx">Posición del nodo en X</param>
+        /// <param name="posy">Posición del nodo en Y</param>
+        /// <returns>Nodo</returns>
         public Node GetNode(int posx, int posy)
         {
             return _nodes[posx, posy];
         }
 
+        /// <summary>
+        /// Devuelve la lista de vecinos aptos respecto a un nodo
+        /// </summary>
+        /// <param name="node">Nodo desde donde se calcularán los vecinos</param>
+        /// <param name="canMoveDiagonal">Si se puede mover en diagonal o no</param>
+        /// <returns></returns>
         public List<Node> GetNeighbours(Node node, bool canMoveDiagonal)
         {
             List<Node> neighbours = new List<Node>();
-
-
             for (int x = -1; x <= 1; x++)
             {
                 for (int y = -1; y <= 1; y++)
@@ -107,10 +119,8 @@ namespace Pathfind
                     {
                         continue;
                     }
-
                 }
             }
-
             return neighbours;
         }
 

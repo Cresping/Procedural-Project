@@ -2,25 +2,60 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SkeletonBehaviour : EnemyBehaviour
+
+namespace HeroesGames.ProjectProcedural.Enemies
 {
-    protected override void OnCantMove() { }
-
-    protected override bool Attack()
+    /// <summary>
+    /// Clase encargada de controlar la IA de los esqueletos
+    /// </summary>
+    public class SkeletonBehaviour : EnemyBehaviour
     {
-        int damage = base.enemyVariableSO.EnemyAttack - base.playerVariableSO.PlayerDef;
-        if (damage > 0)
+        /// <summary>
+        /// Acciones que debe de realizar el esqueleto cuando es su turno
+        /// </summary>
+        protected override void DoSomething()
         {
-            base.playerVariableSO.PlayerHP -= damage;
-            //Debug.Log("Soy " + this.gameObject.name + " y he hecho " + (base.enemyVariableSO.EnemyAttack - base.playerVariableSO.PlayerDef) + " de daño al jugador");
-            return true;
+            if (CanAttackPlayer())
+            {
+                Attack();
+                return;
+            }
+            else if (CanSeePlayer())
+            {
+                if (Pursue())
+                {
+                    return;
+                }
+            }
+            Idle();
         }
-        return false;
+
+        /// <summary>
+        /// Implementación del Ataque del esqueleto
+        /// </summary>
+        /// <returns>True si ha conseguido hacer daño, false si no</returns>
+        protected override bool Attack()
+        {
+            int damage = base.enemyVariableSO.EnemyAttack - base.playerVariableSO.PlayerDef;
+            if (damage > 0)
+            {
+                base.playerVariableSO.PlayerHP -= damage;
+                Debug.Log("Soy " + this.gameObject.name + " y he hecho " + (base.enemyVariableSO.EnemyAttack - base.playerVariableSO.PlayerDef) + " de daño al jugador");
+                return true;
+            }
+            return false;
+
+        }
+
+        /// <summary>
+        /// Implementación del Idle del esqueleto
+        /// </summary>
+        /// <returns></returns>
+        protected override bool Idle()
+        {
+            return base.WanderAround();
+        }
 
     }
 
-    protected override bool TryMove()
-    {
-        return base.WanderAround();
-    }
 }

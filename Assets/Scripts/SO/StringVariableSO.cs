@@ -5,6 +5,9 @@ using UnityEngine;
 
 namespace HeroesGames.ProjectProcedural.SO
 {
+    /// <summary>
+    ///  Clase encargada de crear un 'ScriptableObject' generico de tipo 'String'
+    /// </summary>
     [CreateAssetMenu(fileName = "NewStringVariable", menuName = "Scriptables/Variables/StringVariable")]
     public class StringVariableSO : ScriptableObject, ISerializationCallbackReceiver
     {
@@ -23,19 +26,11 @@ namespace HeroesGames.ProjectProcedural.SO
                 OnValueChangeCallback?.Invoke();
             }
         }
-
-        public void UpdateValueWithoutCallBack(string value)
-        {
-            _runtimeValue = value;
-        }
-
         public void OnAfterDeserialize()
         {
             _runtimeValue = initialValue;
         }
-
         public void OnBeforeSerialize() { }
-
 
         private void OnValidate()
         {

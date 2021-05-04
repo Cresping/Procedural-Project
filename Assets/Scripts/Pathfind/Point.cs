@@ -1,84 +1,46 @@
 using UnityEngine;
 
-namespace Pathfind
+namespace HeroesGames.ProjectProcedural.Pathfind
 {
+    /// <summary>
+    /// Clase encargada de almcenar los datos de un punto del mapa
+    /// </summary>
     public class Point
     {
-        public int x;
-        public int y;
+        public int posX;
+        public int posY;
 
+        /// <summary>
+        /// Constructor por defecto
+        /// </summary>
         public Point()
         {
-            x = 0;
-            y = 0;
-        }
-        public Point(int iX, int iY)
-        {
-            this.x = iX;
-            this.y = iY;
+            posX = 0;
+            posY = 0;
         }
 
-        public Point(Point b)
+        /// <summary>
+        /// Constructor parametrizado
+        /// </summary>
+        /// <param name="iX"></param>
+        /// <param name="iY"></param>
+        public Point(int posX, int posY)
         {
-            x = b.x;
-            y = b.y;
+            this.posX = posX;
+            this.posY = posY;
         }
-
-        public override int GetHashCode()
+        public Vector2Int Position
         {
-            return x ^ y;
-        }
-
-        public override bool Equals(System.Object obj)
-        {
-
-            Point p = (Point)obj;
-
-            if (ReferenceEquals(null, p))
+            get
             {
-                return false;
+                return new Vector2Int(this.posX, this.posY);
+            }
+            set
+            {
+                posX = value.x;
+                posY = value.y;
             }
 
-            return (x == p.x) && (y == p.y);
         }
-
-        public bool Equals(Point p)
-        {
-            if (ReferenceEquals(null, p))
-            {
-                return false;
-            }
-            return (x == p.x) && (y == p.y);
-        }
-
-        public static bool operator ==(Point a, Point b)
-        {
-            if (System.Object.ReferenceEquals(a, b))
-            {
-                return true;
-            }
-            if (ReferenceEquals(null, a))
-            {
-                return false;
-            }
-            if (ReferenceEquals(null, b))
-            {
-                return false;
-            }
-            return a.x == b.x && a.y == b.y;
-        }
-
-        public static bool operator !=(Point a, Point b)
-        {
-            return !(a == b);
-        }
-
-        public Point Set(int iX, int iY)
-        {
-            this.x = iX;
-            this.y = iY;
-            return this;
-        }
-        public Vector3 Position => new Vector2(this.x, this.y);
     }
 }

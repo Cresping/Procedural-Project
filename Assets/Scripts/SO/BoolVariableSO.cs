@@ -5,6 +5,9 @@ using UnityEngine;
 
 namespace HeroesGames.ProjectProcedural.SO
 {
+    /// <summary>
+    ///  Clase encargada de crear un 'ScriptableObject' generico de tipo 'Bool'
+    /// </summary>
     [CreateAssetMenu(fileName = "NewBoolVariable", menuName = "Scriptables/Variables/BoolVariable")]
     public class BoolVariableSO : ScriptableObject, ISerializationCallbackReceiver
     {
@@ -22,10 +25,6 @@ namespace HeroesGames.ProjectProcedural.SO
                 _runtimeValue = value;
                 OnValueChangeCallback?.Invoke();
             }
-        }
-        public void UpdateValueWithoutCallBack(bool value)
-        {
-            _runtimeValue = value;
         }
 
         public void OnAfterDeserialize()

@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+///  Clase encargada de controlar los 'ScriptableObject' de los TIPOS de enemigos
+/// </summary>
 [CreateAssetMenu(fileName = "NewEnemyVariable", menuName = "Scriptables/Enemy/EnemyVariable")]
 public class EnemyVariableSO : ScriptableObject, ISerializationCallbackReceiver
 {
