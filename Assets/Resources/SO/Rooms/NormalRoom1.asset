@@ -9,7 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d6327c218c6d8034a8a3b1086d795f86, type: 3}
-  m_Name: EnemyMonitor
+  m_Script: {fileID: 11500000, guid: 445d399a3dc840740b478bcbae0f028b, type: 3}
+  m_Name: NormalRoom1
   m_EditorClassIdentifier: 
-  initialValue: 0
+  roomType: 2
+  enemyTypeList:
+  - {fileID: 11400000, guid: f1dfb5c9666dc944a8edda846da00f94, type: 2}

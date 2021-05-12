@@ -160,7 +160,7 @@ TextureImporter:
     second: enemy_1
   - first:
       213: 719023305797327018
-    second: mono_52
+    second: enemy_2
   - first:
       213: -3599762447674720757
     second: mono_53
@@ -1795,7 +1795,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: mono_52
+      name: enemy_2
       rect:
         serializedVersion: 2
         x: 157

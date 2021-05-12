@@ -34,8 +34,8 @@ namespace HeroesGames.ProjectProcedural.Pathfind
         /// <summary>
         /// Cambia si un nodo se puede caminar o no
         /// </summary>
-        /// <param name="posx">Posición del nodo en X</param>
-        /// <param name="posy">Posición del nodo en Y</param>
+        /// <param name="posx">Posiciï¿½n del nodo en X</param>
+        /// <param name="posy">Posiciï¿½n del nodo en Y</param>
         /// <param name="walkeable">Si es caminable o no</param>
         /// <returns>True si existe, false si no</returns>
         public bool ChangeNode(int posx, int posy, bool walkeable)
@@ -53,20 +53,31 @@ namespace HeroesGames.ProjectProcedural.Pathfind
         }
 
         /// <summary>
-        /// Devuelve el nodo de la posición dada
+        /// Devuelve el nodo de la posiciï¿½n dada
         /// </summary>
-        /// <param name="posx">Posición del nodo en X</param>
-        /// <param name="posy">Posición del nodo en Y</param>
+        /// <param name="posx">Posiciï¿½n del nodo en X</param>
+        /// <param name="posy">Posiciï¿½n del nodo en Y</param>
         /// <returns>Nodo</returns>
         public Node GetNode(int posx, int posy)
         {
             return _nodes[posx, posy];
         }
 
+       /// <summary>
+        /// Devuelve si el nodo de la posiciÃ³n dada es caminable
+        /// </summary>
+        /// <param name="posx">Posiciï¿½n del nodo en X</param>
+        /// <param name="posy">Posiciï¿½n del nodo en Y</param>
+        /// <returns>True si se puede caminar, false si no</returns>
+        public bool IsWalkeable(int posx, int posy)
+        {
+            return GetNode(posx,posy).Walkable;
+        }
+
         /// <summary>
         /// Devuelve la lista de vecinos aptos respecto a un nodo
         /// </summary>
-        /// <param name="node">Nodo desde donde se calcularán los vecinos</param>
+        /// <param name="node">Nodo desde donde se calcularï¿½n los vecinos</param>
         /// <param name="canMoveDiagonal">Si se puede mover en diagonal o no</param>
         /// <returns></returns>
         public List<Node> GetNeighbours(Node node, bool canMoveDiagonal)

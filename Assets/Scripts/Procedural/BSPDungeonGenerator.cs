@@ -1,3 +1,4 @@
+using HeroesGames.ProjectProcedural.Player;
 using HeroesGames.ProjectProcedural.SO;
 using System;
 using System.Collections;
@@ -27,7 +28,7 @@ namespace HeroesGames.ProjectProcedural.Procedural
         Vector2Int _end;
 
         /// <summary>
-        /// Módulo encargada de crear la mazmorra
+        /// Mï¿½dulo encargada de crear la mazmorra
         /// </summary>
         protected override void RunProceduralGeneration()
         {
@@ -37,10 +38,11 @@ namespace HeroesGames.ProjectProcedural.Procedural
                 GameObject.DestroyImmediate(enemiesParent.GetChild(i).gameObject);
             }
             CreateRooms();
+            FindObjectOfType<PlayerController>().gameObject.transform.position = (Vector3Int)_start;
         }
 
         /// <summary>
-        /// Módulo encargado de crear las habitaciones de la mazmorra
+        /// Mï¿½dulo encargado de crear las habitaciones de la mazmorra
         /// </summary>
         private void CreateRooms()
         {
@@ -62,7 +64,6 @@ namespace HeroesGames.ProjectProcedural.Procedural
             }
             //Luego crea las habitaciones especiales
             CreateStartAndEnd(roomCenter);
-            CreateSpecialRoom(roomList);
             //Conecta todas las habitaciones
             ConnectRooms(roomCenter);
             _floor.UnionWith(_corridors);
@@ -72,6 +73,7 @@ namespace HeroesGames.ProjectProcedural.Procedural
             tileMapGenerator.PaintStartTile(_start);
             tileMapGenerator.PaintEndTile(_end);
             WallGenerator.CreateSimpleWalls(_floor, tileMapGenerator);
+            CreateSpecialRoom(roomList);
         }
 
         /// <summary>
@@ -118,7 +120,7 @@ namespace HeroesGames.ProjectProcedural.Procedural
         /// <summary>
         /// Conecta dos habitaciones con un pasillo
         /// </summary>
-        /// <param name="currentRoomCenter"> Centro de la habitación desde donde se creará el pasillo</param>
+        /// <param name="currentRoomCenter"> Centro de la habitaciï¿½n desde donde se crearï¿½ el pasillo</param>
         /// <param name="destination">Fin del pasillo</param>
         /// <returns>Devuelve las posiciones del pasillo</returns>
         private HashSet<Vector2Int> CreateCorridor(Vector2Int currentRoomCenter, Vector2Int destination)
@@ -156,11 +158,11 @@ namespace HeroesGames.ProjectProcedural.Procedural
         }
 
         /// <summary>
-        /// Devuelve la habitación más cercana a determinado punto
+        /// Devuelve la habitaciï¿½n mï¿½s cercana a determinado punto
         /// </summary>
         /// <param name="currentRoomCenter">Punto</param>
         /// <param name="roomCenter">Lista  de posiciones de centrales de todas las habitaciones</param>
-        /// <returns>Habitación más cercana</returns>
+        /// <returns>Habitaciï¿½n mï¿½s cercana</returns>
         private Vector2Int FindClosestPointTo(Vector2Int currentRoomCenter, List<Vector2Int> roomCenter)
         {
             Vector2Int closet = Vector2Int.zero;
@@ -178,11 +180,11 @@ namespace HeroesGames.ProjectProcedural.Procedural
         }
 
         /// <summary>
-        /// Devuelve la habitación más lejana a determinado punto
+        /// Devuelve la habitaciï¿½n mï¿½s lejana a determinado punto
         /// </summary>
         /// <param name="currentRoomCenter">Punto</param>
         /// <param name="roomCenter">Lista  de posiciones de centrales de todas las habitaciones</param>
-        /// <returns>Habitación más lejana</returns>
+        /// <returns>Habitaciï¿½n mï¿½s lejana</returns>
         private Vector2Int FindFurtherPointTo(Vector2Int currentRoomCenter, List<Vector2Int> roomCenter, out float distance)
         {
             Vector2Int far = Vector2Int.zero;
@@ -200,7 +202,7 @@ namespace HeroesGames.ProjectProcedural.Procedural
         }
 
         /// <summary>
-        /// Módulo encargado de crear el resto de habitaciones especiales
+        /// Mï¿½dulo encargado de crear el resto de habitaciones especiales
         /// </summary>
         /// <param name="roomList">Lista de habitaciones</param>
         private void CreateSpecialRoom(List<BoundsInt> roomList)
@@ -223,7 +225,7 @@ namespace HeroesGames.ProjectProcedural.Procedural
                             {
                                 Vector2Int aux;
                                 aux = new Vector2Int(UnityEngine.Random.Range(room.xMin + 1, room.xMax - 1), UnityEngine.Random.Range(room.yMin + 1, room.yMax - 1));
-                                if (!currentPositions.ContainsKey(aux))
+                                if (!currentPositions.ContainsKey(aux) && gridPathfind.IsWalkeable(aux.x,aux.y))
                                 {
                                     currentPositions.Add(aux, aux);
                                     enemiesPosition.Add(aux);
@@ -242,9 +244,9 @@ namespace HeroesGames.ProjectProcedural.Procedural
         }
 
         /// <summary>
-        /// Modulo encargado de crear una habitación simple
+        /// Modulo encargado de crear una habitaciï¿½n simple
         /// </summary>
-        /// <param name="room">Habitación</param>
+        /// <param name="room">Habitaciï¿½n</param>
         private void CreateSimpleRoom(BoundsInt room)
         {
             for (int col = offset; col < room.size.x - offset; col++)

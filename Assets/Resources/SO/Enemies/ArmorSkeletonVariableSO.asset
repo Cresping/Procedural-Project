@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fa765f0738352c5468d9d12c460cc48a, type: 3}
-  m_Name: BasicSkeletonVariableSO
+  m_Name: ArmorSkeletonVariableSO
   m_EditorClassIdentifier: 
-  enemyPrefab: {fileID: 6060309841025625795, guid: 58508d8f4a7afcc4da7cdd5b8e28d75e, type: 3}
-  maxEnemyHP: 20
-  enemyDefense: 5
-  enemyAttack: 5
-  enemySpeed: 5
+  enemyPrefab: {fileID: 2077187973355700012, guid: 01609db9ef611ed479625654f3c48766, type: 3}
+  maxEnemyHP: 40
+  enemyDefense: 10
+  enemyAttack: 10
+  enemySpeed: 10
   pursuePlayerDistance: 5
   attackPlayerDistance: 1
