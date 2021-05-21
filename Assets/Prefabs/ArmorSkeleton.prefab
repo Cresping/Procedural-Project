@@ -175,6 +175,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7103f51b9252ed44eab2d3ef2604b40f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameVariableSO: {fileID: 11400000, guid: c9f70f3a05f02f943948a81ac920d4fe, type: 2}
   gridPathfind: {fileID: 0}
   enemyVariableSO: {fileID: 11400000, guid: 19ea09983c557db4abfb07df6eae0b70, type: 2}
   playerVariableSO: {fileID: 11400000, guid: 82464bdcbc557ff41b3b1e47fa852778, type: 2}

@@ -11,7 +11,6 @@ namespace HeroesGames.ProjectProcedural.Enemies
     /// </summary>
     public abstract class EnemyBehaviour : MovingObject
     {
-        private const int TURNS_VALUE = 5;
         [SerializeField] protected EnemyVariableSO enemyVariableSO;
         [SerializeField] protected PlayerVariableSO playerVariableSO;
         [SerializeField] protected SpriteRenderer spriteRenderer;
@@ -22,8 +21,12 @@ namespace HeroesGames.ProjectProcedural.Enemies
         protected override void Awake()
         {
             base.Awake();
+        }
+        protected override void Start()
+        {
+            base.Start();
             this._currentEnemyHP = enemyVariableSO.MaxEnemyHP;
-            this._myTurn = Mathf.FloorToInt((playerVariableSO.PlayerSpeed - enemyVariableSO.EnemySpeed) / TURNS_VALUE);
+            this._myTurn = Mathf.FloorToInt((playerVariableSO.PlayerSpeed - enemyVariableSO.EnemySpeed) / base.gameVariableSO.TurnSpeedValue);
             this._currentTurn = _myTurn;
         }
 
@@ -39,9 +42,9 @@ namespace HeroesGames.ProjectProcedural.Enemies
         }
 
         /// <summary>
-        /// Devuelve la distancia respecto a una posición
+        /// Devuelve la distancia respecto a una posiciï¿½n
         /// </summary>
-        /// <param name="position">Posición</param>
+        /// <param name="position">Posiciï¿½n</param>
         /// <returns></returns>
         protected float CalculateDistance(Vector2 position)
         {
@@ -73,12 +76,12 @@ namespace HeroesGames.ProjectProcedural.Enemies
         protected void ChangeMyTurn()
         {
             int previousTurn = _myTurn;
-            this._myTurn = Mathf.FloorToInt((playerVariableSO.PlayerSpeed - enemyVariableSO.EnemySpeed) / TURNS_VALUE);
+            this._myTurn = Mathf.FloorToInt((playerVariableSO.PlayerSpeed - enemyVariableSO.EnemySpeed) / gameVariableSO.TurnSpeedValue);
             _currentTurn += _myTurn - previousTurn;
         }
 
         /// <summary>
-        /// Comprueba el turno del enemigo, si es menor o igual a 0 el enemigo podrá hacer algo
+        /// Comprueba el turno del enemigo, si es menor o igual a 0 el enemigo podrï¿½ hacer algo
         /// </summary>
         protected void CheckTurn()
         {
@@ -99,7 +102,7 @@ namespace HeroesGames.ProjectProcedural.Enemies
         /// <returns>True si existe camino, false si no</returns>
         protected virtual bool Pursue()
         {
-            return base.AttemptTeleportMovement(Mathf.FloorToInt(playerVariableSO.PlayerPreviousPosition.x), Mathf.FloorToInt(playerVariableSO.PlayerPreviousPosition.y));
+            return base.AttemptMovement(Mathf.FloorToInt(playerVariableSO.PlayerPreviousPosition.x), Mathf.FloorToInt(playerVariableSO.PlayerPreviousPosition.y));
         }
 
         /// <summary>
@@ -108,7 +111,7 @@ namespace HeroesGames.ProjectProcedural.Enemies
         protected abstract void DoSomething();
 
         /// <summary>
-        /// Si no puede ni ver ni atacar al jugador, hará su Idle
+        /// Si no puede ni ver ni atacar al jugador, harï¿½ su Idle
         /// </summary>
         /// <returns>True si puede, false si no</returns>
         protected abstract bool Idle();

@@ -93,15 +93,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7103f51b9252ed44eab2d3ef2604b40f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  grid: {fileID: 0}
-  moveSpeed: 1
+  gameVariableSO: {fileID: 11400000, guid: c9f70f3a05f02f943948a81ac920d4fe, type: 2}
   gridPathfind: {fileID: 0}
-  blockingLayer:
-    serializedVersion: 2
-    m_Bits: 832
-  moveLayer:
-    serializedVersion: 2
-    m_Bits: 128
   enemyVariableSO: {fileID: 11400000, guid: f1dfb5c9666dc944a8edda846da00f94, type: 2}
   playerVariableSO: {fileID: 11400000, guid: 82464bdcbc557ff41b3b1e47fa852778, type: 2}
   spriteRenderer: {fileID: 6060309841416353464}

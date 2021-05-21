@@ -98,7 +98,7 @@ Camera:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RenderingPath: -1
-  m_TargetTexture: {fileID: 8400000, guid: 1528acf246a19472fb2d7ada997fea94, type: 2}
+  m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
   m_TargetEye: 0
   m_HDR: 1
@@ -265,7 +265,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: dd2e55825303a49f69c683d64a5854ba, type: 2}
+  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -455,15 +455,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 188a8921241bdb34ba654fd6a2283901, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  grid: {fileID: 0}
-  moveSpeed: 15
+  gameVariableSO: {fileID: 11400000, guid: c9f70f3a05f02f943948a81ac920d4fe, type: 2}
   gridPathfind: {fileID: 0}
-  blockingLayer:
-    serializedVersion: 2
-    m_Bits: 576
-  moveLayer:
-    serializedVersion: 2
-    m_Bits: 128
   playerVariableSO: {fileID: 11400000, guid: 82464bdcbc557ff41b3b1e47fa852778, type: 2}
   _mySprite: {fileID: 7226611521541733787}
 --- !u!1 &7226611521541733785

@@ -46,9 +46,9 @@ namespace HeroesGames.ProjectProcedural.Player
             _inputActions.Disable();
         }
         /// <summary>
-        /// Módulo encargado de mover al jugador mediante botones en la pantalla del movil
+        /// Mï¿½dulo encargado de mover al jugador mediante botones en la pantalla del movil
         /// </summary>
-        /// <param name="direction">Dirección donde debe moverse</param>
+        /// <param name="direction">Direcciï¿½n donde debe moverse</param>
         public void TryMoveButton(Vector2 direction)
         {
             if (_canPressButton)
@@ -56,25 +56,25 @@ namespace HeroesGames.ProjectProcedural.Player
                 CancelInvoke(nameof(EnableButton));
                 _canPressButton = false;
                 _moveDirection = direction;
-                AttemptTeleportMovement((int)_moveDirection.x + Mathf.FloorToInt(transform.position.x), (int)_moveDirection.y + Mathf.FloorToInt(transform.position.y));
+                AttemptMovement((int)_moveDirection.x + Mathf.FloorToInt(transform.position.x), (int)_moveDirection.y + Mathf.FloorToInt(transform.position.y));
                 Invoke(nameof(EnableButton), TIME_BETWEEE_BUTTONSTROKES);
             }
 
         }
         /// <summary>
-        /// Módulo encargado de mover al jugador mediante el teclado, usar solo para testear
+        /// Mï¿½dulo encargado de mover al jugador mediante el teclado, usar solo para testear
         /// </summary>
-        /// <param name="ctx">Dirección donde moverse</param>
+        /// <param name="ctx">Direcciï¿½n donde moverse</param>
         private void TryMoveKeyboard(CallbackContext ctx)
         {
             _moveDirection = ctx.ReadValue<Vector2>();
-            AttemptTeleportMovement((int)_moveDirection.x + Mathf.FloorToInt(transform.position.x), (int)_moveDirection.y + Mathf.FloorToInt(transform.position.y));
+            AttemptMovement((int)_moveDirection.x + Mathf.FloorToInt(transform.position.x), (int)_moveDirection.y + Mathf.FloorToInt(transform.position.y));
         }
         /// <summary>
-        /// Módulo que se ejecuta si el jugador se puede mover. Cambia el 'Sprite' del jugador
+        /// Mï¿½dulo que se ejecuta si el jugador se puede mover. Cambia el 'Sprite' del jugador
         /// </summary>
-        /// <param name="lastPosition">Posición antes de moverse</param>
-        /// <param name="currentPosition">Posición despues de moverse</param>
+        /// <param name="lastPosition">Posiciï¿½n antes de moverse</param>
+        /// <param name="currentPosition">Posiciï¿½n despues de moverse</param>
         protected override void OnCanMove(Vector2Int lastPosition, Vector2Int currentPosition)
         {
             base.OnCanMove(lastPosition, currentPosition);
@@ -94,12 +94,20 @@ namespace HeroesGames.ProjectProcedural.Player
             _previousPosition = transform.position;
         }
         /// <summary>
-        /// Módulo que se ejecuta si el objeto no se puede mover
+        /// Mï¿½dulo que se ejecuta si el objeto no se puede mover
         /// </summary>
-        protected override void OnCantMove() { }
+        protected override void OnCantMove() 
+        {
+            Debug.Log("No puedo moverme");
+        }
+        protected override void OnAlreadyMoving()
+        {
+            base.OnAlreadyMoving();
+            Debug.Log("Ya me estoy moviendo");
+        }
 
         /// <summary>
-        /// Módulo encargado de volver a permitir moverse al jugador
+        /// Mï¿½dulo encargado de volver a permitir moverse al jugador
         /// </summary>
         private void EnableButton()
         {

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using HeroesGames.ProjectProcedural.SO;
 using UnityEngine;
 
 namespace HeroesGames.ProjectProcedural.Utils
@@ -10,10 +11,14 @@ namespace HeroesGames.ProjectProcedural.Utils
     [RequireComponent(typeof(Rigidbody2D)), RequireComponent(typeof(Collider2D))]
     public abstract class MovingObject : MonoBehaviour
     {
+        [SerializeField] protected GameVariableSO gameVariableSO;
         [SerializeField] protected Pathfind.GridPathfind gridPathfind;
+
+        protected bool _isMoving;
 
         protected virtual void Awake()
         {
+            _isMoving = false;
             if (!this.gridPathfind)
             {
                 this.gridPathfind = FindObjectOfType<Pathfind.GridPathfind>();
@@ -22,45 +27,98 @@ namespace HeroesGames.ProjectProcedural.Utils
         protected virtual void Start() { }
 
         /// <summary>
-        /// Mueve al objeto de su posición actual a la posición dada siempre que sea posible
+        /// Mueve al objeto de su posiciï¿½n actual a la posiciï¿½n dada siempre que sea posible
         /// </summary>
-        /// <param name="xPos">Posición X en el grid</param>
-        /// <param name="yPos">Posición Y en el grid</param>
+        /// <param name="xPos">Posiciï¿½n X en el grid</param>
+        /// <param name="yPos">Posiciï¿½n Y en el grid</param>
         /// <returns>'False' si no existe camino posible, 'True' si existe camino</returns>
-        protected bool MoveTeleportMovementPosition(float xPos, float yPos)
+        protected bool TeleportMovementPosition(float xPos, float yPos, out Vector2Int nextPosition)
+        {
+
+            List<Pathfind.Point> points;
+            points = Pathfind.Pathfinding.FindPath(gridPathfind, new Pathfind.Point((int)transform.position.x, (int)transform.position.y), new Pathfind.Point((int)(xPos), (int)(yPos)));
+            if (points.Count > 0)
+            {
+                transform.position = (Vector2)points[0].Position;
+                nextPosition = points[0].Position;
+                return true;
+            }
+            nextPosition = Vector2Int.zero;
+            return false;
+        }
+        protected bool SmoothMovementPosition(float xPos, float yPos, out Vector2Int nextPosition)
         {
             List<Pathfind.Point> points;
             points = Pathfind.Pathfinding.FindPath(gridPathfind, new Pathfind.Point((int)transform.position.x, (int)transform.position.y), new Pathfind.Point((int)(xPos), (int)(yPos)));
             if (points.Count > 0)
             {
-                transform.position = (Vector2) points[0].Position;
+                StartCoroutine(LerpPosition(points[0].Position, gameVariableSO.LerpDuration));
+                nextPosition = points[0].Position;
                 return true;
             }
+            nextPosition = Vector2Int.zero;
             return false;
         }
-        /// <summary>
-        /// Intenta mover al objeto a la posición dada
-        /// </summary>
-        /// <param name="xPos">Posición X en el grid</param>
-        /// <param name="yPos">Posición Y en el grid</param>
-        /// <returns></returns>
-        protected virtual bool AttemptTeleportMovement(int xPos, int yPos)
+        protected IEnumerator LerpPosition(Vector2 targetPosition, float duration)
         {
-            Vector2Int lastPosition = Vector2Int.FloorToInt(transform.position);
-            if (MoveTeleportMovementPosition(xPos, yPos))
+            _isMoving = true;
+            float time = 0;
+            Vector2 startPosition = transform.position;
+            while (time < duration)
             {
-                OnCanMove(lastPosition, Vector2Int.FloorToInt(transform.position));
-                return true;
+                transform.position = Vector2.Lerp(startPosition, targetPosition, time / duration);
+                time += Time.deltaTime;
+                yield return null;
+            }
+            transform.position = targetPosition;
+            _isMoving = false;
+        }
+        /// <summary>
+        /// Intenta mover al objeto a la posiciï¿½n dada
+        /// </summary>
+        /// <param name="xPos">Posiciï¿½n X en el grid</param>
+        /// <param name="yPos">Posiciï¿½n Y en el grid</param>
+        /// <returns></returns>
+        protected virtual bool AttemptMovement(int xPos, int yPos)
+        {
+            if (!gameVariableSO.SmoothGameplay)
+            {
+                Vector2Int lastPosition = Vector2Int.FloorToInt(transform.position);
+                Vector2Int nextPosition;
+                if (TeleportMovementPosition(xPos, yPos, out nextPosition))
+                {
+                    OnCanMove(lastPosition, nextPosition);
+                    return true;
+                }
+                else
+                {
+                    OnCantMove();
+                    return false;
+                }
+            }
+            else if (!_isMoving)
+            {
+                Vector2Int lastPosition = Vector2Int.FloorToInt(transform.position);
+                Vector2Int nextPosition;
+                if (SmoothMovementPosition(xPos, yPos, out nextPosition))
+                {
+                    OnCanMove(lastPosition, nextPosition);
+                    return true;
+                }
+                else
+                {
+                    OnCantMove();
+                    return false;
+                }
             }
             else
             {
-                OnCantMove();
-                return false;
+                OnAlreadyMoving();
+                return true;
             }
-
         }
         /// <summary>
-        /// Intenta mover al objeto en una direccióin aleatoria
+        /// Intenta mover al objeto en una direcciï¿½in aleatoria
         /// </summary>
         /// <returns></returns>
         protected bool WanderAround()
@@ -75,9 +133,8 @@ namespace HeroesGames.ProjectProcedural.Utils
             {
                 int randomNumber = indexOfDirections[Random.Range(0, indexOfDirections.Count)];
                 Vector2Int aux = Direction2D.cardinalDirectionList[randomNumber];
-                if (MoveTeleportMovementPosition(aux.x + Mathf.FloorToInt(transform.position.x), aux.y + Mathf.FloorToInt(transform.position.y)))
+                if (AttemptMovement(aux.x + Mathf.FloorToInt(transform.position.x), aux.y + Mathf.FloorToInt(transform.position.y)))
                 {
-                    OnCanMove(lastPosition, Vector2Int.FloorToInt(transform.position));
                     return true;
                 }
                 indexOfDirections.Remove(randomNumber);
@@ -85,19 +142,24 @@ namespace HeroesGames.ProjectProcedural.Utils
             return false;
         }
         /// <summary>
-        /// Módulo que se ejecuta si el objeto se puede mover. Actualiza los nodos del grid
+        /// Mï¿½dulo que se ejecuta si el objeto se puede mover. Actualiza los nodos del grid
         /// </summary>
-        /// <param name="lastPosition">Posición antes de moverse</param>
-        /// <param name="currentPosition">Posición despues de moverse</param>
+        /// <param name="lastPosition">Posiciï¿½n antes de moverse</param>
+        /// <param name="currentPosition">Posiciï¿½n despues de moverse</param>
         protected virtual void OnCanMove(Vector2Int lastPosition, Vector2Int currentPosition)
         {
             gridPathfind.ChangeNode(currentPosition.x, currentPosition.y, false);
             gridPathfind.ChangeNode(lastPosition.x, lastPosition.y, true);
         }
         /// <summary>
-        /// Módulo que se ejecuta si el objeto no se puede mover
+        /// Mï¿½dulo que se ejecuta si el objeto no se puede mover
         /// </summary>
         protected virtual void OnCantMove() { }
+
+        /// <summary>
+        /// Mï¿½dulo que se ejecuta si el objeto ya se esta moviendo
+        /// </summary>
+        protected virtual void OnAlreadyMoving() { }
     }
 }
 
