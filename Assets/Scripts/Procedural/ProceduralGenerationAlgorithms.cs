@@ -5,16 +5,16 @@ using UnityEngine;
 namespace HeroesGames.ProjectProcedural.Procedural
 {
     /// <summary>
-    /// Clase encargada de almacenar los distintos algoritmos de generación procedural
+    /// Clase encargada de almacenar los distintos algoritmos de generaciï¿½n procedural
     /// </summary>
     public static class ProceduralGenerationAlgorithms
     {
         /// <summary>
-        /// Algoritmo de generación procedural BSP
+        /// Algoritmo de generaciï¿½n procedural BSP
         /// </summary>
-        /// <param name="spaceToSplit">Mapa que se dividirá</param>
-        /// <param name="minWidth">Mínima anchura de las habitaciones</param>
-        /// <param name="minHeight">Máxima anchura de las habitaciones</param>
+        /// <param name="spaceToSplit">Mapa que se dividirï¿½</param>
+        /// <param name="minWidth">Mï¿½nima anchura de las habitaciones</param>
+        /// <param name="minHeight">Mï¿½xima anchura de las habitaciones</param>
         /// <returns></returns>
         public static List<BoundsInt> BinarySpacePartitioning(BoundsInt spaceToSplit, int minWidth, int minHeight)
         {
@@ -63,9 +63,9 @@ namespace HeroesGames.ProjectProcedural.Procedural
         /// <summary>
         /// Divide una habitacion verticalmente y la agrega a la cola de habitaciones
         /// </summary>
-        /// <param name="minWidth">Mínima anchura de la habitación</param>
+        /// <param name="minWidth">Mï¿½nima anchura de la habitaciï¿½n</param>
         /// <param name="roomsQueue">Cola de habitaciones</param>
-        /// <param name="room">Habitación que se dividirá</param>
+        /// <param name="room">Habitaciï¿½n que se dividirï¿½</param>
         private static void SplitVertical(int minWidth, Queue<BoundsInt> roomsQueue, BoundsInt room)
         {
             var xSplit = Random.Range(1, room.size.x);
@@ -78,9 +78,9 @@ namespace HeroesGames.ProjectProcedural.Procedural
         /// <summary>
         /// Divide una habitacion horizontalmente y la agrega a la cola de habitaciones
         /// </summary>
-        /// <param name="minWidth">Mínima anchura de la habitación</param>
+        /// <param name="minWidth">Mï¿½nima anchura de la habitaciï¿½n</param>
         /// <param name="roomsQueue">Cola de habitaciones</param>
-        /// <param name="room">Habitación que se dividirá</param>
+        /// <param name="room">Habitaciï¿½n que se dividirï¿½</param>
         private static void SplitHorizontal(int minHeight, Queue<BoundsInt> roomsQueue, BoundsInt room)
         {
             var ySplit = Random.Range(1, room.size.y);

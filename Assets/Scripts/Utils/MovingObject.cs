@@ -160,6 +160,11 @@ namespace HeroesGames.ProjectProcedural.Utils
         /// M�dulo que se ejecuta si el objeto ya se esta moviendo
         /// </summary>
         protected virtual void OnAlreadyMoving() { }
+
+        protected virtual void RemoveObjectPathfind(Vector2Int currentPosition)
+        {
+            gridPathfind.ChangeNode(currentPosition.x,currentPosition.y, true);
+        }
     }
 }
 

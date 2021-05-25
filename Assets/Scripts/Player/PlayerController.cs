@@ -13,8 +13,7 @@ namespace HeroesGames.ProjectProcedural.Player
     /// </summary>
     public class PlayerController : MovingObject
     {
-        private const float TIME_BETWEEE_BUTTONSTROKES = 0.1f;
-
+        [SerializeField] private CombatVariableSO combatVariableSO;
         [SerializeField] private PlayerVariableSO playerVariableSO;
         [SerializeField] private SpriteRenderer _mySprite;
 
@@ -51,13 +50,13 @@ namespace HeroesGames.ProjectProcedural.Player
         /// <param name="direction">Direcci�n donde debe moverse</param>
         public void TryMoveButton(Vector2 direction)
         {
-            if (_canPressButton)
+            if (_canPressButton && !combatVariableSO.IsActive)
             {
                 CancelInvoke(nameof(EnableButton));
                 _canPressButton = false;
                 _moveDirection = direction;
                 AttemptMovement((int)_moveDirection.x + Mathf.FloorToInt(transform.position.x), (int)_moveDirection.y + Mathf.FloorToInt(transform.position.y));
-                Invoke(nameof(EnableButton), TIME_BETWEEE_BUTTONSTROKES);
+                Invoke(nameof(EnableButton), gameVariableSO.TimeBetweenKeystrokes);
             }
 
         }
@@ -67,8 +66,11 @@ namespace HeroesGames.ProjectProcedural.Player
         /// <param name="ctx">Direcci�n donde moverse</param>
         private void TryMoveKeyboard(CallbackContext ctx)
         {
-            _moveDirection = ctx.ReadValue<Vector2>();
-            AttemptMovement((int)_moveDirection.x + Mathf.FloorToInt(transform.position.x), (int)_moveDirection.y + Mathf.FloorToInt(transform.position.y));
+            if (!combatVariableSO.IsActive)
+            {
+                _moveDirection = ctx.ReadValue<Vector2>();
+                AttemptMovement((int)_moveDirection.x + Mathf.FloorToInt(transform.position.x), (int)_moveDirection.y + Mathf.FloorToInt(transform.position.y));
+            }
         }
         /// <summary>
         /// M�dulo que se ejecuta si el jugador se puede mover. Cambia el 'Sprite' del jugador
@@ -96,8 +98,9 @@ namespace HeroesGames.ProjectProcedural.Player
         /// <summary>
         /// M�dulo que se ejecuta si el objeto no se puede mover
         /// </summary>
-        protected override void OnCantMove() 
+        protected override void OnCantMove()
         {
+            base.OnCantMove();
             Debug.Log("No puedo moverme");
         }
         protected override void OnAlreadyMoving()
@@ -115,4 +118,4 @@ namespace HeroesGames.ProjectProcedural.Player
         }
     }
 }
-    
+

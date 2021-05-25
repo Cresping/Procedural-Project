@@ -216,7 +216,7 @@ namespace HeroesGames.ProjectProcedural.Procedural
                 {
                     if ((Vector2Int)Vector3Int.RoundToInt(room.center) != _start && (Vector2Int)Vector3Int.RoundToInt(room.center) != _end)
                     {
-                        Dictionary<Vector2Int, Vector2Int> currentPositions = new Dictionary<Vector2Int, Vector2Int>();
+                        Dictionary<Vector2Int, Vector2Int> currentEnemiesPositions = new Dictionary<Vector2Int, Vector2Int>();
                         List<Vector2Int> enemiesPosition = new List<Vector2Int>();
                         for (int i = roomVariable.NumberOfEnemies() - 1; i >= 0; i--)
                         {
@@ -225,9 +225,9 @@ namespace HeroesGames.ProjectProcedural.Procedural
                             {
                                 Vector2Int aux;
                                 aux = new Vector2Int(UnityEngine.Random.Range(room.xMin + 1, room.xMax - 1), UnityEngine.Random.Range(room.yMin + 1, room.yMax - 1));
-                                if (!currentPositions.ContainsKey(aux) && gridPathfind.IsWalkeable(aux.x,aux.y))
+                                if (!currentEnemiesPositions.ContainsKey(aux) && gridPathfind.IsWalkeable(aux.x,aux.y))
                                 {
-                                    currentPositions.Add(aux, aux);
+                                    currentEnemiesPositions.Add(aux, aux);
                                     enemiesPosition.Add(aux);
                                     break;
                                 }
@@ -253,7 +253,7 @@ namespace HeroesGames.ProjectProcedural.Procedural
             {
                 for (int row = offset; row < room.size.y - offset; row++)
                 {
-                    Vector2Int position = (Vector2Int)room.min + new Vector2Int(col, row);
+                    Vector2Int position = (Vector2Int) room.min + new Vector2Int(col, row);
                     _floor.Add(position);
                     gridPathfind.ChangeNode(position.x, position.y, true);
                 }

@@ -10,6 +10,7 @@ namespace HeroesGames.ProjectProcedural.SO
      [CreateAssetMenu(fileName = "NewGameVariableSO", menuName = "Scriptables/Game/GameVariable")]
     public class GameVariableSO : ScriptableObject
     {
+        [SerializeField] private float timeBetweenKeystrokes=0.1f;
         [SerializeField] private float lerpDuration=0.2f;
         [SerializeField] private bool smoothGameplay = true;
         [SerializeField] private int turnSpeedValue = 5;
@@ -17,7 +18,7 @@ namespace HeroesGames.ProjectProcedural.SO
         public int TurnSpeedValue { get => turnSpeedValue; set => turnSpeedValue = value; }
         public bool SmoothGameplay { get => smoothGameplay; set => smoothGameplay = value; }
         public float LerpDuration { get => lerpDuration; set => lerpDuration = value; }
-
+        public float TimeBetweenKeystrokes { get => timeBetweenKeystrokes; set => timeBetweenKeystrokes = value; }
     }
 }
 

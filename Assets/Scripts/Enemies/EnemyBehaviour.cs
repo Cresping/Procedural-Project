@@ -11,6 +11,7 @@ namespace HeroesGames.ProjectProcedural.Enemies
     /// </summary>
     public abstract class EnemyBehaviour : MovingObject
     {
+        [SerializeField] protected CombatVariableSO combatVariableSO;
         [SerializeField] protected EnemyVariableSO enemyVariableSO;
         [SerializeField] protected PlayerVariableSO playerVariableSO;
         [SerializeField] protected SpriteRenderer spriteRenderer;
@@ -18,6 +19,10 @@ namespace HeroesGames.ProjectProcedural.Enemies
 
         private int _myTurn;
         private int _currentTurn;
+
+        public EnemyVariableSO EnemyVariableSO { get => enemyVariableSO; protected set => enemyVariableSO = value; }
+        public int CurrentEnemyHP { get => _currentEnemyHP; set => _currentEnemyHP = value; }
+
         protected override void Awake()
         {
             base.Awake();
@@ -122,9 +127,24 @@ namespace HeroesGames.ProjectProcedural.Enemies
         /// <returns>True si lo ha atacado, false si no</returns>
         protected abstract bool Attack();
 
-
-
-
+        public void ReceiveDamage(int damage)
+        {
+            int actualDamage = damage - enemyVariableSO.EnemyDefense;
+            if (actualDamage > 0)
+            {
+                _currentEnemyHP -= actualDamage;
+                Debug.Log("Soy el enemigo " + this.gameObject.name + " y me quedan " + _currentEnemyHP + " de vida");
+                if (_currentEnemyHP <= 0)
+                {
+                    DisableEnemy();
+                }
+            }
+        }
+        public void DisableEnemy()
+        {
+            Debug.Log("Soy el enemigo " + this.gameObject.name + " y me he desactivado");
+            RemoveObjectPathfind(Vector2Int.FloorToInt((Vector2)transform.position));
+            this.gameObject.SetActive(false);
+        }
     }
-
 }

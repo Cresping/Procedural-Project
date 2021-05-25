@@ -15,19 +15,24 @@ namespace HeroesGames.ProjectProcedural.Enemies
         /// </summary>
         protected override void DoSomething()
         {
-            if (CanAttackPlayer())
-            {
-                Attack();
-                return;
-            }
-            else if (CanSeePlayer())
+            if (CanSeePlayer())
             {
                 if (Pursue())
                 {
                     return;
                 }
             }
-            Idle();
+            else
+            {
+                Idle();
+            }
+            if (CanAttackPlayer())
+            {
+                if (Attack())
+                {
+                    return;
+                }
+            }
         }
 
         /// <summary>
@@ -36,15 +41,8 @@ namespace HeroesGames.ProjectProcedural.Enemies
         /// <returns>True si ha conseguido hacer daño, false si no</returns>
         protected override bool Attack()
         {
-            int damage = base.enemyVariableSO.EnemyAttack - base.playerVariableSO.PlayerDef;
-            if (damage > 0)
-            {
-                base.playerVariableSO.PlayerHP -= damage;
-                Debug.Log("Soy " + this.gameObject.name + " y he hecho " + (base.enemyVariableSO.EnemyAttack - base.playerVariableSO.PlayerDef) + " de daño al jugador");
-                return true;
-            }
-            return false;
-
+            combatVariableSO.ActivateCombat(enemyVariableSO, this.gameObject.GetComponent<EnemyBehaviour>());
+            return true;
         }
 
         /// <summary>

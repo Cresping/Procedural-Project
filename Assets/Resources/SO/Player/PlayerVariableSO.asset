@@ -13,7 +13,6 @@ MonoBehaviour:
   m_Name: PlayerVariableSO
   m_EditorClassIdentifier: 
   maxPlayerHP: 100
-  invincibilityTime: 1
-  _playerDamage: 5
+  _playerDamage: 10
   _playerSpeed: 5
   _playerDef: 4

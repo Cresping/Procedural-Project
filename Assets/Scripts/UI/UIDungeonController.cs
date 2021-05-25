@@ -10,11 +10,21 @@ namespace HeroesGames.ProjectProcedural.UI
     /// </summary>
     public class UIDungeonController : MonoBehaviour
     {
+        [SerializeField] CombatVariableSO combatVariableSO;
         [SerializeField] PlayerController playerController;
+        [SerializeField] PlayerCombatController playerCombatController;
         [SerializeField] GameObject pauseMenu;
+
+        [SerializeField] GameObject movementButtons;
+
+        [SerializeField] GameObject combatButtons;
+
+        [SerializeField] GameObject combatUI;
+
         private void Awake()
         {
             pauseMenu.SetActive(false);
+            combatVariableSO.OnCombatActivation += SwitchCombatInterface;
         }
         public void ButtonUP()
         {
@@ -35,6 +45,25 @@ namespace HeroesGames.ProjectProcedural.UI
         public void ButtonPauseMenu(bool value)
         {
             pauseMenu.SetActive(value);
+        }
+        public void ButtonAttack()
+        {
+            playerCombatController.DoDamageEnemy();
+        }
+        public void SwitchCombatInterface()
+        {
+            if (combatVariableSO.IsActive)
+            {
+                movementButtons.SetActive(false);
+                combatButtons.SetActive(true);
+                combatUI.SetActive(true);
+            }
+            else
+            {
+                combatButtons.SetActive(false);
+                combatUI.SetActive(false);
+                movementButtons.SetActive(true);
+            }
         }
     }
 

@@ -9,10 +9,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e9610186eaed9c840867d4560739d441, type: 3}
-  m_Name: GameVariableSO
+  m_Script: {fileID: 11500000, guid: f1f32f466f7c7b44d8fa42fd065acddd, type: 3}
+  m_Name: CombatVariable
   m_EditorClassIdentifier: 
-  timeBetweenKeystrokes: 0.1
-  lerpDuration: 0.2
-  smoothGameplay: 1
-  turnSpeedValue: 5
