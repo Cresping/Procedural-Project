@@ -126,7 +126,13 @@ namespace HeroesGames.ProjectProcedural.Enemies
         /// </summary>
         /// <returns>True si lo ha atacado, false si no</returns>
         protected abstract bool Attack();
-
+        protected override void OnFinishMoving()
+        {
+            if (CanAttackPlayer())
+            {
+                Attack();
+            }
+        }
         public void ReceiveDamage(int damage)
         {
             int actualDamage = damage - enemyVariableSO.EnemyDefense;

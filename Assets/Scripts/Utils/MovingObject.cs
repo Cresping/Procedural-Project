@@ -41,6 +41,7 @@ namespace HeroesGames.ProjectProcedural.Utils
             {
                 transform.position = (Vector2)points[0].Position;
                 nextPosition = points[0].Position;
+                OnFinishMoving();
                 return true;
             }
             nextPosition = Vector2Int.zero;
@@ -71,6 +72,7 @@ namespace HeroesGames.ProjectProcedural.Utils
                 yield return null;
             }
             transform.position = targetPosition;
+            OnFinishMoving();
             _isMoving = false;
         }
         /// <summary>
@@ -161,9 +163,11 @@ namespace HeroesGames.ProjectProcedural.Utils
         /// </summary>
         protected virtual void OnAlreadyMoving() { }
 
+        protected virtual void OnFinishMoving() { }
+
         protected virtual void RemoveObjectPathfind(Vector2Int currentPosition)
         {
-            gridPathfind.ChangeNode(currentPosition.x,currentPosition.y, true);
+            gridPathfind.ChangeNode(currentPosition.x, currentPosition.y, true);
         }
     }
 }

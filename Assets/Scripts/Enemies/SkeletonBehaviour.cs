@@ -22,17 +22,7 @@ namespace HeroesGames.ProjectProcedural.Enemies
                     return;
                 }
             }
-            else
-            {
-                Idle();
-            }
-            if (CanAttackPlayer())
-            {
-                if (Attack())
-                {
-                    return;
-                }
-            }
+            Idle();
         }
 
         /// <summary>

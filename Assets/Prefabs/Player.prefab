@@ -340,7 +340,7 @@ Camera:
     x: 0
     y: 0
     width: 1
-    height: 1
+    height: 2
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
@@ -373,6 +373,7 @@ GameObject:
   - component: {fileID: 7226611520861074221}
   - component: {fileID: 7226611520861074220}
   - component: {fileID: 7226611520861074219}
+  - component: {fileID: 1686672608}
   m_Layer: 8
   m_Name: Player
   m_TagString: Untagged
@@ -427,7 +428,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0.5, y: 0.5}
@@ -441,7 +442,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.5, y: 0.5}
   m_EdgeRadius: 0
 --- !u!114 &7226611520861074219
 MonoBehaviour:
@@ -457,8 +458,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameVariableSO: {fileID: 11400000, guid: c9f70f3a05f02f943948a81ac920d4fe, type: 2}
   gridPathfind: {fileID: 0}
+  combatVariableSO: {fileID: 11400000, guid: 4de606722f98fda4887b78215d26751b, type: 2}
   playerVariableSO: {fileID: 11400000, guid: 82464bdcbc557ff41b3b1e47fa852778, type: 2}
   _mySprite: {fileID: 7226611521541733787}
+--- !u!114 &1686672608
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7226611520861074216}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1fec15618a0454a4e9a5298c7232119c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameVariableSO: {fileID: 11400000, guid: c9f70f3a05f02f943948a81ac920d4fe, type: 2}
+  combatVariableSO: {fileID: 11400000, guid: 4de606722f98fda4887b78215d26751b, type: 2}
+  uIDungeonController: {fileID: 0}
+  playerVariableSO: {fileID: 11400000, guid: 82464bdcbc557ff41b3b1e47fa852778, type: 2}
 --- !u!1 &7226611521541733785
 GameObject:
   m_ObjectHideFlags: 0
