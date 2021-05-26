@@ -31,7 +31,7 @@ namespace HeroesGames.ProjectProcedural.Enemies
         /// <returns>True si ha conseguido hacer daño, false si no</returns>
         protected override bool Attack()
         {
-            combatVariableSO.ActivateCombat(enemyVariableSO, this.gameObject.GetComponent<EnemyBehaviour>());
+            combatVariableSO.AddEnemy(this.gameObject.GetComponent<EnemyBehaviour>());
             return true;
         }
 

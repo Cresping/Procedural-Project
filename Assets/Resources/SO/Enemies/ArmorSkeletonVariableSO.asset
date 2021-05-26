@@ -17,5 +17,5 @@ MonoBehaviour:
   enemyDefense: 5
   enemyAttack: 10
   enemySpeed: 10
-  pursuePlayerDistance: 5
-  attackPlayerDistance: 0
+  pursuePlayerDistance: 10
+  attackPlayerDistance: 1

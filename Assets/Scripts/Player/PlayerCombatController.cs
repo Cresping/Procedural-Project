@@ -20,11 +20,7 @@ namespace HeroesGames.ProjectProcedural.Player
         {
             if (combatVariableSO.IsActive)
             {
-                combatVariableSO.CombatEnemyBehaviour.ReceiveDamage(playerVariableSO.PlayerDamage);             
-                if (!combatVariableSO.CombatEnemyBehaviour.gameObject.activeSelf)
-                {
-                    combatVariableSO.DesactivateCombat();
-                }
+                combatVariableSO.DoDamageCurrentEnemy(playerVariableSO.PlayerDamage);             
             }
         }
     }

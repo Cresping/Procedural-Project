@@ -79,7 +79,7 @@ namespace HeroesGames.ProjectProcedural.Player
         /// <param name="currentPosition">Posici�n despues de moverse</param>
         protected override void OnCanMove(Vector2Int lastPosition, Vector2Int currentPosition)
         {
-            base.OnCanMove(lastPosition, currentPosition);
+            //base.OnCanMove(lastPosition, currentPosition);
             switch (Direction2D.GetFollowDirection(lastPosition, currentPosition).x)
             {
                 case 0:
@@ -91,7 +91,7 @@ namespace HeroesGames.ProjectProcedural.Player
                     _mySprite.flipX = true;
                     break;
             }
-            playerVariableSO.PlayerPosition = transform.position;
+            playerVariableSO.PlayerPosition = currentPosition;
             playerVariableSO.PlayerPreviousPosition = _previousPosition;
             _previousPosition = transform.position;
         }

@@ -18,4 +18,4 @@ MonoBehaviour:
   enemyAttack: 5
   enemySpeed: 5
   pursuePlayerDistance: 5
-  attackPlayerDistance: 0
+  attackPlayerDistance: 1
