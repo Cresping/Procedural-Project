@@ -10,8 +10,8 @@ public class CombatVariableSO : ScriptableObject, ISerializationCallbackReceiver
 {
     public Action OnCombatActivation;
     private bool _isActive;
-    private Stack<EnemyBehaviour> _combatEnemyBehaviour;
-    private EnemyBehaviour _currentEnemyBehaviour;
+    private Stack<EnemyBehaviour> _stackCombatEnemyBehaviour;
+    private EnemyBehaviour _currentCombatEnemyBehaviour;
 
     public bool IsActive
     {
@@ -24,7 +24,7 @@ public class CombatVariableSO : ScriptableObject, ISerializationCallbackReceiver
     }
     public void AddEnemy(EnemyBehaviour combatEnemyBehaviour)
     {
-        _combatEnemyBehaviour.Push(combatEnemyBehaviour);
+        _stackCombatEnemyBehaviour.Push(combatEnemyBehaviour);
         if (!_isActive)
         {
             StartCombat();
@@ -32,7 +32,7 @@ public class CombatVariableSO : ScriptableObject, ISerializationCallbackReceiver
     }
     public void StartCombat()
     {
-        if (_combatEnemyBehaviour.Count > 0)
+        if (_stackCombatEnemyBehaviour.Count > 0)
         {
             IsActive = true;
             NextEnemy();
@@ -40,9 +40,9 @@ public class CombatVariableSO : ScriptableObject, ISerializationCallbackReceiver
     }
     public void NextEnemy()
     {
-        if (_combatEnemyBehaviour.Count > 0)
+        if (_stackCombatEnemyBehaviour.Count > 0)
         {
-            _currentEnemyBehaviour = _combatEnemyBehaviour.Pop();
+            _currentCombatEnemyBehaviour = _stackCombatEnemyBehaviour.Pop();
         }
         else
         {
@@ -51,21 +51,21 @@ public class CombatVariableSO : ScriptableObject, ISerializationCallbackReceiver
     }
     public void DoDamageCurrentEnemy(int damage)
     {
-        _currentEnemyBehaviour.ReceiveDamage(damage);
-        if (!_currentEnemyBehaviour.gameObject.activeSelf)
+        _currentCombatEnemyBehaviour.ReceiveDamage(damage);
+        if (!_currentCombatEnemyBehaviour.gameObject.activeSelf)
         {
             NextEnemy();
         }
     }
     public void EndCombat()
     {
-        _combatEnemyBehaviour = new Stack<EnemyBehaviour>();
+        _stackCombatEnemyBehaviour = new Stack<EnemyBehaviour>();
         IsActive = false;
     }
     public void OnAfterDeserialize()
     {
         _isActive = false;
-        _combatEnemyBehaviour = new Stack<EnemyBehaviour>();
+        _stackCombatEnemyBehaviour = new Stack<EnemyBehaviour>();
     }
 
     public void OnBeforeSerialize() { }
