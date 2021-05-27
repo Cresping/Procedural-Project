@@ -131,19 +131,22 @@ namespace HeroesGames.ProjectProcedural.Enemies
             if (CanAttackPlayer())
             {
                 Attack();
+                StartCoroutine(coroutineCombat());
             }
         }
         public void ReceiveDamage(int damage)
         {
+
             int actualDamage = damage - enemyVariableSO.EnemyDefense;
-            if (actualDamage > 0)
+            if (actualDamage <= 0)
             {
-                _currentEnemyHP -= actualDamage;
-                Debug.Log("Soy el enemigo " + this.gameObject.name + " y me quedan " + _currentEnemyHP + " de vida");
-                if (_currentEnemyHP <= 0)
-                {
-                    DisableEnemy();
-                }
+                actualDamage = 1;
+            }
+            _currentEnemyHP -= actualDamage;
+            Debug.Log("Soy el enemigo " + this.gameObject.name + " y me quedan " + _currentEnemyHP + " de vida");
+            if (_currentEnemyHP <= 0)
+            {
+                DisableEnemy();
             }
         }
         public void DisableEnemy()
@@ -151,6 +154,17 @@ namespace HeroesGames.ProjectProcedural.Enemies
             Debug.Log("Soy el enemigo " + this.gameObject.name + " y me he desactivado");
             RemoveObjectPathfind(Vector2Int.FloorToInt((Vector2)transform.position));
             this.gameObject.SetActive(false);
+        }
+        private IEnumerator coroutineCombat()
+        {
+            while (combatVariableSO.IsActive && _currentEnemyHP > 0)
+            {
+                yield return new WaitForSecondsRealtime(enemyVariableSO.EnemyAttackSpeed);
+                if (combatVariableSO.IsActive && _currentEnemyHP > 0)
+                {
+                    combatVariableSO.DoDamagePlayer(enemyVariableSO.EnemyAttack);
+                }
+            }
         }
     }
 }

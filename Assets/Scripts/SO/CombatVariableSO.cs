@@ -5,68 +5,87 @@ using HeroesGames.ProjectProcedural.Enemies;
 using UnityEngine;
 
 
-[CreateAssetMenu(fileName = nameof(CombatVariableSO), menuName = "Scriptables/" + nameof(CombatVariableSO) + "/" + nameof(CombatVariableSO) + "Variable")]
-public class CombatVariableSO : ScriptableObject, ISerializationCallbackReceiver
+namespace HeroesGames.ProjectProcedural.SO
 {
-    public Action OnCombatActivation;
-    private bool _isActive;
-    private Stack<EnemyBehaviour> _stackCombatEnemyBehaviour;
-    private EnemyBehaviour _currentCombatEnemyBehaviour;
+    [CreateAssetMenu(fileName = nameof(CombatVariableSO), menuName = "Scriptables/" + nameof(CombatVariableSO) + "/" + nameof(CombatVariableSO) + "Variable")]
+    public class CombatVariableSO : ScriptableObject, ISerializationCallbackReceiver
+    {
+        public Action OnCombatActivation;
+        public Action OnCombatPlayerAnimation;
+        public Action OnCombatEnemyAnimation;
+        public Action OnCombatChangeEnemy;
+        [SerializeField] private PlayerVariableSO playerVariableSO;
+        private bool _isActive;
+        private Stack<EnemyBehaviour> _stackCombatEnemyBehaviour;
+        private EnemyBehaviour _currentCombatEnemyBehaviour;
 
-    public bool IsActive
-    {
-        get => _isActive;
-        private set
+        public bool IsActive
         {
-            _isActive = value;
-            OnCombatActivation?.Invoke();
+            get => _isActive;
+            private set
+            {
+                _isActive = value;
+                OnCombatActivation?.Invoke();
+            }
         }
-    }
-    public void AddEnemy(EnemyBehaviour combatEnemyBehaviour)
-    {
-        _stackCombatEnemyBehaviour.Push(combatEnemyBehaviour);
-        if (!_isActive)
+        public void AddEnemy(EnemyBehaviour combatEnemyBehaviour)
         {
-            StartCombat();
+            _stackCombatEnemyBehaviour.Push(combatEnemyBehaviour);
+            if (!_isActive)
+            {
+                StartCombat();
+            }
         }
-    }
-    public void StartCombat()
-    {
-        if (_stackCombatEnemyBehaviour.Count > 0)
+        public void StartCombat()
         {
-            IsActive = true;
-            NextEnemy();
+            if (_stackCombatEnemyBehaviour.Count > 0)
+            {
+                IsActive = true;
+                NextEnemy();
+            }
         }
-    }
-    public void NextEnemy()
-    {
-        if (_stackCombatEnemyBehaviour.Count > 0)
+        public void NextEnemy()
         {
-            _currentCombatEnemyBehaviour = _stackCombatEnemyBehaviour.Pop();
+            if (_stackCombatEnemyBehaviour.Count > 0)
+            {
+                _currentCombatEnemyBehaviour = _stackCombatEnemyBehaviour.Pop();
+                OnCombatChangeEnemy?.Invoke();
+            }
+            else
+            {
+                EndCombat();
+            }
         }
-        else
+        public void DoDamageCurrentEnemy(int damage)
         {
-            EndCombat();
+            OnCombatPlayerAnimation?.Invoke();
+            _currentCombatEnemyBehaviour.ReceiveDamage(damage);
+            if (!_currentCombatEnemyBehaviour.gameObject.activeSelf)
+            {
+                NextEnemy();
+            }
         }
-    }
-    public void DoDamageCurrentEnemy(int damage)
-    {
-        _currentCombatEnemyBehaviour.ReceiveDamage(damage);
-        if (!_currentCombatEnemyBehaviour.gameObject.activeSelf)
+        public void DoDamagePlayer(int damage)
         {
-            NextEnemy();
+            OnCombatEnemyAnimation?.Invoke();
+            playerVariableSO.ReceiveDamage(damage);
         }
-    }
-    public void EndCombat()
-    {
-        _stackCombatEnemyBehaviour = new Stack<EnemyBehaviour>();
-        IsActive = false;
-    }
-    public void OnAfterDeserialize()
-    {
-        _isActive = false;
-        _stackCombatEnemyBehaviour = new Stack<EnemyBehaviour>();
+        public EnemyVariableSO GetCurrentCombatEnemySO()
+        {
+            return _currentCombatEnemyBehaviour.EnemyVariableSO;
+        }
+        public void EndCombat()
+        {
+            _stackCombatEnemyBehaviour = new Stack<EnemyBehaviour>();
+            IsActive = false;
+        }
+        public void OnAfterDeserialize()
+        {
+            _isActive = false;
+            _stackCombatEnemyBehaviour = new Stack<EnemyBehaviour>();
+        }
+
+        public void OnBeforeSerialize() { }
     }
 
-    public void OnBeforeSerialize() { }
 }

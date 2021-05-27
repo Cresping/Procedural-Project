@@ -32,7 +32,8 @@ namespace HeroesGames.ProjectProcedural.Player
         protected override void Start()
         {
             base.Start();
-            transform.position = playerVariableSO.PlayerStartPosition;
+            transform.position = playerVariableSO.PlayerPosition;
+            
         }
         private void OnEnable()
         {

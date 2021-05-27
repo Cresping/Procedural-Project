@@ -16,11 +16,18 @@ namespace HeroesGames.ProjectProcedural.Player
         [SerializeField] private PlayerVariableSO playerVariableSO;
 
 
+        private void Awake()
+        {
+            if(!uIDungeonController)
+            {
+                this.uIDungeonController = FindObjectOfType<UIDungeonController>();
+            }
+        }
         public void DoDamageEnemy()
         {
             if (combatVariableSO.IsActive)
             {
-                combatVariableSO.DoDamageCurrentEnemy(playerVariableSO.PlayerDamage);             
+                combatVariableSO.DoDamageCurrentEnemy(playerVariableSO.PlayerDamage);
             }
         }
     }

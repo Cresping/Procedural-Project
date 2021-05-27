@@ -1,7 +1,11 @@
 using HeroesGames.ProjectProcedural.Player;
+using HeroesGames.ProjectProcedural.Utils;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
+using HeroesGames.ProjectProcedural.SO;
+using UnityEngine.UI;
 
 namespace HeroesGames.ProjectProcedural.UI
 {
@@ -11,8 +15,6 @@ namespace HeroesGames.ProjectProcedural.UI
     public class UIDungeonController : MonoBehaviour
     {
         [SerializeField] CombatVariableSO combatVariableSO;
-        [SerializeField] PlayerController playerController;
-        [SerializeField] PlayerCombatController playerCombatController;
         [SerializeField] GameObject pauseMenu;
 
         [SerializeField] GameObject movementButtons;
@@ -21,26 +23,42 @@ namespace HeroesGames.ProjectProcedural.UI
 
         [SerializeField] GameObject combatUI;
 
+        [SerializeField] Image combatPlayerSprite;
+
+        [SerializeField] Image combatEnemySprite;
+
+        private PlayerController _playerController;
+        private PlayerCombatController _playerCombatController;
+
         private void Awake()
         {
             pauseMenu.SetActive(false);
             combatVariableSO.OnCombatActivation += SwitchCombatInterface;
+            combatVariableSO.OnCombatPlayerAnimation += DoPlayerCombatAnimation;
+            combatVariableSO.OnCombatEnemyAnimation += DoEnemyCombatAnimation;
+            combatVariableSO.OnCombatChangeEnemy += DoChangeEnemySprite;
+
+        }
+        private void Start()
+        {
+            _playerController = FindObjectOfType<PlayerController>();
+            _playerCombatController = FindObjectOfType<PlayerCombatController>();
         }
         public void ButtonUP()
         {
-            playerController.TryMoveButton(Vector2.up);
+            _playerController.TryMoveButton(Vector2.up);
         }
         public void ButtonDOWN()
         {
-            playerController.TryMoveButton(Vector2.down);
+            _playerController.TryMoveButton(Vector2.down);
         }
         public void ButtonLEFT()
         {
-            playerController.TryMoveButton(Vector2.left);
+            _playerController.TryMoveButton(Vector2.left);
         }
         public void ButtonRIGHT()
         {
-            playerController.TryMoveButton(Vector2.right);
+            _playerController.TryMoveButton(Vector2.right);
         }
         public void ButtonPauseMenu(bool value)
         {
@@ -48,7 +66,7 @@ namespace HeroesGames.ProjectProcedural.UI
         }
         public void ButtonAttack()
         {
-            playerCombatController.DoDamageEnemy();
+            _playerCombatController.DoDamageEnemy();
         }
         public void SwitchCombatInterface()
         {
@@ -64,6 +82,20 @@ namespace HeroesGames.ProjectProcedural.UI
                 combatUI.SetActive(false);
                 movementButtons.SetActive(true);
             }
+        }
+        public void DoPlayerCombatAnimation()
+        {
+            Sequence playerAnimationAttack = SequencesTween.DOMoveAnimation(combatPlayerSprite.transform, new Vector2(combatPlayerSprite.transform.position.x - 50, combatPlayerSprite.transform.position.y), 0.1f);
+            playerAnimationAttack.Play();
+        }
+        public void DoEnemyCombatAnimation()
+        {
+            Sequence enemyAnimationAttack = SequencesTween.DOMoveAnimation(combatEnemySprite.transform, new Vector2(combatEnemySprite.transform.position.x + 50, combatEnemySprite.transform.position.y), 0.1f);
+            enemyAnimationAttack.Play();
+        }
+        public void DoChangeEnemySprite()
+        {
+            combatEnemySprite.sprite = combatVariableSO.GetCurrentCombatEnemySO().EnemySprite;
         }
     }
 

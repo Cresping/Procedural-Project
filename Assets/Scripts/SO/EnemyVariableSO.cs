@@ -9,12 +9,15 @@ using UnityEngine;
 public class EnemyVariableSO : ScriptableObject, ISerializationCallbackReceiver
 {
     [SerializeField] private GameObject enemyPrefab;
+    [SerializeField] private Sprite enemySprite;
     [SerializeField] private int maxEnemyHP;
     [SerializeField] private int enemyDefense;
     [SerializeField] private int enemyAttack;
     [SerializeField] private int enemySpeed;
     [SerializeField] private int pursuePlayerDistance;
     [SerializeField] private int attackPlayerDistance;
+
+    [SerializeField] private float enemyAttackSpeed;
 
     private bool _isDead;
 
@@ -26,6 +29,8 @@ public class EnemyVariableSO : ScriptableObject, ISerializationCallbackReceiver
     public int MaxEnemyHP { get => maxEnemyHP; private set => maxEnemyHP = value; }
     public bool IsDead { get => _isDead; set => _isDead = value; }
     public GameObject EnemyPrefab { get => enemyPrefab; set => enemyPrefab = value; }
+    public float EnemyAttackSpeed { get => enemyAttackSpeed; set => enemyAttackSpeed = value; }
+    public Sprite EnemySprite { get => enemySprite; set => enemySprite = value; }
 
     public void OnAfterDeserialize() { }
 

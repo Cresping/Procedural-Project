@@ -67,7 +67,7 @@ namespace HeroesGames.ProjectProcedural.Procedural
             //Conecta todas las habitaciones
             ConnectRooms(roomCenter);
             _floor.UnionWith(_corridors);
-            playerVariableSO.PlayerStartPosition = _start;
+            playerVariableSO.InstancePlayer(_start);
             //Pinta la mazmorra en el mapa
             tileMapGenerator.PaintFloorTiles(_floor);
             tileMapGenerator.PaintStartTile(_start);

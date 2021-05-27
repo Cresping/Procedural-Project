@@ -13,9 +13,11 @@ MonoBehaviour:
   m_Name: SkeletonVariableSO
   m_EditorClassIdentifier: 
   enemyPrefab: {fileID: 6060309841025625795, guid: 58508d8f4a7afcc4da7cdd5b8e28d75e, type: 3}
+  enemySprite: {fileID: 3867371464019619581, guid: eb790298f2997bb48a68771850a24d24, type: 3}
   maxEnemyHP: 20
   enemyDefense: 5
   enemyAttack: 5
   enemySpeed: 5
   pursuePlayerDistance: 5
   attackPlayerDistance: 1
+  enemyAttackSpeed: 1

@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8dd59fcb344461341aa3f21e53ec7805, type: 3}
   m_Name: PlayerVariableSO
   m_EditorClassIdentifier: 
+  playerPrefab: {fileID: 7226611520861074219, guid: 4988bc079a76e2743baae56f806613c3, type: 3}
   maxPlayerHP: 100
-  _playerDamage: 10
-  _playerSpeed: 5
-  _playerDef: 4
+  playerDamage: 10
+  playerSpeed: 5
+  playerDef: 5

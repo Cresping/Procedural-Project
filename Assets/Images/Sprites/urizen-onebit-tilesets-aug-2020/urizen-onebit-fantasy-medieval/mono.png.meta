@@ -409,10 +409,10 @@ TextureImporter:
     second: armor_1
   - first:
       213: 2382899581959632218
-    second: mono_135
+    second: armor_2
   - first:
       213: 4427994835046597627
-    second: mono_136
+    second: armor_3
   - first:
       213: 5626291114944599678
     second: mono_137
@@ -484,10 +484,10 @@ TextureImporter:
     second: mono_159
   - first:
       213: -7067752905693355509
-    second: mono_160
+    second: chest_closed
   - first:
       213: 1303799077531990194
-    second: mono_161
+    second: chest_open
   - first:
       213: 1671577872983613053
     second: mono_162
@@ -3538,7 +3538,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: mono_135
+      name: armor_2
       rect:
         serializedVersion: 2
         x: 196
@@ -3559,7 +3559,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: mono_136
+      name: armor_3
       rect:
         serializedVersion: 2
         x: 209
@@ -4063,7 +4063,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: mono_160
+      name: chest_closed
       rect:
         serializedVersion: 2
         x: 1
@@ -4084,7 +4084,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: mono_161
+      name: chest_open
       rect:
         serializedVersion: 2
         x: 14

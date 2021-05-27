@@ -9,7 +9,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f1f32f466f7c7b44d8fa42fd065acddd, type: 3}
-  m_Name: CombatVariable
+  m_Script: {fileID: 11500000, guid: 2b233072769cd8441a4bb76c7a0cd5be, type: 3}
+  m_Name: ObjectContainerVariableSO
   m_EditorClassIdentifier: 
-  playerVariableSO: {fileID: 11400000, guid: 82464bdcbc557ff41b3b1e47fa852778, type: 2}
