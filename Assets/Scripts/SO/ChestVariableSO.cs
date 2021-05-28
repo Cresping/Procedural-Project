@@ -5,9 +5,11 @@ using UnityEngine;
 
 namespace HeroesGames.ProjectProcedural.SO
 {
-    public class ChestVariableSO : ScriptableObject, ISerializationCallbackReceiver
+    [CreateAssetMenu(fileName = "NewChestVariable", menuName = "Scriptables/Chest/ChestVariableSO")]
+    public class ChestVariableSO : ScriptableObject
     {
 
+        [SerializeField] ObjectContainerVariableSO objectContainer;
         [SerializeField] private GameObject chestPrefab;
 
         [Range(1, 5)]
@@ -15,15 +17,13 @@ namespace HeroesGames.ProjectProcedural.SO
         private int chestRarity;
         private ObjectInventoryVariableSO _objectChest;
 
-
+        public ObjectInventoryVariableSO ObjectChest { get => _objectChest; set => _objectChest = value; }
+        public GameObject ChestPrefab { get => chestPrefab; set => chestPrefab = value; }
 
         private void PickRandomItem()
         {
-
+            _objectChest = objectContainer.PickRandomItem(chestRarity);
         }
-        public void OnAfterDeserialize() { }
-
-        public void OnBeforeSerialize() { }
 
     }
 }

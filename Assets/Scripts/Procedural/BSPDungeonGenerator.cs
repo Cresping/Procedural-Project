@@ -16,6 +16,7 @@ namespace HeroesGames.ProjectProcedural.Procedural
         [SerializeField] private PlayerVariableSO playerVariableSO;
         [SerializeField] private List<RoomVariableSO> roomVariableSOs;
         [SerializeField] private Transform enemiesParent;
+        [SerializeField] private Transform chestsParent;
         [SerializeField] private Pathfind.GridPathfind gridPathfind;
 
         [SerializeField] private int minRoomWidth = 4, minRoomHeight = 4;
@@ -32,10 +33,15 @@ namespace HeroesGames.ProjectProcedural.Procedural
         /// </summary>
         protected override void RunProceduralGeneration()
         {
-            int childs = enemiesParent.childCount;
-            for (int i = childs - 1; i >= 0; i--)
+            int childsEnemies = enemiesParent.childCount;
+            int childsChests = chestsParent.childCount;
+            for (int i = childsEnemies - 1; i >= 0; i--)
             {
                 GameObject.DestroyImmediate(enemiesParent.GetChild(i).gameObject);
+            }
+            for (int i = childsChests - 1; i >= 0; i--)
+            {
+                GameObject.DestroyImmediate(chestsParent.GetChild(i).gameObject);
             }
             CreateRooms();
             FindObjectOfType<PlayerController>().gameObject.transform.position = (Vector3Int)_start;
@@ -216,31 +222,37 @@ namespace HeroesGames.ProjectProcedural.Procedural
                 {
                     if ((Vector2Int)Vector3Int.RoundToInt(room.center) != _start && (Vector2Int)Vector3Int.RoundToInt(room.center) != _end)
                     {
-                        Dictionary<Vector2Int, Vector2Int> currentEnemiesPositions = new Dictionary<Vector2Int, Vector2Int>();
-                        List<Vector2Int> enemiesPosition = new List<Vector2Int>();
-                        for (int i = roomVariable.NumberOfEnemies() - 1; i >= 0; i--)
-                        {
-                            int cont = 0;
-                            while (cont < MAXIMUM_ATTEMPTS_RANDOM)
-                            {
-                                Vector2Int aux;
-                                aux = new Vector2Int(UnityEngine.Random.Range(room.xMin + 1, room.xMax - 1), UnityEngine.Random.Range(room.yMin + 1, room.yMax - 1));
-                                if (!currentEnemiesPositions.ContainsKey(aux) && gridPathfind.IsWalkeable(aux.x,aux.y))
-                                {
-                                    currentEnemiesPositions.Add(aux, aux);
-                                    enemiesPosition.Add(aux);
-                                    break;
-                                }
-                                cont++;
-                            }
-                        }
-                        roomVariable.InstantiateAllEnemies(enemiesParent);
-                        roomVariable.EnableAllEnemies(enemiesPosition);
+                        roomVariable.PrepareRoom(enemiesParent, chestsParent, room);
                         roomListAux.Remove(room);
                         break;
                     }
                 }
             }
+        }
+
+        private BoundsInt Deletethis(RoomVariableSO roomVariable, BoundsInt room)
+        {
+            Dictionary<Vector2Int, Vector2Int> currentEnemiesPositions = new Dictionary<Vector2Int, Vector2Int>();
+            List<Vector2Int> enemiesPosition = new List<Vector2Int>();
+            for (int i = roomVariable.NumberOfEnemies() - 1; i >= 0; i--)
+            {
+                int cont = 0;
+                while (cont < MAXIMUM_ATTEMPTS_RANDOM)
+                {
+                    Vector2Int aux;
+                    aux = new Vector2Int(UnityEngine.Random.Range(room.xMin + 1, room.xMax - 1), UnityEngine.Random.Range(room.yMin + 1, room.yMax - 1));
+                    if (!currentEnemiesPositions.ContainsKey(aux) && gridPathfind.IsWalkeable(aux.x, aux.y))
+                    {
+                        currentEnemiesPositions.Add(aux, aux);
+                        enemiesPosition.Add(aux);
+                        break;
+                    }
+                    cont++;
+                }
+            }
+            roomVariable.InstantiateAllEnemies(enemiesParent);
+            roomVariable.EnableAllEnemies(enemiesPosition);
+            return room;
         }
 
         /// <summary>
@@ -253,7 +265,7 @@ namespace HeroesGames.ProjectProcedural.Procedural
             {
                 for (int row = offset; row < room.size.y - offset; row++)
                 {
-                    Vector2Int position = (Vector2Int) room.min + new Vector2Int(col, row);
+                    Vector2Int position = (Vector2Int)room.min + new Vector2Int(col, row);
                     _floor.Add(position);
                     gridPathfind.ChangeNode(position.x, position.y, true);
                 }
