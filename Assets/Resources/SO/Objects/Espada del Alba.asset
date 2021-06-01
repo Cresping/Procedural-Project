@@ -9,10 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e9610186eaed9c840867d4560739d441, type: 3}
-  m_Name: GameVariableSO
+  m_Script: {fileID: 11500000, guid: cb53c17f418c7e8459b5c2c4e60fa076, type: 3}
+  m_Name: Espada del Alba
   m_EditorClassIdentifier: 
-  timeBetweenKeystrokes: 0.1
-  lerpDuration: 0.1
-  smoothGameplay: 1
-  turnSpeedValue: 5
+  id: 0
+  objectName: Espada del Alba
+  objectSprite: {fileID: 0}
+  objectRarity: 1
+  armorDefense: 5
+  armorHP: 10

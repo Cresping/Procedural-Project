@@ -16,6 +16,7 @@ namespace HeroesGames.ProjectProcedural.SO
         public Action PlayerPositionOnValueChange;
         public Action PlayerSpeedOnValueChange;
 
+
         [SerializeField] private PlayerController playerPrefab;
         [SerializeField] private int maxPlayerHP = 100;
         [SerializeField] private int playerDamage;

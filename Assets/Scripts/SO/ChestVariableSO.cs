@@ -10,19 +10,19 @@ namespace HeroesGames.ProjectProcedural.SO
     {
 
         [SerializeField] ObjectContainerVariableSO objectContainer;
+        [SerializeField] private Sprite openChestSprite;
         [SerializeField] private GameObject chestPrefab;
 
         [Range(1, 5)]
         [SerializeField]
         private int chestRarity;
-        private ObjectInventoryVariableSO _objectChest;
-
-        public ObjectInventoryVariableSO ObjectChest { get => _objectChest; set => _objectChest = value; }
+        
         public GameObject ChestPrefab { get => chestPrefab; set => chestPrefab = value; }
+        public Sprite OpenChestSprite { get => openChestSprite; set => openChestSprite = value; }
 
-        private void PickRandomItem()
+        public ObjectInventoryVariableSO PickRandomItem()
         {
-            _objectChest = objectContainer.PickRandomItem(chestRarity);
+           return objectContainer.PickRandomItem(chestRarity);
         }
 
     }

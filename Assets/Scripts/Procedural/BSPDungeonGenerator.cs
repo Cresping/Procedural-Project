@@ -222,7 +222,7 @@ namespace HeroesGames.ProjectProcedural.Procedural
                 {
                     if ((Vector2Int)Vector3Int.RoundToInt(room.center) != _start && (Vector2Int)Vector3Int.RoundToInt(room.center) != _end)
                     {
-                        roomVariable.PrepareRoom(enemiesParent, chestsParent, room);
+                        roomVariable.PrepareRoom(enemiesParent, chestsParent, room, gridPathfind);
                         roomListAux.Remove(room);
                         break;
                     }

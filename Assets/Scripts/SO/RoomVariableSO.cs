@@ -1,3 +1,4 @@
+using HeroesGames.ProjectProcedural.Pathfind;
 using HeroesGames.ProjectProcedural.Utils;
 using System;
 using System.Collections;
@@ -22,7 +23,7 @@ namespace HeroesGames.ProjectProcedural.SO
         public EnumTypes.RoomType RoomType { get => roomType; private set => roomType = value; }
 
 
-        public void PrepareRoom(Transform parentEnemies, Transform parentChests, BoundsInt room)
+        public void PrepareRoom(Transform parentEnemies, Transform parentChests, BoundsInt room, GridPathfind gridPathfing)
         {
             Dictionary<Vector2Int, Vector2Int> currentOccupiedPositions = new Dictionary<Vector2Int, Vector2Int>();
             List<Vector2Int> chestsPosition = new List<Vector2Int>();
@@ -38,6 +39,7 @@ namespace HeroesGames.ProjectProcedural.SO
                     {
                         currentOccupiedPositions.Add(aux, aux);
                         chestsPosition.Add(aux);
+                        gridPathfing.ChangeNode(aux.x, aux.y,false);
                         break;
                     }
                     cont++;
@@ -54,6 +56,7 @@ namespace HeroesGames.ProjectProcedural.SO
                     {
                         currentOccupiedPositions.Add(aux, aux);
                         enemiesPosition.Add(aux);
+                        gridPathfing.ChangeNode(aux.x, aux.y,false);
                         break;
                     }
                     cont++;

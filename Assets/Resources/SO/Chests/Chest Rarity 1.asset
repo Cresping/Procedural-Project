@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: Chest Rarity 1
   m_EditorClassIdentifier: 
   objectContainer: {fileID: 11400000, guid: 7b0e7cedc7ff6454ca01c287d077715b, type: 2}
+  openChestSprite: {fileID: 1303799077531990194, guid: eb790298f2997bb48a68771850a24d24, type: 3}
   chestPrefab: {fileID: 577175355532080295, guid: cecf81150c2f7dc48a1f3555bec5ea06, type: 3}
   chestRarity: 1

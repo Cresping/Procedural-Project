@@ -33,7 +33,7 @@ namespace HeroesGames.ProjectProcedural.Player
         {
             base.Start();
             transform.position = playerVariableSO.PlayerPosition;
-            
+
         }
         private void OnEnable()
         {
@@ -92,7 +92,6 @@ namespace HeroesGames.ProjectProcedural.Player
                     _mySprite.flipX = true;
                     break;
             }
-            playerVariableSO.PlayerPosition = currentPosition;
             playerVariableSO.PlayerPreviousPosition = _previousPosition;
             _previousPosition = transform.position;
         }
@@ -102,12 +101,18 @@ namespace HeroesGames.ProjectProcedural.Player
         protected override void OnCantMove()
         {
             base.OnCantMove();
+
             Debug.Log("No puedo moverme");
         }
         protected override void OnAlreadyMoving()
         {
             base.OnAlreadyMoving();
             Debug.Log("Ya me estoy moviendo");
+        }
+        protected override void OnFinishMoving()
+        {
+            base.OnFinishMoving();
+            playerVariableSO.PlayerPosition = transform.position;
         }
 
         /// <summary>

@@ -98,7 +98,7 @@ namespace HeroesGames.ProjectProcedural.SO
                     if (_dictionaryFiveStartObjects.Count > 0)
                     {
                         List<int> keys = _dictionaryFiveStartObjects.Keys.ToList<int>();
-                        _dictionaryFiveStartObjects.TryGetValue(keys[Random.Range(0, keys.Count)], out aux);
+                        _dictionaryFiveStartObjects.TryGetValue(keys[Random.Range(0, keys.Count)], out aux);                       
                     }
                     break;
                 default:
