@@ -20,11 +20,7 @@ namespace HeroesGames.ProjectProcedural.Inventory
             if (_chestSpriteRenderer)
             {
                 _chestObject = chestVariableSO.PickRandomItem();
-                if (_chestObject)
-                {
-                    playerVariableSO.PlayerPositionOnValueChange += OpenChest;
-                }
-                else
+                if (!_chestObject)
                 {
                     _chestSpriteRenderer.sprite = chestVariableSO.OpenChestSprite;
                     Debug.LogError("No hay objetos disponibles para el cofre " + gameObject.name);
@@ -48,7 +44,6 @@ namespace HeroesGames.ProjectProcedural.Inventory
         }
         private void OpenChest()
         {
-
             foreach (var direction in Direction2D.cardinalDirectionList)
             {
                 if (playerVariableSO.PlayerPosition == new Vector2(transform.position.x + direction.x, transform.position.y + direction.y))
@@ -61,6 +56,19 @@ namespace HeroesGames.ProjectProcedural.Inventory
                 }
             }
         }
-
+        private void OnTriggerEnter2D(Collider2D other)
+        {
+            if (other.CompareTag("Player") && _chestObject)
+            {
+                playerVariableSO.PlayerPositionOnValueChange += OpenChest;
+            }
+        }
+        private void OnTriggerExit2D(Collider2D other)
+        {
+            if (other.CompareTag("Player") && _chestObject)
+            {
+                playerVariableSO.PlayerPositionOnValueChange -= OpenChest;
+            }
+        }
     }
 }
