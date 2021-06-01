@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 82424c5bc13e02343a85709a560da9ba, type: 3}
+  m_Name: DungeonFloorTiles
+  m_EditorClassIdentifier: 
+  mainTile: {fileID: 11400000, guid: 7a137fad6a1448647976fe3a568f902c, type: 2}
+  commonTiles:
+  - {fileID: 11400000, guid: 7a137fad6a1448647976fe3a568f902c, type: 2}
+  rareTiles:
+  - {fileID: 11400000, guid: acbd4cf0fa5798f4dba7fbcd0f348ec7, type: 2}
+  - {fileID: 11400000, guid: 5e1c7ba6dde4b864f9d28eff136b92c7, type: 2}
+  - {fileID: 11400000, guid: 765d23658f31921489bedd506693d77f, type: 2}
+  probabilityRareTile: 0.03

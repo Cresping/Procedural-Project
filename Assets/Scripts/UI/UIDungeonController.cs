@@ -44,21 +44,25 @@ namespace HeroesGames.ProjectProcedural.UI
             _playerController = FindObjectOfType<PlayerController>();
             _playerCombatController = FindObjectOfType<PlayerCombatController>();
         }
-        public void ButtonUP()
+        public void OnPressButtonUP()
         {
-            _playerController.TryMoveButton(Vector2.up);
+            _playerController.StartPlayerMovement(Vector2.up);
         }
-        public void ButtonDOWN()
+        public void OnPressButtonDOWN()
         {
-            _playerController.TryMoveButton(Vector2.down);
+            _playerController.StartPlayerMovement(Vector2.down);
         }
-        public void ButtonLEFT()
+        public void OnPressButtonLEFT()
         {
-            _playerController.TryMoveButton(Vector2.left);
+            _playerController.StartPlayerMovement(Vector2.left);
         }
-        public void ButtonRIGHT()
+        public void OnPressButtonRIGHT()
         {
-            _playerController.TryMoveButton(Vector2.right);
+            _playerController.StartPlayerMovement(Vector2.right);
+        }
+        public void OnReleaseButtonMovement()
+        {
+            _playerController.StopPlayerMovement();
         }
         public void ButtonPauseMenu(bool value)
         {

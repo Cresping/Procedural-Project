@@ -1105,13 +1105,13 @@ TextureImporter:
     second: mono_366
   - first:
       213: -350042514348368493
-    second: mono_367
+    second: decoration_1
   - first:
       213: -6743509218783996573
-    second: mono_368
+    second: decoration_2
   - first:
       213: 1495663697399834463
-    second: mono_369
+    second: decoration_3
   - first:
       213: -172773907360090832
     second: mono_370
@@ -9010,7 +9010,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: mono_367
+      name: decoration_1
       rect:
         serializedVersion: 2
         x: 92
@@ -9031,7 +9031,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: mono_368
+      name: decoration_2
       rect:
         serializedVersion: 2
         x: 105
@@ -9052,7 +9052,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: mono_369
+      name: decoration_3
       rect:
         serializedVersion: 2
         x: 118

@@ -1,5 +1,6 @@
 using HeroesGames.ProjectProcedural.SO;
 using HeroesGames.ProjectProcedural.Utils;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -20,12 +21,12 @@ namespace HeroesGames.ProjectProcedural.Player
         private InputActions _inputActions;
         private Vector2 _moveDirection;
         private Vector2 _previousPosition;
-        private bool _canPressButton;
+        private IEnumerator _coroutineMovement;
+
 
         protected override void Awake()
         {
             base.Awake();
-            this._canPressButton = true;
             this._inputActions = new InputActions();
             this._previousPosition = transform.position;
         }
@@ -49,17 +50,14 @@ namespace HeroesGames.ProjectProcedural.Player
         /// M�dulo encargado de mover al jugador mediante botones en la pantalla del movil
         /// </summary>
         /// <param name="direction">Direcci�n donde debe moverse</param>
-        public void TryMoveButton(Vector2 direction)
+        private IEnumerator TryMoveButton(Vector2 direction)
         {
-            if (_canPressButton && !combatVariableSO.IsActive)
+            while (!combatVariableSO.IsActive)
             {
-                CancelInvoke(nameof(EnableButton));
-                _canPressButton = false;
                 _moveDirection = direction;
                 AttemptMovement((int)_moveDirection.x + Mathf.FloorToInt(transform.position.x), (int)_moveDirection.y + Mathf.FloorToInt(transform.position.y));
-                Invoke(nameof(EnableButton), gameVariableSO.TimeBetweenKeystrokes);
+                yield return 0;
             }
-
         }
         /// <summary>
         /// M�dulo encargado de mover al jugador mediante el teclado, usar solo para testear
@@ -72,6 +70,16 @@ namespace HeroesGames.ProjectProcedural.Player
                 _moveDirection = ctx.ReadValue<Vector2>();
                 AttemptMovement((int)_moveDirection.x + Mathf.FloorToInt(transform.position.x), (int)_moveDirection.y + Mathf.FloorToInt(transform.position.y));
             }
+        }
+        public void StartPlayerMovement(Vector2 direction)
+        {
+            try { StopCoroutine(_coroutineMovement); } catch (NullReferenceException) { }
+            _coroutineMovement = TryMoveButton(direction);
+            StartCoroutine(_coroutineMovement);
+        }
+        public void StopPlayerMovement()
+        {
+            try { StopCoroutine(_coroutineMovement); } catch (NullReferenceException) { }
         }
         /// <summary>
         /// M�dulo que se ejecuta si el jugador se puede mover. Cambia el 'Sprite' del jugador
@@ -115,13 +123,6 @@ namespace HeroesGames.ProjectProcedural.Player
             playerVariableSO.PlayerPosition = transform.position;
         }
 
-        /// <summary>
-        /// M�dulo encargado de volver a permitir moverse al jugador
-        /// </summary>
-        private void EnableButton()
-        {
-            _canPressButton = true;
-        }
     }
 }
 

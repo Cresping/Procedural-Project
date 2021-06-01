@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: GameVariableSO
   m_EditorClassIdentifier: 
   timeBetweenKeystrokes: 0.1
-  lerpDuration: 0.1
+  lerpDuration: 0.15
   smoothGameplay: 1
   turnSpeedValue: 5
