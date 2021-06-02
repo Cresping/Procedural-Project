@@ -6,6 +6,9 @@ TagManager:
   tags:
   - Enemy
   - Chest
+  - CombatUI
+  - CombatUIPlayerSprite
+  - CombatUIEnemySprite
   layers:
   - Default
   - TransparentFX
@@ -42,4 +45,7 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Top
+    uniqueID: 3124799369
     locked: 0

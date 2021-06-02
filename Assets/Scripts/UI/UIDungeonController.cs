@@ -21,14 +21,14 @@ namespace HeroesGames.ProjectProcedural.UI
 
         [SerializeField] GameObject combatButtons;
 
-        [SerializeField] GameObject combatUI;
+        private SpriteRenderer _combatPlayerSprite;
 
-        [SerializeField] Image combatPlayerSprite;
-
-        [SerializeField] Image combatEnemySprite;
+        private SpriteRenderer _combatEnemySprite;
+        private Animator _combatEnemyAnimator;
 
         private PlayerController _playerController;
         private PlayerCombatController _playerCombatController;
+        private GameObject _combatUI;
 
         private void Awake()
         {
@@ -37,12 +37,19 @@ namespace HeroesGames.ProjectProcedural.UI
             combatVariableSO.OnCombatPlayerAnimation += DoPlayerCombatAnimation;
             combatVariableSO.OnCombatEnemyAnimation += DoEnemyCombatAnimation;
             combatVariableSO.OnCombatChangeEnemy += DoChangeEnemySprite;
+            combatVariableSO.OnCombatChangeEnemy += DoChangeEnemyAnimator;
 
         }
         private void Start()
         {
             _playerController = FindObjectOfType<PlayerController>();
             _playerCombatController = FindObjectOfType<PlayerCombatController>();
+            _combatUI = GameObject.FindGameObjectWithTag("CombatUI");
+            _combatPlayerSprite = GameObject.FindGameObjectWithTag("CombatUIPlayerSprite").GetComponent<SpriteRenderer>();
+            _combatEnemySprite = GameObject.FindGameObjectWithTag("CombatUIEnemySprite").GetComponent<SpriteRenderer>();
+            _combatEnemyAnimator = GameObject.FindGameObjectWithTag("CombatUIEnemySprite").GetComponent<Animator>();
+            _combatUI.SetActive(false);
+
         }
         public void OnPressButtonUP()
         {
@@ -78,28 +85,32 @@ namespace HeroesGames.ProjectProcedural.UI
             {
                 movementButtons.SetActive(false);
                 combatButtons.SetActive(true);
-                combatUI.SetActive(true);
+                _combatUI.SetActive(true);
             }
             else
             {
                 combatButtons.SetActive(false);
-                combatUI.SetActive(false);
+                _combatUI.SetActive(false);
                 movementButtons.SetActive(true);
             }
         }
         public void DoPlayerCombatAnimation()
         {
-            Sequence playerAnimationAttack = SequencesTween.DOMoveAnimation(combatPlayerSprite.transform, new Vector2(combatPlayerSprite.transform.position.x - 50, combatPlayerSprite.transform.position.y), 0.1f);
+            Sequence playerAnimationAttack = SequencesTween.DOMoveAnimation(_combatPlayerSprite.transform, new Vector2(_combatPlayerSprite.transform.position.x - 2, _combatPlayerSprite.transform.position.y), 0.1f);
             playerAnimationAttack.Play();
         }
         public void DoEnemyCombatAnimation()
         {
-            Sequence enemyAnimationAttack = SequencesTween.DOMoveAnimation(combatEnemySprite.transform, new Vector2(combatEnemySprite.transform.position.x + 50, combatEnemySprite.transform.position.y), 0.1f);
+            Sequence enemyAnimationAttack = SequencesTween.DOMoveAnimation(_combatEnemySprite.transform, new Vector2(_combatEnemySprite.transform.position.x + 2, _combatEnemySprite.transform.position.y), 0.1f);
             enemyAnimationAttack.Play();
         }
         public void DoChangeEnemySprite()
         {
-            combatEnemySprite.sprite = combatVariableSO.GetCurrentCombatEnemySO().EnemySprite;
+            _combatEnemySprite.sprite = combatVariableSO.GetCurrentCombatEnemySO().EnemySprite;
+        }
+        public void DoChangeEnemyAnimator()
+        {
+            _combatEnemyAnimator.runtimeAnimatorController = combatVariableSO.GetCurrentCombatEnemySO().EnemyAnimator;
         }
     }
 

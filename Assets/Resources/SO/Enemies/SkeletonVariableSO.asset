@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyPrefab: {fileID: 6060309841025625795, guid: 58508d8f4a7afcc4da7cdd5b8e28d75e, type: 3}
   enemySprite: {fileID: 3867371464019619581, guid: eb790298f2997bb48a68771850a24d24, type: 3}
+  enemyAnimator: {fileID: 9100000, guid: cd4138b0e244b4b41b139a3a6d877365, type: 2}
   maxEnemyHP: 20
   enemyDefense: 5
   enemyAttack: 5

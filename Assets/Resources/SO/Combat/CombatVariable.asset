@@ -13,3 +13,5 @@ MonoBehaviour:
   m_Name: CombatVariable
   m_EditorClassIdentifier: 
   playerVariableSO: {fileID: 11400000, guid: 82464bdcbc557ff41b3b1e47fa852778, type: 2}
+  playerSprite: {fileID: 6816740870868810407, guid: 1476348be622bc846bac9b801898ffce, type: 3}
+  enemySprite: {fileID: 5060902115567049003, guid: 58b1c8a51378ab54a9fe032342976521, type: 3}

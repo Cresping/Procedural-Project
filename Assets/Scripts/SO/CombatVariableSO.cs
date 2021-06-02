@@ -28,6 +28,7 @@ namespace HeroesGames.ProjectProcedural.SO
                 OnCombatActivation?.Invoke();
             }
         }
+
         public void AddEnemy(EnemyBehaviour combatEnemyBehaviour)
         {
             _stackCombatEnemyBehaviour.Push(combatEnemyBehaviour);

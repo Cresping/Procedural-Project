@@ -109,13 +109,11 @@ namespace HeroesGames.ProjectProcedural.Player
         protected override void OnCantMove()
         {
             base.OnCantMove();
-
             Debug.Log("No puedo moverme");
         }
         protected override void OnAlreadyMoving()
         {
             base.OnAlreadyMoving();
-            Debug.Log("Ya me estoy moviendo");
         }
         protected override void OnFinishMoving()
         {
