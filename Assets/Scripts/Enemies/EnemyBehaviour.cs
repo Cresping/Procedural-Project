@@ -134,9 +134,8 @@ namespace HeroesGames.ProjectProcedural.Enemies
                 StartCoroutine(coroutineCombat());
             }
         }
-        public void ReceiveDamage(int damage)
+        public int ReceiveDamage(int damage)
         {
-
             int actualDamage = damage - enemyVariableSO.EnemyDefense;
             if (actualDamage <= 0)
             {
@@ -148,6 +147,7 @@ namespace HeroesGames.ProjectProcedural.Enemies
             {
                 DisableEnemy();
             }
+            return actualDamage;
         }
         public void DisableEnemy()
         {

@@ -14,6 +14,8 @@ namespace HeroesGames.ProjectProcedural.SO
         public Action OnCombatPlayerAnimation;
         public Action OnCombatEnemyAnimation;
         public Action OnCombatChangeEnemy;
+        public Action<int> OnCombatEnemyReceiveDamage;
+        public Action<int> OnCombatPlayerReceiveDamage;
         [SerializeField] private PlayerVariableSO playerVariableSO;
         private bool _isActive;
         private Stack<EnemyBehaviour> _stackCombatEnemyBehaviour;
@@ -59,8 +61,9 @@ namespace HeroesGames.ProjectProcedural.SO
         }
         public void DoDamageCurrentEnemy(int damage)
         {
-            OnCombatPlayerAnimation?.Invoke();
-            _currentCombatEnemyBehaviour.ReceiveDamage(damage);
+            Debug.Log("voy a hacer daño");
+            OnCombatPlayerAnimation?.Invoke();     
+            OnCombatEnemyReceiveDamage?.Invoke(_currentCombatEnemyBehaviour.ReceiveDamage(damage));
             if (!_currentCombatEnemyBehaviour.gameObject.activeSelf)
             {
                 NextEnemy();
@@ -69,11 +72,15 @@ namespace HeroesGames.ProjectProcedural.SO
         public void DoDamagePlayer(int damage)
         {
             OnCombatEnemyAnimation?.Invoke();
-            playerVariableSO.ReceiveDamage(damage);
+            OnCombatPlayerReceiveDamage?.Invoke(playerVariableSO.ReceiveDamage(damage));
         }
         public EnemyVariableSO GetCurrentCombatEnemySO()
         {
             return _currentCombatEnemyBehaviour.EnemyVariableSO;
+        }
+        public int GetCurrentEnemyHP()
+        {
+            return _currentCombatEnemyBehaviour.CurrentEnemyHP;
         }
         public void EndCombat()
         {

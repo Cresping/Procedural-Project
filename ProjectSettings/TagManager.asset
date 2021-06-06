@@ -9,6 +9,7 @@ TagManager:
   - CombatUI
   - CombatUIPlayerSprite
   - CombatUIEnemySprite
+  - CameraHandler
   layers:
   - Default
   - TransparentFX

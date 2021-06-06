@@ -80,14 +80,15 @@ namespace HeroesGames.ProjectProcedural.SO
             get => playerDamage;
             set => playerDamage = value;
         }
-        public void ReceiveDamage(int damage)
+        public int ReceiveDamage(int damage)
         {
             int actualDamage = damage - playerDef;
-            Debug.Log("Soy el jugador y he recibido "+actualDamage+" de daño");
-            if(actualDamage>0)
+            Debug.Log("Soy el jugador y he recibido " + actualDamage + " de daño");
+            if (actualDamage > 0)
             {
-                PlayerHP -= actualDamage; 
+                PlayerHP -= actualDamage;
             }
+            return actualDamage;
         }
         public void OnAfterDeserialize()
         {
