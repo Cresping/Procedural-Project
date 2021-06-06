@@ -61,6 +61,7 @@ namespace HeroesGames.ProjectProcedural.Inventory
             if (other.CompareTag("Player") && _chestObject)
             {
                 playerVariableSO.PlayerPositionOnValueChange += OpenChest;
+                OpenChest();
             }
         }
         private void OnTriggerExit2D(Collider2D other)

@@ -17,10 +17,12 @@ namespace HeroesGames.ProjectProcedural.Player
         [SerializeField] private CombatVariableSO combatVariableSO;
         [SerializeField] private PlayerVariableSO playerVariableSO;
         [SerializeField] private SpriteRenderer _mySprite;
+        [SerializeField] private float timeBetweenKeystrokes = 0.5f;
 
         private InputActions _inputActions;
         private Vector2 _moveDirection;
         private Vector2 _previousPosition;
+        private float _currentTimeBetweenKeystrokes;
         private IEnumerator _coroutineMovement;
 
 
@@ -29,6 +31,7 @@ namespace HeroesGames.ProjectProcedural.Player
             base.Awake();
             this._inputActions = new InputActions();
             this._previousPosition = transform.position;
+            _currentTimeBetweenKeystrokes = 0;
         }
         protected override void Start()
         {
@@ -54,9 +57,15 @@ namespace HeroesGames.ProjectProcedural.Player
         {
             while (!combatVariableSO.IsActive)
             {
-                _moveDirection = direction;
-                AttemptMovement((int)_moveDirection.x + Mathf.FloorToInt(transform.position.x), (int)_moveDirection.y + Mathf.FloorToInt(transform.position.y));
+                _currentTimeBetweenKeystrokes += Time.deltaTime;
+                if (_currentTimeBetweenKeystrokes >= timeBetweenKeystrokes)
+                {
+                    _currentTimeBetweenKeystrokes = 0;
+                    _moveDirection = direction;
+                    AttemptMovement((int)_moveDirection.x + Mathf.FloorToInt(transform.position.x), (int)_moveDirection.y + Mathf.FloorToInt(transform.position.y));
+                }
                 yield return 0;
+
             }
         }
         /// <summary>
@@ -73,6 +82,7 @@ namespace HeroesGames.ProjectProcedural.Player
         }
         public void StartPlayerMovement(Vector2 direction)
         {
+            _currentTimeBetweenKeystrokes = timeBetweenKeystrokes;
             try { StopCoroutine(_coroutineMovement); } catch (NullReferenceException) { }
             _coroutineMovement = TryMoveButton(direction);
             StartCoroutine(_coroutineMovement);

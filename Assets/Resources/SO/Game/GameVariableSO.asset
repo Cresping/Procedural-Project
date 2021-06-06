@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timeBetweenKeystrokes: 0.1
   lerpDuration: 0.15
-  smoothGameplay: 1
+  smoothGameplay: 0
   turnSpeedValue: 5
