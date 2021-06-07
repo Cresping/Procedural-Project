@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,6 +8,7 @@ namespace HeroesGames.ProjectProcedural.SO
     [CreateAssetMenu(fileName = "NewPlayerInventoryVariable", menuName = "Scriptables/Player/PlayerInventoryVariable")]
     public class PlayerInventoryVariableSO : ScriptableObject, ISerializationCallbackReceiver
     {
+        public Action<ObjectInventoryVariableSO> OnInventoryChange;
         [SerializeField] private int maxCapacity = 10;
         private List<ObjectInventoryVariableSO> _objectInventoryVariableSOs;
 
@@ -16,6 +18,7 @@ namespace HeroesGames.ProjectProcedural.SO
             {
                 _objectInventoryVariableSOs.Add(objectInventory);
                 Debug.Log("Se ha agregado el objeto "+objectInventory.name+" al inventario del jugador");
+                OnInventoryChange?.Invoke(objectInventory);
                 return true;
             }
             Debug.Log("La bolsa del jugador esta llena");

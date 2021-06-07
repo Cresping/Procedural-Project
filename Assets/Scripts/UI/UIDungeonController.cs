@@ -17,6 +17,7 @@ namespace HeroesGames.ProjectProcedural.UI
     {
         [SerializeField] CombatVariableSO combatVariableSO;
         [SerializeField] PlayerVariableSO playerVariableSO;
+        [SerializeField] PlayerInventoryVariableSO playerInventoryVariableSO;
         [SerializeField] TextMeshPro damagePrefab;
         [SerializeField] GameObject pauseMenu;
 
@@ -33,6 +34,14 @@ namespace HeroesGames.ProjectProcedural.UI
         [SerializeField] private RectTransform combatPlayerDamagePosition;
         [SerializeField] private RectTransform combatEnemyDamagePosition;
 
+        [SerializeField] private GameObject dialogueUI;
+        [SerializeField] private TextMeshProUGUI textBox;
+        [SerializeField] private List<Image> starsBox;
+        [SerializeField] private Sprite lockedStarSprite;
+        [SerializeField] private Sprite unlockedStarSprite;
+
+        [SerializeField] private int textBoxFadeTime;
+
         private PlayerController _playerController;
         private PlayerCombatController _playerCombatController;
         private GameObject _cameraHandler;
@@ -42,6 +51,8 @@ namespace HeroesGames.ProjectProcedural.UI
         {
             pauseMenu.SetActive(false);
             combatVariableSO.OnCombatActivation += SwitchCombatInterface;
+            playerInventoryVariableSO.OnInventoryChange += DoEnableItemTextBox;
+
         }
         private void Start()
         {
@@ -49,6 +60,7 @@ namespace HeroesGames.ProjectProcedural.UI
             _playerCombatController = FindObjectOfType<PlayerCombatController>();
             _cameraHandler = GameObject.FindGameObjectWithTag("CameraHandler");
             combatUI.SetActive(false);
+            dialogueUI.SetActive(false);
 
         }
         public void OnPressButtonUP()
@@ -83,6 +95,7 @@ namespace HeroesGames.ProjectProcedural.UI
         {
             if (combatVariableSO.IsActive)
             {
+                dialogueUI.SetActive(false);
                 ChangePlayerHeal();
                 combatUI.transform.position = _cameraHandler.transform.position;
                 movementButtons.SetActive(false);
@@ -160,6 +173,28 @@ namespace HeroesGames.ProjectProcedural.UI
         {
             Sequence enemyAnimationAttack = SequencesTween.DOMoveAnimation(combatEnemySprite.transform, new Vector2(combatEnemySprite.transform.position.x + 2, combatEnemySprite.transform.position.y), 0.1f);
             enemyAnimationAttack.Play();
+        }
+        public void DoEnableItemTextBox(ObjectInventoryVariableSO objectInventory)
+        {
+            CancelInvoke(nameof(DisableDialogueUI));
+            for (int i = 0; i < starsBox.Count; i++)
+            {
+                if (i + 1 <= objectInventory.ObjectRarity)
+                {
+                    starsBox[i].sprite = unlockedStarSprite;
+                }
+                else
+                {
+                     starsBox[i].sprite = lockedStarSprite;
+                }
+            }
+            textBox.text = "¡Has obtenido " + objectInventory.name + "!";
+            dialogueUI.gameObject.SetActive(true);
+            Invoke(nameof(DisableDialogueUI), textBoxFadeTime);
+        }
+        public void DisableDialogueUI()
+        {
+            dialogueUI.gameObject.SetActive(false);
         }
 
     }
