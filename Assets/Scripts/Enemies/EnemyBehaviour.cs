@@ -155,7 +155,7 @@ namespace HeroesGames.ProjectProcedural.Enemies
             RemoveObjectPathfind(Vector2Int.FloorToInt((Vector2)transform.position));
             this.gameObject.SetActive(false);
         }
-        private IEnumerator coroutineCombat()
+        protected IEnumerator coroutineCombat()
         {
             while (combatVariableSO.IsActive && _currentEnemyHP > 0)
             {

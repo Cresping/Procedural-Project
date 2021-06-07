@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fa765f0738352c5468d9d12c460cc48a, type: 3}
-  m_Name: ArmorSkeletonVariableSO
+  m_Name: MimicVariableSO
   m_EditorClassIdentifier: 
-  enemyPrefab: {fileID: 2077187973355700012, guid: 01609db9ef611ed479625654f3c48766, type: 3}
-  enemySprite: {fileID: 719023305797327018, guid: eb790298f2997bb48a68771850a24d24, type: 3}
-  enemyAnimator: {fileID: 9100000, guid: 9277c05fad3e2f945a981f3de4b2fb66, type: 2}
+  enemyPrefab: {fileID: 7480030170005920205, guid: e954566507fcb18468307d82f09964ed, type: 3}
+  enemySprite: {fileID: 379911283790892613, guid: c08de8ccaabaec24683eb38f6b97861f, type: 3}
+  enemyAnimator: {fileID: 9100000, guid: f62f8c12532ead641ad8293206d87d83, type: 2}
   maxEnemyHP: 25
   enemyDefense: 5
-  enemyAttack: 8
-  enemySpeed: 10
-  pursuePlayerDistance: 0
+  enemyAttack: 10
+  enemySpeed: 9999
+  pursuePlayerDistance: 1
   attackPlayerDistance: 1
-  enemyAttackSpeed: 0.6
+  enemyAttackSpeed: 0.8
