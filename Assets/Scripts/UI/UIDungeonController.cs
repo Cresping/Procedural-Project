@@ -46,13 +46,19 @@ namespace HeroesGames.ProjectProcedural.UI
         private PlayerCombatController _playerCombatController;
         private GameObject _cameraHandler;
 
-
+        private void OnEnable()
+        {
+            combatVariableSO.OnCombatActivation += SwitchCombatInterface;
+            playerInventoryVariableSO.OnInventoryChange += DoEnableItemTextBox;
+        }
+        private void OnDisable()
+        {
+            combatVariableSO.OnCombatActivation -= SwitchCombatInterface;
+            playerInventoryVariableSO.OnInventoryChange -= DoEnableItemTextBox;
+        }
         private void Awake()
         {
             pauseMenu.SetActive(false);
-            combatVariableSO.OnCombatActivation += SwitchCombatInterface;
-            playerInventoryVariableSO.OnInventoryChange += DoEnableItemTextBox;
-
         }
         private void Start()
         {
@@ -185,7 +191,7 @@ namespace HeroesGames.ProjectProcedural.UI
                 }
                 else
                 {
-                     starsBox[i].sprite = lockedStarSprite;
+                    starsBox[i].sprite = lockedStarSprite;
                 }
             }
             textBox.text = "¡Has obtenido " + objectInventory.name + "!";

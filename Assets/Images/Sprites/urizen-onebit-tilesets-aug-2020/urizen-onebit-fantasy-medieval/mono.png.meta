@@ -199,7 +199,7 @@ TextureImporter:
     second: mono_64
   - first:
       213: 168325356711760866
-    second: mono_65
+    second: Seller
   - first:
       213: -7017546360906517468
     second: mono_66
@@ -493,7 +493,7 @@ TextureImporter:
     second: mono_162
   - first:
       213: -3262793905116686261
-    second: mono_163
+    second: storage
   - first:
       213: -6445480440972518817
     second: mono_164
@@ -526,7 +526,7 @@ TextureImporter:
     second: mono_173
   - first:
       213: -5905817750276465939
-    second: mono_174
+    second: Shop
   - first:
       213: -3062449364444784634
     second: mono_175
@@ -2068,7 +2068,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: mono_65
+      name: Seller
       rect:
         serializedVersion: 2
         x: 66
@@ -4126,7 +4126,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: mono_163
+      name: storage
       rect:
         serializedVersion: 2
         x: 40
@@ -4357,7 +4357,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: mono_174
+      name: Shop
       rect:
         serializedVersion: 2
         x: 183
