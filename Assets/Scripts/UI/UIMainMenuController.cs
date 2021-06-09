@@ -7,6 +7,6 @@ public class UIMainMenuController : MonoBehaviour
 {
     public void DungeonButton()
     {
-          SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+         SceneManager.LoadScene("Dungeon", LoadSceneMode.Single);
     }
 }

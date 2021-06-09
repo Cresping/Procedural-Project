@@ -20,10 +20,10 @@ namespace HeroesGames.ProjectProcedural.Procedural
         [SerializeField] private TileVariableSO endTiles;
 
         /// <summary>
-        /// Módulo encargado de pintar los 'tiles' dados en unas posiciones determinadas
+        /// Mï¿½dulo encargado de pintar los 'tiles' dados en unas posiciones determinadas
         /// </summary>
-        /// <param name="positions">Posiciones donde se pintarán los 'tiles'</param>
-        /// <param name="tilemap">Mapa donde se pintarán los 'tiles'</param>
+        /// <param name="positions">Posiciones donde se pintarï¿½n los 'tiles'</param>
+        /// <param name="tilemap">Mapa donde se pintarï¿½n los 'tiles'</param>
         /// <param name="tile">'Tile' seleccionado</param>
         private void PaintTiles(IEnumerable<Vector2Int> positions, Tilemap tilemap, TileBase tile)
         {
@@ -34,11 +34,11 @@ namespace HeroesGames.ProjectProcedural.Procedural
         }
 
         /// <summary>
-        /// Módulo encargado de pintar un solo 'tile' en una posición determinada
+        /// Mï¿½dulo encargado de pintar un solo 'tile' en una posiciï¿½n determinada
         /// </summary>
-        /// <param name="tilemap">Mapa donde se pintará el 'tile'</param>
+        /// <param name="tilemap">Mapa donde se pintarï¿½ el 'tile'</param>
         /// <param name="tile">'Tile' seleccionado</param>
-        /// <param name="position">Posición donde se pintará</param>
+        /// <param name="position">Posiciï¿½n donde se pintarï¿½</param>
         private void PaintSingleTitle(Tilemap tilemap, TileBase tile, Vector2Int position)
         {
             var tilePosition = tilemap.WorldToCell((Vector3Int)position);
@@ -46,10 +46,10 @@ namespace HeroesGames.ProjectProcedural.Procedural
         }
 
         /// <summary>
-        /// Módulo encargado de pintar los 'tiles' de los muros dadas unas posiciones
+        /// Mï¿½dulo encargado de pintar los 'tiles' de los muros dadas unas posiciones
         /// </summary>
         /// <param name="wallPositions">Posiciones de los muros</param>
-        public void PaintWallTiles(IEnumerable<Vector2Int> wallPositions)
+        public void PaintWallTiles(HashSet<Vector2Int> wallPositions)
         {
             foreach (var position in wallPositions)
             {
@@ -58,10 +58,10 @@ namespace HeroesGames.ProjectProcedural.Procedural
         }
 
         /// <summary>
-        /// Módulo encargado de pintar los 'tiles' del suelo dadas unas posiciones
+        /// Mï¿½dulo encargado de pintar los 'tiles' del suelo dadas unas posiciones
         /// </summary>
         /// <param name="floorPositions">Posiciones del suelo</param>
-        public void PaintFloorTiles(IEnumerable<Vector2Int> floorPositions)
+        public void PaintFloorTiles(HashSet<Vector2Int> floorPositions)
         {
             foreach (var position in floorPositions)
             {
@@ -70,7 +70,7 @@ namespace HeroesGames.ProjectProcedural.Procedural
         }
 
         /// <summary>
-        /// Módulo encargado de pintar el 'tile' del comienzo de la mazmorra
+        /// Mï¿½dulo encargado de pintar el 'tile' del comienzo de la mazmorra
         /// </summary>
         /// <param name="position">Posicion del 'tile'</param>
         public void PaintStartTile(Vector2Int position)
@@ -78,7 +78,7 @@ namespace HeroesGames.ProjectProcedural.Procedural
             PaintSingleTitle(startTileMap, startTiles.PickRandomTile(), position);
         }
         /// <summary>
-        /// Módulo encargado de pintar el 'tile' del fin de la mazmorra
+        /// Mï¿½dulo encargado de pintar el 'tile' del fin de la mazmorra
         /// </summary>
         /// <param name="position">Posicion del 'tile'</param>
         public void PaintEndTile(Vector2Int position)

@@ -244,7 +244,7 @@ TextureImporter:
     second: mono_79
   - first:
       213: -1339237752236633806
-    second: mono_80
+    second: tree_1
   - first:
       213: -4150137615930104328
     second: mono_81
@@ -2983,7 +2983,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: mono_80
+      name: tree_1
       rect:
         serializedVersion: 2
         x: 1
