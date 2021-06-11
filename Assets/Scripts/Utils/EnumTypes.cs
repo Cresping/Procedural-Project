@@ -5,7 +5,7 @@ using UnityEngine;
 namespace HeroesGames.ProjectProcedural.Utils
 {    public class EnumTypes
     {
-        public enum RoomType { Start, End, Normal };
+        public enum RoomType { Easy, Normal, Hard, VeryHard, Lunatic };
         public enum StatusType { None, Poisoned };
     }
 }

@@ -14,14 +14,15 @@ namespace HeroesGames.ProjectProcedural.Procedural
     {
         private const int MAXIMUM_ATTEMPTS_RANDOM = 10;
         [SerializeField] private PlayerVariableSO playerVariableSO;
-        [SerializeField] private List<RoomVariableSO> roomVariableSOs;
+        //[SerializeField] private List<RoomVariableSO> roomVariableSOs;
+        [SerializeField] private BSPDungeonVariableSO bSPDungeonVariableSO;
         [SerializeField] private Transform enemiesParent;
         [SerializeField] private Transform chestsParent;
         [SerializeField] private Pathfind.GridPathfind gridPathfind;
 
-        [SerializeField] private int minRoomWidth = 4, minRoomHeight = 4;
-        [SerializeField] private int dungeonWidth = 20, dungeonHeight = 20;
-        [SerializeField] [Range(0, 10)] private int offset = 1;
+        //[SerializeField] private int minRoomWidth = 4, minRoomHeight = 4;
+        //[SerializeField] private int dungeonWidth = 20, dungeonHeight = 20;
+        //[SerializeField] [Range(0, 10)] private int offset = 1;
 
         HashSet<Vector2Int> _floor;
         HashSet<Vector2Int> _corridors;
@@ -33,6 +34,7 @@ namespace HeroesGames.ProjectProcedural.Procedural
         /// </summary>
         protected override void RunProceduralGeneration()
         {
+            bSPDungeonVariableSO.CalculateDifficulty();
             int childsEnemies = enemiesParent.childCount;
             int childsChests = chestsParent.childCount;
             for (int i = childsEnemies - 1; i >= 0; i--)
@@ -53,9 +55,9 @@ namespace HeroesGames.ProjectProcedural.Procedural
         private void CreateRooms()
         {
             var roomList = ProceduralGenerationAlgorithms.BinarySpacePartitioning
-                (new BoundsInt((Vector3Int)startPosition, new Vector3Int(dungeonWidth, dungeonHeight, 0)), minRoomWidth, minRoomHeight);
+                (new BoundsInt((Vector3Int)startPosition, new Vector3Int(bSPDungeonVariableSO.DungeonWidth, bSPDungeonVariableSO.DungeonHeight, 0)), bSPDungeonVariableSO.MinRoomWidth, bSPDungeonVariableSO.MinRoomHeight);
             //Crea el Grid del Pathfind
-            gridPathfind.CreateGrid(dungeonWidth, dungeonHeight);
+            gridPathfind.CreateGrid(bSPDungeonVariableSO.DungeonWidth, bSPDungeonVariableSO.DungeonHeight);
             _floor = new HashSet<Vector2Int>();
             _corridors = new HashSet<Vector2Int>();
             //En primer lugar crea las habitaciones
@@ -215,9 +217,11 @@ namespace HeroesGames.ProjectProcedural.Procedural
         {
             List<BoundsInt> roomListAux = new List<BoundsInt>();
             roomListAux = roomList;
-            if (roomVariableSOs.Count <= 0) return;
-            foreach (var roomVariable in roomVariableSOs)
+            if (bSPDungeonVariableSO.SelectedRooms.Count <= 0) return;
+
+            foreach (var roomVariable in bSPDungeonVariableSO.SelectedRooms)
             {
+                if (roomListAux.Count <= 2) return;
                 foreach (BoundsInt room in roomListAux)
                 {
                     if ((Vector2Int)Vector3Int.RoundToInt(room.center) != _start && (Vector2Int)Vector3Int.RoundToInt(room.center) != _end)
@@ -261,9 +265,9 @@ namespace HeroesGames.ProjectProcedural.Procedural
         /// <param name="room">Habitaci�n</param>
         private void CreateSimpleRoom(BoundsInt room)
         {
-            for (int col = offset; col < room.size.x - offset; col++)
+            for (int col = bSPDungeonVariableSO.Offset; col < room.size.x - bSPDungeonVariableSO.Offset; col++)
             {
-                for (int row = offset; row < room.size.y - offset; row++)
+                for (int row = bSPDungeonVariableSO.Offset; row < room.size.y - bSPDungeonVariableSO.Offset; row++)
                 {
                     Vector2Int position = (Vector2Int)room.min + new Vector2Int(col, row);
                     _floor.Add(position);

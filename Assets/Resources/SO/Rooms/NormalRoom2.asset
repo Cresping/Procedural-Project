@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 445d399a3dc840740b478bcbae0f028b, type: 3}
   m_Name: NormalRoom2
   m_EditorClassIdentifier: 
-  roomType: 2
+  roomType: 1
   enemyTypeList:
   - {fileID: 11400000, guid: f1dfb5c9666dc944a8edda846da00f94, type: 2}
   - {fileID: 11400000, guid: f1dfb5c9666dc944a8edda846da00f94, type: 2}
