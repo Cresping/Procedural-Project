@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa765f0738352c5468d9d12c460cc48a, type: 3}
+  m_Name: EyeVariableSO
+  m_EditorClassIdentifier: 
+  enemyPrefab: {fileID: 2077187973355700012, guid: 70fa58c9910c16d429c4c8c019a2d05c, type: 3}
+  enemySprite: {fileID: 6735431885417468821, guid: eb790298f2997bb48a68771850a24d24, type: 3}
+  enemyAnimator: {fileID: 9100000, guid: e9e5478b3c5f87741a337ec69bc7c3c1, type: 2}
+  maxEnemyHP: 40
+  enemyDefense: 5
+  enemyAttack: 15
+  enemySpeed: 15
+  pursuePlayerDistance: 999999
+  attackPlayerDistance: 1
+  enemyAttackSpeed: 2

@@ -60,6 +60,7 @@ namespace HeroesGames.ProjectProcedural.SO
                     _selectedRooms.Add(room);
                 }
             }
+            _selectedRooms = ListUtils.UnsortList<RoomVariableSO>(_selectedRooms);
         }
         private void GenerateDungeonSize()
         {

@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa765f0738352c5468d9d12c460cc48a, type: 3}
+  m_Name: GhostVariableSO
+  m_EditorClassIdentifier: 
+  enemyPrefab: {fileID: 2077187973355700012, guid: 760a40f1b7eaf3c4ba00a47ca12ed4a3, type: 3}
+  enemySprite: {fileID: 1271966847290988303, guid: eb790298f2997bb48a68771850a24d24, type: 3}
+  enemyAnimator: {fileID: 9100000, guid: 5e8d0530a6623a8429c6764408b8c953, type: 2}
+  maxEnemyHP: 15
+  enemyDefense: 0
+  enemyAttack: 0
+  enemySpeed: 0
+  pursuePlayerDistance: 5
+  attackPlayerDistance: 1
+  enemyAttackSpeed: 0.7

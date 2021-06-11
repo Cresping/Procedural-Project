@@ -163,7 +163,7 @@ TextureImporter:
     second: enemy_2
   - first:
       213: -3599762447674720757
-    second: mono_53
+    second: enemy_3
   - first:
       213: 4998459046448038181
     second: mono_54
@@ -220,7 +220,7 @@ TextureImporter:
     second: mono_71
   - first:
       213: 8134376697490055126
-    second: mono_72
+    second: enemy_4
   - first:
       213: -7532197018622144789
     second: mono_73
@@ -229,10 +229,10 @@ TextureImporter:
     second: mono_74
   - first:
       213: 6735431885417468821
-    second: mono_75
+    second: enemy_6
   - first:
       213: 1271966847290988303
-    second: mono_76
+    second: enemy_5
   - first:
       213: -9123977352492231926
     second: mono_77
@@ -1816,7 +1816,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: mono_53
+      name: enemy_3
       rect:
         serializedVersion: 2
         x: 170
@@ -2215,7 +2215,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: mono_72
+      name: enemy_4
       rect:
         serializedVersion: 2
         x: 157
@@ -2278,7 +2278,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: mono_75
+      name: enemy_6
       rect:
         serializedVersion: 2
         x: 196
@@ -2299,7 +2299,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: mono_76
+      name: enemy_5
       rect:
         serializedVersion: 2
         x: 209

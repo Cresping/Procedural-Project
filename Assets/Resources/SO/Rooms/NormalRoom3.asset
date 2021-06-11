@@ -14,7 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   roomType: 1
   enemyTypeList:
-  - {fileID: 11400000, guid: f1dfb5c9666dc944a8edda846da00f94, type: 2}
-  - {fileID: 11400000, guid: 19ea09983c557db4abfb07df6eae0b70, type: 2}
-  - {fileID: 11400000, guid: f1dfb5c9666dc944a8edda846da00f94, type: 2}
+  - {fileID: 11400000, guid: 71579a77b31145e45b69dc244a3de172, type: 2}
   chestTypeList: []

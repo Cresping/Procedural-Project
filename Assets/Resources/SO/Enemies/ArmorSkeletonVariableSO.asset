@@ -16,9 +16,9 @@ MonoBehaviour:
   enemySprite: {fileID: 719023305797327018, guid: eb790298f2997bb48a68771850a24d24, type: 3}
   enemyAnimator: {fileID: 9100000, guid: 9277c05fad3e2f945a981f3de4b2fb66, type: 2}
   maxEnemyHP: 25
-  enemyDefense: 5
-  enemyAttack: 8
-  enemySpeed: 10
-  pursuePlayerDistance: 0
+  enemyDefense: 10
+  enemyAttack: 6
+  enemySpeed: 0
+  pursuePlayerDistance: 5
   attackPlayerDistance: 1
-  enemyAttackSpeed: 0.6
+  enemyAttackSpeed: 1.2
