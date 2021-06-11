@@ -97,10 +97,10 @@ TextureImporter:
     second: mono_30
   - first:
       213: 4784237954221522952
-    second: mono_31
+    second: door_open
   - first:
       213: -308170024659255345
-    second: mono_32
+    second: door_close
   - first:
       213: 6625285591372836492
     second: mono_33
@@ -235,7 +235,7 @@ TextureImporter:
     second: mono_76
   - first:
       213: -9123977352492231926
-    second: mono_77
+    second: fence
   - first:
       213: 466982829454491119
     second: mono_78
@@ -247,10 +247,10 @@ TextureImporter:
     second: tree_1
   - first:
       213: -4150137615930104328
-    second: mono_81
+    second: tree_2
   - first:
       213: 6047001384051391290
-    second: mono_82
+    second: tree_3
   - first:
       213: 9094340490074915979
     second: mono_83
@@ -259,7 +259,7 @@ TextureImporter:
     second: mono_84
   - first:
       213: -391344808249397773
-    second: mono_85
+    second: tree_4
   - first:
       213: -232772494003993828
     second: mono_86
@@ -1135,16 +1135,16 @@ TextureImporter:
     second: mono_376
   - first:
       213: 5511743753284413533
-    second: mono_377
+    second: grave_2
   - first:
       213: 3868387843070061392
-    second: mono_378
+    second: grave_1
   - first:
       213: -1607198570084559305
     second: mono_379
   - first:
       213: -5819661644682467024
-    second: mono_380
+    second: key
   - first:
       213: 7274676978878687299
     second: mono_381
@@ -1268,7 +1268,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 2
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -1280,7 +1280,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 2
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -1292,7 +1292,31 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 2
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Windows Store Apps
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -1954,7 +1978,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: mono_31
+      name: door_open
       rect:
         serializedVersion: 2
         x: 144
@@ -1975,7 +1999,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: mono_32
+      name: door_close
       rect:
         serializedVersion: 2
         x: 157
@@ -2920,7 +2944,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: mono_77
+      name: fence
       rect:
         serializedVersion: 2
         x: 222
@@ -3004,7 +3028,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: mono_81
+      name: tree_2
       rect:
         serializedVersion: 2
         x: 14
@@ -3025,7 +3049,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: mono_82
+      name: tree_3
       rect:
         serializedVersion: 2
         x: 27
@@ -3088,7 +3112,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: mono_85
+      name: tree_4
       rect:
         serializedVersion: 2
         x: 66
@@ -9220,7 +9244,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: mono_377
+      name: grave_2
       rect:
         serializedVersion: 2
         x: 222
@@ -9241,7 +9265,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: mono_378
+      name: grave_1
       rect:
         serializedVersion: 2
         x: 235
@@ -9283,7 +9307,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: mono_380
+      name: key
       rect:
         serializedVersion: 2
         x: 1

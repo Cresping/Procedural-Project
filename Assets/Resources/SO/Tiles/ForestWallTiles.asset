@@ -12,7 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82424c5bc13e02343a85709a560da9ba, type: 3}
   m_Name: ForestWallTiles
   m_EditorClassIdentifier: 
-  mainTile: {fileID: 11400000, guid: f9ff4768566d64b42bf0bfe656b0ecda, type: 2}
-  commonTiles: []
-  rareTiles: []
+  mainTile: {fileID: 11400000, guid: d8af30bb5439e2841b872c347bce7422, type: 2}
+  commonTiles:
+  - {fileID: 11400000, guid: 65ab5c7c621b25345a2d835e3ea5840f, type: 2}
+  - {fileID: 11400000, guid: 8d97ef30f31d6f24cb4d7b06c1676d8d, type: 2}
+  rareTiles:
+  - {fileID: 11400000, guid: 4fac304506e815449958859ad4b057d9, type: 2}
+  - {fileID: 11400000, guid: ff78aa946dabfc64b8fb48d3f7dc78fd, type: 2}
+  - {fileID: 11400000, guid: bd7fcc46dcb17cb4e9067ae4f72565ac, type: 2}
   probabilityRareTile: 0.2

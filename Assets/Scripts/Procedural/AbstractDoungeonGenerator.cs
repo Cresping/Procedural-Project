@@ -5,7 +5,7 @@ using UnityEngine;
 namespace HeroesGames.ProjectProcedural.Procedural
 {
     /// <summary>
-    /// Clase abstracta encargada de agrupar los metodos comunes de generación de mazmorras
+    /// Clase abstracta encargada de agrupar los metodos comunes de generaciÃ³n de mazmorras
     /// </summary>
     public abstract class AbstractDoungeonGenerator : MonoBehaviour
     {

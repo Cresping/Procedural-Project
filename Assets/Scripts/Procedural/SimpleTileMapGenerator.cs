@@ -39,7 +39,7 @@ namespace HeroesGames.ProjectProcedural.Procedural
         /// <param name="tilemap">Mapa donde se pintar� el 'tile'</param>
         /// <param name="tile">'Tile' seleccionado</param>
         /// <param name="position">Posici�n donde se pintar�</param>
-        private void PaintSingleTitle(Tilemap tilemap, TileBase tile, Vector2Int position)
+        public void PaintSingleTitle(Tilemap tilemap, TileBase tile, Vector2Int position)
         {
             var tilePosition = tilemap.WorldToCell((Vector3Int)position);
             tilemap.SetTile(tilePosition, tile);
