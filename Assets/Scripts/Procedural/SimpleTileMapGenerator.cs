@@ -29,7 +29,7 @@ namespace HeroesGames.ProjectProcedural.Procedural
         {
             foreach (var position in positions)
             {
-                PaintSingleTitle(tilemap, tile, position);
+                PaintSingleTile(tilemap, tile, position);
             }
         }
 
@@ -39,7 +39,7 @@ namespace HeroesGames.ProjectProcedural.Procedural
         /// <param name="tilemap">Mapa donde se pintar� el 'tile'</param>
         /// <param name="tile">'Tile' seleccionado</param>
         /// <param name="position">Posici�n donde se pintar�</param>
-        public void PaintSingleTitle(Tilemap tilemap, TileBase tile, Vector2Int position)
+        public void PaintSingleTile(Tilemap tilemap, TileBase tile, Vector2Int position)
         {
             var tilePosition = tilemap.WorldToCell((Vector3Int)position);
             tilemap.SetTile(tilePosition, tile);
@@ -53,8 +53,13 @@ namespace HeroesGames.ProjectProcedural.Procedural
         {
             foreach (var position in wallPositions)
             {
-                PaintSingleTitle(wallTileMap, wallTiles.PickRandomTile(), position);
+                PaintSingleTile(wallTileMap, wallTiles.PickRandomTile(), position);
             }
+        }
+        
+        public void PaintWallTile(Vector2Int position)
+        {
+            PaintSingleTile(wallTileMap, wallTiles.PickRandomTile(), position);
         }
 
         /// <summary>
@@ -65,8 +70,13 @@ namespace HeroesGames.ProjectProcedural.Procedural
         {
             foreach (var position in floorPositions)
             {
-                PaintSingleTitle(floorTileMap, floorTiles.PickRandomTile(), position);
+                PaintSingleTile(floorTileMap, floorTiles.PickRandomTile(), position);
             }
+        }
+        
+        public void PaintFloorTile(Vector2Int position)
+        {
+            PaintSingleTile(floorTileMap, floorTiles.PickRandomTile(), position);
         }
 
         /// <summary>
@@ -75,7 +85,7 @@ namespace HeroesGames.ProjectProcedural.Procedural
         /// <param name="position">Posicion del 'tile'</param>
         public void PaintStartTile(Vector2Int position)
         {
-            PaintSingleTitle(startTileMap, startTiles.PickRandomTile(), position);
+            PaintSingleTile(startTileMap, startTiles.PickRandomTile(), position);
         }
         /// <summary>
         /// M�dulo encargado de pintar el 'tile' del fin de la mazmorra
@@ -83,7 +93,7 @@ namespace HeroesGames.ProjectProcedural.Procedural
         /// <param name="position">Posicion del 'tile'</param>
         public void PaintEndTile(Vector2Int position)
         {
-            PaintSingleTitle(endTileMap, endTiles.PickRandomTile(), position);
+            PaintSingleTile(endTileMap, endTiles.PickRandomTile(), position);
         }
 
         /// <summary>

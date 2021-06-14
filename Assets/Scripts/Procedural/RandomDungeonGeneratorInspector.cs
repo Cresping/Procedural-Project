@@ -7,7 +7,7 @@ using UnityEngine;
 namespace HeroesGames.ProjectProcedural.Procedural
 {
     /// <summary>
-    /// Clase que permite pintar la mazmorra entera sin tener que entrar en modo ejecucción
+    /// Clase que permite pintar la mazmorra entera sin tener que entrar en modo ejecucciÃ³n
     /// </summary>
     [CustomEditor(typeof(AbstractDoungeonGenerator), true)]
     public class RandomDungeonGeneratorInspector : Editor

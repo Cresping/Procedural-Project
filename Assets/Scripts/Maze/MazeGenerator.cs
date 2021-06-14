@@ -14,11 +14,7 @@ namespace HeroesGames.ProjectProcedural.Procedural
             height;
 
         [SerializeField]
-        private GameObject
-            wall,
-            border,
-            floor,
-            exit;
+        private GameObject border;
 
         private List<Vector2Int> CurrentFrontiers = new List<Vector2Int>();
     
@@ -29,12 +25,6 @@ namespace HeroesGames.ProjectProcedural.Procedural
 
         #region INIT MAZE
 
-        private void Awake()
-        {
-            _maze = new bool[width, height];
-            _endPlaced = false;
-        }
-
         protected override void RunProceduralGeneration()
         {
             InitMaze();
@@ -43,19 +33,11 @@ namespace HeroesGames.ProjectProcedural.Procedural
             DrawBorders();
         }
 
-        /*
-         private void Start()
-        {
-            InitMaze();
-            PrimsAlgorithm();
-            DrawTilesInMaze();
-            DrawBorders();
-        }
-        */
-        
         // Initialize the maze array.
         private void InitMaze()
         {
+            _maze = new bool[width, height];
+            _endPlaced = false;
             for (var column = 0; column < width; column++)
             for (var row = 0; row < height; row++)
                 _maze[column, row] = true;
@@ -157,20 +139,20 @@ namespace HeroesGames.ProjectProcedural.Procedural
         // Draw Tiles in maze depends on _maze values
         private void DrawTilesInMaze()
         {
-            for (var row = 0; row < width; row++)
-            for (var column = 0; column < height; column++)
+            for (var column = 0; column < width; column++)
+            for (var row = 0; row < height; row++)
             {
-                if (_maze[row, column])
-                    Instantiate(wall, new Vector3(row, column, 0), Quaternion.identity);
+                if (_maze[column, row])
+                    tileMapGenerator.PaintWallTile(new Vector2Int(column,row));
                 else
                 {
                     if (!_endPlaced && row > width - 3 && column > height - 3)
                     {
-                        Instantiate(exit, new Vector3(row, column,0), Quaternion.identity);
+                        tileMapGenerator.PaintEndTile(new Vector2Int(column,row));
                         _endPlaced = true;
                     }
                     else
-                        Instantiate(floor, new Vector3(row, column, 0), Quaternion.identity);
+                        tileMapGenerator.PaintFloorTile(new Vector2Int(column, row));
                 }
             }
         }

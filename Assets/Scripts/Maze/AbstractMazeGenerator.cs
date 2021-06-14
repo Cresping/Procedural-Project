@@ -1,16 +1,17 @@
+using System;
 using UnityEngine;
 
 namespace HeroesGames.ProjectProcedural.Procedural
 {
     public abstract class AbstractMazeGenerator : MonoBehaviour
     {
-        [SerializeField] protected SimpleTileMapGenerator forestMapGenerator = null;
-    
-        private void Awake() => GenerateMaze();
+        [SerializeField] protected SimpleTileMapGenerator forestTileGenerator = null;
 
-        private void GenerateMaze()
+        private void Start() => GenerateMaze();
+
+        public void GenerateMaze()
         {
-            forestMapGenerator.ClearAllTiles();
+            forestTileGenerator.ClearAllTiles();
             RunProceduralGeneration();
         }
     
