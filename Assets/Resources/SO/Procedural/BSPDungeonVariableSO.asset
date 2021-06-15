@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23b3187160b9c10498084e4b7f8ed86a, type: 3}
   m_Name: BSPDungeonVariableSO
   m_EditorClassIdentifier: 
-  dungeonLvl: 5
-  dungeonWidth: 30
-  dungeonHeight: 30
+  dungeonLvl: 1
+  dungeonWidth: 22
+  dungeonHeight: 22
   gameVariableSO: {fileID: 11400000, guid: c9f70f3a05f02f943948a81ac920d4fe, type: 2}
   minRoomWidth: 4
-  minRoomHeight: 4
+  minRoomHeight: 5
   offset: 1

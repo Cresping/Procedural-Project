@@ -14,6 +14,7 @@ namespace HeroesGames.ProjectProcedural.Player
     /// </summary>
     public class PlayerController : MovingObject
     {
+        [SerializeField] private AnimatorHelper animatorHelper;
         [SerializeField] private CombatVariableSO combatVariableSO;
         [SerializeField] private PlayerVariableSO playerVariableSO;
         [SerializeField] private SpriteRenderer _mySprite;
@@ -29,9 +30,11 @@ namespace HeroesGames.ProjectProcedural.Player
         protected override void Awake()
         {
             base.Awake();
+            playerVariableSO.IsOnEvent = false;
             this._inputActions = new InputActions();
             this._previousPosition = transform.position;
             _currentTimeBetweenKeystrokes = 0;
+            this.animatorHelper = new AnimatorHelper(GetComponentInChildren<Animator>());
         }
         protected override void Start()
         {
@@ -102,11 +105,28 @@ namespace HeroesGames.ProjectProcedural.Player
             switch (Direction2D.GetFollowDirection(lastPosition, currentPosition).x)
             {
                 case 0:
+                    switch (Direction2D.GetFollowDirection(lastPosition, currentPosition).y)
+                    {
+                        case 0:
+                            break;
+                        case 1:
+                            animatorHelper.SetWalkDown(false);
+                            animatorHelper.SetWalkUp(true);
+                            break;
+                        case -1:
+                            animatorHelper.SetWalkDown(true);
+                            animatorHelper.SetWalkUp(false);
+                            break;
+                    }
                     break;
                 case 1:
+                    animatorHelper.SetWalkDown(false);
+                    animatorHelper.SetWalkUp(false);
                     _mySprite.flipX = false;
                     break;
                 case -1:
+                    animatorHelper.SetWalkDown(false);
+                    animatorHelper.SetWalkUp(false);
                     _mySprite.flipX = true;
                     break;
             }
@@ -129,6 +149,12 @@ namespace HeroesGames.ProjectProcedural.Player
         {
             base.OnFinishMoving();
             playerVariableSO.PlayerPosition = transform.position;
+        }
+        private void OnDrawGizmos()
+        {
+            Gizmos.color = Color.red;
+            Vector2 direction = Direction2D.cardinalDirectionList[0];
+            Gizmos.DrawRay((Vector2)transform.position + new Vector2(0.5f, 0.5f), direction * 0.7f);
         }
 
     }

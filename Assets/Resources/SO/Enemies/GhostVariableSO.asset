@@ -19,6 +19,7 @@ MonoBehaviour:
   enemyDefense: 0
   enemyAttack: 0
   enemySpeed: 0
+  enemyExperience: 75
   pursuePlayerDistance: 5
   attackPlayerDistance: 1
   enemyAttackSpeed: 0.7

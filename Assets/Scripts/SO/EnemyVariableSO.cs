@@ -16,6 +16,7 @@ public class EnemyVariableSO : ScriptableObject, ISerializationCallbackReceiver
     [SerializeField] private int enemyDefense;
     [SerializeField] private int enemyAttack;
     [SerializeField] private int enemySpeed;
+    [SerializeField] private int enemyExperience;
     [SerializeField] private int pursuePlayerDistance;
     [SerializeField] private int attackPlayerDistance;
 
@@ -34,6 +35,7 @@ public class EnemyVariableSO : ScriptableObject, ISerializationCallbackReceiver
     public float EnemyAttackSpeed { get => enemyAttackSpeed; set => enemyAttackSpeed = value; }
     public Sprite EnemySprite { get => enemySprite; set => enemySprite = value; }
     public AnimatorController EnemyAnimator { get => enemyAnimator; set => enemyAnimator = value; }
+    public int EnemyExperience { get => enemyExperience; set => enemyExperience = value; }
 
     public void OnAfterDeserialize() { }
 

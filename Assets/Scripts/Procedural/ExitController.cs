@@ -18,6 +18,7 @@ namespace HeroesGames.ProjectProcedural.Procedural
         {
             if (other.CompareTag("Player"))
             {
+                playerVariableSO.IsOnEvent = true;
                 NextDungeon();
             }
         }

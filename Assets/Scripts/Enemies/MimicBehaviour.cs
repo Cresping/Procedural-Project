@@ -10,14 +10,6 @@ namespace HeroesGames.ProjectProcedural.Enemies
         /// </summary>
         protected override void DoSomething()
         {
-            if (CanAttackPlayer())
-            {
-                if (Attack())
-                {
-                    StartCoroutine(coroutineCombat());
-                }
-
-            }
         }
 
         /// <summary>
@@ -26,8 +18,13 @@ namespace HeroesGames.ProjectProcedural.Enemies
         /// <returns>True si ha conseguido hacer daño, false si no</returns>
         protected override bool Attack()
         {
-            combatVariableSO.AddEnemy(this.gameObject.GetComponent<EnemyBehaviour>());
-            return true;
+            if (!playerVariableSO.IsOnEvent)
+            {
+                combatVariableSO.AddEnemy(this.gameObject.GetComponent<EnemyBehaviour>());
+                return true;
+            }
+
+            return false;
         }
 
         protected override bool Idle()

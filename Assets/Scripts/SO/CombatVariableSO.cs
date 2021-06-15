@@ -52,7 +52,14 @@ namespace HeroesGames.ProjectProcedural.SO
             if (_stackCombatEnemyBehaviour.Count > 0)
             {
                 _currentCombatEnemyBehaviour = _stackCombatEnemyBehaviour.Pop();
-                OnCombatChangeEnemy?.Invoke();
+                if (_currentCombatEnemyBehaviour.CurrentEnemyHP > 0)
+                {
+                    OnCombatChangeEnemy?.Invoke();
+                }
+                else
+                {
+                    NextEnemy();
+                }
             }
             else
             {
@@ -62,10 +69,11 @@ namespace HeroesGames.ProjectProcedural.SO
         public void DoDamageCurrentEnemy(int damage)
         {
             Debug.Log("voy a hacer daño");
-            OnCombatPlayerAnimation?.Invoke();     
+            OnCombatPlayerAnimation?.Invoke();
             OnCombatEnemyReceiveDamage?.Invoke(_currentCombatEnemyBehaviour.ReceiveDamage(damage));
-            if (!_currentCombatEnemyBehaviour.gameObject.activeSelf)
+            if (_currentCombatEnemyBehaviour.CurrentEnemyHP <= 0)
             {
+                Debug.Log("Siguiente enemigo");
                 NextEnemy();
             }
         }

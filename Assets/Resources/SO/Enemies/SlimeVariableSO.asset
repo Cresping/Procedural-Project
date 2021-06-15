@@ -15,10 +15,11 @@ MonoBehaviour:
   enemyPrefab: {fileID: 2077187973355700012, guid: ec4f18aea117819438d81eb289dbb18a, type: 3}
   enemySprite: {fileID: 8134376697490055126, guid: eb790298f2997bb48a68771850a24d24, type: 3}
   enemyAnimator: {fileID: 9100000, guid: 7f01e6034f2356741bab6392f132aa78, type: 2}
-  maxEnemyHP: 15
+  maxEnemyHP: 10
   enemyDefense: 7
   enemyAttack: 6
   enemySpeed: 5
+  enemyExperience: 25
   pursuePlayerDistance: 5
   attackPlayerDistance: 1
   enemyAttackSpeed: 1.5

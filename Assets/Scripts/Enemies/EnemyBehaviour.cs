@@ -19,6 +19,7 @@ namespace HeroesGames.ProjectProcedural.Enemies
 
         private int _myTurn;
         private int _currentTurn;
+        private bool _inCombat = false;
 
         public EnemyVariableSO EnemyVariableSO { get => enemyVariableSO; protected set => enemyVariableSO = value; }
         public int CurrentEnemyHP { get => _currentEnemyHP; set => _currentEnemyHP = value; }
@@ -31,7 +32,7 @@ namespace HeroesGames.ProjectProcedural.Enemies
         {
             base.Start();
             this._currentEnemyHP = enemyVariableSO.MaxEnemyHP;
-            this._myTurn = Mathf.FloorToInt((playerVariableSO.PlayerSpeed - enemyVariableSO.EnemySpeed) / base.gameVariableSO.TurnSpeedValue);
+            this._myTurn = Mathf.FloorToInt((playerVariableSO.RuntimePlayerSpeed - enemyVariableSO.EnemySpeed) / base.gameVariableSO.TurnSpeedValue);
             this._currentTurn = _myTurn;
         }
 
@@ -81,7 +82,7 @@ namespace HeroesGames.ProjectProcedural.Enemies
         protected void ChangeMyTurn()
         {
             int previousTurn = _myTurn;
-            this._myTurn = Mathf.FloorToInt((playerVariableSO.PlayerSpeed - enemyVariableSO.EnemySpeed) / gameVariableSO.TurnSpeedValue);
+            this._myTurn = Mathf.FloorToInt((playerVariableSO.RuntimePlayerSpeed - enemyVariableSO.EnemySpeed) / gameVariableSO.TurnSpeedValue);
             _currentTurn += _myTurn - previousTurn;
         }
 
@@ -90,14 +91,25 @@ namespace HeroesGames.ProjectProcedural.Enemies
         /// </summary>
         protected void CheckTurn()
         {
-            if (_currentTurn <= 0)
+            if (_currentEnemyHP > 0)
             {
-                DoSomething();
-                _currentTurn = _myTurn;
-            }
-            else
-            {
-                _currentTurn--;
+                if (_currentTurn <= 0)
+                {
+                    DoSomething();
+                    _currentTurn = _myTurn;
+                }
+                else
+                {
+                    _currentTurn--;
+                }
+                if (CanAttackPlayer() && !_inCombat)
+                {
+                    if (Attack())
+                    {
+                        _inCombat = true;
+                        StartCoroutine(coroutineCombat());
+                    }
+                }
             }
         }
 
@@ -145,6 +157,7 @@ namespace HeroesGames.ProjectProcedural.Enemies
             Debug.Log("Soy el enemigo " + this.gameObject.name + " y me quedan " + _currentEnemyHP + " de vida");
             if (_currentEnemyHP <= 0)
             {
+                playerVariableSO.ReceiveExperience(enemyVariableSO.EnemyExperience);
                 DisableEnemy();
             }
             return actualDamage;
