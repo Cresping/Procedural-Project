@@ -14,10 +14,12 @@ namespace HeroesGames.ProjectProcedural.Procedural
         [SerializeField] private Tilemap wallTileMap;
         [SerializeField] private Tilemap startTileMap;
         [SerializeField] private Tilemap endTileMap;
+        [SerializeField] private Tilemap fenceTilemap;
         [SerializeField] private TileVariableSO floorTiles;
         [SerializeField] private TileVariableSO wallTiles;
         [SerializeField] private TileVariableSO startTiles;
         [SerializeField] private TileVariableSO endTiles;
+        [SerializeField] private TileVariableSO fenceTiles;
 
         /// <summary>
         /// M�dulo encargado de pintar los 'tiles' dados en unas posiciones determinadas
@@ -97,6 +99,16 @@ namespace HeroesGames.ProjectProcedural.Procedural
         }
 
         /// <summary>
+        /// M�dulo encargado de pintar el 'tile' de las vallas
+        /// de la mazmorra
+        /// </summary>
+        /// <param name="position">Posicion del 'tile'</param>
+        public void PaintFenceTile(Vector2Int position)
+        {
+            PaintSingleTile(fenceTilemap, fenceTiles.PickRandomTile(), position);
+        }
+
+        /// <summary>
         /// Limpia todos los mapas
         /// </summary>
         public void ClearAllTiles()
@@ -105,6 +117,7 @@ namespace HeroesGames.ProjectProcedural.Procedural
             wallTileMap.ClearAllTiles();
             startTileMap.ClearAllTiles();
             endTileMap.ClearAllTiles();
+            fenceTilemap.ClearAllTiles();
         }
     }
 }

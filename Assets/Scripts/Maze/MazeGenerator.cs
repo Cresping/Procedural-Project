@@ -13,13 +13,10 @@ namespace HeroesGames.ProjectProcedural.Procedural
             width,
             height;
 
-        [SerializeField]
-        private GameObject border;
-
         private List<Vector2Int> CurrentFrontiers = new List<Vector2Int>();
+        private List<Vector2Int> MazePaths = new List<Vector2Int>();
     
-        private bool _endPlaced;
-        private bool[,] _maze; // false = is corridor of the maze, true = is NOT corridor of the maze
+        private bool[,] _maze; // false = is maze's corridor, true = is NOT maze's corridor
     
         #endregion
 
@@ -27,6 +24,7 @@ namespace HeroesGames.ProjectProcedural.Procedural
 
         protected override void RunProceduralGeneration()
         {
+            CleanContents();
             InitMaze();
             PrimsAlgorithm();
             DrawTilesInMaze();
@@ -37,80 +35,102 @@ namespace HeroesGames.ProjectProcedural.Procedural
         private void InitMaze()
         {
             _maze = new bool[width, height];
-            _endPlaced = false;
             for (var column = 0; column < width; column++)
             for (var row = 0; row < height; row++)
                 _maze[column, row] = true;
+        }
+        
+        // Restore Lists and Array
+        private void CleanContents()
+        {
+            CurrentFrontiers.Clear();
+            MazePaths.Clear();
+            _maze = null;
         }
         
         #endregion
         
         #region PRIM'S ALGORITHM
 
-        // Use randomised Prims algorithm to generate corridors in the maze
+        // We use Prim's algorithm to generate corridors in the maze
         private void PrimsAlgorithm()
         {
-            // 1. Choose random initial node, add to corridors and identify neighbours
+            // 1. Choose random initial node, add to corridors and add it to Frontiers List
             var randomX = Mathf.Clamp(Random.Range(0, width) * 2,0,width -1);
             var randomY = Mathf.Clamp(Random.Range(0, height) * 2,0, height -1);
 
             _maze[randomX, randomY] = false;
-            AddNeighboursToFrontier(randomX, randomY);
+            AddFrontiers(new Vector2Int(randomX, randomY));
 
             // 2. Repeat until there aren't frontiers in CurrentFrontiers list
             while (CurrentFrontiers.Count != 0)
             {
-                // Select a random frontier from hashset
+                // 2a. Select a random frontier from list
                 var randomIndex = Random.Range(0, CurrentFrontiers.Count - 1);
                 var chosenFrontier = CurrentFrontiers[randomIndex];
 
-                // Choose a random no corridor neighbour and create floor to it
-                var chosenNeighbour = ChooseRandomNeighbour(chosenFrontier.x, chosenFrontier.y);
+                // 2b. Choose a random node that isn't a corridor of the maze and creates a floor toward it
+                var chosenNeighbour = ChooseRandomNeighbour(new Vector2Int(chosenFrontier.x, chosenFrontier.y));
             
-                _maze[chosenFrontier.x, chosenFrontier.y] = false;
-                _maze[chosenNeighbour.x, chosenNeighbour.y] = false;
-                LinkFloorNodes(chosenFrontier.x, chosenFrontier.y, chosenNeighbour.x, chosenNeighbour.y);
+                // 2c. Turns the selected frontier and selected neighbour into a maze corridor and add them to MazePaths list
+                _maze[chosenFrontier.x, chosenFrontier.y] = false;                
 
-                // Add new frontier tiles to list
-                AddNeighboursToFrontier(chosenFrontier.x, chosenFrontier.y);
+                _maze[chosenNeighbour.x, chosenNeighbour.y] = false;                
 
-                // Remove the chosen frontier from our hashset
+                // 2d. Turns the node between the selected frontier and the new maze's neighbour into a maze corridor
+                LinkFloorNodes(new Vector2Int(chosenFrontier.x, chosenFrontier.y), new Vector2Int(chosenNeighbour.x, chosenNeighbour.y));
+
+                // 2e. Add new frontier tiles to CurrentFrontiers list
+                AddFrontiers(new Vector2Int(chosenFrontier.x, chosenFrontier.y));
+
+                // 2f. Remove the chosen frontier from our CurrentFrontiers list
                 CurrentFrontiers.Remove(chosenFrontier);
             }
+
+            // 3. Add every corridor in the Maze to MazePaths list to make them walkable
+            for (var column = 0; column < width; column++)
+                for (var row = 0; row < height; row++)
+                {
+                    if(!_maze[column,row])
+                        AddNodeToMazePaths(new Vector2Int(column, row));
+                }
         }
-    
-        // Add available neighbours to our frontier hashset
-        private void AddNeighboursToFrontier(int column, int row)
+
+        // Add nodes to MazePath list => transitable tiles for player and enemies
+        private void AddNodeToMazePaths(Vector2Int position) => MazePaths.Add(position);
+
+        // Add available nodes to our frontier list        
+        private void AddFrontiers(Vector2Int position)
         {
-            if (column - 2 >= 0 && _maze[column - 2, row])
-                CurrentFrontiers.Add(new Vector2Int(column - 2, row));
+            if (position.x - 2 >= 0 && _maze[position.x - 2, position.y])
+                CurrentFrontiers.Add(new Vector2Int(position.x - 2, position.y));
 
-            if (column + 2 < width && _maze[column + 2, row])
-                CurrentFrontiers.Add(new Vector2Int(column + 2, row));
+            if (position.x + 2 < width && _maze[position.x + 2, position.y])
+                CurrentFrontiers.Add(new Vector2Int(position.x + 2, position.y));
 
-            if (row - 2 >= 0 && _maze[column, row - 2]) 
-                CurrentFrontiers.Add(new Vector2Int(column, row - 2));
+            if (position.y - 2 >= 0 && _maze[position.x, position.y - 2])
+                CurrentFrontiers.Add(new Vector2Int(position.x, position.y - 2));
 
-            if (row + 2 < height && _maze[column, row + 2])
-                CurrentFrontiers.Add(new Vector2Int(column, row + 2));
+            if (position.y + 2 < height && _maze[position.x, position.y + 2])
+                CurrentFrontiers.Add(new Vector2Int(position.x, position.y + 2));
         }
-    
-        // Choose and return a random no corridor neighbour
-        private Vector2Int ChooseRandomNeighbour(int column, int row)
+
+        // Choose and return a random no corridor neighbour        
+        private Vector2Int ChooseRandomNeighbour(Vector2Int position)
         {
             var neighbours = new List<Vector2Int>();
 
-            if (column - 2 >= 0 && !_maze[column - 2, row])
-                neighbours.Add(new Vector2Int(column - 2, row));
+            if (position.x - 2 >= 0 && !_maze[position.x - 2, position.y])
+                neighbours.Add(new Vector2Int(position.x - 2, position.y));
 
-            if (column + 2 < width && !_maze[column + 2, row])
-                neighbours.Add(new Vector2Int(column + 2, row));
+            if (position.x + 2 < width && !_maze[position.x + 2, position.y])
+                neighbours.Add(new Vector2Int(position.x + 2, position.y));
 
-            if (row - 2 >= 0 && !_maze[column, row - 2])
-                neighbours.Add(new Vector2Int(column, row - 2));
+            if (position.y - 2 >= 0 && !_maze[position.x, position.y - 2])
+                neighbours.Add(new Vector2Int(position.x, position.y - 2));
 
-            if (row + 2 < height && !_maze[column, row + 2])
-                neighbours.Add(new Vector2Int(column, row + 2));
+            if (position.y + 2 < height && !_maze[position.x, position.y + 2])
+                neighbours.Add(new Vector2Int(position.x, position.y + 2));
 
             var randomNeighbour = Random.Range(0, neighbours.Count - 1);
 
@@ -118,17 +138,17 @@ namespace HeroesGames.ProjectProcedural.Procedural
         }
 
         // Remove the wall tile between two chosen in maze floors to complete the corridor
-        private void LinkFloorNodes(int startColumn, int startRow, int endColumn, int endRow)
+        private void LinkFloorNodes(Vector2Int startPosition, Vector2Int endPosition)
         {
-            if (startColumn == endColumn)
+            if (startPosition.x == endPosition.x)
             {
-                var minRow = Mathf.Min(startRow, endRow);
-                _maze[startColumn, minRow + 1] = false;
+                var minRow = Mathf.Min(startPosition.y, endPosition.y);
+                _maze[startPosition.x, minRow + 1] = false;
             }
-            else if (startRow == endRow)
+            else if (startPosition.y == endPosition.y)
             {
-                var minColumn = Mathf.Min(startColumn, endColumn);
-                _maze[minColumn + 1, startRow] = false;
+                var minColumn = Mathf.Min(startPosition.x, endPosition.x);
+                _maze[minColumn + 1, startPosition.y] = false;
             }
         }
 
@@ -145,16 +165,12 @@ namespace HeroesGames.ProjectProcedural.Procedural
                 if (_maze[column, row])
                     tileMapGenerator.PaintWallTile(new Vector2Int(column,row));
                 else
-                {
-                    if (!_endPlaced && row > width - 3 && column > height - 3)
-                    {
-                        tileMapGenerator.PaintEndTile(new Vector2Int(column,row));
-                        _endPlaced = true;
-                    }
-                    else
-                        tileMapGenerator.PaintFloorTile(new Vector2Int(column, row));
-                }
+                    tileMapGenerator.PaintFloorTile(new Vector2Int(column, row));
             }
+
+            //Draw Exit
+            var randomPathTile = MazePaths[Random.Range(0, MazePaths.Count - 1)];
+            tileMapGenerator.PaintEndTile(randomPathTile);
         }
     
         // Draw Borders
@@ -163,24 +179,24 @@ namespace HeroesGames.ProjectProcedural.Procedural
             for (var column = 0; column < width; column++)
             for (var row = 0; row < height; row++)
             {
-                //Draw left and right boundaries
-                if (column == 0)
-                    Instantiate(border, new Vector3(column - 1, row, 0), Quaternion.identity);
-                else if (column == width - 1)
-                    Instantiate(border, new Vector3(width, row, 0), Quaternion.identity);
-                
-                //Draw up and down boundary
-                if (row == 0)
-                    Instantiate(border, new Vector3(column, row -1, 0), Quaternion.identity);
-                else if (row == height - 1)
-                    Instantiate(border, new Vector3(column, height, 0), Quaternion.identity);    
+                    //Draw left and right boundaries
+                    if (column == 0)
+                        tileMapGenerator.PaintFenceTile(new Vector2Int(column - 1, row));
+                    else if (column == width - 1)
+                        tileMapGenerator.PaintFenceTile(new Vector2Int(width, row));
+
+                    //Draw up and down boundary
+                    if (row == 0)
+                        tileMapGenerator.PaintFenceTile(new Vector2Int(column, row - 1));
+                    else if (row == height - 1)
+                        tileMapGenerator.PaintFenceTile(new Vector2Int(column, height));   
             }
 
             // Draw corners
-            Instantiate(border, new Vector3(-1, -1, 0), Quaternion.identity);
-            Instantiate(border, new Vector3(-1, height, 0), Quaternion.identity);
-            Instantiate(border, new Vector3(width, -1, 0), Quaternion.identity);
-            Instantiate(border, new Vector3(width, height, 0), Quaternion.identity);
+            tileMapGenerator.PaintFenceTile(new Vector2Int(-1, -1));
+            tileMapGenerator.PaintFenceTile(new Vector2Int(-1, height));
+            tileMapGenerator.PaintFenceTile(new Vector2Int(width, -1));
+            tileMapGenerator.PaintFenceTile(new Vector2Int(width, height));
         }
 
         #endregion
