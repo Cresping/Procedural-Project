@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23b3187160b9c10498084e4b7f8ed86a, type: 3}
   m_Name: BSPDungeonVariableSO
   m_EditorClassIdentifier: 
+  gameStartBusSO: {fileID: 11400000, guid: 3c70e64ec8585094fbbc496e1e5770c6, type: 2}
   dungeonLvl: 1
   dungeonWidth: 22
   dungeonHeight: 22

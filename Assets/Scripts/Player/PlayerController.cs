@@ -15,8 +15,10 @@ namespace HeroesGames.ProjectProcedural.Player
     public class PlayerController : MovingObject
     {
         [SerializeField] private AnimatorHelper animatorHelper;
+        [SerializeField] private GameOverBusSO gameOverBusSO;
         [SerializeField] private CombatVariableSO combatVariableSO;
         [SerializeField] private PlayerVariableSO playerVariableSO;
+        [SerializeField] private TimerVariableSO timerVariableSO;
         [SerializeField] private SpriteRenderer _mySprite;
         [SerializeField] private float timeBetweenKeystrokes = 0.5f;
 
@@ -24,6 +26,7 @@ namespace HeroesGames.ProjectProcedural.Player
         private Vector2 _moveDirection;
         private Vector2 _previousPosition;
         private float _currentTimeBetweenKeystrokes;
+        private bool _gameOver;
         private IEnumerator _coroutineMovement;
 
 
@@ -40,17 +43,24 @@ namespace HeroesGames.ProjectProcedural.Player
         {
             base.Start();
             transform.position = playerVariableSO.PlayerPosition;
+            _gameOver = false;
 
         }
         private void OnEnable()
         {
             _inputActions.Enable();
             _inputActions.PlayerController.Move.performed += TryMoveKeyboard;
+            gameOverBusSO.OnGameOverEvent += DoGameOver;
         }
         private void OnDisable()
         {
             _inputActions.PlayerController.Move.performed -= TryMoveKeyboard;
+            gameOverBusSO.OnGameOverEvent -= DoGameOver;
             _inputActions.Disable();
+        }
+        private void DoGameOver()
+        {
+            _gameOver = true;
         }
         /// <summary>
         /// M�dulo encargado de mover al jugador mediante botones en la pantalla del movil
@@ -58,7 +68,7 @@ namespace HeroesGames.ProjectProcedural.Player
         /// <param name="direction">Direcci�n donde debe moverse</param>
         private IEnumerator TryMoveButton(Vector2 direction)
         {
-            while (!combatVariableSO.IsActive)
+            while (!combatVariableSO.IsActive && !_gameOver)
             {
                 _currentTimeBetweenKeystrokes += Time.deltaTime;
                 if (_currentTimeBetweenKeystrokes >= timeBetweenKeystrokes)
@@ -68,7 +78,6 @@ namespace HeroesGames.ProjectProcedural.Player
                     AttemptMovement((int)_moveDirection.x + Mathf.FloorToInt(transform.position.x), (int)_moveDirection.y + Mathf.FloorToInt(transform.position.y));
                 }
                 yield return 0;
-
             }
         }
         /// <summary>
@@ -77,7 +86,7 @@ namespace HeroesGames.ProjectProcedural.Player
         /// <param name="ctx">Direcci�n donde moverse</param>
         private void TryMoveKeyboard(CallbackContext ctx)
         {
-            if (!combatVariableSO.IsActive)
+            if (!combatVariableSO.IsActive && !_gameOver)
             {
                 _moveDirection = ctx.ReadValue<Vector2>();
                 AttemptMovement((int)_moveDirection.x + Mathf.FloorToInt(transform.position.x), (int)_moveDirection.y + Mathf.FloorToInt(transform.position.y));

@@ -12,12 +12,15 @@ namespace HeroesGames.ProjectProcedural.SO
     [CreateAssetMenu(fileName = "NewPlayerVariable", menuName = "Scriptables/Player/PlayerVariable")]
     public class PlayerVariableSO : ScriptableObject, ISerializationCallbackReceiver
     {
-        public Action PlayerHPOnValueChange;
         public Action PlayerPositionOnValueChange;
         public Action PlayerSpeedOnValueChange;
         public Action PlayerLevelOnValueChange;
 
+        [SerializeField] private DungeonVariableSO BSPDungeonVariableSO;
+        [SerializeField] private GameStartBusSO gameStartBusSO;
+        [SerializeField] private GameOverBusSO gameOverBusSO;
         [SerializeField] private int playerLevel = 1;
+        [SerializeField] private int dungeonLevel = 1;
         [SerializeField] private PlayerController playerPrefab;
         [SerializeField] private int maxTotalPlayerHP = 100;
         [SerializeField] private int maxInitPlayer = 100;
@@ -26,6 +29,7 @@ namespace HeroesGames.ProjectProcedural.SO
         [SerializeField] private int playerDef;
 
         [SerializeField] private int minExpLevel = 100;
+        private int _numberEnemiesKilled;
         private EnumTypes.StatusType status;
 
         private PlayerController _instancedPlayer;
@@ -74,14 +78,37 @@ namespace HeroesGames.ProjectProcedural.SO
                 {
                     _playerHP = value;
                 }
-                PlayerHPOnValueChange?.Invoke();
+                if (_playerHP <= 0)
+                {
+                    _playerHP = 0;
+                    gameOverBusSO.OnGameOverEvent?.Invoke();
+                }
             }
         }
 
         public int RuntimePlayerDef { get => _runtimePlayerDef; set => _runtimePlayerDef = value; }
-        public int RuntimePlayerSpeed { get => _runtimePlayerSpeed; set => _runtimePlayerSpeed = value; }
+        public int RuntimePlayerSpeed
+        {
+            get => _runtimePlayerSpeed;
+            set
+            {
+                _runtimePlayerSpeed = value;
+                PlayerSpeedOnValueChange?.Invoke();
+            }
+        }
         public int RuntimePlayerDamage { get => _runtimePlayerDamage; set => _runtimePlayerDamage = value; }
         public bool IsOnEvent { get => _isOnEvent; set => _isOnEvent = value; }
+        public int PlayerLevel { get => playerLevel; set => playerLevel = value; }
+        public int DungeonLevel
+        {
+            get => dungeonLevel;
+            set
+            {
+                dungeonLevel = value;
+                BSPDungeonVariableSO.DungeonLvl = dungeonLevel;
+            }
+        }
+        public int NumberEnemiesKilled { get => _numberEnemiesKilled; set => _numberEnemiesKilled = value; }
 
         public void ReceiveExperience(int exp)
         {
@@ -116,7 +143,7 @@ namespace HeroesGames.ProjectProcedural.SO
                         _runtimePlayerSpeed++;
                         break;
                     case 4:
-                        if (_runtimeInitialPlayerHP + 10 >= maxTotalPlayerHP)
+                        if (_runtimeInitialPlayerHP + 5 >= maxTotalPlayerHP)
                         {
                             _runtimeInitialPlayerHP = maxTotalPlayerHP;
                             PlayerHP += 10;
@@ -124,8 +151,8 @@ namespace HeroesGames.ProjectProcedural.SO
                         }
                         else
                         {
-                            _runtimeInitialPlayerHP += 10;
-                            PlayerHP += 10;
+                            _runtimeInitialPlayerHP += 5;
+                            PlayerHP += 5;
                         }
                         break;
                     default:
@@ -148,26 +175,25 @@ namespace HeroesGames.ProjectProcedural.SO
         }
         public void OnAfterDeserialize()
         {
-            _runtimeInitialPlayerHP = maxInitPlayer;
-            _playerHP = maxInitPlayer;
-            _runtimePlayerDamage = playerDamage;
-            _runtimePlayerDef = playerDef;
-            _runtimePlayerSpeed = playerSpeed;
-            _playerExperience = 0;
-            _randomRangeStats = 5;
-            playerLevel = 1;
-            _isOnEvent = false;
+            ResetValues();
         }
 
         public void OnBeforeSerialize() { }
 
         private void OnValidate()
         {
-            PlayerHPOnValueChange?.Invoke();
             PlayerSpeedOnValueChange?.Invoke();
             PlayerPositionOnValueChange?.Invoke();
         }
-        public void ResetValue()
+        private void OnEnable()
+        {
+            gameStartBusSO.OnGameStartEvent += ResetValues;
+        }
+        private void OnDisable()
+        {
+            gameStartBusSO.OnGameStartEvent -= ResetValues;
+        }
+        public void ResetValues()
         {
             _runtimeInitialPlayerHP = maxInitPlayer;
             _playerHP = maxInitPlayer;
@@ -177,7 +203,9 @@ namespace HeroesGames.ProjectProcedural.SO
             _playerExperience = 0;
             _randomRangeStats = 5;
             playerLevel = 1;
+            dungeonLevel = 1;
             _isOnEvent = false;
+            _numberEnemiesKilled = 0;
         }
     }
 }
