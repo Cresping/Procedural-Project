@@ -458,8 +458,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameVariableSO: {fileID: 11400000, guid: c9f70f3a05f02f943948a81ac920d4fe, type: 2}
   gridPathfind: {fileID: 0}
+  animatorHelper:
+    nameWalkUpParameter: 
+    nameWalkDownParameter: 
+  gameOverBusSO: {fileID: 11400000, guid: 423dbfa9ead2ea240b054d83969855f6, type: 2}
   combatVariableSO: {fileID: 11400000, guid: 4de606722f98fda4887b78215d26751b, type: 2}
   playerVariableSO: {fileID: 11400000, guid: 82464bdcbc557ff41b3b1e47fa852778, type: 2}
+  timerVariableSO: {fileID: 11400000, guid: bd8f52ef88b72d04684039a8d4435a0c, type: 2}
   _mySprite: {fileID: 7226611521541733787}
   timeBetweenKeystrokes: 0.2
 --- !u!114 &1686672608

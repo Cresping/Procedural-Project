@@ -12,9 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8dd59fcb344461341aa3f21e53ec7805, type: 3}
   m_Name: PlayerVariableSO
   m_EditorClassIdentifier: 
+  BSPDungeonVariableSO: {fileID: 11400000, guid: 41b62dee66965db41a810d148e271cd6, type: 2}
+  gameStartBusSO: {fileID: 11400000, guid: 3c70e64ec8585094fbbc496e1e5770c6, type: 2}
+  gameOverBusSO: {fileID: 11400000, guid: 423dbfa9ead2ea240b054d83969855f6, type: 2}
   playerLevel: 1
+  dungeonLevel: 2
   playerPrefab: {fileID: 7226611520861074219, guid: 4988bc079a76e2743baae56f806613c3, type: 3}
-  maxPlayerHP: 100
+  maxTotalPlayerHP: 120
+  maxInitPlayer: 20
   playerDamage: 6
   playerSpeed: 5
   playerDef: 5

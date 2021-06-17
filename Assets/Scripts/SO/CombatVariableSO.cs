@@ -17,10 +17,20 @@ namespace HeroesGames.ProjectProcedural.SO
         public Action<int> OnCombatEnemyReceiveDamage;
         public Action<int> OnCombatPlayerReceiveDamage;
         [SerializeField] private PlayerVariableSO playerVariableSO;
+        [SerializeField] private GameOverBusSO gameOverBusSO;
         private bool _isActive;
+
         private Stack<EnemyBehaviour> _stackCombatEnemyBehaviour;
         private EnemyBehaviour _currentCombatEnemyBehaviour;
 
+        private void OnEnable()
+        {
+            gameOverBusSO.OnGameOverEvent += EndCombat;
+        }
+        private void OnDisable()
+        {
+            gameOverBusSO.OnGameOverEvent -= EndCombat;
+        }
         public bool IsActive
         {
             get => _isActive;
@@ -74,6 +84,7 @@ namespace HeroesGames.ProjectProcedural.SO
             if (_currentCombatEnemyBehaviour.CurrentEnemyHP <= 0)
             {
                 Debug.Log("Siguiente enemigo");
+                playerVariableSO.NumberEnemiesKilled++;
                 NextEnemy();
             }
         }

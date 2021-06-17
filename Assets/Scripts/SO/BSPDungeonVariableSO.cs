@@ -94,8 +94,9 @@ namespace HeroesGames.ProjectProcedural.SO
             minRoomHeight = 4 + randomHeigh;
             minRoomWidth = 4 + randomWidth;
         }
-        private void OnEnable()
+        protected override void OnEnable()
         {
+            base.OnEnable();
             LoadAllRoomVariables();
         }
         public override void CalculateDifficulty()

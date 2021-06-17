@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Animations;
 using UnityEngine;
 
 /// <summary>
@@ -11,7 +10,7 @@ public class EnemyVariableSO : ScriptableObject, ISerializationCallbackReceiver
 {
     [SerializeField] private GameObject enemyPrefab;
     [SerializeField] private Sprite enemySprite;
-    [SerializeField] private AnimatorController enemyAnimator;
+    [SerializeField] private RuntimeAnimatorController enemyAnimator;
     [SerializeField] private int maxEnemyHP;
     [SerializeField] private int enemyDefense;
     [SerializeField] private int enemyAttack;
@@ -34,7 +33,7 @@ public class EnemyVariableSO : ScriptableObject, ISerializationCallbackReceiver
     public GameObject EnemyPrefab { get => enemyPrefab; set => enemyPrefab = value; }
     public float EnemyAttackSpeed { get => enemyAttackSpeed; set => enemyAttackSpeed = value; }
     public Sprite EnemySprite { get => enemySprite; set => enemySprite = value; }
-    public AnimatorController EnemyAnimator { get => enemyAnimator; set => enemyAnimator = value; }
+    public RuntimeAnimatorController EnemyAnimator { get => enemyAnimator; set => enemyAnimator = value; }
     public int EnemyExperience { get => enemyExperience; set => enemyExperience = value; }
 
     public void OnAfterDeserialize() { }
