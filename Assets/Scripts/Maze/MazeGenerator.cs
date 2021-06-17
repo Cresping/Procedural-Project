@@ -7,20 +7,31 @@ namespace HeroesGames.ProjectProcedural.Procedural
     public class MazeGenerator : AbstractDoungeonGenerator
     {
         #region VARIABLES
-    
-        [SerializeField]
-        private int
+
+        [SerializeField] private int
             width,
             height;
+        
+        [SerializeField]
+        private Camera mainCamera;
 
         private List<Vector2Int> CurrentFrontiers = new List<Vector2Int>();
         private List<Vector2Int> MazePaths = new List<Vector2Int>();
-    
+
+        private Vector2Int
+            _initialPosition,
+            _exitPosition;
+        
+        private int _initialIndexPosition;
+
+        public int Width => width;
+        public int Height => height;
+
         private bool[,] _maze; // false = is maze's corridor, true = is NOT maze's corridor
-    
+
         #endregion
 
-        #region INIT MAZE
+        #region MAZE DEFINITONS
 
         protected override void RunProceduralGeneration()
         {
@@ -29,9 +40,10 @@ namespace HeroesGames.ProjectProcedural.Procedural
             PrimsAlgorithm();
             DrawTilesInMaze();
             DrawBorders();
+            SetCameraPosition();
         }
 
-        // Initialize the maze array.
+        // Initialises the maze array.
         private void InitMaze()
         {
             _maze = new bool[width, height];
@@ -40,7 +52,7 @@ namespace HeroesGames.ProjectProcedural.Procedural
                 _maze[column, row] = true;
         }
         
-        // Restore Lists and Array
+        // Restores Lists and Array
         private void CleanContents()
         {
             CurrentFrontiers.Clear();
@@ -48,6 +60,38 @@ namespace HeroesGames.ProjectProcedural.Procedural
             _maze = null;
         }
         
+        // Selects which available corner the player appears in the maze
+        private Vector2Int GetInitialPosition(Vector2Int exitPosition)
+        {
+            var availableCorners = new List<Vector2Int>();
+            var tempMaxDistance = 0.0f;
+
+            // Checks if every corner is an available Maze path
+            if (MazePaths.Contains(new Vector2Int(0, 0)))
+                availableCorners.Add(new Vector2Int(0, 0));
+            
+            if(MazePaths.Contains(new Vector2Int(0,height-1)))
+                availableCorners.Add(new Vector2Int(0,height-1));
+
+            if (MazePaths.Contains(new Vector2Int(width - 1, height - 1)))
+                availableCorners.Add(new Vector2Int(width - 1, height - 1));
+            
+            if (MazePaths.Contains(new Vector2Int(width - 1, 0)))
+                availableCorners.Add(new Vector2Int(width - 1, 0));
+
+            // Measures the distances from exit to every available corner and choose the furthest one
+            foreach (var cornerPosition in availableCorners)
+            {
+                var distanceCorner2Exit = Vector2Int.Distance(cornerPosition, exitPosition);
+                if (!(distanceCorner2Exit > tempMaxDistance)) continue;
+                tempMaxDistance = distanceCorner2Exit;
+                _initialPosition = cornerPosition;
+                _initialIndexPosition = availableCorners.IndexOf(cornerPosition);
+            }
+
+            return _initialPosition;
+        }
+
         #endregion
         
         #region PRIM'S ALGORITHM
@@ -154,7 +198,7 @@ namespace HeroesGames.ProjectProcedural.Procedural
 
         #endregion
 
-        #region DRAW THE MAZE
+        #region DRAW THE MAZE AND SET CAMERA POSITION
 
         // Draw Tiles in maze depends on _maze values
         private void DrawTilesInMaze()
@@ -168,9 +212,13 @@ namespace HeroesGames.ProjectProcedural.Procedural
                     tileMapGenerator.PaintFloorTile(new Vector2Int(column, row));
             }
 
-            //Draw Exit
-            var randomPathTile = MazePaths[Random.Range(0, MazePaths.Count - 1)];
-            tileMapGenerator.PaintEndTile(randomPathTile);
+            //Draw Exit 
+            _exitPosition = MazePaths[Random.Range(0, MazePaths.Count - 1)];
+            tileMapGenerator.PaintEndTile(_exitPosition);
+            
+            //Draw Initial position
+            var initPosition = GetInitialPosition(_exitPosition);
+            tileMapGenerator.PaintStartTile(initPosition);
         }
     
         // Draw Borders
@@ -199,6 +247,8 @@ namespace HeroesGames.ProjectProcedural.Procedural
             tileMapGenerator.PaintFenceTile(new Vector2Int(width, height));
         }
 
-        #endregion
+        private void SetCameraPosition() => mainCamera.GetComponent<CameraController>().SetInitialCameraPosition(_initialIndexPosition);
+
+            #endregion
     }
 }
