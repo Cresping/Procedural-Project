@@ -13,13 +13,17 @@ namespace HeroesGames.ProjectProcedural.SO
         [Range(1, 5)]
         [SerializeField]
         protected int objectRarity;
+        private int _playerPositionEquipment;
+        private bool _isEquiped;
 
 
 
         public int ObjectRarity { get => objectRarity; set => objectRarity = value; }
-        protected Sprite ObjectSprite { get => objectSprite; set => objectSprite = value; }
-        protected string ObjectName { get => objectName; set => objectName = value; }
+        public Sprite ObjectSprite { get => objectSprite; set => objectSprite = value; }
+        public string ObjectName { get => objectName; set => objectName = value; }
         public int Id { get => id; set => id = value; }
+        public bool IsEquiped { get => _isEquiped; set => _isEquiped = value; }
+        public int PlayerPositionEquipment { get => _playerPositionEquipment; set => _playerPositionEquipment = value; }
 
         public abstract void OnAfterDeserialize();
         public abstract void OnBeforeSerialize();

@@ -12,6 +12,7 @@ namespace HeroesGames.ProjectProcedural.SO
     [CreateAssetMenu(fileName = "NewPlayerVariable", menuName = "Scriptables/Player/PlayerVariable")]
     public class PlayerVariableSO : ScriptableObject, ISerializationCallbackReceiver
     {
+        private const int MAX_EQUIPPED_OBJECTS = 4;
         public Action PlayerPositionOnValueChange;
         public Action PlayerSpeedOnValueChange;
         public Action PlayerLevelOnValueChange;
@@ -29,6 +30,7 @@ namespace HeroesGames.ProjectProcedural.SO
         [SerializeField] private int playerDef;
 
         [SerializeField] private int minExpLevel = 100;
+        private ObjectInventoryVariableSO[] _equippedObjects = new ObjectInventoryVariableSO[MAX_EQUIPPED_OBJECTS];
         private int _numberEnemiesKilled;
         private EnumTypes.StatusType status;
 
@@ -109,6 +111,7 @@ namespace HeroesGames.ProjectProcedural.SO
             }
         }
         public int NumberEnemiesKilled { get => _numberEnemiesKilled; set => _numberEnemiesKilled = value; }
+        public ObjectInventoryVariableSO[] EquippedObjects { get => _equippedObjects; set => _equippedObjects = value; }
 
         public void ReceiveExperience(int exp)
         {

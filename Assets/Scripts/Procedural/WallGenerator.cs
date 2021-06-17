@@ -12,10 +12,10 @@ namespace HeroesGames.ProjectProcedural.Procedural
     public static class WallGenerator
     {
         /// <summary>
-        /// Módulo encargado de crear los muros dadas las posiciones del suelo y un mapa
+        /// Mï¿½dulo encargado de crear los muros dadas las posiciones del suelo y un mapa
         /// </summary>
         /// <param name="floorPositions">Posiciones del suelo</param>
-        /// <param name="tilemapVisualizer">Mapa donde se pintarán los muros</param>
+        /// <param name="tilemapVisualizer">Mapa donde se pintarï¿½n los muros</param>
         public static void CreateSimpleWalls(HashSet<Vector2Int> floorPositions, SimpleTileMapGenerator tilemapVisualizer)
         {
             var basicWallPositions = FindWallsInDirection(floorPositions, Direction2D.cardinalDirectionList);
@@ -24,7 +24,7 @@ namespace HeroesGames.ProjectProcedural.Procedural
             tilemapVisualizer.PaintWallTiles(cornerWallPositions);
         }
         /// <summary>
-        /// Módulo encargado de devolver las posiciones de los muros en el mapa
+        /// Mï¿½dulo encargado de devolver las posiciones de los muros en el mapa
         /// </summary>
         /// <param name="floorPositions">Posiciones del suelo</param>
         /// <param name="directionList">Direcciones donde se pueden encontrar dichos muros</param>
@@ -45,5 +45,6 @@ namespace HeroesGames.ProjectProcedural.Procedural
             }
             return wallPositions;
         }
+        
     }
 }

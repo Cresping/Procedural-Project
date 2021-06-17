@@ -23,6 +23,7 @@ namespace HeroesGames.ProjectProcedural.SO
         private Stack<EnemyBehaviour> _stackCombatEnemyBehaviour;
         private EnemyBehaviour _currentCombatEnemyBehaviour;
 
+
         private void OnEnable()
         {
             gameOverBusSO.OnGameOverEvent += EndCombat;
