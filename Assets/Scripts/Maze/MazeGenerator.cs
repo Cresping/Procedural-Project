@@ -138,17 +138,17 @@ namespace HeroesGames.ProjectProcedural.Procedural
         }
 
         // Remove the wall tile between two chosen in maze floors to complete the corridor
-        private void LinkFloorNodes(Vector2Int startPosition, Vector2Int endPosition)
+        private void LinkFloorNodes(Vector2Int initPosition, Vector2Int finalPosition)
         {
-            if (startPosition.x == endPosition.x)
+            if (initPosition.x == finalPosition.x)
             {
-                var minRow = Mathf.Min(startPosition.y, endPosition.y);
-                _maze[startPosition.x, minRow + 1] = false;
+                var minRow = Mathf.Min(initPosition.y, finalPosition.y);
+                _maze[initPosition.x, minRow + 1] = false;
             }
-            else if (startPosition.y == endPosition.y)
+            else if (initPosition.y == finalPosition.y)
             {
-                var minColumn = Mathf.Min(startPosition.x, endPosition.x);
-                _maze[minColumn + 1, startPosition.y] = false;
+                var minColumn = Mathf.Min(initPosition.x, finalPosition.x);
+                _maze[minColumn + 1, initPosition.y] = false;
             }
         }
 
