@@ -71,5 +71,9 @@ namespace HeroesGames.ProjectProcedural.Inventory
                 playerVariableSO.PlayerPositionOnValueChange -= OpenChest;
             }
         }
+        private void OnDisable()
+        {
+            playerVariableSO.PlayerPositionOnValueChange -= OpenChest;
+        }
     }
 }
