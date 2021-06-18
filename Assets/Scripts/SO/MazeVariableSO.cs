@@ -9,22 +9,16 @@ namespace HeroesGames.ProjectProcedural.SO
         {
             if (dungeonLvl % 2 == 0)
             {
-                dungeonWidth = 15 + dungeonLvl + 1;
-                dungeonHeight = 15 + dungeonLvl + 1;
+                dungeonWidth = 13 + dungeonLvl;
+                dungeonHeight = 13 + dungeonLvl;
             }
             else
             {
-                dungeonWidth = 15 + dungeonLvl;
-                dungeonHeight = 15 + dungeonLvl;
+                dungeonWidth = 13 + dungeonLvl + 1;
+                dungeonHeight = 13 + dungeonLvl + 1;
             }
-
         }
         
-        public override void CalculateDifficulty()
-        {
-            MazeSize();
-        }
+        public override void CalculateDifficulty() => MazeSize();
     }
 }
-
-

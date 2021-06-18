@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
@@ -14,12 +13,16 @@ namespace HeroesGames.ProjectProcedural.Procedural
         [SerializeField] private Tilemap wallTileMap;
         [SerializeField] private Tilemap startTileMap;
         [SerializeField] private Tilemap endTileMap;
+        [SerializeField] private Tilemap openEndTileMap;
         [SerializeField] private Tilemap fenceTilemap;
+        [SerializeField] private Tilemap keyTileMap;
         [SerializeField] private TileVariableSO floorTiles;
         [SerializeField] private TileVariableSO wallTiles;
         [SerializeField] private TileVariableSO startTiles;
         [SerializeField] private TileVariableSO endTiles;
+        [SerializeField] private TileVariableSO openEndTiles;
         [SerializeField] private TileVariableSO fenceTiles;
+        [SerializeField] private TileVariableSO keyTiles;
 
         /// <summary>
         /// M�dulo encargado de pintar los 'tiles' dados en unas posiciones determinadas
@@ -89,6 +92,7 @@ namespace HeroesGames.ProjectProcedural.Procedural
         {
             PaintSingleTile(startTileMap, startTiles.PickRandomTile(), position);
         }
+        
         /// <summary>
         /// M�dulo encargado de pintar el 'tile' del fin de la mazmorra
         /// </summary>
@@ -96,6 +100,24 @@ namespace HeroesGames.ProjectProcedural.Procedural
         public void PaintEndTile(Vector2Int position)
         {
             PaintSingleTile(endTileMap, endTiles.PickRandomTile(), position);
+        }
+        
+        // <summary>
+        /// M�dulo encargado de pintar el 'tile' del fin de la mazmorra abierta
+        /// </summary>
+        /// <param name="position">Posicion del 'tile'</param>
+        public void PaintOpenEndTile(Vector2Int position)
+        {
+            PaintSingleTile(openEndTileMap, openEndTiles.PickRandomTile(), position);
+        }
+        
+        // <summary>
+        /// M�dulo encargado de pintar el 'tile' de una llave
+        /// </summary>
+        /// <param name="position">Posicion del 'tile'</param>
+        public void PaintKeyTile(Vector2Int position)
+        {
+            PaintSingleTile(keyTileMap, keyTiles.PickRandomTile(), position);
         }
 
         /// <summary>
@@ -117,7 +139,15 @@ namespace HeroesGames.ProjectProcedural.Procedural
             wallTileMap.ClearAllTiles();
             startTileMap.ClearAllTiles();
             endTileMap.ClearAllTiles();
-            fenceTilemap.ClearAllTiles();
+            
+            if(fenceTilemap)
+                fenceTilemap.ClearAllTiles();
+            
+            if(openEndTileMap)
+                openEndTileMap.ClearAllTiles();
+            
+            if(keyTileMap)
+                keyTileMap.ClearAllTiles();
         }
     }
 }

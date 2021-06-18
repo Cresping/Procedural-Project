@@ -16,7 +16,7 @@ MonoBehaviour:
   gameStartBusSO: {fileID: 11400000, guid: 3c70e64ec8585094fbbc496e1e5770c6, type: 2}
   gameOverBusSO: {fileID: 11400000, guid: 423dbfa9ead2ea240b054d83969855f6, type: 2}
   playerLevel: 1
-  dungeonLevel: 2
+  dungeonLevel: 1
   playerPrefab: {fileID: 7226611520861074219, guid: 4988bc079a76e2743baae56f806613c3, type: 3}
   maxTotalPlayerHP: 120
   maxInitPlayer: 20

@@ -9,10 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 82424c5bc13e02343a85709a560da9ba, type: 3}
-  m_Name: ForestStartTiles
+  m_Script: {fileID: 11500000, guid: 04db90333d8d6dc4d82993f9534426b9, type: 3}
+  m_Name: MazeVariableSO
   m_EditorClassIdentifier: 
-  mainTile: {fileID: 11400000, guid: f47ab42c86fef7f43a706ddb6bae0026, type: 2}
-  commonTiles: []
-  rareTiles: []
-  probabilityRareTile: 0.2
+  gameStartBusSO: {fileID: 11400000, guid: 3c70e64ec8585094fbbc496e1e5770c6, type: 2}
+  dungeonLvl: 1
+  dungeonWidth: 15
+  dungeonHeight: 15
