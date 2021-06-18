@@ -2,7 +2,6 @@
 using HeroesGames.ProjectProcedural.Pathfind;
 using HeroesGames.ProjectProcedural.SO;
 using UnityEngine;
-using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
 namespace HeroesGames.ProjectProcedural.Procedural
@@ -11,33 +10,28 @@ namespace HeroesGames.ProjectProcedural.Procedural
     {
         #region VARIABLES
 
-        [SerializeField] private int
-            width,
-            height;
-        
         [SerializeField] private MazeVariableSO mazeVariableSO;
         [SerializeField] private PlayerVariableSO playerVariableSO;
         [SerializeField] private GridPathfind gridPathfind;
-        [SerializeField] private SimpleTileMapGenerator forestTileGenerator;
 
         private List<Vector2Int> CurrentFrontiers = new List<Vector2Int>();
         private List<Vector2Int> MazePaths = new List<Vector2Int>();
 
-        private Vector2Int
-            _initialPosition,
-            _exitPosition;
-
-        private int _startIndexPosition;
-
-        public int Width => width;
-        public int Height => height;
+        private int
+            _width,
+            _height,
+            _startIndexPosition;
 
         private bool[,] _maze; // false = is maze's corridor, true = is NOT maze's corridor
+        
+        public Vector2Int ExitPosition { get; set; }
+        public Vector2Int KeyPosition { get; set; }
 
         #endregion
 
-        #region MAZE DEFINITONS
+        #region MAZE INITIALIZATION
 
+        // Inherited method to Start Procedural Process (Yes it's misspelled. Remember, it's inherited)
         protected override void RunProceduralGeneration()
         {
             CleanContents();
@@ -46,26 +40,8 @@ namespace HeroesGames.ProjectProcedural.Procedural
             DrawTilesInMaze();
             DrawBorders();
         }
-
-        // Initialises the maze array.
-        private void InitMaze()
-        {
-            // Resize the Maze depends on Dungeon Level
-            mazeVariableSO.CalculateDifficulty();
-            width = mazeVariableSO.DungeonWidth;
-            height = mazeVariableSO.DungeonHeight;
-            
-            // Generate the path grid
-            gridPathfind.CreateGrid(width, height);
-            
-            // Assign one maze node for every maze cell
-            _maze = new bool[width, height];
-            for (var column = 0; column < width; column++)
-            for (var row = 0; row < height; row++)
-                _maze[column, row] = true;
-        }
         
-        // Restores Lists and Array
+        // Restores Lists and Arrays
         private void CleanContents()
         {
             tileMapGenerator.ClearAllTiles();
@@ -73,54 +49,35 @@ namespace HeroesGames.ProjectProcedural.Procedural
             MazePaths.Clear();
             _maze = null;
         }
-        
-        // Selects which available corner the player appears in the maze
-        private Vector2Int GetInitialPosition(Vector2Int exitPosition)
+
+        // Initialises the maze array.
+        private void InitMaze()
         {
-            var availableCorners = new List<Vector2Int>();
-            var tempMaxDistance = 0.0f;
-
-            // Checks if every corner is an available Maze path
-            if (MazePaths.Contains(new Vector2Int(0, 0)))
-                availableCorners.Add(new Vector2Int(0, 0));
+            // Resize the Maze depends on Dungeon Level
+            mazeVariableSO.CalculateDifficulty();
+            _width = mazeVariableSO.DungeonWidth;
+            _height = mazeVariableSO.DungeonHeight;
             
-            if(MazePaths.Contains(new Vector2Int(0,height-1)))
-                availableCorners.Add(new Vector2Int(0,height-1));
-
-            if (MazePaths.Contains(new Vector2Int(width - 1, height - 1)))
-                availableCorners.Add(new Vector2Int(width - 1, height - 1));
+            // Generate the path grid
+            gridPathfind.CreateGrid(_width, _height);
             
-            if (MazePaths.Contains(new Vector2Int(width - 1, 0)))
-                availableCorners.Add(new Vector2Int(width - 1, 0));
-
-            // Measures the distances from exit to every available corner and choose the furthest one
-            foreach (var cornerPosition in availableCorners)
-            {
-                var distanceCorner2Exit = Vector2Int.Distance(cornerPosition, exitPosition);
-                if (!(distanceCorner2Exit > tempMaxDistance)) continue;
-                tempMaxDistance = distanceCorner2Exit;
-                startPosition = cornerPosition;
-                _startIndexPosition = availableCorners.IndexOf(cornerPosition);
-            }
-            return startPosition;
+            // Assign one maze node for every maze cell
+            _maze = new bool[_width, _height];
+            for (var column = 0; column < _width; column++)
+            for (var row = 0; row < _height; row++)
+                _maze[column, row] = true;
         }
         
-        private Vector2Int GetAKeyPosition()
-        {
-            // TODO: write the method
-            throw new System.NotImplementedException();
-        }
-
         #endregion
-        
+
         #region PRIM'S ALGORITHM
 
         // We use Prim's algorithm to generate corridors in the maze
         private void PrimsAlgorithm()
         {
             // 1. Choose random initial node, add to corridors and add it to Frontiers List
-            var randomX = Mathf.Clamp(Random.Range(0, width) * 2,0,width -1);
-            var randomY = Mathf.Clamp(Random.Range(0, height) * 2,0, height -1);
+            var randomX = Mathf.Clamp(Random.Range(0, _width) * 2,0,_width -1);
+            var randomY = Mathf.Clamp(Random.Range(0, _height) * 2,0, _height -1);
 
             _maze[randomX, randomY] = false;
             AddFrontiers(new Vector2Int(randomX, randomY));
@@ -151,16 +108,85 @@ namespace HeroesGames.ProjectProcedural.Procedural
             }
 
             // 3. Add every corridor in the Maze to MazePaths list to make them walkable
-            for (var column = 0; column < width; column++)
-                for (var row = 0; row < height; row++)
+            for (var column = 0; column < _width; column++)
+                for (var row = 0; row < _height; row++)
                 {
                     if(!_maze[column,row])
                         AddNodeToMazePaths(new Vector2Int(column, row));
                 }
         }
 
-        // Add nodes to MazePath list => transitable tiles for player and enemies
-        private void AddNodeToMazePaths(Vector2Int position) => MazePaths.Add(position);
+        #endregion
+
+        #region DRAW THE MAZE
+
+        // Draw Tiles in maze depends on _maze values
+        private void DrawTilesInMaze()
+        {
+            for (var column = 0; column < _width; column++)
+            for (var row = 0; row < _height; row++)
+            {
+                if (_maze[column, row])
+                {
+                    tileMapGenerator.PaintWallTile(new Vector2Int(column,row));
+                    gridPathfind.ChangeNode(column, row, false);
+                }
+                    
+                else
+                {
+                    tileMapGenerator.PaintFloorTile(new Vector2Int(column, row));
+                    gridPathfind.ChangeNode(column, row, true);
+                }
+            }
+
+            // Get a node to Draw the Exit
+            ExitPosition = GetRandomMazePathNode();
+
+            // A Key is required to open Exit tile depend on dungeon level
+            if(mazeVariableSO.DungeonLvl < 5)
+                tileMapGenerator.PaintOpenEndTile(ExitPosition);
+            else
+            {
+                KeyPosition = GetRandomMazePathNode();
+                tileMapGenerator.PaintKeyTile(KeyPosition);
+                tileMapGenerator.PaintEndTile(ExitPosition);
+            }
+
+            //Draw Initial position
+            var startPos = GetInitialPosition(ExitPosition);
+            playerVariableSO.InstancePlayer(startPos);
+            RemoveNodeFromMazePaths(new Vector2Int(startPos.x, startPos.y));
+        }
+
+        // Draw Borders
+        private void DrawBorders()
+        {
+            for (var column = 0; column < _width; column++)
+            for (var row = 0; row < _height; row++)
+            {
+                    //Draw left and right boundaries
+                    if (column == 0)
+                        tileMapGenerator.PaintFenceTile(new Vector2Int(column - 1, row));
+                    else if (column == _width - 1)
+                        tileMapGenerator.PaintFenceTile(new Vector2Int(_width, row));
+
+                    //Draw up and down boundary
+                    if (row == 0)
+                        tileMapGenerator.PaintFenceTile(new Vector2Int(column, row - 1));
+                    else if (row == _height - 1)
+                        tileMapGenerator.PaintFenceTile(new Vector2Int(column, _height));   
+            }
+
+            // Draw corners
+            tileMapGenerator.PaintFenceTile(new Vector2Int(-1, -1));
+            tileMapGenerator.PaintFenceTile(new Vector2Int(-1, _height));
+            tileMapGenerator.PaintFenceTile(new Vector2Int(_width, -1));
+            tileMapGenerator.PaintFenceTile(new Vector2Int(_width, _height));
+        }
+
+        #endregion
+        
+        #region OPERATION WITH NODES
 
         // Add available nodes to our frontier list        
         private void AddFrontiers(Vector2Int position)
@@ -168,13 +194,13 @@ namespace HeroesGames.ProjectProcedural.Procedural
             if (position.x - 2 >= 0 && _maze[position.x - 2, position.y])
                 CurrentFrontiers.Add(new Vector2Int(position.x - 2, position.y));
 
-            if (position.x + 2 < width && _maze[position.x + 2, position.y])
+            if (position.x + 2 < _width && _maze[position.x + 2, position.y])
                 CurrentFrontiers.Add(new Vector2Int(position.x + 2, position.y));
 
             if (position.y - 2 >= 0 && _maze[position.x, position.y - 2])
                 CurrentFrontiers.Add(new Vector2Int(position.x, position.y - 2));
 
-            if (position.y + 2 < height && _maze[position.x, position.y + 2])
+            if (position.y + 2 < _height && _maze[position.x, position.y + 2])
                 CurrentFrontiers.Add(new Vector2Int(position.x, position.y + 2));
         }
 
@@ -186,13 +212,13 @@ namespace HeroesGames.ProjectProcedural.Procedural
             if (position.x - 2 >= 0 && !_maze[position.x - 2, position.y])
                 neighbours.Add(new Vector2Int(position.x - 2, position.y));
 
-            if (position.x + 2 < width && !_maze[position.x + 2, position.y])
+            if (position.x + 2 < _width && !_maze[position.x + 2, position.y])
                 neighbours.Add(new Vector2Int(position.x + 2, position.y));
 
             if (position.y - 2 >= 0 && !_maze[position.x, position.y - 2])
                 neighbours.Add(new Vector2Int(position.x, position.y - 2));
 
-            if (position.y + 2 < height && !_maze[position.x, position.y + 2])
+            if (position.y + 2 < _height && !_maze[position.x, position.y + 2])
                 neighbours.Add(new Vector2Int(position.x, position.y + 2));
 
             var randomNeighbour = Random.Range(0, neighbours.Count - 1);
@@ -214,71 +240,52 @@ namespace HeroesGames.ProjectProcedural.Procedural
                 _maze[minColumn + 1, initPosition.y] = false;
             }
         }
-
-        #endregion
-
-        #region DRAW THE MAZE AND SET CAMERA POSITION
-
-        // Draw Tiles in maze depends on _maze values
-        private void DrawTilesInMaze()
+        
+        // Selects which available corner the player appears in the maze
+        private Vector2Int GetInitialPosition(Vector2Int exitPosition)
         {
-            for (var column = 0; column < width; column++)
-            for (var row = 0; row < height; row++)
-            {
-                if (_maze[column, row])
-                {
-                    tileMapGenerator.PaintWallTile(new Vector2Int(column,row));
-                    gridPathfind.ChangeNode(column, row, false);
-                }
-                    
-                else
-                {
-                    tileMapGenerator.PaintFloorTile(new Vector2Int(column, row));
-                    gridPathfind.ChangeNode(column, row, true);
-                }
-            }
+            var availableCorners = new List<Vector2Int>();
+            var tempMaxDistance = 0.0f;
 
-            //Draw Exit 
-            _exitPosition = MazePaths[Random.Range(0, MazePaths.Count - 1)];
+            // Checks if every corner is an available Maze path
+            if (MazePaths.Contains(new Vector2Int(0, 0)))
+                availableCorners.Add(new Vector2Int(0, 0));
             
-            if(mazeVariableSO.DungeonLvl < 5)
-                tileMapGenerator.PaintOpenEndTile(_exitPosition);
-            else
+            if(MazePaths.Contains(new Vector2Int(0,_height-1)))
+                availableCorners.Add(new Vector2Int(0,_height-1));
+
+            if (MazePaths.Contains(new Vector2Int(_width - 1, _height - 1)))
+                availableCorners.Add(new Vector2Int(_width - 1, _height - 1));
+            
+            if (MazePaths.Contains(new Vector2Int(_width - 1, 0)))
+                availableCorners.Add(new Vector2Int(_width - 1, 0));
+
+            // Measures the distances from exit to every available corner and choose the furthest one
+            foreach (var cornerPosition in availableCorners)
             {
-                tileMapGenerator.PaintKeyTile(GetAKeyPosition());
-                tileMapGenerator.PaintEndTile(_exitPosition);
+                var distanceCorner2Exit = Vector2Int.Distance(cornerPosition, exitPosition);
+                if (!(distanceCorner2Exit > tempMaxDistance)) continue;
+                tempMaxDistance = distanceCorner2Exit;
+                startPosition = cornerPosition;
+                _startIndexPosition = availableCorners.IndexOf(cornerPosition);
+                _maze[startPosition.x, startPosition.y] = true;
             }
-                
-
-            //Draw Initial position
-            playerVariableSO.InstancePlayer(GetInitialPosition(_exitPosition));
+            return startPosition;
         }
-
-        // Draw Borders
-        private void DrawBorders()
+        
+        // Extract and deliver one random node from MazePaths 
+        private Vector2Int GetRandomMazePathNode()
         {
-            for (var column = 0; column < width; column++)
-            for (var row = 0; row < height; row++)
-            {
-                    //Draw left and right boundaries
-                    if (column == 0)
-                        tileMapGenerator.PaintFenceTile(new Vector2Int(column - 1, row));
-                    else if (column == width - 1)
-                        tileMapGenerator.PaintFenceTile(new Vector2Int(width, row));
-
-                    //Draw up and down boundary
-                    if (row == 0)
-                        tileMapGenerator.PaintFenceTile(new Vector2Int(column, row - 1));
-                    else if (row == height - 1)
-                        tileMapGenerator.PaintFenceTile(new Vector2Int(column, height));   
-            }
-
-            // Draw corners
-            tileMapGenerator.PaintFenceTile(new Vector2Int(-1, -1));
-            tileMapGenerator.PaintFenceTile(new Vector2Int(-1, height));
-            tileMapGenerator.PaintFenceTile(new Vector2Int(width, -1));
-            tileMapGenerator.PaintFenceTile(new Vector2Int(width, height));
+            var randomNode = MazePaths[Random.Range(0, MazePaths.Count - 1)];
+            RemoveNodeFromMazePaths(randomNode);
+            return randomNode;
         }
+        
+        // Add nodes to MazePath list => walkable tiles for player and enemies
+        private void AddNodeToMazePaths(Vector2Int position) => MazePaths.Add(position);
+        
+        // Remove nodes from MazePath list
+        private void RemoveNodeFromMazePaths(Vector2Int position) => MazePaths.Remove(position);
 
         #endregion
     }
