@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using HeroesGames.ProjectProcedural.Pathfind;
+using HeroesGames.ProjectProcedural.SO;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -14,6 +16,9 @@ namespace HeroesGames.ProjectProcedural.Procedural
         
         [SerializeField]
         private Camera mainCamera;
+
+        [SerializeField] private GridPathfind _gridPathfind;
+        [SerializeField] private PlayerVariableSO _playerVariableSo;
 
         private List<Vector2Int> CurrentFrontiers = new List<Vector2Int>();
         private List<Vector2Int> MazePaths = new List<Vector2Int>();
@@ -40,12 +45,16 @@ namespace HeroesGames.ProjectProcedural.Procedural
             PrimsAlgorithm();
             DrawTilesInMaze();
             DrawBorders();
-            SetCameraPosition();
+            //SetCameraPosition();
         }
 
         // Initialises the maze array.
         private void InitMaze()
         {
+            // TODO:
+            _gridPathfind.CreateGrid(Width, Height);
+            
+            // TODO:
             _maze = new bool[width, height];
             for (var column = 0; column < width; column++)
             for (var row = 0; row < height; row++)
@@ -207,9 +216,16 @@ namespace HeroesGames.ProjectProcedural.Procedural
             for (var row = 0; row < height; row++)
             {
                 if (_maze[column, row])
+                {
                     tileMapGenerator.PaintWallTile(new Vector2Int(column,row));
+                    _gridPathfind.ChangeNode(column, row, false);
+                }
+                    
                 else
+                {
                     tileMapGenerator.PaintFloorTile(new Vector2Int(column, row));
+                    _gridPathfind.ChangeNode(column, row, true);
+                }
             }
 
             //Draw Exit 
@@ -218,7 +234,7 @@ namespace HeroesGames.ProjectProcedural.Procedural
             
             //Draw Initial position
             var initPosition = GetInitialPosition(_exitPosition);
-            tileMapGenerator.PaintStartTile(initPosition);
+            _playerVariableSo.InstancePlayer(initPosition);
         }
     
         // Draw Borders
