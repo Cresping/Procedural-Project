@@ -47,7 +47,7 @@ namespace HeroesGames.ProjectProcedural.Pathfind
             }
             catch (ArgumentOutOfRangeException)
             {
-                Debug.LogError("El nodo "+posx+" "+posy+" no existe");
+                Debug.LogError("El nodo " + posx + " " + posy + " no existe");
                 return false;
             }
         }
@@ -63,7 +63,7 @@ namespace HeroesGames.ProjectProcedural.Pathfind
             return _nodes[posx, posy];
         }
 
-       /// <summary>
+        /// <summary>
         /// Devuelve si el nodo de la posición dada es caminable
         /// </summary>
         /// <param name="posx">Posici�n del nodo en X</param>
@@ -71,7 +71,7 @@ namespace HeroesGames.ProjectProcedural.Pathfind
         /// <returns>True si se puede caminar, false si no</returns>
         public bool IsWalkeable(int posx, int posy)
         {
-            return GetNode(posx,posy).Walkable;
+            return GetNode(posx, posy).Walkable;
         }
 
         /// <summary>
@@ -127,6 +127,10 @@ namespace HeroesGames.ProjectProcedural.Pathfind
                         neighbours.Add(_nodes[checkX, checkY]);
                     }
                     catch (ArgumentOutOfRangeException)
+                    {
+                        continue;
+                    }
+                    catch (IndexOutOfRangeException)
                     {
                         continue;
                     }

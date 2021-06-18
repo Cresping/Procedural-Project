@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
+using System;
 
 namespace HeroesGames.ProjectProcedural.Pathfind
 {
@@ -9,11 +10,11 @@ namespace HeroesGames.ProjectProcedural.Pathfind
     public class Pathfinding
     {
         /// <summary>
-        /// Devuelve la lista de puntos que se deben de recorrer para llegar a la posición deseada
+        /// Devuelve la lista de puntos que se deben de recorrer para llegar a la posiciï¿½n deseada
         /// </summary>
         /// <param name="grid"> El conjunto de nodos</param>
-        /// <param name="startPos">Posición inicial</param>
-        /// <param name="targetPos">Posición final</param>
+        /// <param name="startPos">Posiciï¿½n inicial</param>
+        /// <param name="targetPos">Posiciï¿½n final</param>
         /// <returns></returns>
         public static List<Point> FindPath(GridPathfind grid, Point startPos, Point targetPos)
         {
@@ -31,65 +32,74 @@ namespace HeroesGames.ProjectProcedural.Pathfind
         }
 
         /// <summary>
-        /// Devuelve la lista de nodos que se deben de recorrer para llegar a la posición deseada
+        /// Devuelve la lista de nodos que se deben de recorrer para llegar a la posiciï¿½n deseada
         /// </summary>
         /// <param name="grid">El conjunto de nodos</param>
-        /// <param name="startPos">Posición inicial</param>
-        /// <param name="targetPos">Posición final</param>
+        /// <param name="startPos">Posiciï¿½n inicial</param>
+        /// <param name="targetPos">Posiciï¿½n final</param>
         /// <returns></returns>
         private static List<Node> ImpFindPath(GridPathfind grid, Point startPos, Point targetPos)
         {
-            Node startNode = grid.GetNode(startPos.PosX,startPos.PosY);
-            Node targetNode = grid.GetNode(targetPos.PosX, targetPos.PosY);
-
-            List<Node> openSet = new List<Node>();
-            HashSet<Node> closedSet = new HashSet<Node>();
-            openSet.Add(startNode);
-
-            while (openSet.Count > 0)
+            try
             {
-                Node currentNode = openSet[0];
-                for (int i = 1; i < openSet.Count; i++)
+                Node startNode = grid.GetNode(startPos.PosX, startPos.PosY);
+                Node targetNode = grid.GetNode(targetPos.PosX, targetPos.PosY);
+
+                List<Node> openSet = new List<Node>();
+                HashSet<Node> closedSet = new HashSet<Node>();
+                openSet.Add(startNode);
+
+                while (openSet.Count > 0)
                 {
-                    if (openSet[i].fCost < currentNode.fCost || openSet[i].fCost == currentNode.fCost && openSet[i].HCost < currentNode.HCost)
+                    Node currentNode = openSet[0];
+                    for (int i = 1; i < openSet.Count; i++)
                     {
-                        currentNode = openSet[i];
-                    }
-                }
-
-                openSet.Remove(currentNode);
-                closedSet.Add(currentNode);
-
-                if (currentNode == targetNode)
-                {
-                    return RetracePath(grid, startNode, targetNode);
-                }
-
-                foreach (Node neighbour in grid.GetNeighbours(currentNode,false))
-                {
-                    if (!neighbour.Walkable || closedSet.Contains(neighbour))
-                    {
-                        continue;
+                        if (openSet[i].fCost < currentNode.fCost || openSet[i].fCost == currentNode.fCost && openSet[i].HCost < currentNode.HCost)
+                        {
+                            currentNode = openSet[i];
+                        }
                     }
 
-                    int newMovementCostToNeighbour = currentNode.GCost + GetDistance(currentNode, neighbour) * (int)(10.0f * neighbour.Penalty);
-                    if (newMovementCostToNeighbour < neighbour.GCost || !openSet.Contains(neighbour))
-                    {
-                        neighbour.GCost = newMovementCostToNeighbour;
-                        neighbour.HCost = GetDistance(neighbour, targetNode);
-                        neighbour.Parent = currentNode;
+                    openSet.Remove(currentNode);
+                    closedSet.Add(currentNode);
 
-                        if (!openSet.Contains(neighbour))
-                            openSet.Add(neighbour);
+                    if (currentNode == targetNode)
+                    {
+                        return RetracePath(grid, startNode, targetNode);
+                    }
+
+                    foreach (Node neighbour in grid.GetNeighbours(currentNode, false))
+                    {
+                        if (!neighbour.Walkable || closedSet.Contains(neighbour))
+                        {
+                            continue;
+                        }
+
+                        int newMovementCostToNeighbour = currentNode.GCost + GetDistance(currentNode, neighbour) * (int)(10.0f * neighbour.Penalty);
+                        if (newMovementCostToNeighbour < neighbour.GCost || !openSet.Contains(neighbour))
+                        {
+                            neighbour.GCost = newMovementCostToNeighbour;
+                            neighbour.HCost = GetDistance(neighbour, targetNode);
+                            neighbour.Parent = currentNode;
+
+                            if (!openSet.Contains(neighbour))
+                                openSet.Add(neighbour);
+                        }
                     }
                 }
             }
+            catch (ArgumentOutOfRangeException)
+            {
+            }
+            catch (IndexOutOfRangeException)
+            {
 
+            }
             return null;
         }
 
         /// <summary>
-        /// Módulo encargado de volver atras en la lista de nodos
+        /// Mï¿½dulo encargado de volver atras en la lista de nodos
         /// </summary>
         /// <param name="grid">El conjunto de nodos</param>
         /// <param name="startNode">Nodo de inicio</param>
