@@ -1,0 +1,87 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &7558553593833519840
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7558553593833519846}
+  - component: {fileID: 7558553593833519847}
+  m_Layer: 0
+  m_Name: UIController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7558553593833519846
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7558553593833519840}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7558553593833519847
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7558553593833519840}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dfd35163c6046464893fec0da2ba6a50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  combatVariableSO: {fileID: 11400000, guid: 4de606722f98fda4887b78215d26751b, type: 2}
+  playerVariableSO: {fileID: 11400000, guid: 82464bdcbc557ff41b3b1e47fa852778, type: 2}
+  playerInventoryVariableSO: {fileID: 11400000, guid: 99202fa02e0b9ac45885a4550ba3ee33, type: 2}
+  damagePrefab: {fileID: 7496680719831790847, guid: 3353c6445282e7e4ea9236b1ea5a95ba, type: 3}
+  pauseMenu: {fileID: 0}
+  movementButtons: {fileID: 0}
+  combatButtons: {fileID: 0}
+  combatUI: {fileID: 0}
+  combatPlayerSprite: {fileID: 0}
+  combatEnemySprite: {fileID: 0}
+  enemySpriteOriginalPosition: {fileID: 0}
+  playerSpriteOriginalPosition: {fileID: 0}
+  combatEnemyAnimator: {fileID: 0}
+  combatEnemyHP: {fileID: 0}
+  combatPlayerHP: {fileID: 0}
+  combatPlayerDamagePosition: {fileID: 0}
+  combatEnemyDamagePosition: {fileID: 0}
+  hpStatValue: {fileID: 0}
+  attackStatValue: {fileID: 0}
+  speedStatValue: {fileID: 0}
+  defStatValue: {fileID: 0}
+  dialogueUI: {fileID: 0}
+  textBox: {fileID: 0}
+  starsBox:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  lockedStarSprite: {fileID: -6701758015446056987, guid: 9c08d2c5e2d69a94aae6b53623aa9867, type: 3}
+  unlockedStarSprite: {fileID: -4026705437576799436, guid: 9c08d2c5e2d69a94aae6b53623aa9867, type: 3}
+  levelUPUI: {fileID: 0}
+  textLevelUP: {fileID: 0}
+  timerVariableSO: {fileID: 11400000, guid: bd8f52ef88b72d04684039a8d4435a0c, type: 2}
+  textTimer: {fileID: 0}
+  gameOverBusSO: {fileID: 11400000, guid: 423dbfa9ead2ea240b054d83969855f6, type: 2}
+  gameOverUI: {fileID: 0}
+  buttonGameOverExitMenu: {fileID: 0}
+  dungeonLevelStatValue: {fileID: 0}
+  playerLevelStatValue: {fileID: 0}
+  enemiesKilledStatValue: {fileID: 0}
+  textBoxFadeTime: 2
