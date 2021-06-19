@@ -18,8 +18,7 @@ namespace HeroesGames.ProjectProcedural.Utils
         public static Sequence DOMoveAnimation(Transform transform, Vector2 position, float duration)
         {
             Sequence moveAnimation = DOTween.Sequence();
-            moveAnimation.Append(transform.DOMove(position, duration / 2, true));
-            moveAnimation.Append(transform.DOMove(transform.position, duration / 2, true));
+            moveAnimation.Append(transform.DOMove(position, duration, true));
             return moveAnimation;
         }
     }

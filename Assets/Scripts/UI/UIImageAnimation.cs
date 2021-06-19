@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 namespace HeroesGames.ProjectProcedural.UI
 {
-     [RequireComponent(typeof(Image))]
+    [RequireComponent(typeof(Image))]
     public class UIImageAnimation : MonoBehaviour
     {
 
@@ -14,28 +14,34 @@ namespace HeroesGames.ProjectProcedural.UI
         [SerializeField] private bool loop = true;
         [SerializeField] private bool destroyOnEnd = false;
 
-        private int index = 0;
-        private Image image;
-        private int frame = 0;
+        private int _index = 0;
+        private Image _image;
+        private int _frame = 0;
+        private Sprite _originalSprite;
 
         void Awake()
         {
-            image = GetComponent<Image>();
+            _image = GetComponent<Image>();
+            _originalSprite = _image.sprite;
         }
 
         void Update()
         {
-            if (!loop && index == sprites.Length) return;
-            frame++;
-            if (frame < spritePerFrame) return;
-            image.sprite = sprites[index];
-            frame = 0;
-            index++;
-            if (index >= sprites.Length)
+            if (!loop && _index == sprites.Length) return;
+            _frame++;
+            if (_frame < spritePerFrame) return;
+            _image.sprite = sprites[_index];
+            _frame = 0;
+            _index++;
+            if (_index >= sprites.Length)
             {
-                if (loop) index = 0;
+                if (loop) _index = 0;
                 if (destroyOnEnd) Destroy(gameObject);
             }
+        }
+        private void OnDisable()
+        {
+            _image.sprite = _originalSprite;
         }
     }
 }

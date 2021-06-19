@@ -27,6 +27,8 @@ namespace HeroesGames.ProjectProcedural.UI
 
         [SerializeField] GameObject combatButtons;
         [SerializeField] private GameObject combatUI;
+        [SerializeField] private Button normalAttackButton;
+        [SerializeField] private Button superAttackButton;
         [SerializeField] private SpriteRenderer combatPlayerSprite;
         [SerializeField] private SpriteRenderer combatEnemySprite;
         [SerializeField] private Transform enemySpriteOriginalPosition;
@@ -134,41 +136,75 @@ namespace HeroesGames.ProjectProcedural.UI
         }
         public void ButtonAttack()
         {
-            _playerCombatController.DoDamageEnemy();
+            _playerCombatController.DoAttackEnemy();
+        }
+        public void ButtonStrongAttack()
+        {
+            _playerCombatController.DoStrongAttackEnemy();
         }
         public void SwitchCombatInterface()
         {
             if (combatVariableSO.IsActive)
             {
+                DoStartCombat();
+                combatEnemySprite.transform.position = enemySpriteOriginalPosition.position;
+                combatPlayerSprite.transform.position = playerSpriteOriginalPosition.position;
                 dialogueUI.SetActive(false);
-                ChangePlayerHeal();
                 combatUI.transform.position = _cameraHandler.transform.position;
                 movementButtons.SetActive(false);
                 combatButtons.SetActive(true);
                 combatUI.SetActive(true);
-                combatVariableSO.OnCombatPlayerAnimation += DoPlayerCombatAnimation;
-                combatVariableSO.OnCombatEnemyAnimation += DoEnemyCombatAnimation;
-                combatVariableSO.OnCombatChangeEnemy += DoChangeEnemy;
+                combatVariableSO.OnCombatPlayerAttackAnimation += DoPlayerAttackAnimation;
+                combatVariableSO.OnCombatPlayerStrongAttackAnimation += DoPlayerStrongAttackAnimation;
+                combatVariableSO.OnCombatEnemyAnimation += DoEnemyAttackAnimation;
+                combatVariableSO.OnCombatChangeEnemy += DoEnemyDeadAnimation;
                 combatVariableSO.OnCombatEnemyReceiveDamage += DoReceiveDamageEnemy;
                 combatVariableSO.OnCombatPlayerReceiveDamage += DoReceiveDamagePlayer;
             }
             else
             {
-                combatButtons.SetActive(false);
-                combatUI.SetActive(false);
-                movementButtons.SetActive(true);
-                combatVariableSO.OnCombatPlayerAnimation -= DoPlayerCombatAnimation;
-                combatVariableSO.OnCombatEnemyAnimation -= DoEnemyCombatAnimation;
-                combatVariableSO.OnCombatChangeEnemy -= DoChangeEnemy;
-                combatVariableSO.OnCombatEnemyReceiveDamage -= DoReceiveDamageEnemy;
-                combatVariableSO.OnCombatPlayerReceiveDamage -= DoReceiveDamagePlayer;
+                DoEnemyDeadAnimation();
             }
+        }
+        public void DoStartCombat()
+        {
+            DoChangeEnemy();
+            ChangePlayerHeal();
         }
         public void DoChangeEnemy()
         {
             ChangeEnemyHeal();
             ChangeEnemySprite();
             ChangeEnemyAnimator();
+            normalAttackButton.interactable = true;
+        }
+        public void DoEnemyDeadAnimation()
+        {
+            combatEnemyAnimator.SetTrigger("Dead");
+            normalAttackButton.interactable = false;
+            superAttackButton.interactable = false;
+            if (combatVariableSO.IsActive)
+            {
+                Invoke(nameof(DoChangeEnemy), 0.8f);
+            }
+            else
+            {
+                Invoke(nameof(ExitCombat), 0.8f);
+            }
+        }
+        public void ExitCombat()
+        {
+            DOTween.KillAll();
+            normalAttackButton.interactable = true;
+            combatButtons.SetActive(false);
+            combatUI.SetActive(false);
+            movementButtons.SetActive(true);
+            combatVariableSO.OnCombatPlayerAttackAnimation -= DoPlayerAttackAnimation;
+            combatVariableSO.OnCombatPlayerStrongAttackAnimation -= DoPlayerStrongAttackAnimation;
+            combatVariableSO.OnCombatEnemyAnimation -= DoEnemyAttackAnimation;
+            combatVariableSO.OnCombatChangeEnemy -= DoEnemyDeadAnimation;
+            combatVariableSO.OnCombatEnemyReceiveDamage -= DoReceiveDamageEnemy;
+            combatVariableSO.OnCombatPlayerReceiveDamage -= DoReceiveDamagePlayer;
         }
         public void DoReceiveDamageEnemy(int damage)
         {
@@ -201,6 +237,7 @@ namespace HeroesGames.ProjectProcedural.UI
         public void ChangeEnemyAnimator()
         {
             combatEnemyAnimator.runtimeAnimatorController = combatVariableSO.GetCurrentCombatEnemySO().EnemyAnimator;
+            combatEnemyAnimator.Rebind();
         }
         public void ChangePlayerHeal()
         {
@@ -210,16 +247,29 @@ namespace HeroesGames.ProjectProcedural.UI
                 combatPlayerHP.text = combatPlayerHP.text + "|";
             }
         }
-        public void DoPlayerCombatAnimation()
+        public void DoPlayerStrongAttackAnimation()
         {
             combatPlayerSprite.transform.position = playerSpriteOriginalPosition.position;
-            Sequence playerAnimationAttack = SequencesTween.DOMoveAnimation(combatPlayerSprite.transform, new Vector2(combatPlayerSprite.transform.position.x - 2, combatPlayerSprite.transform.position.y), 0.1f);
+            Sequence playerAnimationStrongAttack = DOTween.Sequence();
+            playerAnimationStrongAttack.Append(SequencesTween.DOMoveAnimation(combatPlayerSprite.transform, new Vector2(combatPlayerSprite.transform.position.x - 1, combatPlayerSprite.transform.position.y + 2), 0.1f));
+            playerAnimationStrongAttack.Append(SequencesTween.DOMoveAnimation(combatPlayerSprite.transform, new Vector2(combatPlayerSprite.transform.position.x - 1, combatPlayerSprite.transform.position.y - 2), 0.1f));
+            playerAnimationStrongAttack.Append(SequencesTween.DOMoveAnimation(combatPlayerSprite.transform, new Vector2(combatPlayerSprite.transform.position.x, combatPlayerSprite.transform.position.y), 0.05f));
+            playerAnimationStrongAttack.Play();
+        }
+        public void DoPlayerAttackAnimation()
+        {
+            combatPlayerSprite.transform.position = playerSpriteOriginalPosition.position;
+            Sequence playerAnimationAttack = DOTween.Sequence();
+            playerAnimationAttack.Append(SequencesTween.DOMoveAnimation(combatPlayerSprite.transform, new Vector2(combatPlayerSprite.transform.position.x - 2, combatPlayerSprite.transform.position.y), 0.05f));
+            playerAnimationAttack.Append(SequencesTween.DOMoveAnimation(combatPlayerSprite.transform, new Vector2(combatPlayerSprite.transform.position.x, combatPlayerSprite.transform.position.y), 0.05f));
             playerAnimationAttack.Play();
         }
-        public void DoEnemyCombatAnimation()
+        public void DoEnemyAttackAnimation()
         {
             combatEnemySprite.transform.position = enemySpriteOriginalPosition.position;
-            Sequence enemyAnimationAttack = SequencesTween.DOMoveAnimation(combatEnemySprite.transform, new Vector2(combatEnemySprite.transform.position.x + 2, combatEnemySprite.transform.position.y), 0.1f);
+            Sequence enemyAnimationAttack = DOTween.Sequence();
+            enemyAnimationAttack.Append(SequencesTween.DOMoveAnimation(combatEnemySprite.transform, new Vector2(combatEnemySprite.transform.position.x + 2, combatEnemySprite.transform.position.y), 0.05f));
+            enemyAnimationAttack.Append(SequencesTween.DOMoveAnimation(combatEnemySprite.transform, new Vector2(combatEnemySprite.transform.position.x, combatEnemySprite.transform.position.y), 0.05f));
             enemyAnimationAttack.Play();
         }
         public void DoEnableItemTextBox(ObjectInventoryVariableSO objectInventory)

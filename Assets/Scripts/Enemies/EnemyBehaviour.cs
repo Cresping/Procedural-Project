@@ -11,15 +11,18 @@ namespace HeroesGames.ProjectProcedural.Enemies
     /// </summary>
     public abstract class EnemyBehaviour : MovingObject
     {
+        [SerializeField] protected AnimatorHelper animatorHelper;
         [SerializeField] protected CombatVariableSO combatVariableSO;
         [SerializeField] protected EnemyVariableSO enemyVariableSO;
         [SerializeField] protected PlayerVariableSO playerVariableSO;
         [SerializeField] protected SpriteRenderer spriteRenderer;
+
         private int _currentEnemyHP;
 
         private int _myTurn;
         private int _currentTurn;
         private bool _inCombat = false;
+        private bool _isMyTurnAttack = false;
 
         public EnemyVariableSO EnemyVariableSO { get => enemyVariableSO; protected set => enemyVariableSO = value; }
         public int CurrentEnemyHP { get => _currentEnemyHP; set => _currentEnemyHP = value; }
@@ -27,6 +30,7 @@ namespace HeroesGames.ProjectProcedural.Enemies
         protected override void Awake()
         {
             base.Awake();
+            animatorHelper = new AnimatorHelper(GetComponentInChildren<Animator>());
         }
         protected override void Start()
         {
@@ -140,10 +144,13 @@ namespace HeroesGames.ProjectProcedural.Enemies
         protected abstract bool Attack();
         protected override void OnFinishMoving()
         {
-            if (CanAttackPlayer())
+            if (CanAttackPlayer() && !_inCombat)
             {
-                Attack();
-                StartCoroutine(coroutineCombat());
+                if (Attack())
+                {
+                    _inCombat = true;
+                    StartCoroutine(coroutineCombat());
+                }
             }
         }
         public int ReceiveDamage(int damage)
@@ -154,7 +161,6 @@ namespace HeroesGames.ProjectProcedural.Enemies
                 actualDamage = 1;
             }
             _currentEnemyHP -= actualDamage;
-            Debug.Log("Soy el enemigo " + this.gameObject.name + " y me quedan " + _currentEnemyHP + " de vida");
             if (_currentEnemyHP <= 0)
             {
                 playerVariableSO.ReceiveExperience(enemyVariableSO.EnemyExperience);
@@ -164,20 +170,35 @@ namespace HeroesGames.ProjectProcedural.Enemies
         }
         public void DisableEnemy()
         {
-            Debug.Log("Soy el enemigo " + this.gameObject.name + " y me he desactivado");
             RemoveObjectPathfind(Vector2Int.FloorToInt((Vector2)transform.position));
             this.gameObject.SetActive(false);
+        }
+        public void EnableTurnAttackWithDelay(float delay)
+        {
+            Invoke(nameof(EnableTurnAttack), delay);
+        }
+        public void EnableTurnAttack()
+        {
+            _isMyTurnAttack = true;
         }
         protected IEnumerator coroutineCombat()
         {
             while (combatVariableSO.IsActive && _currentEnemyHP > 0)
             {
-                yield return new WaitForSecondsRealtime(enemyVariableSO.EnemyAttackSpeed);
-                if (combatVariableSO.IsActive && _currentEnemyHP > 0)
+                if (_isMyTurnAttack)
                 {
-                    combatVariableSO.DoDamagePlayer(enemyVariableSO.EnemyAttack);
+                    yield return new WaitForSecondsRealtime(enemyVariableSO.EnemyAttackSpeed);
+                    if (combatVariableSO.IsActive && _currentEnemyHP > 0)
+                    {
+                        combatVariableSO.DoDamagePlayer(enemyVariableSO.EnemyAttack);
+                    }
+                }
+                else
+                {
+                    yield return null;
                 }
             }
+            _isMyTurnAttack = false;
         }
     }
 }

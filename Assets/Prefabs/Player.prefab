@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 461783757}
   m_Layer: 11
   m_Name: UICamera
-  m_TagString: Untagged
+  m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -106,9 +106,10 @@ GameObject:
   - component: {fileID: 1643548904}
   - component: {fileID: 1643548906}
   - component: {fileID: 1643548905}
+  - component: {fileID: 7545607571209006974}
   m_Layer: 11
   m_Name: 'GameCamera '
-  m_TagString: MainCamera
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -191,6 +192,14 @@ MonoBehaviour:
   m_CropFrameX: 1
   m_CropFrameY: 1
   m_StretchFill: 0
+--- !u!81 &7545607571209006974
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1643548903}
+  m_Enabled: 1
 --- !u!1 &3272654901184116059
 GameObject:
   m_ObjectHideFlags: 0
@@ -322,6 +331,7 @@ MonoBehaviour:
   animatorHelper:
     nameWalkUpParameter: 
     nameWalkDownParameter: 
+    nameDeadParameter: 
   gameOverBusSO: {fileID: 11400000, guid: 423dbfa9ead2ea240b054d83969855f6, type: 2}
   combatVariableSO: {fileID: 11400000, guid: 4de606722f98fda4887b78215d26751b, type: 2}
   playerVariableSO: {fileID: 11400000, guid: 82464bdcbc557ff41b3b1e47fa852778, type: 2}

@@ -14,6 +14,7 @@ namespace HeroesGames.ProjectProcedural.Utils
     {
         [SerializeField] private String nameWalkUpParameter = "WalkUp";
         [SerializeField] private String nameWalkDownParameter = "WalkDown";
+        [SerializeField] private string nameDeadParameter = "Dead";
         private Animator _animator;
 
         ///// <summary>
@@ -39,6 +40,10 @@ namespace HeroesGames.ProjectProcedural.Utils
         public void SetWalkDown(bool value)
         {
             _animator.SetBool(nameWalkDownParameter, value);
+        }
+        public void SetDead()
+        {
+            _animator.SetTrigger(nameDeadParameter);
         }
         /// <summary>
         /// Cambia el animator del modelo

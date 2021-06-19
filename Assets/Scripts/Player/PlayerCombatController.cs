@@ -18,16 +18,23 @@ namespace HeroesGames.ProjectProcedural.Player
 
         private void Awake()
         {
-            if(!uIDungeonController)
+            if (!uIDungeonController)
             {
                 this.uIDungeonController = FindObjectOfType<UIDungeonController>();
             }
         }
-        public void DoDamageEnemy()
+        public void DoAttackEnemy()
         {
             if (combatVariableSO.IsActive)
             {
                 combatVariableSO.DoDamageCurrentEnemy(playerVariableSO.RuntimePlayerDamage);
+            }
+        }
+        public void DoStrongAttackEnemy()
+        {
+            if (combatVariableSO.IsActive)
+            {
+                combatVariableSO.DoStrongDamageCurrentEnemy(playerVariableSO.RuntimePlayerDamage * 2);
             }
         }
     }

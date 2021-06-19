@@ -36,10 +36,9 @@ namespace HeroesGames.ProjectProcedural.Enemies
         {
             if (!playerVariableSO.IsOnEvent)
             {
-                combatVariableSO.AddEnemy(this.gameObject.GetComponent<EnemyBehaviour>());
+                combatVariableSO.AddEnemy(this);
                 return true;
             }
-
             return false;
         }
 

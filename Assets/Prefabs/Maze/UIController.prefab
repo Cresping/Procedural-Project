@@ -51,6 +51,8 @@ MonoBehaviour:
   movementButtons: {fileID: 0}
   combatButtons: {fileID: 0}
   combatUI: {fileID: 0}
+  normalAttackButton: {fileID: 0}
+  superAttackButton: {fileID: 0}
   combatPlayerSprite: {fileID: 0}
   combatEnemySprite: {fileID: 0}
   enemySpriteOriginalPosition: {fileID: 0}

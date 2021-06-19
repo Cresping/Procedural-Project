@@ -10,15 +10,21 @@ namespace HeroesGames.ProjectProcedural.SO
     [CreateAssetMenu(fileName = nameof(CombatVariableSO), menuName = "Scriptables/" + nameof(CombatVariableSO) + "/" + nameof(CombatVariableSO) + "Variable")]
     public class CombatVariableSO : ScriptableObject, ISerializationCallbackReceiver
     {
+        private const int MIN_NORMAL_ATTACKS_TO_UNLOCK_STRONG_ATTACK = 10;
         public Action OnCombatActivation;
-        public Action OnCombatPlayerAnimation;
+        public Action<int> OnCombatPlayerAttack;
+        public Action OnCombatPlayerAttackAnimation;
+        public Action OnCombatPlayerStrongAttackAnimation;
         public Action OnCombatEnemyAnimation;
         public Action OnCombatChangeEnemy;
+        public Action OnCombatEnemyDead;
+        public Action OnCombatPlayerStrongAttackUnlocked;
         public Action<int> OnCombatEnemyReceiveDamage;
         public Action<int> OnCombatPlayerReceiveDamage;
         [SerializeField] private PlayerVariableSO playerVariableSO;
         [SerializeField] private GameOverBusSO gameOverBusSO;
         private bool _isActive;
+        private int _contNormalAttacksPlayer;
 
         private Stack<EnemyBehaviour> _stackCombatEnemyBehaviour;
         private EnemyBehaviour _currentCombatEnemyBehaviour;
@@ -54,8 +60,14 @@ namespace HeroesGames.ProjectProcedural.SO
         {
             if (_stackCombatEnemyBehaviour.Count > 0)
             {
-                IsActive = true;
+                OnCombatPlayerAttack?.Invoke(_contNormalAttacksPlayer);
                 NextEnemy();
+                IsActive = true;
+                if (_contNormalAttacksPlayer >= MIN_NORMAL_ATTACKS_TO_UNLOCK_STRONG_ATTACK)
+                {
+                    OnCombatPlayerStrongAttackUnlocked?.Invoke();
+                    OnCombatPlayerAttack(_contNormalAttacksPlayer);
+                }
             }
         }
         public void NextEnemy()
@@ -65,7 +77,20 @@ namespace HeroesGames.ProjectProcedural.SO
                 _currentCombatEnemyBehaviour = _stackCombatEnemyBehaviour.Pop();
                 if (_currentCombatEnemyBehaviour.CurrentEnemyHP > 0)
                 {
-                    OnCombatChangeEnemy?.Invoke();
+                    if (IsActive)
+                    {
+                        _currentCombatEnemyBehaviour.EnableTurnAttackWithDelay(0.8f);
+                        OnCombatChangeEnemy?.Invoke();
+                        if (_contNormalAttacksPlayer >= MIN_NORMAL_ATTACKS_TO_UNLOCK_STRONG_ATTACK)
+                        {
+                            OnCombatPlayerStrongAttackUnlocked?.Invoke();
+                            OnCombatPlayerAttack(_contNormalAttacksPlayer);
+                        }
+                    }
+                    else
+                    {
+                        _currentCombatEnemyBehaviour.EnableTurnAttack();
+                    }
                 }
                 else
                 {
@@ -79,13 +104,36 @@ namespace HeroesGames.ProjectProcedural.SO
         }
         public void DoDamageCurrentEnemy(int damage)
         {
-            Debug.Log("voy a hacer daño");
-            OnCombatPlayerAnimation?.Invoke();
+            OnCombatPlayerAttackAnimation?.Invoke();
             OnCombatEnemyReceiveDamage?.Invoke(_currentCombatEnemyBehaviour.ReceiveDamage(damage));
+            _contNormalAttacksPlayer++;
+            if (_contNormalAttacksPlayer == MIN_NORMAL_ATTACKS_TO_UNLOCK_STRONG_ATTACK)
+            {
+                OnCombatPlayerStrongAttackUnlocked?.Invoke();
+            }
+            if (_contNormalAttacksPlayer <= MIN_NORMAL_ATTACKS_TO_UNLOCK_STRONG_ATTACK)
+            {
+                OnCombatPlayerAttack(_contNormalAttacksPlayer);
+            }
             if (_currentCombatEnemyBehaviour.CurrentEnemyHP <= 0)
             {
                 Debug.Log("Siguiente enemigo");
                 playerVariableSO.NumberEnemiesKilled++;
+                OnCombatEnemyDead?.Invoke();
+                NextEnemy();
+            }
+        }
+        public void DoStrongDamageCurrentEnemy(int damage)
+        {
+            OnCombatPlayerStrongAttackAnimation?.Invoke();
+            OnCombatEnemyReceiveDamage?.Invoke(_currentCombatEnemyBehaviour.ReceiveDamage(damage));
+            _contNormalAttacksPlayer = 0;
+            OnCombatPlayerAttack(_contNormalAttacksPlayer);
+            if (_currentCombatEnemyBehaviour.CurrentEnemyHP <= 0)
+            {
+                Debug.Log("Siguiente enemigo");
+                playerVariableSO.NumberEnemiesKilled++;
+                OnCombatEnemyDead?.Invoke();
                 NextEnemy();
             }
         }
@@ -109,6 +157,11 @@ namespace HeroesGames.ProjectProcedural.SO
         }
         public void OnAfterDeserialize()
         {
+            ResetValues();
+        }
+        public void ResetValues()
+        {
+            _contNormalAttacksPlayer = 0;
             _isActive = false;
             _stackCombatEnemyBehaviour = new Stack<EnemyBehaviour>();
         }

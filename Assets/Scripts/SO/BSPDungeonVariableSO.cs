@@ -83,16 +83,16 @@ namespace HeroesGames.ProjectProcedural.SO
             }
             else if (dungeonLvl < gameVariableSO.MaxLevelVeryHard)
             {
-                randomHeigh = Random.Range(2, 5);
-                randomWidth = Random.Range(2, 5);
+                randomHeigh = Random.Range(2, 4);
+                randomWidth = Random.Range(2, 4);
             }
             else if (dungeonLvl >= gameVariableSO.MaxLevelVeryHard)
             {
-                randomHeigh = Random.Range(3, 6);
-                randomWidth = Random.Range(3, 6);
+                randomHeigh = Random.Range(3, 5);
+                randomWidth = Random.Range(3, 5);
             }
-            minRoomHeight = 4 + randomHeigh;
-            minRoomWidth = 4 + randomWidth;
+            minRoomHeight = 5 + randomHeigh;
+            minRoomWidth = 5 + randomWidth;
         }
         protected override void OnEnable()
         {

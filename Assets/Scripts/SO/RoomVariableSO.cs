@@ -34,12 +34,12 @@ namespace HeroesGames.ProjectProcedural.SO
                 while (cont < MAXIMUM_ATTEMPTS_RANDOM)
                 {
                     Vector2Int aux;
-                    aux = new Vector2Int(UnityEngine.Random.Range(room.xMin + 2, room.xMax - 2), UnityEngine.Random.Range(room.yMin + 2, room.yMax - 2));
-                    if (!currentOccupiedPositions.ContainsKey(aux))
+                    aux = new Vector2Int(UnityEngine.Random.Range(room.xMin + 2, room.xMax - 3), UnityEngine.Random.Range(room.yMin + 2, room.yMax - 3));
+                    if (!currentOccupiedPositions.ContainsKey(aux) && gridPathfing.IsWalkeable(aux.x, aux.y))
                     {
                         currentOccupiedPositions.Add(aux, aux);
                         chestsPosition.Add(aux);
-                        gridPathfing.ChangeNode(aux.x, aux.y,false);
+                        gridPathfing.ChangeNode(aux.x, aux.y, false);
                         break;
                     }
                     cont++;
@@ -51,12 +51,12 @@ namespace HeroesGames.ProjectProcedural.SO
                 while (cont < MAXIMUM_ATTEMPTS_RANDOM)
                 {
                     Vector2Int aux;
-                    aux = new Vector2Int(UnityEngine.Random.Range(room.xMin + 1, room.xMax - 1), UnityEngine.Random.Range(room.yMin + 1, room.yMax - 1));
-                    if (!currentOccupiedPositions.ContainsKey(aux))
+                    aux = new Vector2Int(UnityEngine.Random.Range(room.xMin + 1, room.xMax - 2), UnityEngine.Random.Range(room.yMin + 1, room.yMax - 2));
+                    if (!currentOccupiedPositions.ContainsKey(aux) && gridPathfing.IsWalkeable(aux.x, aux.y))
                     {
                         currentOccupiedPositions.Add(aux, aux);
                         enemiesPosition.Add(aux);
-                        gridPathfing.ChangeNode(aux.x, aux.y,false);
+                        gridPathfing.ChangeNode(aux.x, aux.y, false);
                         break;
                     }
                     cont++;

@@ -20,11 +20,10 @@ namespace HeroesGames.ProjectProcedural.Enemies
         {
             if (!playerVariableSO.IsOnEvent)
             {
-                combatVariableSO.AddEnemy(this.gameObject.GetComponent<EnemyBehaviour>());
-                return true;
+                combatVariableSO.AddEnemy(this);
+                return false;
             }
-
-            return false;
+            return true;
         }
 
         protected override bool Idle()

@@ -217,7 +217,6 @@ namespace HeroesGames.ProjectProcedural.Procedural
         {
             List<BoundsInt> roomListAux = new List<BoundsInt>();
             roomListAux = roomList;
-            Debug.Log(bSPDungeonVariableSO.SelectedRooms.Count);
             if (bSPDungeonVariableSO.SelectedRooms.Count <= 0) return;
 
             foreach (var roomVariable in bSPDungeonVariableSO.SelectedRooms)

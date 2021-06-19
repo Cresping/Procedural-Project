@@ -9,6 +9,7 @@ namespace HeroesGames.ProjectProcedural.Procedural
     public class ExitController : MonoBehaviour
     {
         [SerializeField] private PlayerVariableSO playerVariableSO;
+        [SerializeField] private CombatVariableSO combatVariableSO;
 
         private void NextDungeon()
         {
@@ -20,7 +21,10 @@ namespace HeroesGames.ProjectProcedural.Procedural
             {
                 playerVariableSO.IsOnEvent = true;
                 playerVariableSO.DungeonLevel++;
-                NextDungeon();
+                if (!combatVariableSO.IsActive)
+                {
+                    NextDungeon();
+                }
             }
         }
     }

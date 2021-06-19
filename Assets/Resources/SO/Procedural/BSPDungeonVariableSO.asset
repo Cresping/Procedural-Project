@@ -17,6 +17,6 @@ MonoBehaviour:
   dungeonWidth: 22
   dungeonHeight: 22
   gameVariableSO: {fileID: 11400000, guid: c9f70f3a05f02f943948a81ac920d4fe, type: 2}
-  minRoomWidth: 4
+  minRoomWidth: 5
   minRoomHeight: 5
   offset: 1

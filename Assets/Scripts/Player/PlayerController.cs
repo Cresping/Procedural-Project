@@ -61,6 +61,7 @@ namespace HeroesGames.ProjectProcedural.Player
         private void DoGameOver()
         {
             _gameOver = true;
+            animatorHelper.SetDead();
         }
         /// <summary>
         /// M�dulo encargado de mover al jugador mediante botones en la pantalla del movil
@@ -148,7 +149,6 @@ namespace HeroesGames.ProjectProcedural.Player
         protected override void OnCantMove()
         {
             base.OnCantMove();
-            Debug.Log("No puedo moverme");
         }
         protected override void OnAlreadyMoving()
         {

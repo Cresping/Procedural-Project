@@ -172,7 +172,7 @@ namespace HeroesGames.ProjectProcedural.SO
             {
                 actualDamage = 1;
             }
-            Debug.Log("Soy el jugador y he recibido " + actualDamage + " de daño");
+            Debug.Log(actualDamage);
             PlayerHP -= actualDamage;
             return actualDamage;
         }
