@@ -16,6 +16,7 @@ namespace HeroesGames.ProjectProcedural.Procedural
         [SerializeField] private Tilemap openEndTileMap;
         [SerializeField] private Tilemap fenceTilemap;
         [SerializeField] private Tilemap keyTileMap;
+        [SerializeField] private Tilemap clockTileMap;
         [SerializeField] private TileVariableSO floorTiles;
         [SerializeField] private TileVariableSO wallTiles;
         [SerializeField] private TileVariableSO startTiles;
@@ -23,7 +24,7 @@ namespace HeroesGames.ProjectProcedural.Procedural
         [SerializeField] private TileVariableSO openEndTiles;
         [SerializeField] private TileVariableSO fenceTiles;
         [SerializeField] private TileVariableSO keyTiles;
-
+        [SerializeField] private TileVariableSO clockTiles;
         /// <summary>
         /// M�dulo encargado de pintar los 'tiles' dados en unas posiciones determinadas
         /// </summary>
@@ -129,6 +130,16 @@ namespace HeroesGames.ProjectProcedural.Procedural
         {
             PaintSingleTile(fenceTilemap, fenceTiles.PickRandomTile(), position);
         }
+        
+        /// <summary>
+        /// M�dulo encargado de pintar el 'tile' de 1 reloj
+        /// de la mazmorra
+        /// </summary>
+        /// <param name="position">Posicion del 'tile'</param>
+        public void PaintClockTile(Vector2Int position)
+        {
+            PaintSingleTile(clockTileMap, clockTiles.PickRandomTile(), position);
+        }
 
         /// <summary>
         /// Limpia todos los mapas
@@ -148,6 +159,9 @@ namespace HeroesGames.ProjectProcedural.Procedural
             
             if(keyTileMap)
                 keyTileMap.ClearAllTiles();
+            
+            if(clockTileMap)
+                clockTileMap.ClearAllTiles();
         }
     }
 }

@@ -156,6 +156,8 @@ namespace HeroesGames.ProjectProcedural.Procedural
             var startPos = GetInitialPosition(ExitPosition);
             playerVariableSO.InstancePlayer(startPos);
             RemoveNodeFromMazePaths(new Vector2Int(startPos.x, startPos.y));
+            
+            //TODO: AddTime method, clock class depends on dungeon difficulty
         }
 
         // Draw Borders
