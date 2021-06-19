@@ -156,7 +156,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 349878880}
-  m_RootOrder: 5
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!66 &42039907
 CompositeCollider2D:
@@ -3161,7 +3161,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 349878880}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &97885876
 GameObject:
@@ -3193,7 +3193,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 349878880}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!483693784 &97885878
 TilemapRenderer:
@@ -5685,14 +5685,14 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 1493465367}
   - {fileID: 951088898}
   - {fileID: 1665403174}
   - {fileID: 90448475}
   - {fileID: 97885877}
+  - {fileID: 1442646048}
   - {fileID: 1447736326}
   - {fileID: 42039906}
-  - {fileID: 1442646048}
-  - {fileID: 1493465367}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -5907,7 +5907,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 349878880}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!19719996 &951088900
 TilemapCollider2D:
@@ -6155,7 +6155,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 349878880}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1447736325
 GameObject:
@@ -6187,7 +6187,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 349878880}
-  m_RootOrder: 4
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!483693784 &1447736327
 TilemapRenderer:
@@ -6419,11 +6419,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1493465362}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4eb59fbc310b40a4593e76f90136eeb2, type: 3}
+  m_Script: {fileID: 11500000, guid: dffb9f5e43436a243aafe60d167e402e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   mazeGenerator: {fileID: 1033123535}
   simpleTileMapGenerator: {fileID: 1897311569}
+  timeVariableSO: {fileID: 11400000, guid: bd8f52ef88b72d04684039a8d4435a0c, type: 2}
+  mazeVariableSO: {fileID: 11400000, guid: 6cb10b8642dfa1d4dbe9dab4c39128f8, type: 2}
 --- !u!19719996 &1493465365
 TilemapCollider2D:
   m_ObjectHideFlags: 0
@@ -6500,7 +6502,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 349878880}
-  m_RootOrder: 7
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1573765086
 GameObject:
@@ -6795,7 +6797,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 349878880}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!19719996 &1665403175
 TilemapCollider2D:

@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: MazeVariableSO
   m_EditorClassIdentifier: 
   gameStartBusSO: {fileID: 11400000, guid: 3c70e64ec8585094fbbc496e1e5770c6, type: 2}
-  dungeonLvl: 5
-  dungeonWidth: 19
-  dungeonHeight: 19
+  dungeonLvl: 10
+  dungeonWidth: 23
+  dungeonHeight: 23
