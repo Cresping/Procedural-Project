@@ -12,8 +12,8 @@ namespace HeroesGames.ProjectProcedural.Procedural
         {
             if (!other.CompareTag("Player")) return;
             simpleTileMapGenerator.PaintOpenEndTile(mazeGenerator.ExitPosition);
-            simpleTileMapGenerator.PaintFloorTile(mazeGenerator.KeyPosition); // TODO: Why this doesn't work?
-            GetComponent<Tilemap>().color = Color.black; // It's a little dirty...?
+            simpleTileMapGenerator.PaintFloorTile(mazeGenerator.KeyPosition);
+            GetComponent<Tilemap>().color = Color.black;
         }
     }
 }
