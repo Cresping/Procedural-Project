@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa765f0738352c5468d9d12c460cc48a, type: 3}
+  m_Name: PirateVariableSO
+  m_EditorClassIdentifier: 
+  enemyPrefab: {fileID: 2077187973355700012, guid: be29bf35119aa1045a7c039a9c280d4b, type: 3}
+  enemySprite: {fileID: 9150857795518445384, guid: d432001948e50e5469bfc5b7bc58ebfd, type: 3}
+  enemyAnimator: {fileID: 9100000, guid: 0dbe4e88b0ea2cf428d023e8b596ec78, type: 2}
+  maxEnemyHP: 5
+  enemyDefense: 5
+  enemyAttack: 2
+  enemySpeed: 15
+  enemyExperience: 60
+  pursuePlayerDistance: 3
+  attackPlayerDistance: 1
+  enemyAttackSpeed: 0.5

@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa765f0738352c5468d9d12c460cc48a, type: 3}
+  m_Name: WarlockFireVariableSO
+  m_EditorClassIdentifier: 
+  enemyPrefab: {fileID: 2077187973355700012, guid: 465af9bd2aae7684ab350a986ca140b8, type: 3}
+  enemySprite: {fileID: 9008768272413781845, guid: d432001948e50e5469bfc5b7bc58ebfd, type: 3}
+  enemyAnimator: {fileID: 9100000, guid: 8859e48091d63a445b9fe51fee09dc3f, type: 2}
+  maxEnemyHP: 10
+  enemyDefense: 2
+  enemyAttack: 15
+  enemySpeed: 0
+  enemyExperience: 101
+  pursuePlayerDistance: 4
+  attackPlayerDistance: 2
+  enemyAttackSpeed: 0.8

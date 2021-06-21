@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa765f0738352c5468d9d12c460cc48a, type: 3}
+  m_Name: GoblinSpellVariableSO
+  m_EditorClassIdentifier: 
+  enemyPrefab: {fileID: 2077187973355700012, guid: e3a19ab47a212c2419078c44ebcea94d, type: 3}
+  enemySprite: {fileID: -1147401495359466748, guid: d432001948e50e5469bfc5b7bc58ebfd, type: 3}
+  enemyAnimator: {fileID: 9100000, guid: 8e6b9521660033749a9519d6d7cf20f7, type: 2}
+  maxEnemyHP: 5
+  enemyDefense: 5
+  enemyAttack: 3
+  enemySpeed: 5
+  enemyExperience: 50
+  pursuePlayerDistance: 2
+  attackPlayerDistance: 2
+  enemyAttackSpeed: 1

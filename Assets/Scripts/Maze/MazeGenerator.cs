@@ -21,16 +21,12 @@ namespace HeroesGames.ProjectProcedural.Procedural
 
         private bool[,] _maze; // false = is maze's corridor, true = is NOT maze's corridor
         
-        public Vector2Int StartPosition
-        {
-            get => startPosition;
-            private set { }
-        }
-
+        public Vector2Int StartPosition { get; private set; }
         public Vector2Int ExitPosition { get; private set; }
         public Vector2Int KeyPosition { get; private set; }
         public Vector2Int ClockPosition { get; private set; }
-        
+        public Vector2Int PotionPosition { get; private set; }
+
         public int Width { get; private set; }
         public int Height { get; private set; }
 
@@ -167,6 +163,10 @@ namespace HeroesGames.ProjectProcedural.Procedural
             // Draw one clock in the maze
             ClockPosition = GetRandomMazePathNode();
             tileMapGenerator.PaintClockTile(ClockPosition);
+            
+            // Draw one HP Potion
+            PotionPosition = GetRandomMazePathNode();
+            tileMapGenerator.PaintPotionTile(PotionPosition);
         }
 
         // Draw Borders
@@ -274,14 +274,16 @@ namespace HeroesGames.ProjectProcedural.Procedural
             // Measures the distances from exit to every available corner and choose the furthest one
             foreach (var cornerPosition in availableCorners)
             {
-                var distanceCorner2Exit = Vector2Int.Distance(cornerPosition, exitPosition);
+                var distanceCorner2Exit = Vector2Int.Distance(cornerPosition, ExitPosition);
                 if (!(distanceCorner2Exit > tempMaxDistance)) continue;
                 tempMaxDistance = distanceCorner2Exit;
                 StartPosition = cornerPosition;
                 _startIndexPosition = availableCorners.IndexOf(cornerPosition);
-                _maze[StartPosition.x, StartPosition.y] = true;
             }
-            return startPosition;
+
+            _maze[StartPosition.x, StartPosition.y] = true;
+            
+            return StartPosition;
         }
         
         // Extract and deliver one random node from MazePaths 

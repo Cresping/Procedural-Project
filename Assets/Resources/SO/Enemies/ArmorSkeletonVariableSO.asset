@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: ArmorSkeletonVariableSO
   m_EditorClassIdentifier: 
   enemyPrefab: {fileID: 2077187973355700012, guid: 01609db9ef611ed479625654f3c48766, type: 3}
-  enemySprite: {fileID: 719023305797327018, guid: eb790298f2997bb48a68771850a24d24, type: 3}
+  enemySprite: {fileID: 572134458542851419, guid: d432001948e50e5469bfc5b7bc58ebfd, type: 3}
   enemyAnimator: {fileID: 9100000, guid: 9277c05fad3e2f945a981f3de4b2fb66, type: 2}
   maxEnemyHP: 25
   enemyDefense: 10

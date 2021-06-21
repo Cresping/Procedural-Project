@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: EyeVariableSO
   m_EditorClassIdentifier: 
   enemyPrefab: {fileID: 2077187973355700012, guid: 70fa58c9910c16d429c4c8c019a2d05c, type: 3}
-  enemySprite: {fileID: 6735431885417468821, guid: eb790298f2997bb48a68771850a24d24, type: 3}
+  enemySprite: {fileID: -5449054242775794067, guid: d432001948e50e5469bfc5b7bc58ebfd, type: 3}
   enemyAnimator: {fileID: 9100000, guid: e9e5478b3c5f87741a337ec69bc7c3c1, type: 2}
   maxEnemyHP: 15
   enemyDefense: 5

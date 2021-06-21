@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa765f0738352c5468d9d12c460cc48a, type: 3}
+  m_Name: TwoHeadVariableSO
+  m_EditorClassIdentifier: 
+  enemyPrefab: {fileID: 2077187973355700012, guid: ae62a153da1e3cf498f7cc01b1baf597, type: 3}
+  enemySprite: {fileID: -4453719734264909257, guid: d432001948e50e5469bfc5b7bc58ebfd, type: 3}
+  enemyAnimator: {fileID: 9100000, guid: a58c5396e8cf1314b842c4fc64001e14, type: 2}
+  maxEnemyHP: 50
+  enemyDefense: 6
+  enemyAttack: 4
+  enemySpeed: 5
+  enemyExperience: 175
+  pursuePlayerDistance: 6
+  attackPlayerDistance: 1
+  enemyAttackSpeed: 0.8

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: AxeSkeletonVariableSO
   m_EditorClassIdentifier: 
   enemyPrefab: {fileID: 2077187973355700012, guid: c42d62b081834f34aaaf0e9766c119f2, type: 3}
-  enemySprite: {fileID: -3599762447674720757, guid: eb790298f2997bb48a68771850a24d24, type: 3}
+  enemySprite: {fileID: 5875395181630150645, guid: d432001948e50e5469bfc5b7bc58ebfd, type: 3}
   enemyAnimator: {fileID: 9100000, guid: 75cd5435bd2722948973830a62500a97, type: 2}
   maxEnemyHP: 30
   enemyDefense: 0

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: GhostVariableSO
   m_EditorClassIdentifier: 
   enemyPrefab: {fileID: 2077187973355700012, guid: 760a40f1b7eaf3c4ba00a47ca12ed4a3, type: 3}
-  enemySprite: {fileID: 1271966847290988303, guid: eb790298f2997bb48a68771850a24d24, type: 3}
+  enemySprite: {fileID: -6640614073646168285, guid: d432001948e50e5469bfc5b7bc58ebfd, type: 3}
   enemyAnimator: {fileID: 9100000, guid: 5e8d0530a6623a8429c6764408b8c953, type: 2}
   maxEnemyHP: 15
   enemyDefense: 0

@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa765f0738352c5468d9d12c460cc48a, type: 3}
+  m_Name: RabbitKnifeVariableSO
+  m_EditorClassIdentifier: 
+  enemyPrefab: {fileID: 2077187973355700012, guid: c9e7313db55b707438ac897e364ca361, type: 3}
+  enemySprite: {fileID: -860468679390908754, guid: d432001948e50e5469bfc5b7bc58ebfd, type: 3}
+  enemyAnimator: {fileID: 9100000, guid: 2c0824966ccbc84439dd20c24b5a6744, type: 2}
+  maxEnemyHP: 14
+  enemyDefense: 7
+  enemyAttack: 6
+  enemySpeed: 5
+  enemyExperience: 130
+  pursuePlayerDistance: 10
+  attackPlayerDistance: 1
+  enemyAttackSpeed: 0.5

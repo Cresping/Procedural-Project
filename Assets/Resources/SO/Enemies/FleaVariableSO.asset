@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa765f0738352c5468d9d12c460cc48a, type: 3}
+  m_Name: FleaVariableSO
+  m_EditorClassIdentifier: 
+  enemyPrefab: {fileID: 2077187973355700012, guid: 7f9a8921dbdf15647b3d79ed42a3793b, type: 3}
+  enemySprite: {fileID: 5480056424480108288, guid: d432001948e50e5469bfc5b7bc58ebfd, type: 3}
+  enemyAnimator: {fileID: 9100000, guid: 3cbfca2968e5f3d44bf25985d3b8917d, type: 2}
+  maxEnemyHP: 15
+  enemyDefense: 5
+  enemyAttack: 1
+  enemySpeed: 25
+  enemyExperience: 90
+  pursuePlayerDistance: 1
+  attackPlayerDistance: 1
+  enemyAttackSpeed: 1

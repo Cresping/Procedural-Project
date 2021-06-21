@@ -17,6 +17,7 @@ namespace HeroesGames.ProjectProcedural.Procedural
         [SerializeField] private Tilemap fenceTilemap;
         [SerializeField] private Tilemap keyTileMap;
         [SerializeField] private Tilemap clockTileMap;
+        [SerializeField] private Tilemap potionTileMap;
         [SerializeField] private TileVariableSO floorTiles;
         [SerializeField] private TileVariableSO wallTiles;
         [SerializeField] private TileVariableSO startTiles;
@@ -25,6 +26,8 @@ namespace HeroesGames.ProjectProcedural.Procedural
         [SerializeField] private TileVariableSO fenceTiles;
         [SerializeField] private TileVariableSO keyTiles;
         [SerializeField] private TileVariableSO clockTiles;
+        [SerializeField] private TileVariableSO potionTiles;
+        
         /// <summary>
         /// M�dulo encargado de pintar los 'tiles' dados en unas posiciones determinadas
         /// </summary>
@@ -140,6 +143,16 @@ namespace HeroesGames.ProjectProcedural.Procedural
         {
             PaintSingleTile(clockTileMap, clockTiles.PickRandomTile(), position);
         }
+        
+        /// <summary>
+        /// M�dulo encargado de pintar el 'tile' de 1 poción
+        /// de la mazmorra
+        /// </summary>
+        /// <param name="position">Posicion del 'tile'</param>
+        public void PaintPotionTile(Vector2Int position)
+        {
+            PaintSingleTile(potionTileMap, potionTiles.PickRandomTile(), position);
+        }
 
         /// <summary>
         /// Limpia todos los mapas
@@ -162,6 +175,9 @@ namespace HeroesGames.ProjectProcedural.Procedural
             
             if(clockTileMap)
                 clockTileMap.ClearAllTiles();
+            
+            if(potionTileMap)
+                potionTileMap.ClearAllTiles();
         }
     }
 }

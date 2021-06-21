@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: MimicVariableSO
   m_EditorClassIdentifier: 
   enemyPrefab: {fileID: 7480030170005920205, guid: e954566507fcb18468307d82f09964ed, type: 3}
-  enemySprite: {fileID: 379911283790892613, guid: c08de8ccaabaec24683eb38f6b97861f, type: 3}
+  enemySprite: {fileID: -4238003056365228607, guid: d432001948e50e5469bfc5b7bc58ebfd, type: 3}
   enemyAnimator: {fileID: 9100000, guid: f62f8c12532ead641ad8293206d87d83, type: 2}
   maxEnemyHP: 25
   enemyDefense: 5
