@@ -2,6 +2,7 @@ using System;
 using HeroesGames.ProjectProcedural.SO;
 using HeroesGames.ProjectProcedural.UI;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.Tilemaps;
 
 namespace HeroesGames.ProjectProcedural.Procedural
@@ -12,11 +13,14 @@ namespace HeroesGames.ProjectProcedural.Procedural
         [SerializeField] private MazeVariableSO mazeVariableSO;
         [SerializeField] private UIDungeonController uiController;
         [SerializeField, Range(1,2)] private float messageDuration;
+        [SerializeField] private SoundController soundController;
+        [SerializeField] private AudioClip potionClip;
 
         private void OnTriggerEnter2D(Collider2D other)
         {
             if (!other.CompareTag("Player")) return;
             RecoverHealth();
+            soundController.PlaySound(potionClip);
             uiController.ShowMessages("¡Recuperas algo de vida!",messageDuration);
             GetComponent<TilemapCollider2D>().enabled = false;
             GetComponent<Tilemap>().color = Color.black;

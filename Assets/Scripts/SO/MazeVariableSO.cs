@@ -9,13 +9,13 @@ namespace HeroesGames.ProjectProcedural.SO
         {
             if (dungeonLvl % 2 == 0)
             {
-                dungeonWidth = 13 + dungeonLvl;
-                dungeonHeight = 13 + dungeonLvl;
+                dungeonWidth = 15 + dungeonLvl;
+                dungeonHeight = 15 + dungeonLvl;
             }
             else
             {
-                dungeonWidth = 13 + dungeonLvl + 1;
-                dungeonHeight = 13 + dungeonLvl + 1;
+                dungeonWidth = 15 + dungeonLvl + 1;
+                dungeonHeight = 15 + dungeonLvl + 1;
             }
         }
         
