@@ -19,7 +19,7 @@ MonoBehaviour:
   dungeonLevel: 1
   playerPrefab: {fileID: 7226611520861074219, guid: 4988bc079a76e2743baae56f806613c3, type: 3}
   maxTotalPlayerHP: 120
-  maxInitPlayer: 999
+  maxInitPlayer: 20
   playerDamage: 6
   playerSpeed: 5
   playerDef: 5

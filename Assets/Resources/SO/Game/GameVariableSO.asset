@@ -17,7 +17,7 @@ MonoBehaviour:
   lerpDuration: 0.15
   smoothGameplay: 0
   turnSpeedValue: 5
-  maxLevelEasy: 99
+  maxLevelEasy: 5
   maxLevelNormal: 10
   maxLevelHard: 15
   maxLevelVeryHard: 20

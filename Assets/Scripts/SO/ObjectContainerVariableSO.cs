@@ -59,7 +59,6 @@ namespace HeroesGames.ProjectProcedural.SO
                         break;
                 }
             }
-            Debug.Log(_dictionaryOneStartObjects.Count);
         }
         public ObjectInventoryVariableSO PickRandomItem(int rarity)
         {

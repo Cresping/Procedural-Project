@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameStartBusSO: {fileID: 11400000, guid: 3c70e64ec8585094fbbc496e1e5770c6, type: 2}
   dungeonLvl: 1
-  dungeonWidth: 22
-  dungeonHeight: 22
+  dungeonWidth: 42
+  dungeonHeight: 42
   gameVariableSO: {fileID: 11400000, guid: c9f70f3a05f02f943948a81ac920d4fe, type: 2}
-  minRoomWidth: 5
-  minRoomHeight: 5
+  minRoomWidth: 7
+  minRoomHeight: 7
   offset: 1
