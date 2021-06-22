@@ -9,12 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cb53c17f418c7e8459b5c2c4e60fa076, type: 3}
-  m_Name: Espada del Alba
+  m_Script: {fileID: 11500000, guid: 9fe51f3cef6b2804b8d7490f7a62318b, type: 3}
+  m_Name: OldSword
   m_EditorClassIdentifier: 
-  id: 0
-  objectName: Espada del Alba
-  objectSprite: {fileID: 0}
+  objectName: Old Sword
+  objectSprite: {fileID: 1460189747944437290, guid: eb790298f2997bb48a68771850a24d24, type: 3}
   objectRarity: 1
-  armorDefense: 5
-  armorHP: 10
+  weaponAttack: 2
+  weaponSpeed: 1
