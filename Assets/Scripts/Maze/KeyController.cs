@@ -18,7 +18,7 @@ namespace HeroesGames.ProjectProcedural.Procedural
         {
             if (!other.CompareTag("Player")) return;
             soundController.PlaySound(doorClip);
-            uiController.ShowMessages("¡Tienes la llave!\nYa puedes escapar",messageDuration);
+            uiController.ShowMessages("You've found the key!\nRun away, quick!",messageDuration);
             simpleTileMapGenerator.PaintOpenEndTile(mazeGenerator.ExitPosition);
             GetComponent<Tilemap>().color = Color.black;
         }

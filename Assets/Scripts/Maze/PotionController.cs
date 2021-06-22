@@ -2,7 +2,6 @@ using System;
 using HeroesGames.ProjectProcedural.SO;
 using HeroesGames.ProjectProcedural.UI;
 using UnityEngine;
-using UnityEngine.Serialization;
 using UnityEngine.Tilemaps;
 
 namespace HeroesGames.ProjectProcedural.Procedural
@@ -21,7 +20,7 @@ namespace HeroesGames.ProjectProcedural.Procedural
             if (!other.CompareTag("Player")) return;
             RecoverHealth();
             soundController.PlaySound(potionClip);
-            uiController.ShowMessages("¡Recuperas algo de vida!",messageDuration);
+            uiController.ShowMessages("You've found a health potion!",messageDuration);
             GetComponent<TilemapCollider2D>().enabled = false;
             GetComponent<Tilemap>().color = Color.black;
         }
@@ -30,7 +29,7 @@ namespace HeroesGames.ProjectProcedural.Procedural
         {
             var hp2Recover = Convert.ToInt32((mazeVariableSO.DungeonLvl * playerVariableSO.PlayerLevel) / (playerVariableSO.PlayerLevel * 0.1));
             playerVariableSO.PlayerHP += hp2Recover;
-            Debug.Log("Se han añadido " + hp2Recover + " puntos de salud. Ahora el player tiene un total de " +
+            Debug.Log(hp2Recover + "health points regained" + "Total HP Points = " +
                       playerVariableSO.PlayerHP);
         }
     }

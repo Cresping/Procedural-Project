@@ -24,7 +24,7 @@ namespace HeroesGames.ProjectProcedural.Procedural
             var time = CalculateTime();
             timeVariableSO.AddTime(time);
             soundController.PlaySound(clockClip);
-            uiController.ShowMessages("¡Tiempo extra!",messageDuration);
+            uiController.ShowMessages("¡Extra Time!",messageDuration);
             GetComponent<TilemapCollider2D>().enabled = false;
             GetComponent<Tilemap>().color = Color.black;
         }
