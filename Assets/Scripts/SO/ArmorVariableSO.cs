@@ -4,7 +4,7 @@ using UnityEngine;
 namespace HeroesGames.ProjectProcedural.SO
 {
 
-    [CreateAssetMenu(fileName = nameof(ArmorVariableSO), menuName = "Scriptables/" + nameof(ArmorVariableSO) + "/" + nameof(ArmorVariableSO) + "Variable")]
+        [CreateAssetMenu(fileName = "ArmorVariableSO", menuName = "Scriptables/Inventory/ArmorVariableSO")]
     public class ArmorVariableSO : ObjectInventoryVariableSO
     {
         [SerializeField] private int armorDefense;

@@ -9,7 +9,7 @@ namespace HeroesGames.ProjectProcedural.SO
     [CreateAssetMenu(fileName = "NewTimerVariable", menuName = "Scriptables/Timer/TimerVariable")]
     public class TimerVariableSO : ScriptableObject
     {
-        private const float MAX_TIME_TIMER = 99999999999999.0f;
+        private const float MAX_TIME_TIMER = 60.0f;
         [SerializeField] private GameStartBusSO gameStartBusSO;
         [SerializeField] private GameOverBusSO gameOverBusSO;
         private float _timeSeconds;

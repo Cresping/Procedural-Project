@@ -13,8 +13,8 @@ public class FPSCounter : MonoBehaviour
 
     private void Awake()
     {
-        QualitySettings.vSyncCount = 0;
-        Application.targetFrameRate = 30;
+        QualitySettings.vSyncCount = 1;
+        Application.targetFrameRate = 60;
     }
     private void Update()
     {
