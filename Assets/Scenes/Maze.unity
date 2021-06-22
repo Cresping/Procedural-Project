@@ -7986,7 +7986,7 @@ MonoBehaviour:
   playerVariableSO: {fileID: 11400000, guid: 82464bdcbc557ff41b3b1e47fa852778, type: 2}
   mazeVariableSO: {fileID: 11400000, guid: 6cb10b8642dfa1d4dbe9dab4c39128f8, type: 2}
   uiController: {fileID: 1592597450}
-  messageDuration: 1
+  messageDuration: 1.5
   soundController: {fileID: 1888988990}
   potionClip: {fileID: 8300000, guid: 166a2f9135c27244681042d7e3c38fce, type: 3}
 --- !u!19719996 &1264306042
@@ -8190,7 +8190,7 @@ MonoBehaviour:
   mazeGenerator: {fileID: 1033123535}
   simpleTileMapGenerator: {fileID: 1897311569}
   uiController: {fileID: 1592597450}
-  messageDuration: 1.5
+  messageDuration: 2
   soundController: {fileID: 1888988990}
   doorClip: {fileID: 8300000, guid: 419ff1ebfc99aa84fb2caf9d2ab30ddb, type: 3}
 --- !u!483693784 &1442646047
@@ -8526,7 +8526,7 @@ MonoBehaviour:
   timeVariableSO: {fileID: 11400000, guid: bd8f52ef88b72d04684039a8d4435a0c, type: 2}
   playerVariableSO: {fileID: 11400000, guid: 82464bdcbc557ff41b3b1e47fa852778, type: 2}
   uiController: {fileID: 1592597450}
-  messageDuration: 1
+  messageDuration: 1.5
   soundController: {fileID: 1888988990}
   clockClip: {fileID: 8300000, guid: c457d7b4f9d43c449afeed377ed6d82f, type: 3}
 --- !u!19719996 &1493465365
