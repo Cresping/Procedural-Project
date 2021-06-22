@@ -1,4 +1,6 @@
+using System;
 using HeroesGames.ProjectProcedural.SO;
+using HeroesGames.ProjectProcedural.UI;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -7,17 +9,19 @@ namespace HeroesGames.ProjectProcedural.Procedural
     public class ClockController : MonoBehaviour
     {
         [SerializeField] private MazeGenerator mazeGenerator;
+        [SerializeField] private MazeVariableSO mazeVariableSO;
         [SerializeField] private SimpleTileMapGenerator simpleTileMapGenerator;
         [SerializeField] private TimerVariableSO timeVariableSO;
-        [SerializeField] private MazeVariableSO mazeVariableSO;
-        
-        // TODO: change the time coefficient by a factor that depends on the maze's difficulty
-    
+        [SerializeField] private PlayerVariableSO playerVariableSO;
+        [SerializeField] private UIDungeonController uiController;
+        [SerializeField, Range(1,2)] private float messageDuration;
+
         private void OnTriggerEnter2D(Collider2D other)
         {
             if (!other.CompareTag("Player")) return;
-            simpleTileMapGenerator.PaintFloorTile(mazeGenerator.ClockPosition); // TODO: Why this doesn't work?
-            timeVariableSO.AddTime(CalculateTime());
+            var time = CalculateTime();
+            timeVariableSO.AddTime(time);
+            uiController.ShowMessages("¡Tiempo extra!",messageDuration);
             GetComponent<TilemapCollider2D>().enabled = false;
             GetComponent<Tilemap>().color = Color.black;
         }
@@ -28,10 +32,14 @@ namespace HeroesGames.ProjectProcedural.Procedural
             var initialDistance2Clock = Vector2Int.Distance(mazeGenerator.StartPosition, mazeGenerator.ClockPosition);
 
             if (initialDistance2Clock < mazeGenerator.Width * 0.5)
-                time2Add = initialDistance2Clock + mazeVariableSO.DungeonLvl;
+                time2Add = initialDistance2Clock +
+                           Convert.ToInt32(0.8f * (mazeVariableSO.DungeonLvl * playerVariableSO.PlayerLevel) /
+                               (playerVariableSO.PlayerLevel * 0.1));
             else
-                time2Add = (initialDistance2Clock + mazeVariableSO.DungeonLvl) * 0.8f;
-            
+                time2Add = initialDistance2Clock +
+                            Convert.ToInt32(0.5f * (mazeVariableSO.DungeonLvl * playerVariableSO.PlayerLevel) /
+                                (playerVariableSO.PlayerLevel * 0.1));
+
             return time2Add;
         }
     }

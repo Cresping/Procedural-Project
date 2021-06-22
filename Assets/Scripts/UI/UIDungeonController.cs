@@ -9,6 +9,7 @@ using UnityEngine.UI;
 using TMPro;
 using System;
 using UnityEngine.SceneManagement;
+using UnityEngine.Serialization;
 
 namespace HeroesGames.ProjectProcedural.UI
 {
@@ -53,6 +54,9 @@ namespace HeroesGames.ProjectProcedural.UI
 
         [SerializeField] private GameObject levelUPUI;
         [SerializeField] private TextMeshProUGUI textLevelUP;
+
+        [SerializeField] private GameObject messagesUI;
+        [SerializeField] private TextMeshProUGUI messageText;
 
         [SerializeField] private TimerVariableSO timerVariableSO;
         [SerializeField] private TextMeshProUGUI textTimer;
@@ -292,6 +296,13 @@ namespace HeroesGames.ProjectProcedural.UI
             dialogueUI.gameObject.SetActive(true);
             Invoke(nameof(DisableDialogueUI), textBoxFadeTime);
         }
+
+        public void ShowMessages(string message, float msgDuration)
+        {
+            messageText.text = message;
+            messagesUI.gameObject.SetActive(true);
+            Invoke(nameof(DisableMessagesUI), msgDuration);
+        }
         public void DoLevelUP()
         {
             CancelInvoke(nameof(DisableLevelUPUI));
@@ -330,6 +341,10 @@ namespace HeroesGames.ProjectProcedural.UI
         public void DisableDialogueUI()
         {
             dialogueUI.gameObject.SetActive(false);
+        }
+        public void DisableMessagesUI()
+        {
+            messagesUI.gameObject.SetActive(false);
         }
         private IEnumerator ReduceTimer()
         {
