@@ -34,7 +34,7 @@ namespace HeroesGames.ProjectProcedural.UI
             if (objectInventoryVariableSO is ArmorVariableSO)
             {
                 ArmorVariableSO aux = (ArmorVariableSO)objectInventoryVariableSO;
-                playerVariableSO.PlayerHP += aux.ArmorHP;
+                playerVariableSO.RuntimePlayerHP += aux.ArmorHP;
                 playerVariableSO.RuntimePlayerDef += aux.ArmorDefense;
                 playerVariableSO.EquippedObjects[objectInventoryVariableSO.PlayerPositionEquipment] = aux;
                 UpdateStats();
@@ -45,7 +45,7 @@ namespace HeroesGames.ProjectProcedural.UI
             if (objectInventoryVariableSO is ArmorVariableSO)
             {
                 ArmorVariableSO aux = (ArmorVariableSO)objectInventoryVariableSO;
-                playerVariableSO.PlayerHP -= aux.ArmorHP;
+                playerVariableSO.RuntimePlayerHP -= aux.ArmorHP;
                 playerVariableSO.RuntimePlayerDef -= aux.ArmorDefense;
                 playerVariableSO.EquippedObjects[objectInventoryVariableSO.PlayerPositionEquipment] = null;
                 UpdateStats();
@@ -53,10 +53,10 @@ namespace HeroesGames.ProjectProcedural.UI
         }
         private void UpdateStats()
         {
-            textHPValue.text = "HP:\n" + (playerVariableSO.PlayerHP).ToString();
+            textHPValue.text = "HP:\n" + (playerVariableSO.RuntimePlayerHP).ToString();
             textDefenseValue.text = "DEF:\n" + (playerVariableSO.RuntimePlayerDef).ToString();
-            textAttackValue.text = "ATK:\n" + (playerVariableSO.RuntimePlayerDamage).ToString();
-            textSpeedValue.text = "SPD:\n" + (playerVariableSO.RuntimePlayerSpeed).ToString();
+            textAttackValue.text = "ATK:\n" + (playerVariableSO.RuntimePlayerAtk).ToString();
+            textSpeedValue.text = "SPD:\n" + (playerVariableSO.RuntimePlayerSpd).ToString();
         }
 
     }

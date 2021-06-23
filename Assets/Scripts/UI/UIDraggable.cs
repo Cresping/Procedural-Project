@@ -14,9 +14,11 @@ namespace HeroesGames.ProjectProcedural.UI
         [SerializeField] private Transform canvas;
         private Transform _parentToReturn;
         private CanvasGroup _canvasGroup;
+        private bool _isEquiped;
 
         public Transform ParentToReturn { get => _parentToReturn; set => _parentToReturn = value; }
         public ObjectInventoryVariableSO ObjectInventoryVariableSO { get => objectInventoryVariableSO; set => objectInventoryVariableSO = value; }
+        public bool IsEquiped { get => _isEquiped; set => _isEquiped = value; }
 
         private void Awake()
         {
@@ -24,11 +26,7 @@ namespace HeroesGames.ProjectProcedural.UI
         }
         public void OnBeginDrag(PointerEventData eventData)
         {
-            if (objectInventoryVariableSO.IsEquiped)
-            {
-                objectInventoryVariableSO.IsEquiped = false;
-                mainMenuBusSO.OnUnequipItemEvent?.Invoke(objectInventoryVariableSO);
-            }
+
             _parentToReturn = this.transform.parent;
             this.transform.SetParent(canvas);
             _canvasGroup.blocksRaycasts = false;
@@ -47,5 +45,4 @@ namespace HeroesGames.ProjectProcedural.UI
             _canvasGroup.blocksRaycasts = true;
         }
     }
-
 }

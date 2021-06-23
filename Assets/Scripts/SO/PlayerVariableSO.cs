@@ -23,12 +23,10 @@ namespace HeroesGames.ProjectProcedural.SO
         [SerializeField] private int playerLevel = 1;
         [SerializeField] private int dungeonLevel = 1;
         [SerializeField] private PlayerController playerPrefab;
-        [SerializeField] private int maxTotalPlayerHP = 100;
-        [SerializeField] private int maxInitPlayer = 100;
-        [SerializeField] private int playerDamage;
+        [SerializeField] private int originalPlayerHP = 100;
+        [SerializeField] private int playerAttack;
         [SerializeField] private int playerSpeed;
         [SerializeField] private int playerDef;
-
         [SerializeField] private int minExpLevel = 100;
         private ObjectInventoryVariableSO[] _equippedObjects = new ObjectInventoryVariableSO[MAX_EQUIPPED_OBJECTS];
         private int _numberEnemiesKilled;
@@ -38,8 +36,9 @@ namespace HeroesGames.ProjectProcedural.SO
         private Vector2 _playerPosition;
         private Vector2 _playerPreviousPosition;
         private Vector2 _playerStartPosition;
-        private int _runtimeInitialPlayerHP;
-        private int _playerHP;
+
+        private int _runtimeMaxPlayerHP;
+        private int _runtimePlayerHP;
         private int _runtimePlayerDamage;
         private int _runtimePlayerSpeed;
         private int _runtimePlayerDef;
@@ -67,29 +66,30 @@ namespace HeroesGames.ProjectProcedural.SO
         public Vector2 PlayerPreviousPosition { get => _playerPreviousPosition; set => _playerPreviousPosition = value; }
         public EnumTypes.StatusType Status { get => status; set => status = value; }
 
-        public int PlayerHP
+        public int RuntimePlayerHP
         {
-            get => _playerHP;
+            get => _runtimePlayerHP;
             set
             {
-                if (value > maxInitPlayer)
+                if (_runtimePlayerHP + value > _runtimeMaxPlayerHP)
                 {
-                    _playerHP = maxInitPlayer;
+                    _runtimePlayerHP = _runtimeMaxPlayerHP;
                 }
                 else
                 {
-                    _playerHP = value;
+                    _runtimePlayerHP += value;
                 }
-                if (_playerHP <= 0)
+
+                if (_runtimePlayerHP <= 0)
                 {
-                    _playerHP = 0;
+                    _runtimePlayerHP = 0;
                     gameOverBusSO.OnGameOverEvent?.Invoke();
                 }
             }
         }
 
         public int RuntimePlayerDef { get => _runtimePlayerDef; set => _runtimePlayerDef = value; }
-        public int RuntimePlayerSpeed
+        public int RuntimePlayerSpd
         {
             get => _runtimePlayerSpeed;
             set
@@ -98,7 +98,7 @@ namespace HeroesGames.ProjectProcedural.SO
                 PlayerSpeedOnValueChange?.Invoke();
             }
         }
-        public int RuntimePlayerDamage { get => _runtimePlayerDamage; set => _runtimePlayerDamage = value; }
+        public int RuntimePlayerAtk { get => _runtimePlayerDamage; set => _runtimePlayerDamage = value; }
         public bool IsOnEvent { get => _isOnEvent; set => _isOnEvent = value; }
         public int PlayerLevel { get => playerLevel; set => playerLevel = value; }
         public int DungeonLevel
@@ -146,17 +146,9 @@ namespace HeroesGames.ProjectProcedural.SO
                         _runtimePlayerSpeed++;
                         break;
                     case 4:
-                        if (_runtimeInitialPlayerHP + 5 >= maxTotalPlayerHP)
-                        {
-                            _runtimeInitialPlayerHP = maxTotalPlayerHP;
-                            PlayerHP += 10;
-                            _randomRangeStats--;
-                        }
-                        else
-                        {
-                            _runtimeInitialPlayerHP += 5;
-                            PlayerHP += 5;
-                        }
+                        _runtimeMaxPlayerHP += 10;
+                        RuntimePlayerHP += 10;
+                        _randomRangeStats--;
                         break;
                     default:
                         Debug.LogError("Error al subir de nivel, estadística no controlada");
@@ -172,7 +164,7 @@ namespace HeroesGames.ProjectProcedural.SO
             {
                 actualDamage = 1;
             }
-            PlayerHP -= actualDamage;
+            RuntimePlayerHP -= actualDamage;
             return actualDamage;
         }
         public void OnAfterDeserialize()
@@ -197,9 +189,9 @@ namespace HeroesGames.ProjectProcedural.SO
         }
         public void ResetValues()
         {
-            _runtimeInitialPlayerHP = maxInitPlayer;
-            _playerHP = maxInitPlayer;
-            _runtimePlayerDamage = playerDamage;
+            _runtimeMaxPlayerHP = originalPlayerHP;
+            _runtimePlayerHP = originalPlayerHP;
+            _runtimePlayerDamage = playerAttack;
             _runtimePlayerDef = playerDef;
             _runtimePlayerSpeed = playerSpeed;
             _playerExperience = 0;

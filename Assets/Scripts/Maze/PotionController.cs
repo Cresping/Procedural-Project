@@ -28,9 +28,9 @@ namespace HeroesGames.ProjectProcedural.Procedural
         private void RecoverHealth()
         {
             var hp2Recover = Convert.ToInt32((mazeVariableSO.DungeonLvl * playerVariableSO.PlayerLevel) / (playerVariableSO.PlayerLevel * 0.1));
-            playerVariableSO.PlayerHP += hp2Recover;
+            playerVariableSO.RuntimePlayerHP += hp2Recover;
             Debug.Log(hp2Recover + "health points regained" + "Total HP Points = " +
-                      playerVariableSO.PlayerHP);
+                      playerVariableSO.RuntimePlayerHP);
         }
     }
 }

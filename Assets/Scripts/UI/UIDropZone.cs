@@ -14,6 +14,9 @@ namespace HeroesGames.ProjectProcedural.UI
         [Range(0, 3)]
         [SerializeField] private int positionEquipment;
         private ObjectInventoryVariableSO _currentObjectInventoryVariableSO;
+
+        public int PositionEquipment { get => positionEquipment; set => positionEquipment = value; }
+
         public void OnDrop(PointerEventData eventData)
         {
             UIDraggable draggable = eventData.pointerDrag.GetComponent<UIDraggable>();
@@ -23,9 +26,15 @@ namespace HeroesGames.ProjectProcedural.UI
                 if (!isStorage)
                 {
                     _currentObjectInventoryVariableSO = draggable.ObjectInventoryVariableSO;
-                    _currentObjectInventoryVariableSO.IsEquiped = true;
+                    draggable.IsEquiped = true;
                     _currentObjectInventoryVariableSO.PlayerPositionEquipment = positionEquipment;
                     mainMenuBusSO.OnEquipItemEvent?.Invoke(_currentObjectInventoryVariableSO);
+                }
+                else
+                {
+                    _currentObjectInventoryVariableSO = draggable.ObjectInventoryVariableSO;
+                     draggable.IsEquiped = false;
+                    mainMenuBusSO.OnUnequipItemEvent?.Invoke(_currentObjectInventoryVariableSO);
                 }
             }
         }
