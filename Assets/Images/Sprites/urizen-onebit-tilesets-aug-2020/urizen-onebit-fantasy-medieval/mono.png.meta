@@ -304,64 +304,64 @@ TextureImporter:
     second: mono_99
   - first:
       213: 1460189747944437290
-    second: sword_1
+    second: Heavenly Virgin Sword
   - first:
       213: 1343523951209513608
-    second: mono_101
+    second: Snake Eye Mesh Breaker
   - first:
       213: 4424935010822704702
-    second: mono_102
+    second: Dragon's Eye Mandoble
   - first:
       213: -2495499389721068457
-    second: mono_103
+    second: Snow Moon Claymore
   - first:
       213: 1452102795228103545
-    second: mono_104
+    second: Dual Redemption Blade
   - first:
       213: -5216553334465857430
-    second: mono_105
+    second: Lady's Poison Rapier
   - first:
       213: 8044724156855972330
-    second: mono_106
+    second: Hi&Bye's Big Blade
   - first:
       213: -2076580681315870309
-    second: mono_107
+    second: Hi&Bye's Big Blade
   - first:
       213: -4038730528674392297
-    second: mono_108
+    second: Eternal Doom's Katana
   - first:
       213: 1384859092214673483
-    second: mono_109
+    second: Otherworld Hand Scimitar
   - first:
       213: -1350222591166992161
-    second: mono_110
+    second: Skull Desperation Hammer
   - first:
       213: -6841472400505947854
-    second: mono_111
+    second: Mace of Broken Will
   - first:
       213: 550859833898381921
-    second: mono_112
+    second: Drunken Ape's Bludgeon
   - first:
       213: 6612155809946945768
-    second: mono_113
+    second: Elf's Dream Pike
   - first:
       213: 4630123907050887180
-    second: mono_114
+    second: Maiden's Smile Halberd
   - first:
       213: 6314644632956519390
-    second: mono_115
+    second: Great Dwarf God Axe
   - first:
       213: -1291384152859764808
-    second: mono_116
+    second: Dragon-tailed Axe
   - first:
       213: -4365721819942672217
-    second: mono_117
+    second: Nimble Wrist Axe
   - first:
       213: 3253653294767027575
-    second: mono_118
+    second: Blazing Succubus Sigh
   - first:
       213: -2455473374004462037
-    second: mono_119
+    second: Ether Kiss Blade
   - first:
       213: -3643847146442990696
     second: mono_120
@@ -379,22 +379,22 @@ TextureImporter:
     second: mono_124
   - first:
       213: -1997035450416101533
-    second: mono_125
+    second: Uncertain Destiny's Club
   - first:
       213: -276270269352122150
-    second: mono_126
+    second: Rod of Soulskinning
   - first:
       213: 1663713061527031527
-    second: mono_127
+    second: Ram's Horned Rod
   - first:
       213: -2445805377695091370
-    second: mono_128
+    second: King's Wrath Catalyst
   - first:
       213: 691424299163688023
-    second: mono_129
+    second: White Witch's Crook
   - first:
       213: 2556873601328848464
-    second: mono_130
+    second: Blasphemous Pardon's Halberd
   - first:
       213: 6133929978387928825
     second: mono_131
@@ -2815,7 +2815,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sword_1
+      name: Heavenly Virgin Sword
       rect:
         serializedVersion: 2
         x: 1
@@ -2836,7 +2836,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: mono_101
+      name: Snake Eye Mesh Breaker
       rect:
         serializedVersion: 2
         x: 14
@@ -2857,7 +2857,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: mono_102
+      name: Dragon's Eye Mandoble
       rect:
         serializedVersion: 2
         x: 27
@@ -2878,7 +2878,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: mono_103
+      name: Snow Moon Claymore
       rect:
         serializedVersion: 2
         x: 40
@@ -2899,7 +2899,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: mono_104
+      name: Dual Redemption Blade
       rect:
         serializedVersion: 2
         x: 53
@@ -2920,7 +2920,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: mono_105
+      name: Lady's Poison Rapier
       rect:
         serializedVersion: 2
         x: 66
@@ -2941,7 +2941,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: mono_106
+      name: Wolf Bastard Greatsword
       rect:
         serializedVersion: 2
         x: 79
@@ -2962,7 +2962,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: mono_107
+      name: Hi&Bye's Big Blade
       rect:
         serializedVersion: 2
         x: 92
@@ -2983,7 +2983,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: mono_108
+      name: Eternal Doom's Katana
       rect:
         serializedVersion: 2
         x: 105
@@ -3004,7 +3004,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: mono_109
+      name: Otherworld Hand Scimitar
       rect:
         serializedVersion: 2
         x: 118
@@ -3025,7 +3025,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: mono_110
+      name: Skull Desperation Hammer
       rect:
         serializedVersion: 2
         x: 131
@@ -3046,7 +3046,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: mono_111
+      name: Mace of Broken Will
       rect:
         serializedVersion: 2
         x: 144
@@ -3067,7 +3067,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: mono_112
+      name: Drunken Ape's Bludgeon
       rect:
         serializedVersion: 2
         x: 157
@@ -3088,7 +3088,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: mono_113
+      name: Elf's Dream Pike
       rect:
         serializedVersion: 2
         x: 170
@@ -3109,7 +3109,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: mono_114
+      name: Maiden's Smile Halberd
       rect:
         serializedVersion: 2
         x: 183
@@ -3130,7 +3130,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: mono_115
+      name: Great Dwarf God Axe
       rect:
         serializedVersion: 2
         x: 196
@@ -3151,7 +3151,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: mono_116
+      name: Dragon-tailed Axe
       rect:
         serializedVersion: 2
         x: 209
@@ -3172,7 +3172,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: mono_117
+      name: Nimble Wrist Axe
       rect:
         serializedVersion: 2
         x: 222
@@ -3193,7 +3193,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: mono_118
+      name: Blazing Succubus Sigh
       rect:
         serializedVersion: 2
         x: 235
@@ -3214,7 +3214,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: mono_119
+      name: Ether Kiss Blade
       rect:
         serializedVersion: 2
         x: 248
@@ -3340,7 +3340,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: mono_125
+      name: Uncertain Destiny's Club
       rect:
         serializedVersion: 2
         x: 66
@@ -3361,7 +3361,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: mono_126
+      name: Rod of Soulskinning
       rect:
         serializedVersion: 2
         x: 79
@@ -3382,7 +3382,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: mono_127
+      name: Ram's Horned Rod
       rect:
         serializedVersion: 2
         x: 92
@@ -3403,7 +3403,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: mono_128
+      name: King's Wrath Catalyst
       rect:
         serializedVersion: 2
         x: 105
@@ -3424,7 +3424,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: mono_129
+      name: White Witch's Crook
       rect:
         serializedVersion: 2
         x: 118
@@ -3445,7 +3445,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: mono_130
+      name: Blasphemous Pardon's Halberd
       rect:
         serializedVersion: 2
         x: 131
