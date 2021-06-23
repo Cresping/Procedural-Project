@@ -397,31 +397,31 @@ TextureImporter:
     second: Blasphemous Pardon's Halberd
   - first:
       213: 6133929978387928825
-    second: mono_131
+    second: Shield of Regal's Faith
   - first:
       213: 3560313816378177714
-    second: mono_132
+    second: Fallen Warrior's Guard
   - first:
       213: -8291338559592296500
-    second: mono_133
+    second: Captive Ghost's Buckler
   - first:
       213: 5974975697548876711
-    second: armor_1
+    second: Angel's Breastplate
   - first:
       213: 2382899581959632218
-    second: armor_2
+    second: Bewitched Bone Protector
   - first:
       213: 4427994835046597627
-    second: armor_3
+    second: Adam's Armour
   - first:
       213: 5626291114944599678
-    second: mono_137
+    second: Frostwind Helmet
   - first:
       213: -888187827849949497
-    second: mono_138
+    second: Goblin Master's Shell
   - first:
       213: -3249088038590144830
-    second: mono_139
+    second: Iron Man's Mask
   - first:
       213: -7409565172403405812
     second: mono_140
@@ -3466,7 +3466,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: mono_131
+      name: Shield of Regal's Faith
       rect:
         serializedVersion: 2
         x: 144
@@ -3487,7 +3487,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: mono_132
+      name: Fallen Warrior's Guard
       rect:
         serializedVersion: 2
         x: 157
@@ -3508,7 +3508,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: mono_133
+      name: Captive Ghost's Buckler
       rect:
         serializedVersion: 2
         x: 170
@@ -3529,7 +3529,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: armor_1
+      name: Angel's Breastplate
       rect:
         serializedVersion: 2
         x: 183
@@ -3550,7 +3550,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: armor_2
+      name: Bewitched Bone Protector
       rect:
         serializedVersion: 2
         x: 196
@@ -3571,7 +3571,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: armor_3
+      name: Adam's Armour
       rect:
         serializedVersion: 2
         x: 209
@@ -3592,7 +3592,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: mono_137
+      name: Frostwind Helmet
       rect:
         serializedVersion: 2
         x: 222
@@ -3613,7 +3613,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: mono_138
+      name: Goblin Master's Shell
       rect:
         serializedVersion: 2
         x: 235
@@ -3634,7 +3634,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: mono_139
+      name: Iron Man's Mask
       rect:
         serializedVersion: 2
         x: 248
