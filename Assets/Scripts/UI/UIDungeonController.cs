@@ -246,7 +246,7 @@ namespace HeroesGames.ProjectProcedural.UI
         public void ChangePlayerHeal()
         {
             combatPlayerHP.text = "";
-            for (int i = 0; i < playerVariableSO.PlayerHP; i++)
+            for (int i = 0; i < playerVariableSO.RuntimePlayerHP; i++)
             {
                 combatPlayerHP.text = combatPlayerHP.text + "|";
             }
@@ -315,9 +315,9 @@ namespace HeroesGames.ProjectProcedural.UI
         }
         public void DoChangeStats()
         {
-            hpStatValue.text = playerVariableSO.PlayerHP.ToString();
-            attackStatValue.text = playerVariableSO.RuntimePlayerDamage.ToString();
-            speedStatValue.text = playerVariableSO.RuntimePlayerSpeed.ToString();
+            hpStatValue.text = playerVariableSO.RuntimePlayerHP.ToString();
+            attackStatValue.text = playerVariableSO.RuntimePlayerAtk.ToString();
+            speedStatValue.text = playerVariableSO.RuntimePlayerSpd.ToString();
             defStatValue.text = playerVariableSO.RuntimePlayerDef.ToString();
         }
         public void DoGameOver()

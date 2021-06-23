@@ -27,14 +27,14 @@ namespace HeroesGames.ProjectProcedural.Player
         {
             if (combatVariableSO.IsActive)
             {
-                combatVariableSO.DoDamageCurrentEnemy(playerVariableSO.RuntimePlayerDamage);
+                combatVariableSO.DoDamageCurrentEnemy(playerVariableSO.RuntimePlayerAtk);
             }
         }
         public void DoStrongAttackEnemy()
         {
             if (combatVariableSO.IsActive)
             {
-                combatVariableSO.DoStrongDamageCurrentEnemy(playerVariableSO.RuntimePlayerDamage * 2);
+                combatVariableSO.DoStrongDamageCurrentEnemy(playerVariableSO.RuntimePlayerAtk * 2);
             }
         }
     }

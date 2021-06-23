@@ -36,7 +36,7 @@ namespace HeroesGames.ProjectProcedural.Enemies
         {
             base.Start();
             this._currentEnemyHP = enemyVariableSO.MaxEnemyHP;
-            this._myTurn = Mathf.FloorToInt((playerVariableSO.RuntimePlayerSpeed - enemyVariableSO.EnemySpeed) / base.gameVariableSO.TurnSpeedValue);
+            this._myTurn = Mathf.FloorToInt((playerVariableSO.RuntimePlayerSpd - enemyVariableSO.EnemySpeed) / base.gameVariableSO.TurnSpeedValue);
             this._currentTurn = _myTurn;
         }
 
@@ -86,7 +86,7 @@ namespace HeroesGames.ProjectProcedural.Enemies
         protected void ChangeMyTurn()
         {
             int previousTurn = _myTurn;
-            this._myTurn = Mathf.FloorToInt((playerVariableSO.RuntimePlayerSpeed - enemyVariableSO.EnemySpeed) / gameVariableSO.TurnSpeedValue);
+            this._myTurn = Mathf.FloorToInt((playerVariableSO.RuntimePlayerSpd - enemyVariableSO.EnemySpeed) / gameVariableSO.TurnSpeedValue);
             _currentTurn += _myTurn - previousTurn;
         }
 

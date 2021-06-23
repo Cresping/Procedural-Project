@@ -446,7 +446,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8273cc5bb4f0b4e4d917a8d9f790badd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mainMenuBusSO: {fileID: 0}
+  mainMenuBusSO: {fileID: 11400000, guid: 773c7b54a10daf24b8aea1027362643a, type: 2}
   dropParent: {fileID: 1956524272}
   isStorage: 1
   positionEquipment: 0
