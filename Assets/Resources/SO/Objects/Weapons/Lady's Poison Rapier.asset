@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   objectName: Lady's Poison Rapier
   objectSprite: {fileID: -5216553334465857430, guid: eb790298f2997bb48a68771850a24d24, type: 3}
-  objectRarity: 1
-  weaponAttack: 0
-  weaponSpeed: 0
+  objectRarity: 3
+  weaponAttack: 4
+  weaponSpeed: 5

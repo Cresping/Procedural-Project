@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   objectName: Ram's Horned Rod
   objectSprite: {fileID: 1663713061527031527, guid: eb790298f2997bb48a68771850a24d24, type: 3}
-  objectRarity: 1
-  weaponAttack: 0
-  weaponSpeed: 0
+  objectRarity: 3
+  weaponAttack: 4
+  weaponSpeed: 5

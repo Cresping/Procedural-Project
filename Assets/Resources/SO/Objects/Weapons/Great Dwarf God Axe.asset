@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   objectName: Great Dwarf God Axe
   objectSprite: {fileID: 6314644632956519390, guid: eb790298f2997bb48a68771850a24d24, type: 3}
-  objectRarity: 1
-  weaponAttack: 0
-  weaponSpeed: 0
+  objectRarity: 5
+  weaponAttack: 8
+  weaponSpeed: -5

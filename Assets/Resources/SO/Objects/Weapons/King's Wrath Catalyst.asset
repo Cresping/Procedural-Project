@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   objectName: King's Wrath Catalyst
   objectSprite: {fileID: -2445805377695091370, guid: eb790298f2997bb48a68771850a24d24, type: 3}
-  objectRarity: 1
-  weaponAttack: 0
-  weaponSpeed: 0
+  objectRarity: 5
+  weaponAttack: 6
+  weaponSpeed: 5

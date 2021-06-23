@@ -15,5 +15,5 @@ MonoBehaviour:
   objectName: Eternal Doom's Katana
   objectSprite: {fileID: -4038730528674392297, guid: eb790298f2997bb48a68771850a24d24, type: 3}
   objectRarity: 1
-  weaponAttack: 0
-  weaponSpeed: 0
+  weaponAttack: 2
+  weaponSpeed: 3
