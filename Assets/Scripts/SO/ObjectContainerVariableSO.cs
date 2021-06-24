@@ -69,39 +69,39 @@ namespace HeroesGames.ProjectProcedural.SO
                     if (_dictionaryOneStartObjects.Count > 0)
                     {
                         List<int> keys = _dictionaryOneStartObjects.Keys.ToList<int>();
-                        _dictionaryOneStartObjects.TryGetValue(keys[Random.Range(0, keys.Count)], out aux);
+                        _dictionaryOneStartObjects.TryGetValue(keys[Random.Range(0, keys.Count + 1)], out aux);
                     }
                     break;
                 case 2:
                     if (_dictionaryTwoStartObjects.Count > 0)
                     {
                         List<int> keys = _dictionaryTwoStartObjects.Keys.ToList<int>();
-                        _dictionaryTwoStartObjects.TryGetValue(keys[Random.Range(0, keys.Count)], out aux);
+                        _dictionaryTwoStartObjects.TryGetValue(keys[Random.Range(0, keys.Count + 1)], out aux);
                     }
                     break;
                 case 3:
                     if (_dictionaryThreeStartObjects.Count > 0)
                     {
                         List<int> keys = _dictionaryThreeStartObjects.Keys.ToList<int>();
-                        _dictionaryThreeStartObjects.TryGetValue(keys[Random.Range(0, keys.Count)], out aux);
+                        _dictionaryThreeStartObjects.TryGetValue(keys[Random.Range(0, keys.Count + 1)], out aux);
                     }
                     break;
                 case 4:
                     if (_dictionaryFourStartObjects.Count > 0)
                     {
                         List<int> keys = _dictionaryFourStartObjects.Keys.ToList<int>();
-                        _dictionaryFourStartObjects.TryGetValue(keys[Random.Range(0, keys.Count)], out aux);
+                        _dictionaryFourStartObjects.TryGetValue(keys[Random.Range(0, keys.Count + 1)], out aux);
                     }
                     break;
                 case 5:
                     if (_dictionaryFiveStartObjects.Count > 0)
                     {
                         List<int> keys = _dictionaryFiveStartObjects.Keys.ToList<int>();
-                        _dictionaryFiveStartObjects.TryGetValue(keys[Random.Range(0, keys.Count)], out aux);                       
+                        _dictionaryFiveStartObjects.TryGetValue(keys[Random.Range(0, keys.Count + 1)], out aux);
                     }
                     break;
                 default:
-                    Debug.LogError("La rareza pedida no esta controlada");
+                    Debug.LogError("La rareza pedida no está controlada");
                     break;
             }
             return aux;

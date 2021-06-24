@@ -1,4 +1,4 @@
-// Upgrade NOTE: replaced 'mul(UNITY_MATRIX_MVP,*)' with 'UnityObjectToClipPos(*)'
+
 
 Shader "Sprites/SpritesInvertColor"
 {
@@ -81,7 +81,7 @@ Shader "Sprites/SpritesInvertColor"
                 #if UNITY_TEXTURE_ALPHASPLIT_ALLOWED
                     if (_AlphaSplitEnabled)
                     color.a = tex2D (_AlphaTex, uv).r;
-                #endif //UNITY_TEXTURE_ALPHASPLIT_ALLOWED
+                #endif 
                 
                 return color;
             }

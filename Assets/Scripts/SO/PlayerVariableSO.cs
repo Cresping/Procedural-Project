@@ -39,8 +39,8 @@ namespace HeroesGames.ProjectProcedural.SO
 
         private int _runtimeMaxPlayerHP;
         private int _runtimePlayerHP;
-        private int _runtimePlayerDamage;
-        private int _runtimePlayerSpeed;
+        private int _runtimePlayerAtk;
+        private int _runtimePlayerSpd;
         private int _runtimePlayerDef;
         private int _playerExperience;
         private int _randomRangeStats;
@@ -91,14 +91,14 @@ namespace HeroesGames.ProjectProcedural.SO
         public int RuntimePlayerDef { get => _runtimePlayerDef; set => _runtimePlayerDef = value; }
         public int RuntimePlayerSpd
         {
-            get => _runtimePlayerSpeed;
+            get => _runtimePlayerSpd;
             set
             {
-                _runtimePlayerSpeed = value;
+                _runtimePlayerSpd = value;
                 PlayerSpeedOnValueChange?.Invoke();
             }
         }
-        public int RuntimePlayerAtk { get => _runtimePlayerDamage; set => _runtimePlayerDamage = value; }
+        public int RuntimePlayerAtk { get => _runtimePlayerAtk; set => _runtimePlayerAtk = value; }
         public bool IsOnEvent { get => _isOnEvent; set => _isOnEvent = value; }
         public int PlayerLevel { get => playerLevel; set => playerLevel = value; }
         public int DungeonLevel
@@ -111,6 +111,49 @@ namespace HeroesGames.ProjectProcedural.SO
             }
         }
         public int NumberEnemiesKilled { get => _numberEnemiesKilled; set => _numberEnemiesKilled = value; }
+        public void EquipObject(int slot, ObjectInventoryVariableSO objectInventoryVariableSO)
+        {
+            if (slot < MAX_EQUIPPED_OBJECTS && slot >= 0)
+            {
+                if (objectInventoryVariableSO is ArmorVariableSO)
+                {
+                    ArmorVariableSO aux = (ArmorVariableSO)objectInventoryVariableSO;
+                    _equippedObjects[slot] = aux;
+                    _runtimeMaxPlayerHP += aux.ArmorHP;
+                    _runtimePlayerHP += aux.ArmorHP;
+                    _runtimePlayerDef += aux.ArmorDefense;
+                }
+                else if (objectInventoryVariableSO is WeaponVariableSO)
+                {
+                    WeaponVariableSO aux = (WeaponVariableSO)objectInventoryVariableSO;
+                    _equippedObjects[slot] = aux;
+                    _runtimePlayerAtk += aux.WeaponAttack;
+                    _runtimePlayerSpd += aux.WeaponSpeed;
+                }
+            }
+        }
+        public void UnequipObject(int slot, ObjectInventoryVariableSO objectInventoryVariableSO)
+        {
+            if (slot < MAX_EQUIPPED_OBJECTS && slot >= 0)
+            {
+                if (objectInventoryVariableSO is ArmorVariableSO)
+                {
+                    ArmorVariableSO aux = (ArmorVariableSO)objectInventoryVariableSO;
+                    _equippedObjects[slot] = null;
+                    _runtimeMaxPlayerHP -= aux.ArmorHP;
+                    _runtimePlayerHP -= aux.ArmorHP;
+                    _runtimePlayerDef -= aux.ArmorDefense;
+                }
+                else if (objectInventoryVariableSO is WeaponVariableSO)
+                {
+                    WeaponVariableSO aux = (WeaponVariableSO)objectInventoryVariableSO;
+                    _equippedObjects[slot] = null;
+                    _runtimePlayerAtk -= aux.WeaponAttack;
+                    _runtimePlayerSpd -= aux.WeaponSpeed;
+                }
+                objectInventoryVariableSO.PlayerPositionEquipment = -1;
+            }
+        }
         public ObjectInventoryVariableSO[] EquippedObjects { get => _equippedObjects; set => _equippedObjects = value; }
 
         public void ReceiveExperience(int exp)
@@ -137,13 +180,13 @@ namespace HeroesGames.ProjectProcedural.SO
                 switch (selectedStat)
                 {
                     case 1:
-                        _runtimePlayerDamage++;
+                        _runtimePlayerAtk++;
                         break;
                     case 2:
                         _runtimePlayerDef++;
                         break;
                     case 3:
-                        _runtimePlayerSpeed++;
+                        _runtimePlayerSpd++;
                         break;
                     case 4:
                         _runtimeMaxPlayerHP += 10;
@@ -191,9 +234,9 @@ namespace HeroesGames.ProjectProcedural.SO
         {
             _runtimeMaxPlayerHP = originalPlayerHP;
             _runtimePlayerHP = originalPlayerHP;
-            _runtimePlayerDamage = playerAttack;
+            _runtimePlayerAtk = playerAttack;
             _runtimePlayerDef = playerDef;
-            _runtimePlayerSpeed = playerSpeed;
+            _runtimePlayerSpd = playerSpeed;
             _playerExperience = 0;
             _randomRangeStats = 5;
             playerLevel = 1;

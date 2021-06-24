@@ -11,6 +11,7 @@ TagManager:
   - CombatUIEnemySprite
   - CameraHandler
   - UICamera
+  - DragZone
   layers:
   - Default
   - TransparentFX

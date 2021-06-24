@@ -4,16 +4,20 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using HeroesGames.ProjectProcedural.SO;
+using UnityEngine.UI;
+
 namespace HeroesGames.ProjectProcedural.UI
 {
     [RequireComponent(typeof(CanvasGroup))]
+    [RequireComponent(typeof(Image))]
     public class UIDraggable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
     {
         [SerializeField] private ObjectInventoryVariableSO objectInventoryVariableSO;
         [SerializeField] private MainMenuBusSO mainMenuBusSO;
-        [SerializeField] private Transform canvas;
+        [SerializeField] private Transform dragZone;
         private Transform _parentToReturn;
         private CanvasGroup _canvasGroup;
+        private Image _imageObject;
         private bool _isEquiped;
 
         public Transform ParentToReturn { get => _parentToReturn; set => _parentToReturn = value; }
@@ -23,15 +27,17 @@ namespace HeroesGames.ProjectProcedural.UI
         private void Awake()
         {
             _canvasGroup = GetComponent<CanvasGroup>();
+            _imageObject = GetComponent<Image>();
+            _imageObject.sprite = objectInventoryVariableSO.ObjectSprite;
+            dragZone = GameObject.FindGameObjectWithTag("DragZone").transform;
         }
         public void OnBeginDrag(PointerEventData eventData)
         {
 
             _parentToReturn = this.transform.parent;
-            this.transform.SetParent(canvas);
+            this.transform.SetParent(dragZone);
             _canvasGroup.blocksRaycasts = false;
-            //Vector2 pos = Camera.main.ScreenToViewportPoint(Mouse.current.position.ReadValue());
-            //transform.position = pos;
+            mainMenuBusSO.OnDragItem?.Invoke(objectInventoryVariableSO);
         }
 
         public void OnDrag(PointerEventData eventData)

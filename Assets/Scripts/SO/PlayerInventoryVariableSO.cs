@@ -10,13 +10,15 @@ namespace HeroesGames.ProjectProcedural.SO
     {
         public Action<ObjectInventoryVariableSO> OnInventoryChange;
         [SerializeField] private int maxCapacity = 10;
-        private List<ObjectInventoryVariableSO> _objectInventoryVariableSOs;
+        private List<ObjectInventoryVariableSO> _objectInventory;
+
+        public List<ObjectInventoryVariableSO> ObjectInventory { get => _objectInventory; set => _objectInventory = value; }
 
         public bool AddObjectInventory(ObjectInventoryVariableSO objectInventory)
         {
-            if (_objectInventoryVariableSOs.Count < maxCapacity)
+            if (_objectInventory.Count < maxCapacity)
             {
-                _objectInventoryVariableSOs.Add(objectInventory);
+                _objectInventory.Add(objectInventory);
                 Debug.Log("Se ha agregado el objeto "+objectInventory.name+" al inventario del jugador");
                 OnInventoryChange?.Invoke(objectInventory);
                 return true;
@@ -26,13 +28,13 @@ namespace HeroesGames.ProjectProcedural.SO
         }
         public bool RemoveObjectInventory(int index)
         {
-            if (index < 0 || index > _objectInventoryVariableSOs.Count) return false;
-            _objectInventoryVariableSOs.RemoveAt(index);
+            if (index < 0 || index > _objectInventory.Count) return false;
+            _objectInventory.RemoveAt(index);
             return true;
         }
         public void OnAfterDeserialize()
         {
-            _objectInventoryVariableSOs = new List<ObjectInventoryVariableSO>();
+            _objectInventory = new List<ObjectInventoryVariableSO>();
         }
 
         public void OnBeforeSerialize()
