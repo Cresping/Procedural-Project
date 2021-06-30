@@ -571,6 +571,7 @@ MonoBehaviour:
   fenceTilemap: {fileID: 361015303}
   keyTileMap: {fileID: 0}
   clockTileMap: {fileID: 0}
+  potionTileMap: {fileID: 0}
   floorTiles: {fileID: 11400000, guid: 42c4b18556a491544bb4a3438ce839e2, type: 2}
   wallTiles: {fileID: 11400000, guid: ced1c5e4f1c525744908fcb604f62beb, type: 2}
   startTiles: {fileID: 11400000, guid: 9058c9087a3b0f94c824a8c852491dac, type: 2}
@@ -579,6 +580,7 @@ MonoBehaviour:
   fenceTiles: {fileID: 0}
   keyTiles: {fileID: 0}
   clockTiles: {fileID: 0}
+  potionTiles: {fileID: 0}
 --- !u!4 &359918019
 Transform:
   m_ObjectHideFlags: 0
@@ -9057,6 +9059,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6261283560536178183, guid: 8c107e2d95721ef4bbf02fad34ad2107, type: 3}
       propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8885128461786795729, guid: 8c107e2d95721ef4bbf02fad34ad2107, type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
