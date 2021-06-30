@@ -20,6 +20,7 @@ namespace HeroesGames.ProjectProcedural.Procedural
             soundController.PlaySound(doorClip);
             uiController.ShowMessages("You've found the key!\nRun away, quick!",messageDuration);
             simpleTileMapGenerator.PaintOpenEndTile(mazeGenerator.ExitPosition);
+            GetComponent<TilemapCollider2D>().enabled = false;
             GetComponent<Tilemap>().color = Color.black;
         }
     }
