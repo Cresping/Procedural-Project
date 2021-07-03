@@ -17,3 +17,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: dd0c0d862dcc3d943acc400406dc498c, type: 2}
   - {fileID: 11400000, guid: 71579a77b31145e45b69dc244a3de172, type: 2}
   chestTypeList: []
+  hasEntranceMaze: 1

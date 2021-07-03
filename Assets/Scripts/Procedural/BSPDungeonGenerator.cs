@@ -16,8 +16,10 @@ namespace HeroesGames.ProjectProcedural.Procedural
         [SerializeField] private PlayerVariableSO playerVariableSO;
         //[SerializeField] private List<RoomVariableSO> roomVariableSOs;
         [SerializeField] private BSPDungeonVariableSO bSPDungeonVariableSO;
+        [SerializeField] private GameObject mazeEntrancePrefab;
         [SerializeField] private Transform enemiesParent;
         [SerializeField] private Transform chestsParent;
+        [SerializeField] private Transform mazeParent;
         [SerializeField] private Pathfind.GridPathfind gridPathfind;
 
         //[SerializeField] private int minRoomWidth = 4, minRoomHeight = 4;
@@ -37,6 +39,7 @@ namespace HeroesGames.ProjectProcedural.Procedural
             bSPDungeonVariableSO.CalculateDifficulty();
             int childsEnemies = enemiesParent.childCount;
             int childsChests = chestsParent.childCount;
+            int childsMaze = mazeParent.childCount;
             for (int i = childsEnemies - 1; i >= 0; i--)
             {
                 GameObject.DestroyImmediate(enemiesParent.GetChild(i).gameObject);
@@ -44,6 +47,10 @@ namespace HeroesGames.ProjectProcedural.Procedural
             for (int i = childsChests - 1; i >= 0; i--)
             {
                 GameObject.DestroyImmediate(chestsParent.GetChild(i).gameObject);
+            }
+            for (int i = childsMaze - 1; i >= 0; i--)
+            {
+                GameObject.DestroyImmediate(mazeParent.GetChild(i).gameObject);
             }
             CreateRooms();
             FindObjectOfType<PlayerController>().gameObject.transform.position = (Vector3Int)_start;
@@ -226,7 +233,7 @@ namespace HeroesGames.ProjectProcedural.Procedural
                 {
                     if ((Vector2Int)Vector3Int.RoundToInt(room.center) != _start && (Vector2Int)Vector3Int.RoundToInt(room.center) != _end)
                     {
-                        roomVariable.PrepareRoom(enemiesParent, chestsParent, room, gridPathfind);
+                        roomVariable.PrepareRoom(enemiesParent, chestsParent, mazeParent, room, gridPathfind, mazeEntrancePrefab);
                         roomListAux.Remove(room);
                         break;
                     }

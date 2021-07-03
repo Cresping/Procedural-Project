@@ -48,10 +48,8 @@ namespace HeroesGames.ProjectProcedural.Inventory
             {
                 if (playerVariableSO.PlayerPosition == new Vector2(transform.position.x + direction.x, transform.position.y + direction.y))
                 {
-                    if (TryGetItem())
-                    {
-                        playerVariableSO.PlayerPositionOnValueChange -= OpenChest;
-                    }
+                    TryGetItem();
+                    playerVariableSO.PlayerPositionOnValueChange -= OpenChest;
                     return;
                 }
             }

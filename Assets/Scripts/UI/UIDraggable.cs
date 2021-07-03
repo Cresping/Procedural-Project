@@ -18,17 +18,19 @@ namespace HeroesGames.ProjectProcedural.UI
         private Transform _parentToReturn;
         private CanvasGroup _canvasGroup;
         private Image _imageObject;
-        private bool _isEquiped;
 
         public Transform ParentToReturn { get => _parentToReturn; set => _parentToReturn = value; }
         public ObjectInventoryVariableSO ObjectInventoryVariableSO { get => objectInventoryVariableSO; set => objectInventoryVariableSO = value; }
-        public bool IsEquiped { get => _isEquiped; set => _isEquiped = value; }
 
         private void Awake()
         {
             _canvasGroup = GetComponent<CanvasGroup>();
             _imageObject = GetComponent<Image>();
             _imageObject.sprite = objectInventoryVariableSO.ObjectSprite;
+
+        }
+        private void OnEnable()
+        {
             dragZone = GameObject.FindGameObjectWithTag("DragZone").transform;
         }
         public void OnBeginDrag(PointerEventData eventData)

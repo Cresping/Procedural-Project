@@ -17,7 +17,9 @@ namespace HeroesGames.ProjectProcedural.SO
         public Action PlayerSpeedOnValueChange;
         public Action PlayerLevelOnValueChange;
 
+        [SerializeField] private PlayerInventoryVariableSO playerInventoryVariableSO;
         [SerializeField] private DungeonVariableSO BSPDungeonVariableSO;
+        [SerializeField] private MazeVariableSO mazeVariableSO;
         [SerializeField] private GameStartBusSO gameStartBusSO;
         [SerializeField] private GameOverBusSO gameOverBusSO;
         [SerializeField] private int playerLevel = 1;
@@ -108,6 +110,7 @@ namespace HeroesGames.ProjectProcedural.SO
             {
                 dungeonLevel = value;
                 BSPDungeonVariableSO.DungeonLvl = dungeonLevel;
+                mazeVariableSO.DungeonLvl = dungeonLevel;
             }
         }
         public int NumberEnemiesKilled { get => _numberEnemiesKilled; set => _numberEnemiesKilled = value; }
@@ -130,6 +133,7 @@ namespace HeroesGames.ProjectProcedural.SO
                     _runtimePlayerAtk += aux.WeaponAttack;
                     _runtimePlayerSpd += aux.WeaponSpeed;
                 }
+                objectInventoryVariableSO.IsEquiped = true;
             }
         }
         public void UnequipObject(int slot, ObjectInventoryVariableSO objectInventoryVariableSO)
@@ -152,6 +156,26 @@ namespace HeroesGames.ProjectProcedural.SO
                     _runtimePlayerSpd -= aux.WeaponSpeed;
                 }
                 objectInventoryVariableSO.PlayerPositionEquipment = -1;
+                objectInventoryVariableSO.IsEquiped = false;
+            }
+        }
+        public void ResetEquipObjects()
+        {
+            foreach (ObjectInventoryVariableSO objectInventory in _equippedObjects)
+            {
+                if (objectInventory is ArmorVariableSO)
+                {
+                    ArmorVariableSO aux = (ArmorVariableSO)objectInventory;
+                    _runtimeMaxPlayerHP += aux.ArmorHP;
+                    _runtimePlayerHP += aux.ArmorHP;
+                    _runtimePlayerDef += aux.ArmorDefense;
+                }
+                else if (objectInventory is WeaponVariableSO)
+                {
+                    WeaponVariableSO aux = (WeaponVariableSO)objectInventory;
+                    _runtimePlayerAtk += aux.WeaponAttack;
+                    _runtimePlayerSpd += aux.WeaponSpeed;
+                }
             }
         }
         public ObjectInventoryVariableSO[] EquippedObjects { get => _equippedObjects; set => _equippedObjects = value; }
@@ -207,7 +231,7 @@ namespace HeroesGames.ProjectProcedural.SO
             {
                 actualDamage = 1;
             }
-            RuntimePlayerHP -= actualDamage;
+            RuntimePlayerHP = -actualDamage;
             return actualDamage;
         }
         public void OnAfterDeserialize()
@@ -243,6 +267,7 @@ namespace HeroesGames.ProjectProcedural.SO
             dungeonLevel = 1;
             _isOnEvent = false;
             _numberEnemiesKilled = 0;
+            ResetEquipObjects();
         }
     }
 }

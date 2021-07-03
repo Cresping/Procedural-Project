@@ -276,24 +276,43 @@ namespace HeroesGames.ProjectProcedural.UI
             enemyAnimationAttack.Append(SequencesTween.DOMoveAnimation(combatEnemySprite.transform, new Vector2(combatEnemySprite.transform.position.x, combatEnemySprite.transform.position.y), 0.05f));
             enemyAnimationAttack.Play();
         }
-        public void DoEnableItemTextBox(ObjectInventoryVariableSO objectInventory)
+        public void DoEnableItemTextBox(bool obtain, ObjectInventoryVariableSO objectInventory)
         {
             CancelInvoke(nameof(DisableDialogueUI));
             CancelInvoke(nameof(DisableLevelUPUI));
             DisableLevelUPUI();
-            for (int i = 0; i < starsBox.Count; i++)
+            if (obtain)
             {
-                if (i + 1 <= objectInventory.ObjectRarity)
+                for (int i = 0; i < starsBox.Count; i++)
                 {
-                    starsBox[i].sprite = unlockedStarSprite;
+                    if (i + 1 <= objectInventory.ObjectRarity)
+                    {
+                        starsBox[i].sprite = unlockedStarSprite;
+                    }
+                    else
+                    {
+                        starsBox[i].sprite = lockedStarSprite;
+                    }
                 }
-                else
-                {
-                    starsBox[i].sprite = lockedStarSprite;
-                }
+                textBox.text = "You have obtained " + objectInventory.name + "!";
+                dialogueUI.gameObject.SetActive(true);
             }
-            textBox.text = "¡Has obtenido " + objectInventory.name + "!";
-            dialogueUI.gameObject.SetActive(true);
+            else
+            {
+                for (int i = 0; i < starsBox.Count; i++)
+                {
+                    if (i + 1 <= objectInventory.ObjectRarity)
+                    {
+                        starsBox[i].sprite = unlockedStarSprite;
+                    }
+                    else
+                    {
+                        starsBox[i].sprite = lockedStarSprite;
+                    }
+                }
+                textBox.text = "You already have the object " + objectInventory.name;
+                dialogueUI.gameObject.SetActive(true);
+            }
             Invoke(nameof(DisableDialogueUI), textBoxFadeTime);
         }
 
@@ -308,7 +327,7 @@ namespace HeroesGames.ProjectProcedural.UI
             CancelInvoke(nameof(DisableLevelUPUI));
             CancelInvoke(nameof(DisableDialogueUI));
             DisableDialogueUI();
-            textLevelUP.text = "¡HAS SUBIDO AL NIVEL " + playerVariableSO.PlayerLevel + "!";
+            textLevelUP.text = "YOU LEVELED UP TO LEVEL " + playerVariableSO.PlayerLevel + "!";
             levelUPUI.gameObject.SetActive(true);
             DoChangeStats();
             Invoke(nameof(DisableLevelUPUI), textBoxFadeTime);

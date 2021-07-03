@@ -28,7 +28,7 @@ namespace HeroesGames.ProjectProcedural.SO
                         if (!CheckRepeated(_dictionaryOneStartObjects, objectInventory))
                         {
                             _dictionaryOneStartObjects.Add(objectInventory.Id, objectInventory);
-                        }
+                        }                     
                         break;
                     case 2:
                         if (!CheckRepeated(_dictionaryTwoStartObjects, objectInventory))
@@ -59,6 +59,7 @@ namespace HeroesGames.ProjectProcedural.SO
                         break;
                 }
             }
+              Debug.Log("Hay un total de  "+_dictionaryOneStartObjects.Count+" de una estrella");
         }
         public ObjectInventoryVariableSO PickRandomItem(int rarity)
         {
@@ -69,35 +70,35 @@ namespace HeroesGames.ProjectProcedural.SO
                     if (_dictionaryOneStartObjects.Count > 0)
                     {
                         List<int> keys = _dictionaryOneStartObjects.Keys.ToList<int>();
-                        _dictionaryOneStartObjects.TryGetValue(keys[Random.Range(0, keys.Count + 1)], out aux);
+                        _dictionaryOneStartObjects.TryGetValue(keys[Random.Range(0, keys.Count)], out aux);
                     }
                     break;
                 case 2:
                     if (_dictionaryTwoStartObjects.Count > 0)
                     {
                         List<int> keys = _dictionaryTwoStartObjects.Keys.ToList<int>();
-                        _dictionaryTwoStartObjects.TryGetValue(keys[Random.Range(0, keys.Count + 1)], out aux);
+                        _dictionaryTwoStartObjects.TryGetValue(keys[Random.Range(0, keys.Count)], out aux);
                     }
                     break;
                 case 3:
                     if (_dictionaryThreeStartObjects.Count > 0)
                     {
                         List<int> keys = _dictionaryThreeStartObjects.Keys.ToList<int>();
-                        _dictionaryThreeStartObjects.TryGetValue(keys[Random.Range(0, keys.Count + 1)], out aux);
+                        _dictionaryThreeStartObjects.TryGetValue(keys[Random.Range(0, keys.Count)], out aux);
                     }
                     break;
                 case 4:
                     if (_dictionaryFourStartObjects.Count > 0)
                     {
                         List<int> keys = _dictionaryFourStartObjects.Keys.ToList<int>();
-                        _dictionaryFourStartObjects.TryGetValue(keys[Random.Range(0, keys.Count + 1)], out aux);
+                        _dictionaryFourStartObjects.TryGetValue(keys[Random.Range(0, keys.Count)], out aux);
                     }
                     break;
                 case 5:
                     if (_dictionaryFiveStartObjects.Count > 0)
                     {
                         List<int> keys = _dictionaryFiveStartObjects.Keys.ToList<int>();
-                        _dictionaryFiveStartObjects.TryGetValue(keys[Random.Range(0, keys.Count + 1)], out aux);
+                        _dictionaryFiveStartObjects.TryGetValue(keys[Random.Range(0, keys.Count)], out aux);
                     }
                     break;
                 default:

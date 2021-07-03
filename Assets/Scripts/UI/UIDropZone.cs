@@ -16,20 +16,16 @@ namespace HeroesGames.ProjectProcedural.UI
         private ObjectInventoryVariableSO _currentObjectInventoryVariableSO;
 
         public int PositionEquipment { get => positionEquipment; set => positionEquipment = value; }
-
         public void OnDrop(PointerEventData eventData)
         {
             UIDraggable draggable = eventData.pointerDrag.GetComponent<UIDraggable>();
             if (draggable)
             {
-
                 if (!isStorage)
                 {
                     _currentObjectInventoryVariableSO = draggable.ObjectInventoryVariableSO;
-                    if (!draggable.IsEquiped)
+                    if (!_currentObjectInventoryVariableSO.IsEquiped)
                     {
-                        mainMenuBusSO.OnUnequipItemEvent?.Invoke(_currentObjectInventoryVariableSO);
-                        draggable.IsEquiped = true;
                         _currentObjectInventoryVariableSO.PlayerPositionEquipment = positionEquipment;
                         mainMenuBusSO.OnEquipItemEvent?.Invoke(_currentObjectInventoryVariableSO);
                         draggable.ParentToReturn = dropParent;
@@ -38,12 +34,10 @@ namespace HeroesGames.ProjectProcedural.UI
                 else
                 {
                     _currentObjectInventoryVariableSO = draggable.ObjectInventoryVariableSO;
-                    draggable.IsEquiped = false;
                     mainMenuBusSO.OnUnequipItemEvent?.Invoke(_currentObjectInventoryVariableSO);
                     draggable.ParentToReturn = dropParent;
                 }
             }
-
         }
 
         public void OnPointerEnter(PointerEventData eventData)

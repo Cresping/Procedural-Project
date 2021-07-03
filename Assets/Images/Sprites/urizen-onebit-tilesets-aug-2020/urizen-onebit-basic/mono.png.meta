@@ -49,7 +49,7 @@ TextureImporter:
     second: mono_14
   - first:
       213: 7630522046721939728
-    second: mono_15
+    second: mazeEntrance
   - first:
       213: -7412171197442839678
     second: mono_16
@@ -1642,7 +1642,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: mono_15
+      name: mazeEntrance
       rect:
         serializedVersion: 2
         x: 196

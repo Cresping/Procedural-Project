@@ -10,19 +10,27 @@ namespace HeroesGames.ProjectProcedural.Procedural
     {
         [SerializeField] private PlayerVariableSO playerVariableSO;
         [SerializeField] private CombatVariableSO combatVariableSO;
-
+        [SerializeField] private bool exitToDungeon = true;
         private void NextDungeon()
         {
-            SceneManager.LoadScene("Dungeon", LoadSceneMode.Single);
+            if (exitToDungeon)
+            {
+                SceneManager.LoadScene("Dungeon", LoadSceneMode.Single);
+            }
+            else
+            {
+                SceneManager.LoadScene("Maze", LoadSceneMode.Single);
+            }
+
         }
         private void OnTriggerEnter2D(Collider2D other)
         {
             if (other.CompareTag("Player"))
             {
-                playerVariableSO.IsOnEvent = true;
-                playerVariableSO.DungeonLevel++;
                 if (!combatVariableSO.IsActive)
                 {
+                    playerVariableSO.IsOnEvent = true;
+                    playerVariableSO.DungeonLevel++;
                     NextDungeon();
                 }
             }

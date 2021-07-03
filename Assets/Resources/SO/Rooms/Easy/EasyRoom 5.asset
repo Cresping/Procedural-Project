@@ -16,3 +16,4 @@ MonoBehaviour:
   enemyTypeList:
   - {fileID: 11400000, guid: f1dfb5c9666dc944a8edda846da00f94, type: 2}
   chestTypeList: []
+  hasEntranceMaze: 1

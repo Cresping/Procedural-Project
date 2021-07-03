@@ -14,7 +14,7 @@ public class UIMainMenuController : MonoBehaviour
     }
     private void Start()
     {
-        storage.SetActive(false);
+        //storage.SetActive(false);
     }
     public void DungeonButton()
     {

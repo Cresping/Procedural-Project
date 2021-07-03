@@ -17,20 +17,39 @@ namespace HeroesGames.ProjectProcedural.SO
         [SerializeField] EnumTypes.RoomType roomType;
         [SerializeField] List<EnemyVariableSO> enemyTypeList;
         [SerializeField] List<ChestVariableSO> chestTypeList;
+        [SerializeField] private bool hasEntranceMaze = false;
 
         private List<GameObject> enemyList;
         private List<GameObject> chestList;
         public EnumTypes.RoomType RoomType { get => roomType; private set => roomType = value; }
 
 
-        public void PrepareRoom(Transform parentEnemies, Transform parentChests, BoundsInt room, GridPathfind gridPathfing)
+        public void PrepareRoom(Transform parentEnemies, Transform parentChests, Transform parentMaze, BoundsInt room, GridPathfind gridPathfing, GameObject entranceMazePrefab)
         {
+            int cont = 0;
             Dictionary<Vector2Int, Vector2Int> currentOccupiedPositions = new Dictionary<Vector2Int, Vector2Int>();
             List<Vector2Int> chestsPosition = new List<Vector2Int>();
             List<Vector2Int> enemiesPosition = new List<Vector2Int>();
+            if (hasEntranceMaze && entranceMazePrefab)
+            {
+                cont = 0;
+                while (cont < MAXIMUM_ATTEMPTS_RANDOM)
+                {
+                    Vector2Int aux;
+                    aux = new Vector2Int(UnityEngine.Random.Range(room.xMin + 2, room.xMax - 3), UnityEngine.Random.Range(room.yMin + 2, room.yMax - 3));
+                    if (!currentOccupiedPositions.ContainsKey(aux) && gridPathfing.IsWalkeable(aux.x, aux.y))
+                    {
+                        GameObject maze = Instantiate(entranceMazePrefab, parentMaze);
+                        currentOccupiedPositions.Add(aux, aux);
+                        gridPathfing.ChangeNode(aux.x, aux.y, true);
+                        maze.transform.position = (Vector3Int) aux;
+                        break;
+                    }
+                }
+            }
             for (int i = chestTypeList.Count - 1; i >= 0; i--)
             {
-                int cont = 0;
+                cont = 0;
                 while (cont < MAXIMUM_ATTEMPTS_RANDOM)
                 {
                     Vector2Int aux;
@@ -47,7 +66,7 @@ namespace HeroesGames.ProjectProcedural.SO
             }
             for (int i = enemyTypeList.Count - 1; i >= 0; i--)
             {
-                int cont = 0;
+                cont = 0;
                 while (cont < MAXIMUM_ATTEMPTS_RANDOM)
                 {
                     Vector2Int aux;

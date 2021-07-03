@@ -8,33 +8,32 @@ namespace HeroesGames.ProjectProcedural.SO
     [CreateAssetMenu(fileName = "NewPlayerInventoryVariable", menuName = "Scriptables/Player/PlayerInventoryVariable")]
     public class PlayerInventoryVariableSO : ScriptableObject, ISerializationCallbackReceiver
     {
-        public Action<ObjectInventoryVariableSO> OnInventoryChange;
-        [SerializeField] private int maxCapacity = 10;
-        private List<ObjectInventoryVariableSO> _objectInventory;
+        [SerializeField] private MainMenuBusSO mainMenuBusSO;
+        public Action<bool, ObjectInventoryVariableSO> OnInventoryChange;
+        private Dictionary<int, ObjectInventoryVariableSO> _inventory;
 
-        public List<ObjectInventoryVariableSO> ObjectInventory { get => _objectInventory; set => _objectInventory = value; }
+        public Dictionary<int, ObjectInventoryVariableSO> Inventory { get => _inventory; set => _inventory = value; }
 
         public bool AddObjectInventory(ObjectInventoryVariableSO objectInventory)
         {
-            if (_objectInventory.Count < maxCapacity)
+            if (!_inventory.ContainsKey(objectInventory.Id))
             {
-                _objectInventory.Add(objectInventory);
-                Debug.Log("Se ha agregado el objeto "+objectInventory.name+" al inventario del jugador");
-                OnInventoryChange?.Invoke(objectInventory);
+                _inventory.Add(objectInventory.Id, objectInventory);
+                Debug.Log("Se ha agregado el objeto " + objectInventory.name + " al inventario del jugador");
+                OnInventoryChange?.Invoke(true, objectInventory);
                 return true;
             }
-            Debug.Log("La bolsa del jugador esta llena");
+            else
+            {
+                OnInventoryChange?.Invoke(false, objectInventory);
+                Debug.Log("El jugador ya tiene se objeto");
+            }
+
             return false;
-        }
-        public bool RemoveObjectInventory(int index)
-        {
-            if (index < 0 || index > _objectInventory.Count) return false;
-            _objectInventory.RemoveAt(index);
-            return true;
         }
         public void OnAfterDeserialize()
         {
-            _objectInventory = new List<ObjectInventoryVariableSO>();
+            _inventory = new Dictionary<int, ObjectInventoryVariableSO>();
         }
 
         public void OnBeforeSerialize()

@@ -13,6 +13,10 @@ namespace HeroesGames.ProjectProcedural.UI
         [SerializeField] private PlayerVariableSO playerVariableSO;
         [SerializeField] private PlayerInventoryVariableSO playerInventoryVariableSO;
         [SerializeField] private RectTransform content;
+        [SerializeField] private RectTransform slot1;
+        [SerializeField] private RectTransform slot2;
+        [SerializeField] private RectTransform slot3;
+        [SerializeField] private RectTransform slot4;
         [SerializeField] private GameObject prefabContentObject;
 
         [SerializeField] private TextMeshProUGUI textHPValue;
@@ -119,13 +123,45 @@ namespace HeroesGames.ProjectProcedural.UI
                 {
                     GameObject.DestroyImmediate(content.GetChild(i).gameObject);
                 }
-                foreach (ObjectInventoryVariableSO objectInventory in playerInventoryVariableSO.ObjectInventory)
+                foreach (ObjectInventoryVariableSO objectInventory in playerInventoryVariableSO.Inventory.Values)
                 {
-                    GameObject newContentObject = new GameObject();
-                    newContentObject = prefabContentObject;
-                    UIDraggable draggableObject = newContentObject.GetComponent<UIDraggable>();
-                    draggableObject.ObjectInventoryVariableSO = objectInventory;
-                    Instantiate(draggableObject, content);
+                    if (!objectInventory.IsEquiped)
+                    {
+                        GameObject newContentObject = new GameObject();
+                        newContentObject = prefabContentObject;
+                        UIDraggable draggableObject = newContentObject.GetComponent<UIDraggable>();
+                        draggableObject.ObjectInventoryVariableSO = objectInventory;
+                        Instantiate(draggableObject, content);
+                    }
+                    else
+                    {
+                        GameObject newSlotObject = new GameObject();
+                        newSlotObject = prefabContentObject;
+                        UIDraggable draggableObject = newSlotObject.GetComponent<UIDraggable>();
+                        draggableObject.ObjectInventoryVariableSO = objectInventory;
+                        switch (objectInventory.PlayerPositionEquipment)
+                        {
+                            case 0:
+                                Instantiate(draggableObject, slot1);
+                                mainMenuBusSO.OnEquipItemEvent?.Invoke(objectInventory);
+                                break;
+                            case 1:
+                                Instantiate(draggableObject, slot2);
+                                mainMenuBusSO.OnEquipItemEvent?.Invoke(objectInventory);
+                                break;
+                            case 2:
+                                Instantiate(draggableObject, slot3);
+                                mainMenuBusSO.OnEquipItemEvent?.Invoke(objectInventory);
+                                break;
+                            case 3:
+                                Instantiate(draggableObject, slot4);
+                                mainMenuBusSO.OnEquipItemEvent?.Invoke(objectInventory);
+                                break;
+                            default:
+                                Debug.LogError("Error al cargar los objetos equipados");
+                                break;
+                        }
+                    }
                 }
             }
             else
