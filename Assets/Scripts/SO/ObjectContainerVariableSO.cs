@@ -59,7 +59,6 @@ namespace HeroesGames.ProjectProcedural.SO
                         break;
                 }
             }
-              Debug.Log("Hay un total de  "+_dictionaryOneStartObjects.Count+" de una estrella");
         }
         public ObjectInventoryVariableSO PickRandomItem(int rarity)
         {

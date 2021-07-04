@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 445d399a3dc840740b478bcbae0f028b, type: 3}
+  m_Name: VeryHard 20
+  m_EditorClassIdentifier: 
+  roomType: 3
+  enemyTypeList:
+  - {fileID: 11400000, guid: 4cd443fbbcd12c04eb266c9422aa7c04, type: 2}
+  - {fileID: 11400000, guid: 4cd443fbbcd12c04eb266c9422aa7c04, type: 2}
+  - {fileID: 11400000, guid: 4cd443fbbcd12c04eb266c9422aa7c04, type: 2}
+  - {fileID: 11400000, guid: e5e789c260cd9bc40bd2763e7a7cde07, type: 2}
+  - {fileID: 11400000, guid: 4cd443fbbcd12c04eb266c9422aa7c04, type: 2}
+  chestTypeList:
+  - {fileID: 11400000, guid: 7bfb03478bee15440b243cb978b823a9, type: 2}
+  hasEntranceMaze: 0

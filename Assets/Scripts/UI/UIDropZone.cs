@@ -21,9 +21,11 @@ namespace HeroesGames.ProjectProcedural.UI
             UIDraggable draggable = eventData.pointerDrag.GetComponent<UIDraggable>();
             if (draggable)
             {
+                _currentObjectInventoryVariableSO = draggable.ObjectInventoryVariableSO;
+                mainMenuBusSO.OnDropItem?.Invoke(_currentObjectInventoryVariableSO);
                 if (!isStorage)
                 {
-                    _currentObjectInventoryVariableSO = draggable.ObjectInventoryVariableSO;
+
                     if (!_currentObjectInventoryVariableSO.IsEquiped)
                     {
                         _currentObjectInventoryVariableSO.PlayerPositionEquipment = positionEquipment;
@@ -33,7 +35,6 @@ namespace HeroesGames.ProjectProcedural.UI
                 }
                 else
                 {
-                    _currentObjectInventoryVariableSO = draggable.ObjectInventoryVariableSO;
                     mainMenuBusSO.OnUnequipItemEvent?.Invoke(_currentObjectInventoryVariableSO);
                     draggable.ParentToReturn = dropParent;
                 }

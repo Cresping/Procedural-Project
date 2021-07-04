@@ -135,7 +135,6 @@ namespace HeroesGames.ProjectProcedural.UI
         public void ButtonExitDungeon()
         {
             Debug.Log("Cargando menu");
-            playerVariableSO.ResetValues();
             SceneManager.LoadScene("MainMenu", LoadSceneMode.Single);
         }
         public void ButtonAttack()

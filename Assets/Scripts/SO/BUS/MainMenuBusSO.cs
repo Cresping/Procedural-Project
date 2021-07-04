@@ -9,6 +9,7 @@ namespace HeroesGames.ProjectProcedural.SO
     public class MainMenuBusSO : ScriptableObject
     {
         public Action<ObjectInventoryVariableSO> OnDragItem;
+        public Action<ObjectInventoryVariableSO> OnDropItem;
         public Action<ObjectInventoryVariableSO> OnEquipItemEvent;
         public Action<ObjectInventoryVariableSO> OnUnequipItemEvent;
     }

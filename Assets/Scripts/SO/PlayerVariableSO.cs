@@ -18,6 +18,7 @@ namespace HeroesGames.ProjectProcedural.SO
         public Action PlayerLevelOnValueChange;
 
         [SerializeField] private PlayerInventoryVariableSO playerInventoryVariableSO;
+        [SerializeField] private PlayerRecordsVariableSO playerRecordsVariableSO;
         [SerializeField] private DungeonVariableSO BSPDungeonVariableSO;
         [SerializeField] private MazeVariableSO mazeVariableSO;
         [SerializeField] private GameStartBusSO gameStartBusSO;
@@ -268,6 +269,22 @@ namespace HeroesGames.ProjectProcedural.SO
             _isOnEvent = false;
             _numberEnemiesKilled = 0;
             ResetEquipObjects();
+        }
+        public void UpdateRecords()
+        {
+            if (playerLevel > playerRecordsVariableSO.MaxPlayerLevel)
+            {
+                playerRecordsVariableSO.MaxPlayerLevel = playerLevel;
+            }
+            if (dungeonLevel > playerRecordsVariableSO.MaxDungeonLevel)
+            {
+                playerRecordsVariableSO.MaxDungeonLevel = dungeonLevel;
+            }
+            if (playerInventoryVariableSO.Inventory.Count > playerRecordsVariableSO.NumberObjectsUnlocked)
+            {
+                playerRecordsVariableSO.NumberObjectsUnlocked = playerInventoryVariableSO.Inventory.Count;
+            }
+
         }
     }
 }

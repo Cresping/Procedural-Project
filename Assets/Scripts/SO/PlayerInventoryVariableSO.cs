@@ -26,10 +26,14 @@ namespace HeroesGames.ProjectProcedural.SO
             else
             {
                 OnInventoryChange?.Invoke(false, objectInventory);
-                Debug.Log("El jugador ya tiene se objeto");
+                Debug.Log("El jugador ya tiene ese objeto");
             }
 
             return false;
+        }
+        private void OnEnable()
+        {
+            _inventory = new Dictionary<int, ObjectInventoryVariableSO>();
         }
         public void OnAfterDeserialize()
         {

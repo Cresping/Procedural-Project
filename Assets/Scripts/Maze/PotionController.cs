@@ -21,6 +21,7 @@ namespace HeroesGames.ProjectProcedural.Procedural
             RecoverHealth();
             soundController.PlaySound(potionClip);
             uiController.ShowMessages("You've found a health potion!",messageDuration);
+            uiController.DoChangeStats();
             GetComponent<TilemapCollider2D>().enabled = false;
             GetComponent<Tilemap>().color = Color.black;
         }

@@ -31,16 +31,13 @@ namespace HeroesGames.ProjectProcedural.Inventory
                 Debug.LogError("El cofre " + gameObject.name + " no tiene SpriteRenderer");
             }
         }
-        public bool TryGetItem()
+        public void GetItem()
         {
 
-            if (playerInventoryVariableSO.AddObjectInventory(_chestObject))
-            {
-                _chestSpriteRenderer.sprite = chestVariableSO.OpenChestSprite;
-                _chestObject = null;
-                return true;
-            }
-            return false;
+            playerInventoryVariableSO.AddObjectInventory(_chestObject);
+            _chestSpriteRenderer.sprite = chestVariableSO.OpenChestSprite;
+            _chestObject = null;
+
         }
         private void OpenChest()
         {
@@ -48,7 +45,7 @@ namespace HeroesGames.ProjectProcedural.Inventory
             {
                 if (playerVariableSO.PlayerPosition == new Vector2(transform.position.x + direction.x, transform.position.y + direction.y))
                 {
-                    TryGetItem();
+                    GetItem();
                     playerVariableSO.PlayerPositionOnValueChange -= OpenChest;
                     return;
                 }

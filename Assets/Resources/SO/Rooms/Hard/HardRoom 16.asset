@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 445d399a3dc840740b478bcbae0f028b, type: 3}
+  m_Name: HardRoom 16
+  m_EditorClassIdentifier: 
+  roomType: 2
+  enemyTypeList:
+  - {fileID: 11400000, guid: 347091ba658f38748a6bba7988adf221, type: 2}
+  - {fileID: 11400000, guid: 6bdeb3483e62d1c43b8d702b77d55d7f, type: 2}
+  - {fileID: 11400000, guid: 45a2146e3c9972944a7d6516423cce32, type: 2}
+  chestTypeList:
+  - {fileID: 11400000, guid: 8a105b9b7b8eb4640a0a1d955e84e64d, type: 2}
+  hasEntranceMaze: 1

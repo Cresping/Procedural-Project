@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7480030170005920202}
   - component: {fileID: 7480030170005920203}
   - component: {fileID: 7480030170005920201}
-  - component: {fileID: 2129741267580570042}
+  - component: {fileID: -8924197990430021198}
   m_Layer: 9
   m_Name: Mimic
   m_TagString: Enemy
@@ -81,7 +81,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &2129741267580570042
+--- !u!114 &-8924197990430021198
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -90,11 +90,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 7480030170005920205}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 81fce16514d52e44881de0f8036fbfdc, type: 3}
+  m_Script: {fileID: 11500000, guid: 7103f51b9252ed44eab2d3ef2604b40f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   gameVariableSO: {fileID: 11400000, guid: c9f70f3a05f02f943948a81ac920d4fe, type: 2}
   gridPathfind: {fileID: 0}
+  animatorHelper:
+    nameWalkUpParameter: 
+    nameWalkDownParameter: 
+    nameDeadParameter: 
   combatVariableSO: {fileID: 11400000, guid: 4de606722f98fda4887b78215d26751b, type: 2}
   enemyVariableSO: {fileID: 11400000, guid: 1d9943a62cbd57646835617ce4eab25b, type: 2}
   playerVariableSO: {fileID: 11400000, guid: 82464bdcbc557ff41b3b1e47fa852778, type: 2}
