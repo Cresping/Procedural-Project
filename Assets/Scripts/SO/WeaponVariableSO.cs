@@ -12,9 +12,6 @@ namespace HeroesGames.ProjectProcedural.SO
 
         public int WeaponAttack { get => weaponAttack; set => weaponAttack = value; }
         public int WeaponSpeed { get => weaponSpeed; set => weaponSpeed = value; }
-
-        public override void OnAfterDeserialize() { }
-        public override void OnBeforeSerialize() { }
     }
 }
 

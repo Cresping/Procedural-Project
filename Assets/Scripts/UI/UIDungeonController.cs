@@ -344,7 +344,7 @@ namespace HeroesGames.ProjectProcedural.UI
             dungeonLevelStatValue.text = playerVariableSO.DungeonLevel.ToString();
             playerLevelStatValue.text = playerVariableSO.PlayerLevel.ToString();
             enemiesKilledStatValue.text = playerVariableSO.NumberEnemiesKilled.ToString();
-            textTimer.text = "00:00:00";
+            textTimer.text = "00:00";
             gameOverUI.gameObject.SetActive(true);
             Invoke(nameof(EnableButtonGameOver), 2f);
         }
@@ -371,10 +371,14 @@ namespace HeroesGames.ProjectProcedural.UI
                 timerVariableSO.TimeSeconds -= Time.deltaTime;
                 int seconds = Mathf.FloorToInt(timerVariableSO.TimeSeconds % 60F);
                 int milliseconds = Mathf.FloorToInt((timerVariableSO.TimeSeconds * 100F) % 100F);
-                textTimer.text = seconds.ToString("00") + ":" + milliseconds.ToString("00");
+                if (milliseconds > 0.0f)
+                {
+                    textTimer.text = seconds.ToString("00") + ":" + milliseconds.ToString("00");
+                }
                 yield return null;
             }
-            textTimer.text = "00:00:00";
+            yield return new WaitForSeconds(0.5f);
+            textTimer.text = "00:00";
         }
 
     }

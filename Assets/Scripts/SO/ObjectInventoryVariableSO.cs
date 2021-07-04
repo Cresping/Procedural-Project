@@ -14,7 +14,7 @@ namespace HeroesGames.ProjectProcedural.SO
         [SerializeField]
         protected int objectRarity = 1;
         private int _playerPositionEquipment;
-        private bool _isEquiped;
+        private bool _isEquiped=false;
 
         public int ObjectRarity { get => objectRarity; set => objectRarity = value; }
         public Sprite ObjectSprite { get => objectSprite; set => objectSprite = value; }
@@ -26,12 +26,12 @@ namespace HeroesGames.ProjectProcedural.SO
         private void OnEnable()
         {
             this._id = GetInstanceID();
-            _playerPositionEquipment = -1;
-            _isEquiped = false;
         }
         public virtual void OnAfterDeserialize()
         {
             this._id = GetInstanceID();
+            _isEquiped = false;
+            _playerPositionEquipment = -1;
         }
         public virtual void OnBeforeSerialize()
         {

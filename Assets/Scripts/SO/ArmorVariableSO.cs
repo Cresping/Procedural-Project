@@ -13,8 +13,5 @@ namespace HeroesGames.ProjectProcedural.SO
         public int ArmorHP { get => armorHP; set => armorHP = value; }
         public int ArmorDefense { get => armorDefense; set => armorDefense = value; }
 
-
-        public override void OnAfterDeserialize() { }
-        public override void OnBeforeSerialize() { }
     }
 }

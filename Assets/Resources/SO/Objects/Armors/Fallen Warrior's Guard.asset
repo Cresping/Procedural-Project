@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Fallen Warrior's Guard
   m_EditorClassIdentifier: 
   objectName: Fallen Warrior's Guard
-  objectSprite: {fileID: 0}
+  objectSprite: {fileID: 5974975697548876711, guid: eb790298f2997bb48a68771850a24d24, type: 3}
   objectRarity: 3
   armorDefense: 9
   armorHP: 9

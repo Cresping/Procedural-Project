@@ -12,5 +12,6 @@ namespace HeroesGames.ProjectProcedural.SO
         public Action<ObjectInventoryVariableSO> OnDropItem;
         public Action<ObjectInventoryVariableSO> OnEquipItemEvent;
         public Action<ObjectInventoryVariableSO> OnUnequipItemEvent;
+        public Action<int> OnEnableSlot;
     }
 }

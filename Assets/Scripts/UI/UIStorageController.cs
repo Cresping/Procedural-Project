@@ -144,18 +144,26 @@ namespace HeroesGames.ProjectProcedural.UI
                             case 0:
                                 Instantiate(draggableObject, slot1);
                                 mainMenuBusSO.OnEquipItemEvent?.Invoke(objectInventory);
+                                slot1.GetComponent<UIDropZone>().IsTaken = true;
+                                slot1.GetComponent<UIDropZone>().CurrentObjectInventoryVariableSO = objectInventory;
                                 break;
                             case 1:
                                 Instantiate(draggableObject, slot2);
                                 mainMenuBusSO.OnEquipItemEvent?.Invoke(objectInventory);
+                                slot2.GetComponent<UIDropZone>().IsTaken = true;
+                                slot2.GetComponent<UIDropZone>().CurrentObjectInventoryVariableSO = objectInventory;
                                 break;
                             case 2:
                                 Instantiate(draggableObject, slot3);
                                 mainMenuBusSO.OnEquipItemEvent?.Invoke(objectInventory);
+                                slot3.GetComponent<UIDropZone>().IsTaken = true;
+                                slot3.GetComponent<UIDropZone>().CurrentObjectInventoryVariableSO = objectInventory;
                                 break;
                             case 3:
                                 Instantiate(draggableObject, slot4);
                                 mainMenuBusSO.OnEquipItemEvent?.Invoke(objectInventory);
+                                slot4.GetComponent<UIDropZone>().IsTaken = true;
+                                slot4.GetComponent<UIDropZone>().CurrentObjectInventoryVariableSO = objectInventory;
                                 break;
                             default:
                                 Debug.LogError("Error al cargar los objetos equipados");

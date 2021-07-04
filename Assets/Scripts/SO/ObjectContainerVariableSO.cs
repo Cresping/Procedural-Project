@@ -7,7 +7,6 @@ namespace HeroesGames.ProjectProcedural.SO
     [CreateAssetMenu(fileName = nameof(ObjectContainerVariableSO), menuName = "Scriptables/" + nameof(ObjectContainerVariableSO) + "/" + nameof(ObjectContainerVariableSO) + "Variable")]
     public class ObjectContainerVariableSO : ScriptableObject
     {
-
         private Dictionary<int, ObjectInventoryVariableSO> _dictionaryOneStartObjects;
         private Dictionary<int, ObjectInventoryVariableSO> _dictionaryTwoStartObjects;
         private Dictionary<int, ObjectInventoryVariableSO> _dictionaryThreeStartObjects;
