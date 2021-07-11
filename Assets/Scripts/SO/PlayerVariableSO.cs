@@ -237,6 +237,7 @@ namespace HeroesGames.ProjectProcedural.SO
         }
         public void OnAfterDeserialize()
         {
+            _equippedObjects = new ObjectInventoryVariableSO[MAX_EQUIPPED_OBJECTS];
             ResetValues();
         }
 
@@ -257,6 +258,7 @@ namespace HeroesGames.ProjectProcedural.SO
         }
         public void ResetValues()
         {
+            Debug.Log("Valores del player reseteados");
             _runtimeMaxPlayerHP = originalPlayerHP;
             _runtimePlayerHP = originalPlayerHP;
             _runtimePlayerAtk = playerAttack;
