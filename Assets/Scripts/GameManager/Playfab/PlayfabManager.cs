@@ -22,8 +22,8 @@ namespace Playfab
 
 
         // Create a user request and try to Log in Playfab Server using PlayfabSettings
-        
-        
+
+
         public void Login(Action<LoginResult> onSuccess, Action<PlayFabError> onError)
         {
 #if UNITY_ANDROID
@@ -53,5 +53,36 @@ namespace Playfab
             => PlayFabClientAPI.GetTitleData(new GetTitleDataRequest(), onSuccess, onError);
 
         #endregion
+
+        public void GetInventory(Action<GetUserInventoryResult> onSucess, Action onError = null)
+        {
+            var request = new GetUserInventoryRequest()
+            {
+
+            };
+            PlayFabClientAPI.GetUserInventory(request,
+            (result) =>
+            {
+                onSucess(result);
+            },
+            (error) =>
+            {
+                onError?.Invoke();
+            }
+            );
+        }
+        public void PurchaseFreeItem()
+        {
+            var request = new GrantItemsToUserRequest()
+            {
+
+            };
+            var result = server.GrantItemsToUser(
+{
+            PlayFabID: currentPlayerId,
+ CatalogVersion: "New Shop",
+ ItemIds:[rewards]
+});
+        }
     }
 }
