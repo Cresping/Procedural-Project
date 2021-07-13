@@ -73,16 +73,10 @@ namespace Playfab
         }
         public void PurchaseFreeItem()
         {
-            var request = new GrantItemsToUserRequest()
-            {
+            //var request = new GrantItemsToUserRequest()
+            //{
 
-            };
-            var result = server.GrantItemsToUser(
-{
-            PlayFabID: currentPlayerId,
- CatalogVersion: "New Shop",
- ItemIds:[rewards]
-});
+            //};
         }
     }
 }
