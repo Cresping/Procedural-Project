@@ -22,7 +22,7 @@ namespace Playfab
             }
             );
         }
-        public void AddItemInventory(ObjectInventoryVariableSO objectInventory)
+        public void AddItemInventory()
         {
             
         }
