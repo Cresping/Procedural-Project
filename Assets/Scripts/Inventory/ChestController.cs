@@ -34,7 +34,7 @@ namespace HeroesGames.ProjectProcedural.Inventory
         public void GetItem()
         {
 
-            playerInventoryVariableSO.AddObjectInventory(_chestObject);
+            playerInventoryVariableSO.AddObjectTemporalInventory(_chestObject);
             _chestSpriteRenderer.sprite = chestVariableSO.OpenChestSprite;
             _chestObject = null;
 

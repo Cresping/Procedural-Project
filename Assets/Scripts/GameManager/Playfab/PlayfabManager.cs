@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using HeroesGames.ProjectProcedural.SO;
 using PlayFab;
 using PlayFab.ClientModels;
 using UnityEngine;
@@ -9,12 +10,27 @@ namespace Playfab
     public class PlayfabManager : Singleton<PlayfabManager>
     {
         [SerializeField] private bool isTestServer = true;
-
+        [SerializeField] private PlayfabBusSO playfabBusSO;
         private const string PLAYFAB_TEST_SERVER = "50267"; // 1 Min Dngon (Test) ID
         private const string PLAYFAB_PRODUCTION_SERVER = "4A8C2"; // 1 Min Dngon (Production) ID
         private string idUser = null;
-        private void Awake() => SelectPlayfabServer();
+        private List<string> _tempObjectsId;
         
+        
+        private void Awake()
+        {
+            SelectPlayfabServer();
+        }
+        private void OnEnable()
+        {
+            playfabBusSO.OnUpdateInventory += GrantItemToUserRequest;
+        }
+        private void OnDisable()
+        {
+            playfabBusSO.OnUpdateInventory -= GrantItemToUserRequest;
+        }
+
+
         #region LOGIN
 
         // Select ServerID depends on isTestServer bool
@@ -72,50 +88,51 @@ namespace Playfab
             }
             );
         }
-        public void GrantItemToUserRequest(List<string> idObjects)
-        {
-            if(idUser!=null)
-            {
-                var request = new PlayFab.ServerModels.GrantItemsToUserRequest()
-                {
-                    CatalogVersion = "EquippableObjects",
-                    ItemIds = idObjects,
-                    PlayFabId = SystemInfo.deviceUniqueIdentifier
-                };
-            }
-        }
         [ContextMenu("AddInventory")]
-        public void GrantItemToUserRequest()
+        public void GrantItemToUser(string idUser, List<string> objectsId)
         {
             PlayFabServerAPI.GrantItemsToUser(new PlayFab.ServerModels.GrantItemsToUserRequest
             {
                 CatalogVersion = "EquippableObjects",
-                ItemIds = new List<string> { "6852" },
+                ItemIds = objectsId,
                 PlayFabId = idUser
-            }, LogSuccess, LogFailure); 
+            }, LogSuccesGrantItemToUser, LogFailureGrantItemToUser); 
         }
         [ContextMenu("AccountInformation")]
-        public void GetAccountInformation()
+        public void GrantItemToUserRequest(List<string> objectsId)
         {
-            GetAccountInfoRequest request = new GetAccountInfoRequest();
-            PlayFabClientAPI.GetAccountInfo(request, LogSuccess, LogFailure);
+            if(idUser==null)
+            {
+                _tempObjectsId = objectsId;
+                GetAccountInfoRequest request = new GetAccountInfoRequest();
+                PlayFabClientAPI.GetAccountInfo(request, LogSuccessAccountInformationGrantItemToUser, LogFailureGrantItemToUser);
+            }
+            else
+            {
+                GrantItemToUser(idUser, objectsId);
+            }
         }
 
-        private void LogSuccess(GetAccountInfoResult obj)
+        private void LogSuccessAccountInformationGrantItemToUser(GetAccountInfoResult obj)
         {
             Debug.Log("Se ha obtenido la informacion de la cuenta con exito");
             Debug.Log("ID de la cuenta: "+obj.AccountInfo.PlayFabId);
             idUser = obj.AccountInfo.PlayFabId;
+            GrantItemToUser(idUser, _tempObjectsId);
+        }
+        private void LogSuccesGrantItemToUser(PlayFab.ServerModels.GrantItemsToUserResult obj)
+        {
+            Debug.Log("Se han agregado objetos al usuario " + idUser + " de forma satisfactoria");
+            _tempObjectsId = new List<string>();
+            playfabBusSO.OnSucessUpdateInventory?.Invoke();
+        }
+        private void LogFailureGrantItemToUser(PlayFabError obj)
+        {
+            Debug.LogError("Ha ocurrido un error con Playfab:" + obj.GenerateErrorReport());
+            playfabBusSO.OnFailedUpdateInventory?.Invoke(obj.ErrorMessage);
+
         }
 
-        private void LogFailure(PlayFabError obj)
-        {
-            Debug.LogError("Pos no funciona " + obj.GenerateErrorReport());
-        }
 
-        private void LogSuccess(PlayFab.ServerModels.GrantItemsToUserResult obj)
-        {
-            Debug.Log("Pos si funciona");
-        }
     }
 }

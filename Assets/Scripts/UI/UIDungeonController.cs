@@ -10,6 +10,7 @@ using TMPro;
 using System;
 using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
+using Playfab;
 
 namespace HeroesGames.ProjectProcedural.UI
 {
@@ -24,8 +25,10 @@ namespace HeroesGames.ProjectProcedural.UI
         [SerializeField] TextMeshPro damagePrefab;
         [SerializeField] GameObject pauseMenu;
 
+        //Movement Buttons
         [SerializeField] GameObject movementButtons;
 
+        //Combat Buttons
         [SerializeField] GameObject combatButtons;
         [SerializeField] private GameObject combatUI;
         [SerializeField] private Button normalAttackButton;
@@ -40,27 +43,32 @@ namespace HeroesGames.ProjectProcedural.UI
         [SerializeField] private RectTransform combatPlayerDamagePosition;
         [SerializeField] private RectTransform combatEnemyDamagePosition;
 
-
+        //Player Stats
         [SerializeField] private TextMeshProUGUI hpStatValue;
         [SerializeField] private TextMeshProUGUI attackStatValue;
         [SerializeField] private TextMeshProUGUI speedStatValue;
         [SerializeField] private TextMeshProUGUI defStatValue;
 
+        //UnlockWeaponUI  
         [SerializeField] private GameObject dialogueUI;
         [SerializeField] private TextMeshProUGUI textBox;
         [SerializeField] private List<Image> starsBox;
         [SerializeField] private Sprite lockedStarSprite;
         [SerializeField] private Sprite unlockedStarSprite;
 
+        //LevelUPUI
         [SerializeField] private GameObject levelUPUI;
         [SerializeField] private TextMeshProUGUI textLevelUP;
 
+        //DialogueUI
         [SerializeField] private GameObject messagesUI;
         [SerializeField] private TextMeshProUGUI messageText;
 
+        //Timer
         [SerializeField] private TimerVariableSO timerVariableSO;
         [SerializeField] private TextMeshProUGUI textTimer;
 
+        //GameOver
         [SerializeField] private GameOverBusSO gameOverBusSO;
         [SerializeField] private GameObject gameOverUI;
         [SerializeField] private Button buttonGameOverExitMenu;
@@ -68,6 +76,9 @@ namespace HeroesGames.ProjectProcedural.UI
         [SerializeField] private TextMeshProUGUI playerLevelStatValue;
         [SerializeField] private TextMeshProUGUI enemiesKilledStatValue;
         [SerializeField] private int textBoxFadeTime;
+
+        //PlayFab
+        [SerializeField] private PlayfabBusSO playfabBusSO;
 
         private PlayerController _playerController;
         private PlayerCombatController _playerCombatController;
@@ -79,6 +90,7 @@ namespace HeroesGames.ProjectProcedural.UI
             playerInventoryVariableSO.OnInventoryChange += DoEnableItemTextBox;
             playerVariableSO.PlayerLevelOnValueChange += DoLevelUP;
             gameOverBusSO.OnGameOverEvent += DoGameOver;
+            playfabBusSO.OnSucessUpdateInventory += EnableButtonGameOver;
             StartCoroutine(_coroutineReduceTimer);
         }
         private void OnDisable()
@@ -87,6 +99,7 @@ namespace HeroesGames.ProjectProcedural.UI
             playerInventoryVariableSO.OnInventoryChange -= DoEnableItemTextBox;
             playerVariableSO.PlayerLevelOnValueChange -= DoLevelUP;
             gameOverBusSO.OnGameOverEvent -= DoGameOver;
+            playfabBusSO.OnSucessUpdateInventory -= EnableButtonGameOver;
             try { StopCoroutine(_coroutineReduceTimer); } catch (NullReferenceException) { }
         }
 
@@ -341,12 +354,12 @@ namespace HeroesGames.ProjectProcedural.UI
         public void DoGameOver()
         {
             try { StopCoroutine(_coroutineReduceTimer); } catch (NullReferenceException) { }
+            playerInventoryVariableSO.UpdateInventory();
             dungeonLevelStatValue.text = playerVariableSO.DungeonLevel.ToString();
             playerLevelStatValue.text = playerVariableSO.PlayerLevel.ToString();
             enemiesKilledStatValue.text = playerVariableSO.NumberEnemiesKilled.ToString();
             textTimer.text = "00:00";
             gameOverUI.gameObject.SetActive(true);
-            Invoke(nameof(EnableButtonGameOver), 2f);
         }
         public void EnableButtonGameOver()
         {
