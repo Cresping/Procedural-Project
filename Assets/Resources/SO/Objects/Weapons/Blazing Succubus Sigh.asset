@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fe51f3cef6b2804b8d7490f7a62318b, type: 3}
   m_Name: Blazing Succubus Sigh
   m_EditorClassIdentifier: 
+  _id: 7070
   objectName: Blazing Succubus Sigh
   objectSprite: {fileID: 3253653294767027575, guid: eb790298f2997bb48a68771850a24d24, type: 3}
   objectRarity: 2

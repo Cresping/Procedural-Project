@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fe51f3cef6b2804b8d7490f7a62318b, type: 3}
   m_Name: Dragon-tailed Axe
   m_EditorClassIdentifier: 
+  _id: 7052
   objectName: Dragon-tailed Axe
   objectSprite: {fileID: -1291384152859764808, guid: eb790298f2997bb48a68771850a24d24, type: 3}
   objectRarity: 3

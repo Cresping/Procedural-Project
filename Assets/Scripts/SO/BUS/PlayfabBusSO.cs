@@ -8,12 +8,13 @@ namespace HeroesGames.ProjectProcedural.SO
     [CreateAssetMenu(fileName = "PlayfabErrorBusSO", menuName = "Scriptables/Bus/PlayfabErrorBus")]
     public class PlayfabBusSO : ScriptableObject
     {
-        public Action<string> OnFailedUpdateInventory;
-        public Action OnSucessUpdateInventory;
+        public Action OnLogin;
         public Action<List<string>> OnUpdateInventory;
         public Action OnLoadPlayfabInventory;
-        public Action<List<string>> OnSucessLoadPlayfabInventory;
-        public Action OnFailedLoadPlayfabInventory;
+        public Action OnSucessLogin;
+        public Action OnSucessUpdateInventory;
+        public Action OnSucessLoadPlayfabInventory;
+        public Action<string> OnErrorPlayFab;
     }
 
 }

@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fe51f3cef6b2804b8d7490f7a62318b, type: 3}
   m_Name: Elf's Dream Pike
   m_EditorClassIdentifier: 
+  _id: 6996
   objectName: Elf's Dream Pike
   objectSprite: {fileID: 6612155809946945768, guid: eb790298f2997bb48a68771850a24d24, type: 3}
   objectRarity: 1

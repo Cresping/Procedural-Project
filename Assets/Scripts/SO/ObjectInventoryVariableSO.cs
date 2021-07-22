@@ -6,7 +6,7 @@ namespace HeroesGames.ProjectProcedural.SO
 {
     public abstract class ObjectInventoryVariableSO : ScriptableObject, ISerializationCallbackReceiver
     {
-        private int _id;
+        [SerializeField] private int _id=0;
         [SerializeField] private string objectName;
 
         [SerializeField] private Sprite objectSprite;
@@ -23,13 +23,12 @@ namespace HeroesGames.ProjectProcedural.SO
         public int PlayerPositionEquipment { get => _playerPositionEquipment; set => _playerPositionEquipment = value; }
         public bool IsEquiped { get => _isEquiped; set => _isEquiped = value; }
 
-        private void OnEnable()
-        {
-            this._id = GetInstanceID();
-        }
         public virtual void OnAfterDeserialize()
         {
-            this._id = GetInstanceID();
+            if(this._id==0)
+            {
+                this._id = GetInstanceID();
+            }
             _isEquiped = false;
             _playerPositionEquipment = -1;
         }

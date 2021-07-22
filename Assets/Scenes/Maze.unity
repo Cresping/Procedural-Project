@@ -9109,6 +9109,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1671131068}
     - target: {fileID: 7558553593833519847, guid: 6280080cc2b0935468040a56ab6e5d09, type: 3}
+      propertyPath: playfabBusSO
+      value: 
+      objectReference: {fileID: 11400000, guid: 4db44d32de64e2d4fbabcf602fac0d44, type: 2}
+    - target: {fileID: 7558553593833519847, guid: 6280080cc2b0935468040a56ab6e5d09, type: 3}
       propertyPath: combatButtons
       value: 
       objectReference: {fileID: 1671131072}

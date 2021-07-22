@@ -33,6 +33,15 @@ namespace HeroesGames.ProjectProcedural.SO
 
             return false;
         }
+        public bool AddObjectInventory(ObjectInventoryVariableSO objectInventory)
+        {
+            if (!_inventory.ContainsKey(objectInventory.Id))
+            {
+                _inventory.Add(objectInventory.Id, objectInventory);
+                return true;
+            }
+            return false;
+        }
         public void UpdateInventory()
         {
             List<string> objectsId = new List<string>();
@@ -41,7 +50,10 @@ namespace HeroesGames.ProjectProcedural.SO
                 objectsId.Add(objectInventory.Id.ToString());
                 _inventory.Add(objectInventory.Id, objectInventory);
             }
-            playfabBusSO.OnUpdateInventory.Invoke(objectsId);
+            if(objectsId.Count>0)
+            {
+                playfabBusSO.OnUpdateInventory.Invoke(objectsId);
+            }
         }
         private void ResetValues()
         {
@@ -52,7 +64,6 @@ namespace HeroesGames.ProjectProcedural.SO
             _inventory = new Dictionary<int, ObjectInventoryVariableSO>();
             _temporalInventory = new Dictionary<int, ObjectInventoryVariableSO>();
             playfabBusSO.OnSucessUpdateInventory += ResetValues;
-            playfabBusSO.OnLoadPlayfabInventory?.Invoke();
         }
         public void OnAfterDeserialize()
         {

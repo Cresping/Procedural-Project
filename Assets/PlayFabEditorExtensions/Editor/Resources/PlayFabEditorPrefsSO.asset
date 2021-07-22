@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: PlayFabEditorPrefsSO
   m_EditorClassIdentifier: 
   DevAccountEmail: heroesgames.mbox@gmail.com
-  DevAccountToken: i8qqzx3cj7d6azm51x6yhzkxyftgtccseazo88ip97tqkm9yx5e9pn3wm47omruncaoa74e44ie1uyypnd48x65tmbubdx9m9cfk791q9hyn5jyj7usfsptqguknnksmpaj9ixn8btbmcokxsaqgwy7mc4ypqm7z86ngeoreezj69ibmxob8akteiajweea399uwe5mp
+  DevAccountToken: dihqs34uuk8qdh4xnnut9mcur3mg4s7orfmm8hwwsrizo8brdy3k3hnxdarf374e7bq5om9edxnjybrmxqofthi7rifc3xaga6hrf1ajgd4431br7crrk71ejdypoedjdiu6qqyycka676i6chq3gibahmpb7oxfxtnwc3x5wdy7gw5eumf6git8yx8s37gerxnudwro
   SelectedStudio: Heroes Games
   SdkPath: Assets/PlayFabSDK
   EdExPath: 

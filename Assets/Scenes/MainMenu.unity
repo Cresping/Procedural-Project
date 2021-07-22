@@ -4633,6 +4633,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4326bde4f7032744e949185d77738dfc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  loginManagerSO: {fileID: 11400000, guid: 200ff29924fd5a648824abb6e0b81b05, type: 2}
   playerRecordsVariableSO: {fileID: 11400000, guid: 3fda93bca39cb5d42b563221ded20fd7, type: 2}
   playerVariableSO: {fileID: 11400000, guid: 82464bdcbc557ff41b3b1e47fa852778, type: 2}
   valueMaxLevelPlayer: {fileID: 5432877495926671290}
@@ -4640,6 +4641,7 @@ MonoBehaviour:
   valueCollectedItems: {fileID: 399568306}
   gameStartBusSO: {fileID: 11400000, guid: 3c70e64ec8585094fbbc496e1e5770c6, type: 2}
   storage: {fileID: 655278933}
+  mainScreen: {fileID: 2015699729}
 --- !u!1 &1676451390
 GameObject:
   m_ObjectHideFlags: 0
@@ -4804,6 +4806,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mainMenuBusSO: {fileID: 11400000, guid: 773c7b54a10daf24b8aea1027362643a, type: 2}
+  playfabBusSO: {fileID: 11400000, guid: 4db44d32de64e2d4fbabcf602fac0d44, type: 2}
   playerVariableSO: {fileID: 11400000, guid: 82464bdcbc557ff41b3b1e47fa852778, type: 2}
   playerInventoryVariableSO: {fileID: 11400000, guid: 99202fa02e0b9ac45885a4550ba3ee33, type: 2}
   content: {fileID: 1956524272}
@@ -5458,6 +5461,7 @@ GameObject:
   - component: {fileID: 2015699732}
   - component: {fileID: 2015699731}
   - component: {fileID: 2015699734}
+  - component: {fileID: 2015699735}
   m_Layer: 5
   m_Name: TitleScreen
   m_TagString: Untagged
@@ -5584,18 +5588,6 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2015699729}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
       - m_Target: {fileID: 306581019}
         m_TargetAssemblyTypeName: HeroesGames.ProjectProcedural.Sound.SoundUIController,
           Assembly-CSharp
@@ -5609,6 +5601,32 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 2015699735}
+        m_TargetAssemblyTypeName: HeroesGames.ProjectProcedural.UI.UILoginController,
+          Assembly-CSharp
+        m_MethodName: Login
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &2015699735
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2015699729}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 77eb433d8d6b4104e8dbbbafe81ac140, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playfabBusSO: {fileID: 11400000, guid: 4db44d32de64e2d4fbabcf602fac0d44, type: 2}
 --- !u!1 &2020433480
 GameObject:
   m_ObjectHideFlags: 0

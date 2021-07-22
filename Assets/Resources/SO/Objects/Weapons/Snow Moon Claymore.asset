@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fe51f3cef6b2804b8d7490f7a62318b, type: 3}
   m_Name: Snow Moon Claymore
   m_EditorClassIdentifier: 
+  _id: 6980
   objectName: Snow Moon Claymore
   objectSprite: {fileID: -2495499389721068457, guid: eb790298f2997bb48a68771850a24d24, type: 3}
   objectRarity: 4

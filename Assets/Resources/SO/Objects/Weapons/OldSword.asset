@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fe51f3cef6b2804b8d7490f7a62318b, type: 3}
   m_Name: OldSword
   m_EditorClassIdentifier: 
+  _id: 7138
   objectName: Old Sword
   objectSprite: {fileID: 1460189747944437290, guid: eb790298f2997bb48a68771850a24d24, type: 3}
   objectRarity: 1

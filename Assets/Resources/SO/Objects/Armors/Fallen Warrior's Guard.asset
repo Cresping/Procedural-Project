@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb53c17f418c7e8459b5c2c4e60fa076, type: 3}
   m_Name: Fallen Warrior's Guard
   m_EditorClassIdentifier: 
+  _id: 7006
   objectName: Fallen Warrior's Guard
   objectSprite: {fileID: 5974975697548876711, guid: eb790298f2997bb48a68771850a24d24, type: 3}
   objectRarity: 3

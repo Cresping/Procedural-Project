@@ -2,11 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using System;
+
 namespace HeroesGames.ProjectProcedural.SO
 {
     [CreateAssetMenu(fileName = nameof(ObjectContainerVariableSO), menuName = "Scriptables/" + nameof(ObjectContainerVariableSO) + "/" + nameof(ObjectContainerVariableSO) + "Variable")]
     public class ObjectContainerVariableSO : ScriptableObject
     {
+        private Dictionary<int, ObjectInventoryVariableSO> _dictionaryAllObjects;
         private Dictionary<int, ObjectInventoryVariableSO> _dictionaryOneStartObjects;
         private Dictionary<int, ObjectInventoryVariableSO> _dictionaryTwoStartObjects;
         private Dictionary<int, ObjectInventoryVariableSO> _dictionaryThreeStartObjects;
@@ -18,9 +21,12 @@ namespace HeroesGames.ProjectProcedural.SO
             ObjectInventoryVariableSO[] objectArray;
             ResetDictionaries();
             objectArray = Resources.LoadAll<ObjectInventoryVariableSO>("SO/Objects");
-            Debug.Log("Hay un total de " + objectArray.Length + " objetos");
             foreach (ObjectInventoryVariableSO objectInventory in objectArray)
             {
+                if (!_dictionaryAllObjects.ContainsKey(objectInventory.Id)) 
+                {
+                    _dictionaryAllObjects.Add(objectInventory.Id, objectInventory);
+                }
                 switch (objectInventory.ObjectRarity)
                 {
                     case 1:
@@ -58,6 +64,7 @@ namespace HeroesGames.ProjectProcedural.SO
                         break;
                 }
             }
+            Debug.Log("Hay un total de " + _dictionaryAllObjects.Values.Count + " objetos");
         }
         public ObjectInventoryVariableSO PickRandomItem(int rarity)
         {
@@ -68,35 +75,35 @@ namespace HeroesGames.ProjectProcedural.SO
                     if (_dictionaryOneStartObjects.Count > 0)
                     {
                         List<int> keys = _dictionaryOneStartObjects.Keys.ToList<int>();
-                        _dictionaryOneStartObjects.TryGetValue(keys[Random.Range(0, keys.Count)], out aux);
+                        _dictionaryOneStartObjects.TryGetValue(keys[UnityEngine.Random.Range(0, keys.Count)], out aux);
                     }
                     break;
                 case 2:
                     if (_dictionaryTwoStartObjects.Count > 0)
                     {
                         List<int> keys = _dictionaryTwoStartObjects.Keys.ToList<int>();
-                        _dictionaryTwoStartObjects.TryGetValue(keys[Random.Range(0, keys.Count)], out aux);
+                        _dictionaryTwoStartObjects.TryGetValue(keys[UnityEngine.Random.Range(0, keys.Count)], out aux);
                     }
                     break;
                 case 3:
                     if (_dictionaryThreeStartObjects.Count > 0)
                     {
                         List<int> keys = _dictionaryThreeStartObjects.Keys.ToList<int>();
-                        _dictionaryThreeStartObjects.TryGetValue(keys[Random.Range(0, keys.Count)], out aux);
+                        _dictionaryThreeStartObjects.TryGetValue(keys[UnityEngine.Random.Range(0, keys.Count)], out aux);
                     }
                     break;
                 case 4:
                     if (_dictionaryFourStartObjects.Count > 0)
                     {
                         List<int> keys = _dictionaryFourStartObjects.Keys.ToList<int>();
-                        _dictionaryFourStartObjects.TryGetValue(keys[Random.Range(0, keys.Count)], out aux);
+                        _dictionaryFourStartObjects.TryGetValue(keys[UnityEngine.Random.Range(0, keys.Count)], out aux);
                     }
                     break;
                 case 5:
                     if (_dictionaryFiveStartObjects.Count > 0)
                     {
                         List<int> keys = _dictionaryFiveStartObjects.Keys.ToList<int>();
-                        _dictionaryFiveStartObjects.TryGetValue(keys[Random.Range(0, keys.Count)], out aux);
+                        _dictionaryFiveStartObjects.TryGetValue(keys[UnityEngine.Random.Range(0, keys.Count)], out aux);
                     }
                     break;
                 default:
@@ -105,8 +112,30 @@ namespace HeroesGames.ProjectProcedural.SO
             }
             return aux;
         }
+        public ObjectInventoryVariableSO GetObjectInventory(string id)
+        {
+            try
+            {
+                int parse = Int32.Parse(id);
+                if (_dictionaryAllObjects.ContainsKey(parse))
+                {
+                    return _dictionaryAllObjects[parse];
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            catch (FormatException)
+            {
+                Debug.LogError("El ID " + id + " no es un entero");
+                return null;
+            }
+
+        }
         private void ResetDictionaries()
         {
+            _dictionaryAllObjects = new Dictionary<int, ObjectInventoryVariableSO>();
             _dictionaryOneStartObjects = new Dictionary<int, ObjectInventoryVariableSO>();
             _dictionaryTwoStartObjects = new Dictionary<int, ObjectInventoryVariableSO>();
             _dictionaryThreeStartObjects = new Dictionary<int, ObjectInventoryVariableSO>();

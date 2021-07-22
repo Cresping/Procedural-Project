@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fe51f3cef6b2804b8d7490f7a62318b, type: 3}
   m_Name: Blasphemous Pardon's Halberd
   m_EditorClassIdentifier: 
+  _id: 7214
   objectName: Blasphemous Pardon's Halberd
   objectSprite: {fileID: 2556873601328848464, guid: eb790298f2997bb48a68771850a24d24, type: 3}
   objectRarity: 4

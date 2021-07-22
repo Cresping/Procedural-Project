@@ -21,26 +21,19 @@ namespace Playfab
         {
             SelectPlayfabServer();
         }
-        private void OnEnable()
-        {
-            playfabBusSO.OnUpdateInventory += GrantItemToUserRequest;
-        }
-        private void OnDisable()
-        {
-            playfabBusSO.OnUpdateInventory -= GrantItemToUserRequest;
-        }
-
 
         #region LOGIN
 
         // Select ServerID depends on isTestServer bool
-        private void SelectPlayfabServer() => PlayFabSettings.TitleId =
-            isTestServer ? PLAYFAB_TEST_SERVER : PLAYFAB_PRODUCTION_SERVER;
+        private void SelectPlayfabServer()
+        {
+            PlayFabSettings.TitleId = isTestServer ? PLAYFAB_TEST_SERVER : PLAYFAB_PRODUCTION_SERVER;
+        } 
 
 
         // Create a user request and try to Log in Playfab Server using PlayfabSettings
 
-        //TODO Hacer otro login creando una cuenta con GooglePlay
+        //TODO Hacer otro login creando una cuenta con GooglePlay o  Playfab
         public void Login(Action<LoginResult> onSuccess, Action<PlayFabError> onError)
         {
 #if UNITY_ANDROID
@@ -71,12 +64,9 @@ namespace Playfab
 
         #endregion
 
-        public void GetInventory(Action<GetUserInventoryResult> onSucess, Action onError = null)
+        public void GetUserInventoryRequest(Action<GetUserInventoryResult> onSucess, Action<PlayFabError> onError)
         {
-            var request = new GetUserInventoryRequest()
-            {
-
-            };
+            var request = new GetUserInventoryRequest();
             PlayFabClientAPI.GetUserInventory(request,
             (result) =>
             {
@@ -84,53 +74,42 @@ namespace Playfab
             },
             (error) =>
             {
-                onError?.Invoke();
+                onError?.Invoke(error);
             }
             );
         }
-        [ContextMenu("AddInventory")]
-        public void GrantItemToUser(string idUser, List<string> objectsId)
+        public void GrantItemToUserRequest(string idUser, List<string> objectsId, Action<PlayFab.ServerModels.GrantItemsToUserResult> onSucess, Action<PlayFabError> onError)
         {
-            PlayFabServerAPI.GrantItemsToUser(new PlayFab.ServerModels.GrantItemsToUserRequest
+            var request = new PlayFab.ServerModels.GrantItemsToUserRequest()
             {
                 CatalogVersion = "EquippableObjects",
                 ItemIds = objectsId,
                 PlayFabId = idUser
-            }, LogSuccesGrantItemToUser, LogFailureGrantItemToUser); 
-        }
-        [ContextMenu("AccountInformation")]
-        public void GrantItemToUserRequest(List<string> objectsId)
-        {
-            if(idUser==null)
+            };
+            PlayFabServerAPI.GrantItemsToUser(request,
+            (result) =>
             {
-                _tempObjectsId = objectsId;
-                GetAccountInfoRequest request = new GetAccountInfoRequest();
-                PlayFabClientAPI.GetAccountInfo(request, LogSuccessAccountInformationGrantItemToUser, LogFailureGrantItemToUser);
-            }
-            else
+                 onSucess(result);
+             },
+            (error) =>
             {
-                GrantItemToUser(idUser, objectsId);
+                onError?.Invoke(error);
             }
+            );
         }
-
-        private void LogSuccessAccountInformationGrantItemToUser(GetAccountInfoResult obj)
+        public void GetAccountInfoRequest(Action<GetAccountInfoResult> onSucess, Action<PlayFabError> onError)
         {
-            Debug.Log("Se ha obtenido la informacion de la cuenta con exito");
-            Debug.Log("ID de la cuenta: "+obj.AccountInfo.PlayFabId);
-            idUser = obj.AccountInfo.PlayFabId;
-            GrantItemToUser(idUser, _tempObjectsId);
-        }
-        private void LogSuccesGrantItemToUser(PlayFab.ServerModels.GrantItemsToUserResult obj)
-        {
-            Debug.Log("Se han agregado objetos al usuario " + idUser + " de forma satisfactoria");
-            _tempObjectsId = new List<string>();
-            playfabBusSO.OnSucessUpdateInventory?.Invoke();
-        }
-        private void LogFailureGrantItemToUser(PlayFabError obj)
-        {
-            Debug.LogError("Ha ocurrido un error con Playfab:" + obj.GenerateErrorReport());
-            playfabBusSO.OnFailedUpdateInventory?.Invoke(obj.ErrorMessage);
-
+            GetAccountInfoRequest request = new GetAccountInfoRequest();
+            PlayFabClientAPI.GetAccountInfo(request,
+           (result) =>
+           {
+               onSucess(result);
+           },
+           (error) =>
+           {
+               onError?.Invoke(error);
+           }
+           );
         }
 
 

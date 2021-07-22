@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb53c17f418c7e8459b5c2c4e60fa076, type: 3}
   m_Name: Shield of Regal's Faith
   m_EditorClassIdentifier: 
+  _id: 7178
   objectName: Shield of Regal's Faith
   objectSprite: {fileID: 6133929978387928825, guid: eb790298f2997bb48a68771850a24d24, type: 3}
   objectRarity: 1

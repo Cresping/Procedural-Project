@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fe51f3cef6b2804b8d7490f7a62318b, type: 3}
   m_Name: Dragon's Eye Mandoble
   m_EditorClassIdentifier: 
+  _id: 7226
   objectName: Dragon's Eye Mandoble
   objectSprite: {fileID: 4424935010822704702, guid: eb790298f2997bb48a68771850a24d24, type: 3}
   objectRarity: 3

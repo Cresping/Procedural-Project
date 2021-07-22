@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fe51f3cef6b2804b8d7490f7a62318b, type: 3}
   m_Name: Nimble Wrist Axe
   m_EditorClassIdentifier: 
+  _id: 7206
   objectName: Nimble Wrist Axe
   objectSprite: {fileID: -4365721819942672217, guid: eb790298f2997bb48a68771850a24d24, type: 3}
   objectRarity: 1

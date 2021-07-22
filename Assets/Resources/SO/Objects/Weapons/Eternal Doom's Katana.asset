@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fe51f3cef6b2804b8d7490f7a62318b, type: 3}
   m_Name: Eternal Doom's Katana
   m_EditorClassIdentifier: 
+  _id: 6932
   objectName: Eternal Doom's Katana
   objectSprite: {fileID: -4038730528674392297, guid: eb790298f2997bb48a68771850a24d24, type: 3}
   objectRarity: 1

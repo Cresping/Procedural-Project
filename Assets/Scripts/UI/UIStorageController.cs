@@ -10,6 +10,7 @@ namespace HeroesGames.ProjectProcedural.UI
     public class UIStorageController : MonoBehaviour
     {
         [SerializeField] private MainMenuBusSO mainMenuBusSO;
+        [SerializeField] private PlayfabBusSO playfabBusSO;
         [SerializeField] private PlayerVariableSO playerVariableSO;
         [SerializeField] private PlayerInventoryVariableSO playerInventoryVariableSO;
         [SerializeField] private RectTransform content;
@@ -41,12 +42,14 @@ namespace HeroesGames.ProjectProcedural.UI
         }
         private void OnEnable()
         {
+            playfabBusSO.OnSucessLoadPlayfabInventory += LoadStorage;
             mainMenuBusSO.OnEquipItemEvent += DoIncreaseStats;
             mainMenuBusSO.OnUnequipItemEvent += DoDecreaseStats;
-            mainMenuBusSO.OnDragItem += DoUpdateObjectInfo;
+            mainMenuBusSO.OnDragItem += DoUpdateObjectInfo;   
         }
         private void OnDisable()
         {
+            playfabBusSO.OnSucessLoadPlayfabInventory -= LoadStorage;
             mainMenuBusSO.OnEquipItemEvent -= DoIncreaseStats;
             mainMenuBusSO.OnUnequipItemEvent -= DoDecreaseStats;
             mainMenuBusSO.OnDragItem -= DoUpdateObjectInfo;

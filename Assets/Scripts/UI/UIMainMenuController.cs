@@ -7,6 +7,8 @@ using UnityEngine.SceneManagement;
 
 public class UIMainMenuController : MonoBehaviour
 {
+    [SerializeField] private LoginManagerSO loginManagerSO;
+    [SerializeField] private PlayfabBusSO playfabBusSO;
     [SerializeField] private PlayerRecordsVariableSO playerRecordsVariableSO;
     [SerializeField] private PlayerVariableSO playerVariableSO;
     [SerializeField] private TextMeshProUGUI valueMaxLevelPlayer;
@@ -14,12 +16,23 @@ public class UIMainMenuController : MonoBehaviour
     [SerializeField] private TextMeshProUGUI valueCollectedItems;
     [SerializeField] private GameStartBusSO gameStartBusSO;
     [SerializeField] private GameObject storage;
+    [SerializeField] private GameObject mainScreen;
     private void Start()
     {
-        playerVariableSO.UpdateRecords();
         UpdateRecords();
-        playerVariableSO.ResetValues();
         gameStartBusSO.OnGameStartEvent?.Invoke();
+        if(loginManagerSO.IsAlreadyLogged)
+        {
+            mainScreen.SetActive(false);
+        }
+    }
+    private void OnEnable()
+    {
+        playfabBusSO.OnSucessLoadPlayfabInventory += UpdateRecords;
+    }
+    private void OnDisable()
+    {
+        playfabBusSO.OnSucessLoadPlayfabInventory -= UpdateRecords;
     }
     public void DungeonButton()
     {
@@ -36,8 +49,10 @@ public class UIMainMenuController : MonoBehaviour
     }
     public void UpdateRecords()
     {
+        playerVariableSO.UpdateRecords();
         valueMaxLevelPlayer.text = playerRecordsVariableSO.MaxPlayerLevel.ToString();
         valueMaxDungeon.text = playerRecordsVariableSO.MaxDungeonLevel.ToString();
         valueCollectedItems.text = playerRecordsVariableSO.NumberObjectsUnlocked.ToString() + "/38";
+        playerVariableSO.ResetValues();
     }
 }
