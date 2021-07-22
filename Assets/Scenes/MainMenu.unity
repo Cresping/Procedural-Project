@@ -4634,6 +4634,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   loginManagerSO: {fileID: 11400000, guid: 200ff29924fd5a648824abb6e0b81b05, type: 2}
+  playfabBusSO: {fileID: 11400000, guid: 4db44d32de64e2d4fbabcf602fac0d44, type: 2}
   playerRecordsVariableSO: {fileID: 11400000, guid: 3fda93bca39cb5d42b563221ded20fd7, type: 2}
   playerVariableSO: {fileID: 11400000, guid: 82464bdcbc557ff41b3b1e47fa852778, type: 2}
   valueMaxLevelPlayer: {fileID: 5432877495926671290}
