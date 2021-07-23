@@ -10,7 +10,7 @@ namespace HeroesGames.ProjectProcedural.SO
     public class LoginManagerSO : ScriptableObject, ISerializationCallbackReceiver
     {
         [SerializeField] private PlayfabManagerSO playfabManager;
-        [SerializeField] private PlayfabBusSO playfabBus;
+        [SerializeField] private PlayfabBusDataSO playfabBus;
         [SerializeField] private string gameVersion;
         [SerializeField] private EconomyModel serverEconomy;
         private bool isAlreadyLogged;

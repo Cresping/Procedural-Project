@@ -5,8 +5,8 @@ using UnityEngine;
 
 namespace HeroesGames.ProjectProcedural.SO
 {
-    [CreateAssetMenu(fileName = "PlayfabErrorBusSO", menuName = "Scriptables/Bus/PlayfabErrorBus")]
-    public class PlayfabBusSO : ScriptableObject
+    [CreateAssetMenu(fileName = "PlayfabBusDataSO", menuName = "Scriptables/Bus/PlayfabBusData")]
+    public class PlayfabBusDataSO : ScriptableObject
     {
         public Action OnLogin;
         public Action<List<string>> OnUpdateInventory;
@@ -18,4 +18,3 @@ namespace HeroesGames.ProjectProcedural.SO
     }
 
 }
-

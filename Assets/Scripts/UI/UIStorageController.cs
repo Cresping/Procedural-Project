@@ -10,7 +10,7 @@ namespace HeroesGames.ProjectProcedural.UI
     public class UIStorageController : MonoBehaviour
     {
         [SerializeField] private MainMenuBusSO mainMenuBusSO;
-        [SerializeField] private PlayfabBusSO playfabBusSO;
+        [SerializeField] private PlayfabBusDataSO playfabBusSO;
         [SerializeField] private PlayerVariableSO playerVariableSO;
         [SerializeField] private PlayerInventoryVariableSO playerInventoryVariableSO;
         [SerializeField] private RectTransform content;

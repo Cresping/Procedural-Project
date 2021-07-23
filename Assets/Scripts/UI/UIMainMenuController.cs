@@ -8,7 +8,7 @@ using UnityEngine.SceneManagement;
 public class UIMainMenuController : MonoBehaviour
 {
     [SerializeField] private LoginManagerSO loginManagerSO;
-    [SerializeField] private PlayfabBusSO playfabBusSO;
+    [SerializeField] private PlayfabBusDataSO playfabBusSO;
     [SerializeField] private PlayerRecordsVariableSO playerRecordsVariableSO;
     [SerializeField] private PlayerVariableSO playerVariableSO;
     [SerializeField] private TextMeshProUGUI valueMaxLevelPlayer;

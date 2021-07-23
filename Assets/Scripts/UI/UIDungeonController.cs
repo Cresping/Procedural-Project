@@ -78,7 +78,7 @@ namespace HeroesGames.ProjectProcedural.UI
         [SerializeField] private int textBoxFadeTime;
 
         //PlayFab
-        [SerializeField] private PlayfabBusSO playfabBusSO;
+        [SerializeField] private PlayfabBusDataSO playfabBusSO;
 
         private PlayerController _playerController;
         private PlayerCombatController _playerCombatController;

@@ -192,7 +192,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8013604a9521a4d4aa408aef6b73fdda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playfabBusSO: {fileID: 11400000, guid: 4db44d32de64e2d4fbabcf602fac0d44, type: 2}
+  playfabBusSO: {fileID: 11400000, guid: b0439140c886a1745afe164ca68360d9, type: 2}
   errorText: {fileID: 7269223282404993432}
   errorPanel: {fileID: 7269223283259065901}
 --- !u!1 &7269223282091174042

@@ -15,4 +15,4 @@ MonoBehaviour:
   playfabManager: {fileID: 11400000, guid: 1f63453e63ade7341b416a97e53f4575, type: 2}
   playerInventory: {fileID: 11400000, guid: 99202fa02e0b9ac45885a4550ba3ee33, type: 2}
   objectContainer: {fileID: 11400000, guid: a5ca1135847ddad40bad0e9471164419, type: 2}
-  playfabBusSO: {fileID: 11400000, guid: 4db44d32de64e2d4fbabcf602fac0d44, type: 2}
+  playfabBusSO: {fileID: 11400000, guid: b0439140c886a1745afe164ca68360d9, type: 2}

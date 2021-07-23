@@ -8,8 +8,9 @@ namespace HeroesGames.ProjectProcedural.SO
     [CreateAssetMenu(fileName = "NewPlayerInventoryVariable", menuName = "Scriptables/Player/PlayerInventoryVariable")]
     public class PlayerInventoryVariableSO : ScriptableObject, ISerializationCallbackReceiver
     {
+        [SerializeField] private InventoryManagerSO inventoryManagerSO;
         [SerializeField] private MainMenuBusSO mainMenuBusSO;
-        [SerializeField] private PlayfabBusSO playfabBusSO;
+        [SerializeField] private PlayfabBusDataSO playfabBusSO;
         public Action<bool, ObjectInventoryVariableSO> OnInventoryChange;
         private Dictionary<int, ObjectInventoryVariableSO> _inventory;
         private Dictionary<int, ObjectInventoryVariableSO> _temporalInventory;
@@ -52,7 +53,8 @@ namespace HeroesGames.ProjectProcedural.SO
             }
             if(objectsId.Count>0)
             {
-                playfabBusSO.OnUpdateInventory.Invoke(objectsId);
+                inventoryManagerSO.GrantItemToUserRequest(objectsId);
+                //playfabBusSO.OnUpdateInventory.Invoke(objectsId);
             }
         }
         private void ResetValues()

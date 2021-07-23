@@ -7,7 +7,7 @@ namespace HeroesGames.ProjectProcedural.UI
 {
     public class UILoginController : MonoBehaviour
     {
-        [SerializeField] private PlayfabBusSO playfabBusSO;
+        [SerializeField] private PlayfabBusDataSO playfabBusSO;
         private void OnEnable()
         {
             playfabBusSO.OnSucessLogin += OnLoginSucess;

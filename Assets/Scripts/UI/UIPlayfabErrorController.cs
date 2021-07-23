@@ -9,7 +9,8 @@ namespace HeroesGames.ProjectProcedural.UI
 {
     public class UIPlayfabErrorController : MonoBehaviour
     {
-        [SerializeField] private PlayfabBusSO playfabBusSO;
+        [SerializeField] private PlayfabBusDataSO playfabBusSO;
+        [SerializeField] private PlayerInventoryVariableSO playerInventoryVariableSO;
         [SerializeField] private TextMeshProUGUI errorText;
         [SerializeField] private GameObject errorPanel;
 
@@ -33,6 +34,11 @@ namespace HeroesGames.ProjectProcedural.UI
         public void DisableWindows()
         {
             this.errorPanel.SetActive(false);
+        }
+        public void TryAgainUpdateInventory()
+        {
+            this.errorPanel.SetActive(false);
+            playerInventoryVariableSO.UpdateInventory();
         }
     }
 }

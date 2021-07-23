@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e225272cb0eff604796111bc0cb25fbf, type: 3}
   m_Name: PlayerInventoryVariableSO
   m_EditorClassIdentifier: 
+  inventoryManagerSO: {fileID: 11400000, guid: 8415a51b009038a4e8d54fbc0a5cfd71, type: 2}
   mainMenuBusSO: {fileID: 11400000, guid: 773c7b54a10daf24b8aea1027362643a, type: 2}
-  playfabBusSO: {fileID: 11400000, guid: 4db44d32de64e2d4fbabcf602fac0d44, type: 2}
+  playfabBusSO: {fileID: 11400000, guid: b0439140c886a1745afe164ca68360d9, type: 2}

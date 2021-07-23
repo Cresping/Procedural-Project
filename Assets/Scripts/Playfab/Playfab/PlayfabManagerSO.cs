@@ -12,7 +12,7 @@ namespace HeroesGames.ProjectProcedural.SO
     public class PlayfabManagerSO : ScriptableObject
     {
         [SerializeField] private bool isTestServer = true;
-        [SerializeField] private PlayfabBusSO playfabBusSO;
+        [SerializeField] private PlayfabBusDataSO playfabBusSO;
         private const string PLAYFAB_TEST_SERVER = "50267"; // 1 Min Dngon (Test) ID
         private const string PLAYFAB_PRODUCTION_SERVER = "4A8C2"; // 1 Min Dngon (Production) ID
 

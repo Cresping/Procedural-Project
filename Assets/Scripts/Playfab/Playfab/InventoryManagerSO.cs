@@ -11,22 +11,17 @@ namespace HeroesGames.ProjectProcedural.SO
         [SerializeField] private PlayfabManagerSO playfabManager;
         [SerializeField] private PlayerInventoryVariableSO playerInventory;
         [SerializeField] private ObjectContainerVariableSO objectContainer;
-        [SerializeField] private PlayfabBusSO playfabBusSO;
+        [SerializeField] private PlayfabBusDataSO playfabBusSO;
 
         private void OnEnable()
         {
-            playfabBusSO.OnUpdateInventory += GrantItemToUserRequest;
-            playfabBusSO.OnLoadPlayfabInventory += LoadInventory;
             playfabBusSO.OnSucessLogin += LoadInventory;
         }
         private void OnDisable()
         {
-            playfabBusSO.OnUpdateInventory -= GrantItemToUserRequest;
-            playfabBusSO.OnLoadPlayfabInventory -= LoadInventory;
             playfabBusSO.OnSucessLogin -= LoadInventory;
         }
-
-        private void GrantItemToUserRequest(List<string> obj)
+        public void GrantItemToUserRequest(List<string> obj)
         {
             Debug.Log("Se va a agregar objetos al inventario del jugador en el servidor");
             playfabManager.GetAccountInfoRequest(

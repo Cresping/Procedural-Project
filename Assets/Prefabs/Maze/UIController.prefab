@@ -78,6 +78,8 @@ MonoBehaviour:
   unlockedStarSprite: {fileID: -4026705437576799436, guid: 9c08d2c5e2d69a94aae6b53623aa9867, type: 3}
   levelUPUI: {fileID: 0}
   textLevelUP: {fileID: 0}
+  messagesUI: {fileID: 0}
+  messageText: {fileID: 0}
   timerVariableSO: {fileID: 11400000, guid: bd8f52ef88b72d04684039a8d4435a0c, type: 2}
   textTimer: {fileID: 0}
   gameOverBusSO: {fileID: 11400000, guid: 423dbfa9ead2ea240b054d83969855f6, type: 2}
@@ -87,3 +89,4 @@ MonoBehaviour:
   playerLevelStatValue: {fileID: 0}
   enemiesKilledStatValue: {fileID: 0}
   textBoxFadeTime: 2
+  playfabBusSO: {fileID: 11400000, guid: b0439140c886a1745afe164ca68360d9, type: 2}

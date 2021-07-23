@@ -11,18 +11,7 @@ namespace Playfab
     {
         [SerializeField] private PlayerInventoryVariableSO playerInventory;
         [SerializeField] private ObjectContainerVariableSO objectContainer;
-        [SerializeField] private PlayfabBusSO playfabBusSO;
-        private void OnEnable()
-        {
-            playfabBusSO.OnUpdateInventory += GrantItemToUserRequest;
-            playfabBusSO.OnLoadPlayfabInventory += LoadInventory;
-        }
-        private void OnDisable()
-        {
-            playfabBusSO.OnUpdateInventory -= GrantItemToUserRequest;
-            playfabBusSO.OnLoadPlayfabInventory -= LoadInventory;
-        }
-
+        [SerializeField] private PlayfabBusDataSO playfabBusSO;
         private void GrantItemToUserRequest(List<string> obj)
         {
             Debug.Log("Se va a agregar objetos al inventario del jugador en el servidor");

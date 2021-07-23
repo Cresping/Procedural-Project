@@ -9,6 +9,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 00b19cb6fa055b24c8df96f8cd5ee8c0, type: 3}
-  m_Name: PlayFabBusSO
+  m_Script: {fileID: 11500000, guid: b734b7f8699b75d4a895bafd1d04ecdf, type: 3}
+  m_Name: PlayfabBusDataSO
   m_EditorClassIdentifier: 
