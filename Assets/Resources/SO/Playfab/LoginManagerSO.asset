@@ -18,3 +18,4 @@ MonoBehaviour:
   serverEconomy:
     moneyBase: 100
     moneyRatio: 0.1
+  welcomeEvent: {fileID: 11400000, guid: 3860463b8fbe3804a96f849fc3255ef6, type: 2}

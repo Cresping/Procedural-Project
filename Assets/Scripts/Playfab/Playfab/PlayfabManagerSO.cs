@@ -1,7 +1,6 @@
 using PlayFab;
 using PlayFab.ClientModels;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -38,7 +37,11 @@ namespace HeroesGames.ProjectProcedural.SO
             var requestWithAndroid = new LoginWithAndroidDeviceIDRequest()
             {
                 CreateAccount = true, //If account doesn't exist, create it!
-                AndroidDeviceId = SystemInfo.deviceUniqueIdentifier //the custom ID is the Unique Device Identifier
+                AndroidDeviceId = SystemInfo.deviceUniqueIdentifier, //the custom ID is the Unique Device Identifier
+                InfoRequestParameters = new GetPlayerCombinedInfoRequestParams
+                {
+                    GetPlayerProfile = true
+                }
             };
 
             PlayFabClientAPI.LoginWithAndroidDeviceID(requestWithAndroid, onSuccess, onError);
@@ -108,6 +111,17 @@ namespace HeroesGames.ProjectProcedural.SO
                onError?.Invoke(error);
            }
            );
+        }
+        
+        private void GetPlayerProfile(string playFabId) {
+            PlayFabClientAPI.GetPlayerProfile( new GetPlayerProfileRequest() {
+                    PlayFabId = playFabId,
+                    ProfileConstraints = new PlayerProfileViewConstraints() {
+                        ShowDisplayName = true
+                    }
+                },
+                result => Debug.Log("The player's DisplayName profile data is: " + result.PlayerProfile.DisplayName),
+                error => Debug.LogError(error.GenerateErrorReport()));
         }
     }
 }
