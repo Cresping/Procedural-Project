@@ -56,6 +56,10 @@ namespace HeroesGames.ProjectProcedural.SO
                 Debug.Log("Se va actualizar los objetos del usuario");
                 inventoryManagerSO.GrantItemToUserRequest(objectsId);
             }
+            else
+            {
+                playfabBusSO.OnSucessUpdateInventory?.Invoke();
+            }
         }
         private void ResetValues()
         {

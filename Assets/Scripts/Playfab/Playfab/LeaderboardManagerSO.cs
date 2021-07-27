@@ -62,7 +62,7 @@ namespace HeroesGames.ProjectProcedural.SO
                     var leaderboard = new StringBuilder();
                     foreach (var playerLeaderboardEntry in onSuccessGetLeaderBoard.Leaderboard)
                     {
-                        leaderboard.AppendLine($"User: {playerLeaderboardEntry.DisplayName} ----- Score: {playerLeaderboardEntry.StatValue}");
+                        leaderboard.AppendLine($"User: {playerLeaderboardEntry.DisplayName} ----- Dungeon: {playerLeaderboardEntry.StatValue}");
                     }
                     playfabBusDataSO.OnSucessLoadLeaderboard?.Invoke(leaderboard.ToString());
 
@@ -94,7 +94,7 @@ namespace HeroesGames.ProjectProcedural.SO
                         var leaderboard = new StringBuilder();
                         foreach (var playerLeaderboardEntry in onSuccessGetLeaderBoard.Leaderboard)
                         {
-                            leaderboard.AppendLine($"User: {playerLeaderboardEntry.DisplayName}  -----  Dungeon: {playerLeaderboardEntry.StatValue}");
+                            leaderboard.AppendLine($"User: {playerLeaderboardEntry.DisplayName} ----- Dungeon: {playerLeaderboardEntry.StatValue}");
                         }
                         playfabBusDataSO.OnSucessLoadLeaderboard?.Invoke(leaderboard.ToString());
                     },
