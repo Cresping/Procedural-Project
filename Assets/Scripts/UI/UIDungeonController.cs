@@ -361,10 +361,19 @@ namespace HeroesGames.ProjectProcedural.UI
             playerLevelStatValue.text = playerVariableSO.PlayerLevel.ToString();
             enemiesKilledStatValue.text = playerVariableSO.NumberEnemiesKilled.ToString();
             textTimer.text = "00:00";
+            if (playerInventoryVariableSO.HasObjectUpdate())
+            {
+                Invoke(nameof(EnableButtonGameOver), 20f);
+            }
+            else
+            {
+                Invoke(nameof(EnableButtonGameOver), 5f);
+            }
             gameOverUI.gameObject.SetActive(true);
         }
         public void EnableButtonGameOver()
         {
+            CancelInvoke(nameof(EnableButtonGameOver));
             Debug.Log("Se ha activado el botón de Game Over");
             buttonGameOverExitMenu.interactable = true;
         }

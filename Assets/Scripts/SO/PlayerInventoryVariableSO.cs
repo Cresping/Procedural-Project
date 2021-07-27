@@ -14,6 +14,7 @@ namespace HeroesGames.ProjectProcedural.SO
         public Action<bool, ObjectInventoryVariableSO> OnInventoryChange;
         private Dictionary<int, ObjectInventoryVariableSO> _inventory;
         private Dictionary<int, ObjectInventoryVariableSO> _temporalInventory;
+        private bool _hasUpdate;
         public Dictionary<int, ObjectInventoryVariableSO> Inventory { get => _inventory; set => _inventory = value; }
 
         public bool AddObjectTemporalInventory(ObjectInventoryVariableSO objectInventory)
@@ -43,8 +44,13 @@ namespace HeroesGames.ProjectProcedural.SO
             }
             return false;
         }
+        public bool HasObjectUpdate()
+        {
+            return _hasUpdate;
+        }
         public void UpdateInventory()
         {
+            _hasUpdate = false;
             List<string> objectsId = new List<string>();
             foreach(ObjectInventoryVariableSO objectInventory in _temporalInventory.Values)
             { 
@@ -55,10 +61,7 @@ namespace HeroesGames.ProjectProcedural.SO
             {
                 Debug.Log("Se va actualizar los objetos del usuario");
                 inventoryManagerSO.GrantItemToUserRequest(objectsId);
-            }
-            else
-            {
-                playfabBusSO.OnSucessUpdateInventory?.Invoke();
+                _hasUpdate = true;
             }
         }
         private void ResetValues()
