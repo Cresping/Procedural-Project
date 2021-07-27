@@ -33,7 +33,7 @@ namespace HeroesGames.ProjectProcedural.SO
         //TODO Hacer otro login creando una cuenta con GooglePlay o  Playfab
         public void Login(Action<LoginResult> onSuccess, Action<PlayFabError> onError)
         {
-            #if UNITY_ANDROID
+#if UNITY_ANDROID
             var requestWithAndroid = new LoginWithAndroidDeviceIDRequest()
             {
                 CreateAccount = true, //If account doesn't exist, create it!
@@ -45,7 +45,7 @@ namespace HeroesGames.ProjectProcedural.SO
             };
 
             PlayFabClientAPI.LoginWithAndroidDeviceID(requestWithAndroid, onSuccess, onError);
-            #else
+#else
             var request = new LoginWithCustomIDRequest
             {
                 CreateAccount = true, //If account doesn't exist, create it!
@@ -53,7 +53,7 @@ namespace HeroesGames.ProjectProcedural.SO
             };
 
             PlayFabClientAPI.LoginWithCustomID(request, onSuccess, onError);
-            #endif
+#endif
         }
 
         #endregion
@@ -112,16 +112,82 @@ namespace HeroesGames.ProjectProcedural.SO
            }
            );
         }
-        
-        private void GetPlayerProfile(string playFabId) {
-            PlayFabClientAPI.GetPlayerProfile( new GetPlayerProfileRequest() {
-                    PlayFabId = playFabId,
-                    ProfileConstraints = new PlayerProfileViewConstraints() {
-                        ShowDisplayName = true
-                    }
-                },
+
+        public void GetPlayerProfile(string playFabId)
+        {
+            PlayFabClientAPI.GetPlayerProfile(new GetPlayerProfileRequest()
+            {
+                PlayFabId = playFabId,
+                ProfileConstraints = new PlayerProfileViewConstraints()
+                {
+                    ShowDisplayName = true
+                }
+            },
                 result => Debug.Log("The player's DisplayName profile data is: " + result.PlayerProfile.DisplayName),
                 error => Debug.LogError(error.GenerateErrorReport()));
+        }
+        public void GetLeaderboardAroundPlayer(string playerId, int maxResultsCount, string leaderboardName, Action<GetLeaderboardAroundPlayerResult> onSucess, Action<PlayFabError> onError)
+        {
+            var request = new GetLeaderboardAroundPlayerRequest
+            {
+                PlayFabId = playerId,
+                MaxResultsCount = maxResultsCount,
+                StatisticName = leaderboardName
+            };
+            PlayFabClientAPI.GetLeaderboardAroundPlayer(request,
+            (result) =>
+            {
+                onSucess(result);
+            },
+            (error) =>
+            {
+                onError?.Invoke(error);
+            }
+            );
+        }
+        public void UpdatePlayerStatistics(string leaderboardName, int score, Action<UpdatePlayerStatisticsResult> onSucess, Action<PlayFabError> onError)
+        {
+            var request = new UpdatePlayerStatisticsRequest
+            {
+                Statistics = new List<StatisticUpdate>
+                {
+                    new StatisticUpdate
+                    {
+                        StatisticName = leaderboardName,
+                        Value = score
+                    }
+                },
+            };
+            PlayFabClientAPI.UpdatePlayerStatistics(request,
+            (result) =>
+            {
+                onSucess(result);
+            },
+            (error) =>
+            {
+                onError?.Invoke(error);
+            }
+            );
+        }
+        public void GetLeaderboard(int startPosition, int maxResultsCount, string leaderboardName, Action<GetLeaderboardResult> onSucess, Action<PlayFabError> onError)
+        {
+            var request = new GetLeaderboardRequest
+            {
+                StartPosition = startPosition,
+                MaxResultsCount = maxResultsCount,
+                StatisticName = leaderboardName
+            };
+            PlayFabClientAPI.GetLeaderboard(request,
+            (result) =>
+            {
+                onSucess(result);
+            },
+            (error) =>
+            {
+                onError?.Invoke(error);
+            }
+            );
+
         }
     }
 }

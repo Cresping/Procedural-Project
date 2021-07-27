@@ -8,44 +8,79 @@ namespace HeroesGames.ProjectProcedural.SO
     [CreateAssetMenu(fileName = "InventoryManagerSO", menuName = "Scriptables/Playfab/InventoryManagerSO")]
     public class InventoryManagerSO : ScriptableObject
     {
+        private const string ERROR_GRANT_ITEM_TO_USER = "002";
+        private const string ERROR_SHOW_INVENTORY = "004";
+        [SerializeField] private LoginManagerSO loginManager;
         [SerializeField] private PlayfabManagerSO playfabManager;
         [SerializeField] private PlayerInventoryVariableSO playerInventory;
         [SerializeField] private ObjectContainerVariableSO objectContainer;
         [SerializeField] private PlayfabBusDataSO playfabBusSO;
-
+        private List<string> _currentObj;
         private void OnEnable()
         {
             playfabBusSO.OnSucessLogin += LoadInventory;
+            playfabBusSO.OnReplyErrorPlayFab += OnErrorResponse;
         }
         private void OnDisable()
         {
             playfabBusSO.OnSucessLogin -= LoadInventory;
+            playfabBusSO.OnReplyErrorPlayFab -= OnErrorResponse;
+        }
+        public void OnErrorResponse(string errorCode, bool retry)
+        {
+            switch (errorCode)
+            {
+                case ERROR_GRANT_ITEM_TO_USER:
+                    if (retry)
+                    {
+                        GrantItemToUserRequest(_currentObj);
+                    }
+                    else
+                    {
+                        playfabBusSO.OnIgnoreUpdateInventory?.Invoke();
+                    }
+
+                    break;
+                case ERROR_SHOW_INVENTORY:
+                    if (retry)
+                    {
+                        LoadInventory();
+                    }
+                    break;
+            }
         }
         public void GrantItemToUserRequest(List<string> obj)
         {
-            Debug.Log("Se va a agregar objetos al inventario del jugador en el servidor");
-            playfabManager.GetAccountInfoRequest(
-            (onSuccessAccountInfo) =>
+            if (loginManager.IsAlreadyLogged)
             {
-                Debug.Log("Se ha obtenido la informacion del usuario " + onSuccessAccountInfo.AccountInfo.PlayFabId);
-                playfabManager.GrantItemToUserRequest(onSuccessAccountInfo.AccountInfo.PlayFabId, obj,
-                (onSuccessGrantItemToUserRequest) =>
+                _currentObj = obj;
+                Debug.Log("Se va a agregar objetos al inventario del jugador en el servidor");
+                playfabManager.GetAccountInfoRequest(
+                (onSuccessAccountInfo) =>
                 {
-                    Debug.Log("Se han agregado correctamente los objetos al inventario del jugador " + onSuccessAccountInfo.AccountInfo.PlayFabId);
-                    playfabBusSO.OnSucessUpdateInventory?.Invoke();
+                    Debug.Log("Se ha obtenido la informacion del usuario " + onSuccessAccountInfo.AccountInfo.PlayFabId);
+                    playfabManager.GrantItemToUserRequest(onSuccessAccountInfo.AccountInfo.PlayFabId, obj,
+                    (onSuccessGrantItemToUserRequest) =>
+                    {
+                        Debug.Log("Se han agregado correctamente los objetos al inventario del jugador " + onSuccessAccountInfo.AccountInfo.PlayFabId);
+                        playfabBusSO.OnSucessUpdateInventory?.Invoke();
+                    },
+                    (onError) =>
+                    {
+                        Debug.LogError("Ha ocurrido un error al agregar los objetos al inventario del jugador " + onSuccessAccountInfo.AccountInfo.PlayFabId);
+                        playfabBusSO.OnErrorPlayFab?.Invoke(ERROR_GRANT_ITEM_TO_USER);
+                    });
                 },
-                (onError) =>
-                {
-                    Debug.LogError("Ha ocurrido un error al agregar los objetos al inventario del jugador " + onSuccessAccountInfo.AccountInfo.PlayFabId);
-                    playfabBusSO.OnErrorPlayFab?.Invoke(onError.GenerateErrorReport().ToString());
-                });
-            },
             (onError) =>
+                {
+                    Debug.LogError("No se ha podido obtener la informacion del jugador");
+                    playfabBusSO.OnErrorPlayFab?.Invoke(ERROR_GRANT_ITEM_TO_USER);
+                });
+            }
+            else
             {
-                Debug.LogError("No se ha podido obtener la informacion del jugador");
-                playfabBusSO.OnErrorPlayFab?.Invoke(onError.GenerateErrorReport().ToString());
-            });
-
+                Debug.Log("El jugador no está conectado a su cuenta");
+            }
         }
 
         [ContextMenu("ShowPlayerInventory")]
@@ -69,29 +104,37 @@ namespace HeroesGames.ProjectProcedural.SO
         [ContextMenu("Load Inventory")]
         public void LoadInventory()
         {
-            playfabManager.GetUserInventoryRequest(
-            (onSucess) =>
+            if (loginManager.IsAlreadyLogged)
             {
-                foreach (ItemInstance item in onSucess.Inventory)
+                playfabManager.GetUserInventoryRequest(
+                (onSucess) =>
                 {
-                    ObjectInventoryVariableSO aux = objectContainer.GetObjectInventory(item.ItemId);
-                    if (aux)
+                    foreach (ItemInstance item in onSucess.Inventory)
                     {
-                        playerInventory.AddObjectInventory(aux);
+                        ObjectInventoryVariableSO aux = objectContainer.GetObjectInventory(item.ItemId);
+                        if (aux)
+                        {
+                            playerInventory.AddObjectInventory(aux);
+                        }
+                        else
+                        {
+                            Debug.LogError("ID no reconocido del objeto " + item.ItemId);
+                        }
+                        Debug.Log("Player owns " + item.ItemId);
                     }
-                    else
-                    {
-                        Debug.LogError("ID no reconocido del objeto " + item.ItemId);
-                    }
-                    Debug.Log("Player owns " + item.ItemId);
-                }
-                playfabBusSO.OnSucessLoadPlayfabInventory?.Invoke();
-            },
-            (onError) =>
+                    playfabBusSO.OnSucessLoadPlayfabInventory?.Invoke();
+                },
+                (onError) =>
+                {
+                    Debug.LogError("No se ha podido cargar el inventario del jugador");
+                    playfabBusSO.OnErrorPlayFab?.Invoke(ERROR_SHOW_INVENTORY);
+                });
+            }
+            else
             {
-                Debug.LogError("No se ha podido cargar el inventario del jugador");
-                playfabBusSO.OnErrorPlayFab?.Invoke(onError.GenerateErrorReport().ToString());
-            });
+                Debug.Log("El jugador no está conectado a su cuenta");
+            }
+
         }
     }
 }

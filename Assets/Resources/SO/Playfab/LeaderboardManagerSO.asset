@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 39a53033ba6d8f94aa8f6977759cec2f, type: 3}
+  m_Name: LeaderboardManagerSO
+  m_EditorClassIdentifier: 
+  playfabManagerSO: {fileID: 11400000, guid: 1f63453e63ade7341b416a97e53f4575, type: 2}
+  loginManagerSO: {fileID: 11400000, guid: 200ff29924fd5a648824abb6e0b81b05, type: 2}
+  playfabBusDataSO: {fileID: 11400000, guid: b0439140c886a1745afe164ca68360d9, type: 2}
+  playerRecordsVariableSO: {fileID: 11400000, guid: 3fda93bca39cb5d42b563221ded20fd7, type: 2}

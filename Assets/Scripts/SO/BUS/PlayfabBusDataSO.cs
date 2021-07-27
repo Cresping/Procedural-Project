@@ -12,9 +12,14 @@ namespace HeroesGames.ProjectProcedural.SO
         public Action<List<string>> OnUpdateInventory;
         public Action OnLoadPlayfabInventory;
         public Action OnSucessLogin;
+        public Action OnIgnoreLogin;
         public Action OnSucessUpdateInventory;
+        public Action OnIgnoreUpdateInventory;
         public Action OnSucessLoadPlayfabInventory;
+        public Action OnSucessLoadPlayerLeaderboardRecord;
+        public Action<string> OnSucessLoadLeaderboard;
         public Action<string> OnErrorPlayFab;
+        public Action<string,bool> OnReplyErrorPlayFab;
     }
 
 }

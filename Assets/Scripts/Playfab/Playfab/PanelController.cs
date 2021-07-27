@@ -30,10 +30,14 @@ public class PanelController : MonoBehaviour
     {
         _user = userNameBox.text;
 
-        if (!string.IsNullOrWhiteSpace(_user))
+        if (!string.IsNullOrWhiteSpace(_user) && _user.Length<=10)
+        {
             loginManager.UpdateUserName(_user);
+        }
         else
+        {
             userNameBoxPlaceholder.text = "Write a valid username";
+        }        
     }
 
     private void WelcomeMessage(string user)

@@ -11,16 +11,23 @@ namespace HeroesGames.ProjectProcedural.Sound
         [SerializeField] private SoundVariableSO buttonSound;
         [SerializeField] private SoundVariableSO dragSound;
         [SerializeField] private SoundVariableSO dropSound;
-
+        [SerializeField] private bool isMainSoundController;
         private void OnEnable()
         {
-            mainMenuBusSO.OnDragItem += PlayDragSound;
-            mainMenuBusSO.OnDropItem += PlayDropSound;
+            if (isMainSoundController)
+            {
+                mainMenuBusSO.OnDragItem += PlayDragSound;
+                mainMenuBusSO.OnDropItem += PlayDropSound;
+            }
+
         }
         private void OnDisable()
         {
-            mainMenuBusSO.OnDragItem -= PlayDragSound;
-            mainMenuBusSO.OnDropItem -= PlayDropSound;
+            if (isMainSoundController)
+            {
+                mainMenuBusSO.OnDragItem -= PlayDragSound;
+                mainMenuBusSO.OnDropItem -= PlayDropSound;
+            }
         }
         public void PlayButtonSound()
         {

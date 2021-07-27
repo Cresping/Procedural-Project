@@ -91,6 +91,7 @@ namespace HeroesGames.ProjectProcedural.UI
             playerVariableSO.PlayerLevelOnValueChange += DoLevelUP;
             gameOverBusSO.OnGameOverEvent += DoGameOver;
             playfabBusSO.OnSucessUpdateInventory += EnableButtonGameOver;
+            playfabBusSO.OnIgnoreUpdateInventory += EnableButtonGameOver;
             StartCoroutine(_coroutineReduceTimer);
         }
         private void OnDisable()
@@ -100,6 +101,7 @@ namespace HeroesGames.ProjectProcedural.UI
             playerVariableSO.PlayerLevelOnValueChange -= DoLevelUP;
             gameOverBusSO.OnGameOverEvent -= DoGameOver;
             playfabBusSO.OnSucessUpdateInventory -= EnableButtonGameOver;
+            playfabBusSO.OnIgnoreUpdateInventory -= EnableButtonGameOver;
             try { StopCoroutine(_coroutineReduceTimer); } catch (NullReferenceException) { }
         }
 
@@ -363,6 +365,7 @@ namespace HeroesGames.ProjectProcedural.UI
         }
         public void EnableButtonGameOver()
         {
+            Debug.Log("Se ha activado el botón de Game Over");
             buttonGameOverExitMenu.interactable = true;
         }
         public void DisableLevelUPUI()

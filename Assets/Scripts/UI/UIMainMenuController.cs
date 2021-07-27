@@ -29,10 +29,12 @@ public class UIMainMenuController : MonoBehaviour
     private void OnEnable()
     {
         playfabBusSO.OnSucessLoadPlayfabInventory += UpdateRecords;
+        playfabBusSO.OnSucessLoadPlayerLeaderboardRecord += UpdateMaxDungeonRecord;
     }
     private void OnDisable()
     {
         playfabBusSO.OnSucessLoadPlayfabInventory -= UpdateRecords;
+        playfabBusSO.OnSucessLoadPlayerLeaderboardRecord -= UpdateMaxDungeonRecord;
     }
     public void DungeonButton()
     {
@@ -54,5 +56,9 @@ public class UIMainMenuController : MonoBehaviour
         valueMaxDungeon.text = playerRecordsVariableSO.MaxDungeonLevel.ToString();
         valueCollectedItems.text = playerRecordsVariableSO.NumberObjectsUnlocked.ToString() + "/38";
         playerVariableSO.ResetValues();
+    }
+    public void UpdateMaxDungeonRecord()
+    {
+         valueMaxDungeon.text = playerRecordsVariableSO.MaxDungeonLevel.ToString();
     }
 }

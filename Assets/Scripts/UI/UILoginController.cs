@@ -11,16 +11,22 @@ namespace HeroesGames.ProjectProcedural.UI
         private void OnEnable()
         {
             playfabBusSO.OnSucessLogin += OnLoginSucess;
+            playfabBusSO.OnIgnoreLogin += OnIgnoreLogin;
         }
         private void OnDisable()
         {
             playfabBusSO.OnSucessLogin -= OnLoginSucess;
+            playfabBusSO.OnIgnoreLogin -= OnIgnoreLogin;
         }
         public void Login()
         {
             playfabBusSO.OnLogin.Invoke();
         }
         private void OnLoginSucess()
+        {
+            this.gameObject.SetActive(false);
+        }
+        private void OnIgnoreLogin()
         {
             this.gameObject.SetActive(false);
         }

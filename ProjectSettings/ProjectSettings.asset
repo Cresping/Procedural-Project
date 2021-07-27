@@ -42,8 +42,6 @@ PlayerSettings:
   m_SplashScreenLogos:
   - logo: {fileID: 10404, guid: 0000000000000000e000000000000000, type: 0}
     duration: 2
-  - logo: {fileID: 21300000, guid: ee1db4c74da3fd547930b24725bc09d0, type: 3}
-    duration: 3
   - logo: {fileID: 21300000, guid: b177618e05853784386f4c5893adb1b1, type: 3}
     duration: 2
   m_VirtualRealitySplashScreen: {fileID: 0}
@@ -780,7 +778,7 @@ PlayerSettings:
     m_VersionName: 
   apiCompatibilityLevel: 6
   activeInputHandler: 1
-  cloudProjectId: 
+  cloudProjectId: fe385e5c-f8cd-45d3-b1a2-194ccf3c403d
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
   projectName: ProceduralProject

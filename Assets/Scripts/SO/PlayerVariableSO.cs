@@ -19,6 +19,7 @@ namespace HeroesGames.ProjectProcedural.SO
 
         [SerializeField] private PlayerInventoryVariableSO playerInventoryVariableSO;
         [SerializeField] private PlayerRecordsVariableSO playerRecordsVariableSO;
+        [SerializeField] private LeaderboardManagerSO leaderboardManagerSO;
         [SerializeField] private DungeonVariableSO BSPDungeonVariableSO;
         [SerializeField] private MazeVariableSO mazeVariableSO;
         [SerializeField] private GameStartBusSO gameStartBusSO;
@@ -281,6 +282,7 @@ namespace HeroesGames.ProjectProcedural.SO
             if (dungeonLevel > playerRecordsVariableSO.MaxDungeonLevel)
             {
                 playerRecordsVariableSO.MaxDungeonLevel = dungeonLevel;
+                leaderboardManagerSO.UpdatePlayerStatistics(playerRecordsVariableSO.MaxDungeonLevel);
             }
             if (playerInventoryVariableSO.Inventory.Count > playerRecordsVariableSO.NumberObjectsUnlocked)
             {

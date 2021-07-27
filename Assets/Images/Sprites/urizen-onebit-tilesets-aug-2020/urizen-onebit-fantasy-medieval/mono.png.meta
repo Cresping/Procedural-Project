@@ -571,7 +571,7 @@ TextureImporter:
     second: mono_188
   - first:
       213: -3958539558722342377
-    second: mono_189
+    second: records
   - first:
       213: 4274999156262529481
     second: mono_190
@@ -633,8 +633,8 @@ TextureImporter:
   textureSettings:
     serializedVersion: 2
     filterMode: 0
-    aniso: -1
-    mipBias: -100
+    aniso: 1
+    mipBias: 0
     wrapU: 1
     wrapV: 1
     wrapW: 1
@@ -4435,8 +4435,8 @@ TextureImporter:
       name: mono_177
       rect:
         serializedVersion: 2
-        x: 222
-        y: 14
+        x: 219
+        y: 19
         width: 12
         height: 12
       alignment: 0
@@ -4684,7 +4684,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: mono_189
+      name: records
       rect:
         serializedVersion: 2
         x: 118

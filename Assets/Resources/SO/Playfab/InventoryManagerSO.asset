@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52764e34bd07b7446b55e027fe03acc5, type: 3}
   m_Name: InventoryManagerSO
   m_EditorClassIdentifier: 
+  loginManager: {fileID: 11400000, guid: 200ff29924fd5a648824abb6e0b81b05, type: 2}
   playfabManager: {fileID: 11400000, guid: 1f63453e63ade7341b416a97e53f4575, type: 2}
   playerInventory: {fileID: 11400000, guid: 99202fa02e0b9ac45885a4550ba3ee33, type: 2}
   objectContainer: {fileID: 11400000, guid: a5ca1135847ddad40bad0e9471164419, type: 2}
